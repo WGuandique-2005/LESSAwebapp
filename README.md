@@ -33,4 +33,4 @@ El desarrollo se realiza utilizando metodologías ágiles, distribuyendo el trab
 
 Actualmente, el proyecto se encuentra en la fase inicial de desarrollo. Ya se han completado el prototipo visual, la estructuración de los primeros sprints y la integración básica del sistema de autenticación mediante Google OAuth. Se han incorporado nuevas épicas, como **Mecánicas de Gamificación** y **Minijuegos**, para enriquecer la experiencia del usuario y mejorar la organización del backlog.
 
-- [GPO01-LESSA-2025], derechos resrvador 2025
+- [GPO01-LESSA-2025]
