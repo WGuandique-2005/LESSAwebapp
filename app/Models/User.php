@@ -19,9 +19,26 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'oauth',
     ];
+
+    public function lecciones()
+    {
+        return $this->hasMany(ProgresoUsuario::class);
+    }
+
+    public function puntos()
+    {
+        return $this->hasMany(PuntosUsuario::class);
+    }
+
+    public function recompensas()
+    {
+        return $this->hasMany(RecompensasUsuario::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
