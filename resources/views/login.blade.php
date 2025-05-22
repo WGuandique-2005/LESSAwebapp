@@ -199,7 +199,7 @@
         </button>
 
         <div class="links">
-            <a href="#">Olvidaste tu contraseña</a><br>
+            <a href="recuperar_pass">Olvidé mi contraseña</a><br>
             ¿No tienes una cuenta? <a href="#">Crea una aquí</a>
         </div>
     </div>

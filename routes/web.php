@@ -5,3 +5,6 @@ use App\Http\Controllers\TaskController;
 
 Route::get('/', [TaskController::class, 'index'])->name('/');
 Route::get('/login', [TaskController::class, 'loginForm'])->name('login');
+
+
+Route::get('/recuperar_pass', [TaskController::class, 'recuperarPass'])->name('recuperar');

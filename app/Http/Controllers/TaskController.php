@@ -15,4 +15,9 @@ class TaskController extends Controller
     {
         return view('login');
     }
+
+    public function recuperarPass()
+    {
+        return view('recuperarPass');
+    }
 }
