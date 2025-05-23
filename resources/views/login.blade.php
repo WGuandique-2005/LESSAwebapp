@@ -200,7 +200,7 @@
 
         <div class="links">
             <a href="recuperar_pass">Olvidé mi contraseña</a><br>
-            ¿No tienes una cuenta? <a href="#">Crea una aquí</a>
+            ¿No tienes una cuenta? <a href="{{ route('signup') }}">Crea una aquí</a>
         </div>
     </div>
 </body>
