@@ -1,18 +1,11 @@
 <?php
-// Controller para manejar la lógica de usuarios
-// - Autenticación
-// - Registro
-// - Recuperación de contraseña
-// - Actualización de perfil
-// - Eliminación de cuenta
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use function Termwind\renderUsing;
-
 
 class UserController extends Controller
 {
@@ -28,19 +21,20 @@ class UserController extends Controller
             'username' => 'required|string|max:255|unique:users,username',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-            'oauth_id'    => 'nullable|string',
         ]);
 
         $user = User::create([
-            'name' => $data['name'],
+            'name'     => $data['name'],
             'username' => $data['username'],
-            'email' => $data['email'],
-            'password' => $data['password'],
-            'oauth_id' => $data['oauth'],
+            'email'    => $data['email'],
+            'password' => bcrypt($data['password']),
+            // oauth_id se queda null por defecto para usuarios normales
         ]);
-        if(!$user) {
+
+        if (!$user) {
             return back()->withErrors(['error' => 'Error al crear el usuario.']);
         }
+
         Auth::login($user);
         return redirect()->route('home');
     }
@@ -48,5 +42,25 @@ class UserController extends Controller
     public function showLoginForm()
     {
         return view('login');
+    }
+
+    public function login(Request $request)
+    {
+        $data = $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        if (Auth::attempt($data)) {
+            return redirect()->route('home');
+        }
+
+        return back()->withErrors(['error' => 'Credenciales incorrectas.']);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }

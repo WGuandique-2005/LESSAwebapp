@@ -51,11 +51,4 @@ class GoogleController extends Controller
         // Redirige a home
         return redirect()->route('home');
     }
-
-    // 3. Logout
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('/');
-    }
 }

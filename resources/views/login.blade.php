@@ -177,32 +177,32 @@
     
     <a href="/" class="back-button">Volver</a>
     <div class="logo"></div>
+<form action="{{ route('login.submit') }}" method="POST" class="container">
+    @csrf
+    <h1>Login</h1>
 
-    <div class="container">
-        <h1>Login</h1>
-
-        <div class="input-group">
-            <h2>Correo</h2>
-            <input type="email" placeholder="Correo" />
-        </div>
-
-        <div class="input-group">
-            <h2>Contraseña</h2>
-            <input type="password" placeholder="Contraseña" />
-        </div>
-
-        <button class="login-btn">Iniciar sesión</button>
-
-        <a class="google-btn" href="{{ route('auth.google') }}">
-            <img src="https://img.icons8.com/?size=512&id=17949&format=png" alt="Google logo" class="google-icon"/>
-            Inicia sesión con tu cuenta Google
-        </a>
-
-        <div class="links">
-            <a href="recuperar_pass">Olvidé mi contraseña</a><br>
-            ¿No tienes una cuenta? <a href="{{ route('signup') }}">Crea una aquí</a>
-        </div>
+    <div class="input-group">
+        <h2>Correo</h2>
+        <input type="email" name="email" placeholder="Correo" required />
     </div>
+
+    <div class="input-group">
+        <h2>Contraseña</h2>
+        <input type="password" name="password" placeholder="Contraseña" required />
+    </div>
+
+    <button type="submit" class="login-btn">Iniciar sesión</button>
+
+    <a class="google-btn" href="{{ route('auth.google') }}">
+        <img src="https://img.icons8.com/?size=512&id=17949&format=png" alt="Google logo" class="google-icon" />
+        Inicia sesión con tu cuenta Google
+    </a>
+
+    <div class="links">
+        <a href="{{ route('recuperar') }}">Olvidé mi contraseña</a><br>
+        ¿No tienes una cuenta? <a href="{{ route('signup') }}">Crea una aquí</a>
+    </div>
+</form>
 </body>
 
 </html>

@@ -290,10 +290,10 @@
             <button type="submit" class="signup-btn">Registrarse</button>
         </form>
 
-        <button class="google-btn">
+        <a class="google-btn" href="{{ route('auth.google') }}">
             <img src="https://img.icons8.com/?size=512&id=17949&format=png" alt="Google logo" class="google-icon" />
-            Regístrate con tu cuenta Google
-        </button>
+            Inicia sesión con tu cuenta Google
+        </a>
 
         <div class="links">
             <a href="{{ route('login') }}">¿Ya tienes una cuenta? Inicia sesión aquí</a>

@@ -20,6 +20,7 @@ use App\Http\Controllers\Auth\GoogleController;
 Route::get('/', [TaskController::class, 'index'])->name('/');
 // Login
 Route::get('/login', [TaskController::class, 'loginForm'])->name('login');
+Route::post('/login', [UserController::class, 'login'])->name('login.submit');
 
 // Registro de usuario
 Route::get('/signup', [UserController::class, 'showSignUpForm'])->name('signup');
@@ -45,8 +46,5 @@ Route::middleware('auth')->group(function () {
     })->name('home');
 
     //logout
-    Route::get('/logout', function () {
-        Auth::logout();
-        return redirect('/');
-    })->name('logout');
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 });
