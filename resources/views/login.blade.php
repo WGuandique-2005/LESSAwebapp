@@ -193,10 +193,10 @@
 
         <button class="login-btn">Iniciar sesión</button>
 
-        <button class="google-btn">
-            <img src="https://img.icons8.com/?size=512&id=17949&format=png" alt="Google logo" class="google-icon" />
+        <a class="google-btn" href="{{ route('auth.google') }}">
+            <img src="https://img.icons8.com/?size=512&id=17949&format=png" alt="Google logo" class="google-icon"/>
             Inicia sesión con tu cuenta Google
-        </button>
+        </a>
 
         <div class="links">
             <a href="recuperar_pass">Olvidé mi contraseña</a><br>

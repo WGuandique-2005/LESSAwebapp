@@ -28,7 +28,7 @@ class UserController extends Controller
             'username' => 'required|string|max:255|unique:users,username',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-            'oauth'    => 'nullable|string',
+            'oauth_id'    => 'nullable|string',
         ]);
 
         $user = User::create([
@@ -36,7 +36,7 @@ class UserController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => $data['password'],
-            'oauth' => $data['oauth'],
+            'oauth_id' => $data['oauth'],
         ]);
         if(!$user) {
             return back()->withErrors(['error' => 'Error al crear el usuario.']);
