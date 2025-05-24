@@ -40,7 +40,7 @@
             --font-size-xxl: 2.5rem;
 
             /* Otros */
-            --border-radius: 8px;
+            --border-radius: 10px;
             --transition-speed: 0.3s;
         }
 
