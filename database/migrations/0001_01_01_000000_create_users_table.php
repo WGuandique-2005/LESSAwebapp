@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
@@ -17,8 +14,16 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->boolean('es_google_oauth');
+
+            // Campo para contraseña (nullable si se usa solo OAuth)
+            $table->string('password')->nullable();
+
+            // Campo para identificar usuarios con inicio de sesión por Google
+            $table->boolean('es_google_oauth')->default(false);
+
+            // ID del proveedor externo (Google OAuth)
+            $table->string('oauth_id')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });
@@ -39,13 +44,10 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
     }
 };

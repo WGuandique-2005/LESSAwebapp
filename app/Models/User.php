@@ -22,7 +22,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'oauth',
+        'oauth_id',
     ];
 
     public function lecciones()
