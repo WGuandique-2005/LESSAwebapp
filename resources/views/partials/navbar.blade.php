@@ -96,12 +96,19 @@
         </div>
 
         <div class="menu" id="menu">
-            <a href="#">Inicio</a>
-            <a href="/login">Login</a>
-            <a href="#">Practicar</a>
-            <a href="#">Aprender</a>
-            <a href="#">Info</a>
-            <a href="#">Perfil</a>
+            @if (Auth::check())
+                <a href="#">Inicio</a>
+                <a href="/logout">Logout</a>
+                <a href="#">Practicar</a>
+                <a href="#">Aprender</a>
+                <a href="#">Info</a>
+                <a href="#">Perfil</a>
+            @else
+                <a href="#">Inicio</a>
+                <a href="/login">Login</a>
+
+                <a href="#">Info</a>
+            @endif
         </div>
     </nav>
     <script>

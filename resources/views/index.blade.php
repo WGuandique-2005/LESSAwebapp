@@ -26,7 +26,8 @@
         }
 
         .btn-start,
-        .btn-ihave {
+        .btn-ihave,
+        .btn-start-second {
             padding: 10px 20px;
             border-radius: 5px;
             font-size: 16px;
@@ -35,6 +36,12 @@
         }
 
         .btn-start {
+            background-color: #011B40;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-start-second {
             background-color: #011B40;
             color: #fff;
             border: none;
@@ -51,6 +58,9 @@
         }
         .btn-ihave:hover{
             background-color: #ffff60;
+        }
+        .btn-start-second:hover{
+            background-color: #0056b3;
         }
 
         .firstParent,
@@ -233,7 +243,7 @@
         <!-- Sección 4: Llamado a la acción -->
         <div class="fourthParent">
             <h1>Todos aprenden con LESSA</h1>
-            <button class="btn-start">EMPIEZA AHORA</button>
+            <button class="btn-start-second" id="btn-start">EMPIEZA AHORA</button>
             <img src="{{ asset('img/game.png') }}" alt="Juego">
         </div>
 
@@ -242,6 +252,24 @@
     <footer>
         @include('partials.footer')
     </footer>
+    <script>
+        addEventListener("DOMContentLoaded", function() {
+            const btnStart = document.querySelector(".btn-start");
+            const btnIhave = document.querySelector(".btn-ihave");
+            const btnStartSecond = document.querySelector(".btn-start-second");
+
+            btnStart.addEventListener("click", function() {
+                window.location.href = "/signup";
+            });
+
+            btnIhave.addEventListener("click", function() {
+                window.location.href = "/login";
+            });
+            btnStartSecond.addEventListener("click", function() {
+                window.location.href = "/signup";
+            });
+        });
+    </script>
 </body>
 
 </html>
