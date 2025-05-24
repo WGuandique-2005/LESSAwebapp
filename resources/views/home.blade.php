@@ -424,7 +424,7 @@
                 <div class="hero-text">
                     <img src="{{ asset('img/logo_sinfondo.png') }}" alt="LESSA Logo" class="hero-logo">
                     <h1 style="color: white;">Bienvenido, {{ Auth::user()->name }}</h1>
-                    <h2>Aquí es donde transformas todo tu conocimiento teórico en habilidades de comunicación.</h2>
+                    <h3>Aquí es donde transformas todo tu conocimiento teórico en habilidades de comunicación.</h3>
                     <p>La sección de práctica de LESSA está diseñada para ayudarte a fortalecer tu confianza como
                         profesional. ¡No más dudas, adquiere confianza en el uso del Lenguaje de Señas Salvadoreño!</p>
                 </div>
