@@ -28,7 +28,6 @@ class UserController extends Controller
             'username' => $data['username'],
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
-            // oauth_id se queda null por defecto para usuarios normales
         ]);
 
         if (!$user) {
