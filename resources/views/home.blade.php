@@ -8,11 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Colores */
             --primary-blue: #007bff;
-            /* Un azul primario similar al de la imagen */
             --primary-orange: #ff6b35;
-            /* Naranja para énfasis */
             --light-gray: #f8f9fa;
             --medium-gray: #e9ecef;
             --dark-gray: #343a40;
@@ -23,7 +20,6 @@
             --shadow-medium: rgba(0, 0, 0, 0.15);
             --text-secondary: #6c757d;
 
-            /* Espaciado */
             --spacing-xs: 0.25rem;
             --spacing-sm: 0.5rem;
             --spacing-md: 1rem;
@@ -31,7 +27,6 @@
             --spacing-xl: 2rem;
             --spacing-xxl: 3rem;
 
-            /* Tipografía */
             --font-family-primary: 'Poppins', sans-serif;
             --font-size-base: 1rem;
             --font-size-sm: 0.875rem;
@@ -39,12 +34,10 @@
             --font-size-xl: 2rem;
             --font-size-xxl: 2.5rem;
 
-            /* Otros */
             --border-radius: 10px;
             --transition-speed: 0.3s;
         }
 
-        /* Base Styles */
         body {
             font-family: var(--font-family-primary);
             line-height: 1.6;
@@ -62,7 +55,6 @@
             padding: 0 var(--spacing-md);
         }
 
-        /* Hero Section */
         .hero-section {
             background-color: var(--primary-blue);
             padding: var(--spacing-xl) 0;
@@ -79,7 +71,6 @@
             height: 100%;
             object-fit: cover;
             opacity: 0.2;
-            /* Para que la imagen de fondo sea sutil */
             z-index: 0;
         }
 
@@ -90,7 +81,6 @@
             text-align: center;
             position: relative;
             z-index: 1;
-            /* Asegura que el contenido esté sobre la imagen */
         }
 
         .hero-logo {
@@ -122,7 +112,6 @@
             margin-bottom: var(--spacing-xl);
         }
 
-        /* Features Section (right side of hero) */
         .features-section {
             background-color: var(--white);
             padding: var(--spacing-lg) var(--spacing-xl);
@@ -131,7 +120,7 @@
             text-align: center;
             position: relative;
             z-index: 2;
-            margin-top: var(--spacing-xl); /* Add some space below hero text */
+            margin-top: var(--spacing-xl);
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
@@ -149,7 +138,6 @@
 
         .feature-item img {
             max-width: 240px;
-            /* Ajusta el tamaño del icono del teléfono */
             height: auto;
             margin-bottom: var(--spacing-sm);
         }
@@ -159,7 +147,6 @@
             color: var(--text-secondary);
         }
 
-        /* Practice Sections */
         .practice-sections {
             padding: var(--spacing-xxl) 0;
         }
@@ -181,7 +168,6 @@
             margin: 0 auto;
         }
 
-        /* New layout for practice sections */
         .practice-sections-layout {
             display: grid;
             grid-template-columns: 1fr;
@@ -212,14 +198,12 @@
         .card-image-container {
             width: 100%;
             height: 180px;
-            /* Altura fija para las imágenes */
             overflow: hidden;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: var(--medium-gray);
-            /* Fallback si no hay imagen */
         }
 
         .card-image {
@@ -250,7 +234,6 @@
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-            /* Permite que el contenido ocupe el espacio restante */
         }
 
         .card-content h3 {
@@ -263,7 +246,6 @@
             font-size: var(--font-size-sm);
             color: var(--text-secondary);
             flex-grow: 1;
-            /* Permite que el párrafo de descripción crezca */
         }
 
         .progress-card {
@@ -290,7 +272,6 @@
             height: 100px;
             border-radius: 50%;
             background-color: var(--medium-gray);
-            /* Color de fondo del círculo */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -302,7 +283,6 @@
             box-shadow: inset 0 0 0 5px var(--medium-gray); /* Border effect for progress */
         }
 
-        /* Styling for the circular progress (using conic-gradient for simplicity) */
         .progress-circle::before {
             content: '';
             position: absolute;
@@ -320,7 +300,6 @@
             position: relative;
             z-index: 1;
             background-color: var(--white);
-            /* Para que el porcentaje no se mezcle con el gradiente */
             padding: var(--spacing-sm);
             border-radius: 50%;
         }
@@ -337,7 +316,6 @@
             color: var(--text-secondary);
         }
 
-        /* Floating Tip Card */
         .tip-card {
             background-color: var(--white);
             border-radius: var(--border-radius);
@@ -351,8 +329,8 @@
 
         .tip-icon {
             font-size: var(--font-size-lg);
-            color: var(--primary-orange); /* Changed to orange for emphasis */
-            min-width: 24px; /* Ensure icon has space */
+            color: var(--primary-orange);
+            min-width: 24px;
             text-align: center;
         }
 
