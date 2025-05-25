@@ -59,7 +59,7 @@
         </div>
         <div class="footer">
             <p>Si no fuiste tú quien activó esta cuenta, por favor contáctanos de inmediato.</p>
-            <p>&copy; {{ date('Y') }} Tu Aplicación. Todos los derechos reservados.</p>
+            <p>&copy; {{ date('Y') }} LESSA. Todos los derechos reservados.</p>
         </div>
     </div>
 </body>
