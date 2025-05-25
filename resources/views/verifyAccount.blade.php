@@ -172,12 +172,10 @@
             <button type="submit">Verificar</button>
         </form>
 
-        @if(session('canResend'))
         <form method="POST" action="{{ route('verify.resend') }}">
             @csrf
             <button type="submit" class="mt-3">Reenviar código</button>
         </form>
-        @endif
     </div>
 </body>
 </html>
