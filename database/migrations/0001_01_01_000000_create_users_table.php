@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('oauth_id')->nullable();
 
             $table->rememberToken();
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
 
