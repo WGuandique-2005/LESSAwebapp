@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Mail\AccountActivated;
 use Illuminate\Support\Str;
 
 class GoogleController extends Controller
@@ -41,12 +42,16 @@ class GoogleController extends Controller
                     'email'     => $googleUser->getEmail(),
                     'password'  => bcrypt(Str::random(16)),
                     'oauth_id'  => $googleUser->getId(),
+                    'es_google_oauth' => true, // Indica que es un usuario de Google OAuth
                     'is_active' => true, // Asumimos que el usuario está activo al registrarse con Google
-                    'es_google_oauth' => true,
                 ]);
             }
         }
-
+        // Mandar correo de bienvenida si es un nuevo usuario
+        if ($user->wasRecentlyCreated) {
+            // Enviar correo de bienvenida
+            \Mail::to($user->email)->send(new AccountActivated($user));
+        }
         // Inicia sesión
         Auth::login($user, true);
 

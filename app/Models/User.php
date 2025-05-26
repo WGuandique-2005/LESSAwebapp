@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'oauth_id',
         'is_active',
+        'es_google_oauth',
     ];
 
     public function lecciones()
@@ -61,6 +62,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
+            'es_google_oauth' => 'boolean',
         ];
     }
 }
