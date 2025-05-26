@@ -41,6 +41,8 @@ class GoogleController extends Controller
                     'email'     => $googleUser->getEmail(),
                     'password'  => bcrypt(Str::random(16)),
                     'oauth_id'  => $googleUser->getId(),
+                    'is_active' => true, // Asumimos que el usuario está activo al registrarse con Google
+                    'es_google_oauth' => true,
                 ]);
             }
         }

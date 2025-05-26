@@ -38,6 +38,8 @@ class UserController extends Controller
             'email'     => $data['email'],
             'password'  => bcrypt($data['password']),
             'is_active' => false,
+            'es_google_oauth' => false, // No es OAuth
+            'oauth_id'  => null, // No tiene OAuth ID
         ]);
 
         // 3) Generar token de 6 caracteres y guardarlo
@@ -135,6 +137,12 @@ class UserController extends Controller
             'email'    => 'required|email',
             'password' => 'required|string',
         ]);
+
+        // Verificar si el usuario está activo
+        $user = User::where('email', $credentials['email'])->first();
+        if ($user && ! $user->is_active) {
+            return back()->withErrors(['error' => 'Cuenta no activada. Por favor verifica tu correo.']);
+        }
 
         if (Auth::attempt($credentials)) {
             return redirect()->route('home');
