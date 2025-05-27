@@ -211,12 +211,12 @@
                     <div class="btn">
                         <button type="button" class="btn_borrar">Borrar</button>
                         <button type="button" class="btn_cerrar">Cerrar sesión</button>
+                        @include('partials.configAccount')
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
     <footer>
         @include('partials.footer')
     </footer>

@@ -175,6 +175,7 @@ class UserController extends Controller
     /** Cerrar sesión */
     public function logout()
     {
+        session()->flush();
         Auth::logout();
         return redirect('/');
     }
