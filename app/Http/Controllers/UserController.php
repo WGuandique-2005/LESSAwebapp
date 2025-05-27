@@ -151,6 +151,17 @@ class UserController extends Controller
         return back()->withErrors(['error' => 'Credenciales incorrectas.']);
     }
 
+    /** Mostrar formulario de recuperación de contraseña */
+    public function showRecuperarPassForm()
+    {
+        return view('recuperarPass');
+    }
+    /** Procesar recuperación de contraseña */
+    public function recuperarPass(Request $request)
+    {
+        // Aquí iría la lógica para enviar un enlace de recuperación de contraseña
+    }
+
     /** Cerrar sesión */
     public function logout()
     {
