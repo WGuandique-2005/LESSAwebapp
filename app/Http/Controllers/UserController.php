@@ -162,6 +162,16 @@ class UserController extends Controller
         // Aquí iría la lógica para enviar un enlace de recuperación de contraseña
     }
 
+    // Ver perfil del usuario
+    public function showProfile()
+    {
+        $user = Auth::user();
+        return view('userProfile', compact('user'));
+    }
+    public function editProfile(Request $request)
+    {
+        return view('configAccount');
+    }
     /** Cerrar sesión */
     public function logout()
     {
