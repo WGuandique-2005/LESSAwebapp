@@ -176,7 +176,7 @@
 <body>
     
     <div class="logo"></div>
-<form action="{{ route('login.submit') }}" method="POST" class="container">
+<form action="{{ route('comprobarCorreo') }}" method="POST" class="container">
     @csrf
     <h1>Recuperar contraseña</h1>
 
@@ -187,8 +187,8 @@
 
     <button type="submit" class="login-btn">Solicitar nueva contraseña</button>
 
-    <a class="google-btn" href="{{ route('auth.google') }}">
-        Volver a inicio de sesión
+    <a class="google-btn" href="{{ route('login') }}">
+        Volver a login
     </a>
 </form>
 </body>

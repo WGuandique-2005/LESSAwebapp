@@ -20,4 +20,11 @@ class TaskController extends Controller
     {
         return view('/Mail/recuperarPass');
     }
+
+    public function comprobarCorreo()
+    {
+        //pendiente lógica de comparación de correo con la base de datos
+
+        return view('/Mail/comprobarCorreo');
+    }
 }
