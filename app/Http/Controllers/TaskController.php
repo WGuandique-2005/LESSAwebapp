@@ -18,6 +18,6 @@ class TaskController extends Controller
 
     public function recuperarPass()
     {
-        return view('recuperarPass');
+        return view('/Mail/recuperarPass');
     }
 }
