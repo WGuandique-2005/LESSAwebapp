@@ -199,7 +199,7 @@
     </a>
 
     <div class="links">
-        <a href="{{ route('recuperar') }}">Olvidé mi contraseña</a><br>
+        <a href="{{ route('recuperar') }}">¿Olvidaste tu contraseña?</a><br>
         ¿No tienes una cuenta? <a href="{{ route('signup') }}">Crea una aquí</a>
     </div>
 </form>
