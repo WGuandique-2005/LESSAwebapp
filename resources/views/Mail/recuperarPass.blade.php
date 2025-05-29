@@ -130,19 +130,26 @@
         }
 
         .back-button {
-            position: absolute;
-            top: 30px;
-            left: 30px;
+            display: inline-block;
+            margin-top: 20px;
             color: white;
             background-color: #F4A261;
             padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .back-button:hover {
             background-color: #ffffff;
             color: #F4A261;
+        }
+
+        .back-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         @media screen and (max-width: 768px) {
@@ -185,11 +192,10 @@
         <input type="email" name="email" placeholder="Correo" required />
     </div>
 
-    <button type="submit" class="login-btn">Solicitar nueva contraseña</button>
-
-    <a class="google-btn" href="{{ route('login') }}">
-        Volver a login
-    </a>
+        <button type="submit" class="login-btn">Solicitar nueva contraseña</button>
+    <div class="back-container">
+        <a href="{{ route('login') }}" class="back-button">Volver</a>
+    </div>
 </form>
 </body>
 

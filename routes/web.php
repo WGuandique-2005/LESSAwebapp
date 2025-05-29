@@ -31,8 +31,8 @@ Route::get('/recuperar_pass', [TaskController::class, 'recuperarPass'])->name('r
 // Verificar correo
 Route::post('/recuperar_pass', [TaskController::class, 'comprobarCorreo'])->name('comprobarCorreo');
 // Nueva contraseña
-Route::get('/new_pass', [TaskController::class, 'newPass'])->name('newPass_view');
-Route::put('/new_pass', [TaskController::class, 'newPass'])->name('newPass');
+//Route::get('/new_pass', [TaskController::class, 'newPass'])->name('newPass_view');
+//Route::put('/new_pass', [TaskController::class, 'newPass'])->name('newPass');
 
 //----------------------------------
 // Google OAuth authentication
