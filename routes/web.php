@@ -27,9 +27,9 @@ Route::post('/verify/resend',[UserController::class,'resendToken'])->name('verif
 
 
 // Recuperar contraseña
-Route::get('/recuperar_pass', [TaskController::class, 'recuperarPass'])->name('recuperar');
+Route::get('/recuperar_pass', [UserController::class, 'showRecuperarPassForm'])->name('recuperar');
 // Verificar correo
-Route::post('/recuperar_pass', [TaskController::class, 'comprobarCorreo'])->name('comprobarCorreo');
+Route::post('/recuperar_pass', [UserController::class, 'recuperarPass'])->name('recuperarPass');
 // Nueva contraseña
 //Route::get('/new_pass', [TaskController::class, 'newPass'])->name('newPass_view');
 //Route::put('/new_pass', [TaskController::class, 'newPass'])->name('newPass');

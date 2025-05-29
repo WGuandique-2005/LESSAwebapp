@@ -183,7 +183,7 @@
 <body>
     
     <div class="logo"></div>
-<form action="{{ route('comprobarCorreo') }}" method="POST" class="container">
+<form action="{{ route('recuperarPass') }}" method="POST" class="container">
     @csrf
     <h1>Recuperar contraseña</h1>
 
@@ -191,7 +191,6 @@
         <h2>Correo</h2>
         <input type="email" name="email" placeholder="Correo" required />
     </div>
-
         <button type="submit" class="login-btn">Solicitar nueva contraseña</button>
     <div class="back-container">
         <a href="{{ route('login') }}" class="back-button">Volver</a>

@@ -160,6 +160,8 @@ class UserController extends Controller
     public function recuperarPass(Request $request)
     {
         // Aquí iría la lógica para enviar un enlace de recuperación de contraseña
+
+        return view('processNewPass');
     }
 
     // Ver perfil del usuario
