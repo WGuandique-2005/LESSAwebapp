@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\VerificationToken;
+use App\Models\ResetToken;
 use App\Mail\VerifyUser;
 use App\Mail\AccountActivated;
+use App\Mail\RestorePassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -157,11 +159,74 @@ class UserController extends Controller
         return view('recuperarPass');
     }
     /** Procesar recuperación de contraseña */
-    public function recuperarPass(Request $request)
+    public function linkRecuperarPass(Request $request)
     {
-        // Aquí iría la lógica para enviar un enlace de recuperación de contraseña
+        $request->validate([
+        'email' => 'required|email',
+        ]);
 
+        $user = User::where('email', $request->email)->first();
+        if (! $user) {
+            return back()->withErrors(['email' => 'Correo no encontrado.']);
+        }
+
+        // Generar token de 6 caracteres
+        $token = Str::upper(Str::random(6));
+
+        // Eliminar tokens anteriores y crear nuevo
+        ResetToken::where('user_id', $user->id)->delete();
+        ResetToken::create([
+            'user_id' => $user->id,
+            'token'   => $token,
+        ]);
+
+        // Enviar correo
+        Mail::to($user->email)->send(new RestorePassword($user, $token));
+
+        return back()->with('status', 'Se ha enviado un código de recuperación a tu correo.');
+    }
+
+    public function showNewPassForm()
+    {
         return view('processNewPass');
+    }
+
+
+    public function resetPassword(Request $request)
+    {
+        // 1. Validar entrada
+        $request->validate([
+            'email' => 'required|email',
+            'token' => 'required|string|size:6',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // 2. Buscar usuario y token
+        $user = User::where('email', $request->email)->first();
+        if (! $user) {
+            return back()->withErrors(['email' => 'Correo no encontrado.']);
+        }
+
+        $record = VerificationToken::where('user_id', $user->id)
+                                    ->where('token', $request->token)
+                                    ->first();
+
+        if (! $record) {
+            return back()->withErrors(['token' => 'Código inválido.']);
+        }
+
+        // 3. Verificar expiración (2h)
+        if (Carbon::parse($record->created_at)->addHours(2)->isPast()) {
+            return back()->withErrors(['token' => 'El código ha expirado.']);
+        }
+
+        // 4. Cambiar contraseña y borrar token
+        $user->update([
+            'password' => bcrypt($request->password)
+        ]);
+        $record->delete();
+
+        return redirect()->route('login')->with('status', 'Contraseña actualizada. Ahora puedes iniciar sesión.');
     }
 
     // Ver perfil del usuario

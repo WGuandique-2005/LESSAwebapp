@@ -191,10 +191,29 @@
         <h2>Correo</h2>
         <input type="email" name="email" placeholder="Correo" required />
     </div>
-        <button type="submit" class="login-btn">Solicitar nueva contraseña</button>
+
+    <button type="submit" class="login-btn">Solicitar nueva contraseña</button>
+
     <div class="back-container">
         <a href="{{ route('login') }}" class="back-button">Volver</a>
     </div>
+
+    @if (session('status'))
+        <div class="status-message">{{ session('status') }}</div>
+        <div class="change-password-link">
+            <a href="{{ route('newPass_view') }}">¿Ya tienes el código? Cambia tu contraseña aquí.</a>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="error-messages">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li style="color: red">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </form>
 </body>
 

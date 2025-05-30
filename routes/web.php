@@ -29,10 +29,10 @@ Route::post('/verify/resend',[UserController::class,'resendToken'])->name('verif
 // Recuperar contraseña
 Route::get('/recuperar_pass', [UserController::class, 'showRecuperarPassForm'])->name('recuperar');
 // Verificar correo
-Route::post('/recuperar_pass', [UserController::class, 'recuperarPass'])->name('recuperarPass');
+Route::post('/recuperar_pass', [UserController::class, 'linkRecuperarPass'])->name('recuperarPass');
 // Nueva contraseña
-//Route::get('/new_pass', [TaskController::class, 'newPass'])->name('newPass_view');
-//Route::put('/new_pass', [TaskController::class, 'newPass'])->name('newPass');
+Route::get('/new_pass', [UserController::class, 'showNewPassForm'])->name('newPass_view');
+Route::post('/new_pass', [UserController::class, 'resetPassword'])->name('newPass');
 
 //----------------------------------
 // Google OAuth authentication
