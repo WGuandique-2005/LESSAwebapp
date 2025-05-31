@@ -26,10 +26,11 @@
 </head>
 <body>
     <h2>Hola, {{ $user->name }}!</h2>
-    <p>Tu código de verificación es:</p>
+    <p>Recibimos una solicitud para actualizar tu contraseña.</p>
+    <p>Usa el siguiente código para actualizar tu contraseña:</p>
     <h1 style="letter-spacing:4px">{{ $token }}</h1>
-    <p>Ingresa este código en la pantalla de verificación de nuestra aplicación. Tiene validez de 24 horas.</p>
-    <p>Si no solicitaste este código, ignora este correo.</p>
+    <p>Si no solicitaste este cambio, puedes ignorar este mensaje.</p>
+    <p>Gracias por usar nuestro servicio.</p>
     <p>&copy; {{ date('Y') }} LESSA. Todos los derechos reservados.</p>
 </body>
 </html>
