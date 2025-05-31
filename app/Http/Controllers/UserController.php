@@ -65,11 +65,8 @@ class UserController extends Controller
                 ->with('status', '¡Registro exitoso! Te hemos enviado un código de verificación a tu correo electrónico.');
 
         } catch (ValidationException $e) {
-            // Laravel's default handling for ValidationException already sends errors back to the form
-            // No need to explicitly return back()->withErrors() here
             return back()->withInput()->withErrors($e->errors());
         } catch (Exception $e) {
-            // General catch for other potential errors (e.g., mail sending failure)
             return back()->withInput()->with('error', 'Hubo un problema al intentar registrarte. Por favor, inténtalo de nuevo más tarde.');
         }
     }
