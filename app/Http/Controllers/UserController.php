@@ -30,28 +30,28 @@ class UserController extends Controller
         try {
             // 1) Validar datos de registro
             $data = $request->validate([
-                'name'     => 'required|string|max:255',
+                'name' => 'required|string|max:255',
                 'username' => 'required|string|max:255|unique:users,username',
-                'email'    => 'required|email|unique:users,email',
+                'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:8|confirmed',
             ]);
 
             // 2) Crear usuario con is_active = false
             $user = User::create([
-                'name'      => $data['name'],
-                'username'  => $data['username'],
-                'email'     => $data['email'],
-                'password'  => bcrypt($data['password']),
+                'name' => $data['name'],
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
                 'is_active' => false,
                 'es_google_oauth' => false,
-                'oauth_id'  => null,
+                'oauth_id' => null,
             ]);
 
             // 3) Generar token de 6 caracteres y guardarlo
             $token = Str::upper(Str::random(6));
             VerificationToken::create([
                 'user_id' => $user->id,
-                'token'   => $token,
+                'token' => $token,
             ]);
 
             // 4) Enviar correo de verificación
@@ -62,7 +62,7 @@ class UserController extends Controller
 
             // 6) Redirigir al formulario de verificación
             return redirect()->route('verify.view')
-                             ->with('status', '¡Registro exitoso! Te hemos enviado un código de verificación a tu correo electrónico.');
+                ->with('status', '¡Registro exitoso! Te hemos enviado un código de verificación a tu correo electrónico.');
 
         } catch (ValidationException $e) {
             // Laravel's default handling for ValidationException already sends errors back to the form
@@ -102,8 +102,8 @@ class UserController extends Controller
 
             // 2) Recuperar el registro de token (si existe)
             $record = VerificationToken::where('user_id', $userId)
-                                         ->where('token', $request->token)
-                                         ->first();
+                ->where('token', $request->token)
+                ->first();
 
             if (!$record) {
                 // Use ValidationException for specific field errors
@@ -182,7 +182,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email'    => 'required|email',
+            'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
@@ -198,7 +198,7 @@ class UserController extends Controller
 
         if (!$user->is_active) {
             return back()->withInput($request->only('email'))
-                         ->with('error', 'Tu cuenta no ha sido activada. Por favor, verifica tu correo electrónico.');
+                ->with('error', 'Tu cuenta no ha sido activada. Por favor, verifica tu correo electrónico.');
         }
 
         if (Auth::attempt($credentials)) {
@@ -236,7 +236,7 @@ class UserController extends Controller
             ResetToken::where('user_id', $user->id)->delete();
             ResetToken::create([
                 'user_id' => $user->id,
-                'token'   => $token,
+                'token' => $token,
                 'created_at' => Carbon::now(), // Ensure created_at is set for expiration check
             ]);
 
@@ -265,8 +265,8 @@ class UserController extends Controller
         try {
             // 1. Validar entrada
             $request->validate([
-                'email'    => 'required|email|exists:users,email',
-                'token'    => 'required|string|size:6',
+                'email' => 'required|email|exists:users,email',
+                'token' => 'required|string|size:6',
                 'password' => 'required|string|min:8|confirmed',
             ]);
 
@@ -276,8 +276,8 @@ class UserController extends Controller
 
             // 3. Buscar y verificar el token de reseteo
             $record = ResetToken::where('user_id', $user->id)
-                                ->where('token', $request->token)
-                                ->first();
+                ->where('token', $request->token)
+                ->first();
 
             if (!$record) {
                 throw ValidationException::withMessages(['token' => 'El código de recuperación es inválido.']);
