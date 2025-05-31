@@ -52,7 +52,6 @@ Route::middleware('auth')->group(function () {
 
     // Ver y editar perfil
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
-    Route::get('/profile/update', [UserController::class, 'editProfile'])->name('profile.update');
 
     //logout
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');

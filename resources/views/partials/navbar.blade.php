@@ -335,7 +335,7 @@
                     </div>
                     <div class="avatar-dropdown" id="avatarDropdown">
                         <a href="{{ route('profile') }}">Ver Perfil</a>
-                        <a href="{{ route('profile.update') }}">Configurar Perfil</a>
+                        <a href="#">Configurar Perfil</a>
                         <a href="{{ route('logout')}}">Cerrar Sesión</a>
                     </div>
                 </div>
