@@ -308,6 +308,43 @@ class UserController extends Controller
         return view('userProfile', compact('user'));
     }
 
+    /** Actualizar perfil de usuario */
+    public function showEditProfileForm()
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para editar tu perfil.');
+        }
+        return view('editProfile', compact('user'));
+    }
+    public function update(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            if (!$user) {
+                return redirect()->route('login')->with('error', 'Debes iniciar sesión para actualizar tu perfil.');
+            }
+
+            // Validar los datos del perfil
+            $data = $request->validate([
+                'name' => 'required|string|max:255',
+                'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+                'email' => 'required|email|unique:users,email,' . $user->id,
+                'password' => 'nullable|string|min:8|confirmed',
+            ]);
+
+            // Actualizar el usuario
+            $user->update($data);
+
+            return back()->with('status', 'Perfil actualizado exitosamente.');
+
+        } catch (ValidationException $e) {
+            return back()->withInput()->withErrors($e->errors());
+        } catch (Exception $e) {
+            return back()->withInput()->with('error', 'Hubo un problema al actualizar tu perfil. Por favor, inténtalo de nuevo.');
+        }
+    }
+
     /** Cerrar sesión */
     public function logout(Request $request)
     {
