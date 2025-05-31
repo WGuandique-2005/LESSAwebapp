@@ -4,9 +4,26 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registro - PlotChat</title>
+    <title>Registro - LESSA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlalr+G/yqW8S8H5f+3zT1xZ6+K/5B5E1Q6Z8c2q5f8+5z7m3gD9c5O6Z7t0+7z9f+2V0P3p3P4p+1Q8+"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Tu CSS existente aquí */
+        :root {
+            --primary-blue: #4285f4;
+            --primary-blue-dark: #3367d6;
+            --secondary-orange: #F4A261;
+            --text-light: #fff;
+            --text-dark: #333;
+            --input-bg: rgba(255, 255, 255, 0.2);
+            --input-border-focus: #F4A261;
+            --shadow-light: rgba(0, 0, 0, 0.3);
+            --blur-strength: 15px;
+            --error-red: #ff6b6b;
+            --success-green: rgba(40, 167, 69, 0.8);
+            --danger-red: rgba(220, 53, 69, 0.8);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -21,20 +38,28 @@
             align-items: center;
             background: url({{ asset('img/login.png') }}) no-repeat center center/cover;
             position: relative;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .container {
             width: 70%;
             max-width: 500px;
-            background: #16424774;
-            backdrop-filter: blur(15px);
+            background: rgba(22, 66, 71, 0.7);
+            backdrop-filter: blur(var(--blur-strength));
             border-radius: 20px;
             padding: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            color: #fff;
+            box-shadow: 0 8px 32px var(--shadow-light);
+            color: var(--text-light);
+            position: relative;
+            z-index: 5;
+            flex-shrink: 0;
+            margin-top: 100px;
+            margin-bottom: 20px;
         }
 
         .logo {
@@ -44,35 +69,44 @@
             width: 160px;
             height: 160px;
             background: url({{ asset('img/logo_sinfondo.png') }}) center/contain no-repeat;
+            z-index: 10;
         }
 
         h1 {
             font-size: 32px;
             margin-bottom: 20px;
-            color: white;
+            color: var(--text-light);
         }
 
         h2 {
             font-size: 16px;
             margin-bottom: 5px;
-            color: white;
+            color: var(--text-light);
+            align-self: flex-start;
+            padding-left: 5px;
         }
 
         .input-group {
             width: 100%;
             margin-bottom: 20px;
+            position: relative;
         }
 
         input {
             width: 100%;
             padding: 12px;
-            border: none;
+            border: 1px solid transparent;
             border-radius: 10px;
             font-size: 16px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            background: var(--input-bg);
+            color: var(--text-light);
             outline: none;
-            transition: border-color 0.3s ease; /* Transición suave para el borde */
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--input-border-focus);
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         input::placeholder {
@@ -88,18 +122,21 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
-            transition: background-color 0.3s;
-            background-color: #4285f4;
-            color: white;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .signup-btn:hover {
-            background-color: #3367d6;
+            background-color: var(--primary-blue-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         .google-btn {
-            background-color: white;
-            color: #333;
+            background-color: var(--text-light);
+            color: var(--text-dark);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -112,11 +149,14 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .google-btn:hover {
             background-color: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         .google-icon {
@@ -129,10 +169,18 @@
             text-align: center;
             font-size: 14px;
             margin-top: 20px;
+            line-height: 1.6;
         }
 
         .links a {
-            color: #fff;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        .links a:hover {
+            color: var(--secondary-orange);
             text-decoration: underline;
         }
 
@@ -140,84 +188,148 @@
             position: absolute;
             top: 30px;
             left: 30px;
-            color: white;
-            background-color: #F4A261;
+            color: var(--text-light);
+            background-color: var(--secondary-orange);
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
         }
 
         .back-button:hover {
-            background-color: #ffffff;
-            color: #F4A261;
+            background-color: var(--text-light);
+            color: var(--secondary-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Estilos para errores de validación */
         .error-message {
-            color: #ffdddd;
+            color: var(--error-red);
             font-size: 13px;
             margin-top: 5px;
             padding-left: 5px;
-            opacity: 1; /* Por defecto visible si hay error */
-            transition: opacity 0.3s ease-in-out; /* Transición para ocultar/mostrar */
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: opacity 0.4s ease-in-out, height 0.4s ease-in-out, margin-top 0.4s ease-in-out;
+        }
+
+        .error-message.show {
+            opacity: 1;
+            height: auto;
+            margin-top: 5px;
+        }
+
+        .error-message i {
+            margin-right: 8px;
+            font-size: 14px;
         }
 
         .input-group input.is-invalid {
-            border: 1px solid #ff6b6b;
+            border: 1px solid var(--error-red);
         }
 
-        /* Estilo para mensajes de sesión */
         .session-message {
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 20px;
+            border-radius: 10px;
             margin-bottom: 20px;
             width: 100%;
             text-align: center;
             font-weight: bold;
             opacity: 1;
             transition: opacity 0.5s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .session-message.success {
-            background-color: rgba(40, 167, 69, 0.8); /* Verde */
+            background-color: var(--success-green);
             color: white;
         }
 
         .session-message.error {
-            background-color: rgba(220, 53, 69, 0.8); /* Rojo */
+            background-color: var(--danger-red);
             color: white;
         }
 
         .session-message.hidden {
             opacity: 0;
-            pointer-events: none; /* Evita que sea clicable cuando está oculto */
+            pointer-events: none;
         }
-
 
         @media screen and (max-width: 768px) {
             .container {
                 padding: 30px 20px;
-                margin-top: 80px;
+                margin-top: 120px;
+                margin-bottom: 40px;
             }
 
             .logo {
-                width: 60px;
-                height: 60px;
+                width: 80px;
+                height: 80px;
                 top: 20px;
                 right: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .back-button {
+                top: 20px;
+                left: 20px;
+                padding: 8px 15px;
+                font-size: 14px;
             }
         }
 
         @media screen and (max-width: 480px) {
+            .container {
+                padding: 25px 15px;
+                margin-top: 100px;
+                margin-bottom: 30px;
+            }
+
             h1 {
                 font-size: 24px;
+            }
+
+            h2 {
+                font-size: 14px;
             }
 
             input,
             .signup-btn,
             .google-btn {
                 font-size: 14px;
+                padding: 10px;
+            }
+
+            .google-icon {
+                width: 18px;
+                height: 18px;
+            }
+
+            .links {
+                font-size: 13px;
+            }
+
+            .logo {
+                width: 60px;
+                height: 60px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .back-button {
+                top: 15px;
+                left: 15px;
+                padding: 7px 12px;
+                font-size: 13px;
             }
         }
     </style>
@@ -225,13 +337,12 @@
 
 <body>
 
-    <a href="/" class="back-button">Volver</a>
+    <a class="back-button">Volver</a>
     <div class="logo"></div>
 
     <div class="container">
         <h1>Registrarse</h1>
 
-        {{-- Mensaje de éxito/error global de sesión --}}
         @if (session('success'))
             <div class="session-message success" id="session-message">
                 {{ session('success') }}
@@ -249,42 +360,43 @@
             <div class="input-group">
                 <h2>Nombre Completo</h2>
                 <input type="text" name="name" placeholder="Tu nombre" value="{{ old('name') }}"
-                       class="@error('name') is-invalid @enderror" required autocomplete="name" autofocus />
+                    class="@error('name') is-invalid @enderror" required autocomplete="name" autofocus />
                 @error('name')
-                    <div class="error-message">{{ $message }}</div>
+                    <div class="error-message show"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="input-group">
                 <h2>Nombre de Usuario</h2>
                 <input type="text" name="username" placeholder="Tu nombre de usuario" value="{{ old('username') }}"
-                       class="@error('username') is-invalid @enderror" required autocomplete="username" />
+                    class="@error('username') is-invalid @enderror" required autocomplete="username" />
                 @error('username')
-                    <div class="error-message">{{ $message }}</div>
+                    <div class="error-message show"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="input-group">
                 <h2>Correo Electrónico</h2>
                 <input type="email" name="email" placeholder="Correo" value="{{ old('email') }}"
-                       class="@error('email') is-invalid @enderror" required autocomplete="email" />
+                    class="@error('email') is-invalid @enderror" required autocomplete="email" />
                 @error('email')
-                    <div class="error-message">{{ $message }}</div>
+                    <div class="error-message show"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="input-group">
                 <h2>Contraseña</h2>
                 <input type="password" name="password" placeholder="Contraseña"
-                       class="@error('password') is-invalid @enderror" required autocomplete="new-password" />
+                    class="@error('password') is-invalid @enderror" required autocomplete="new-password" />
                 @error('password')
-                    <div class="error-message">{{ $message }}</div>
+                    <div class="error-message show"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="input-group">
                 <h2>Confirmar Contraseña</h2>
-                <input type="password" name="password_confirmation" placeholder="Repite tu contraseña" required autocomplete="new-password" />
+                <input type="password" name="password_confirmation" placeholder="Repite tu contraseña" required
+                    autocomplete="new-password" />
             </div>
 
             <button type="submit" class="signup-btn">Registrarse</button>
@@ -295,33 +407,41 @@
             Inicia sesión con tu cuenta Google
         </a>
 
-        <div class="links">
-            <a href="{{ route('login') }}">¿Ya tienes una cuenta? Inicia sesión aquí</a>
+        <div class="links">¿Ya tienes una cuenta? <a href="{{ route('login') }}">Inicia sesión aquí</a>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const sessionMessage = document.getElementById('session-message');
+            const backButton = document.querySelector('.back-button');
+
+            if (backButton) {
+                backButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    window.history.back();
+                });
+            }
+
             if (sessionMessage) {
                 setTimeout(() => {
                     sessionMessage.classList.add('hidden');
-                }, 5000); // Oculta después de 5 segundos
+                }, 5000);
             }
 
-            // 2. Limpiar errores de validación al escribir en el campo
             const form = document.querySelector('form');
             if (form) {
                 form.querySelectorAll('input').forEach(input => {
                     input.addEventListener('input', function() {
                         if (this.classList.contains('is-invalid')) {
                             this.classList.remove('is-invalid');
-                            const errorDiv = this.nextElementSibling; // Asume que el div de error es el siguiente hermano
+                            const errorDiv = this.nextElementSibling;
                             if (errorDiv && errorDiv.classList.contains('error-message')) {
-                                errorDiv.style.opacity = '0'; // Ocultar el mensaje de error con transición
-                                setTimeout(() => {
-                                    errorDiv.remove(); // Eliminar el div después de la transición
-                                }, 300); // Coincide con la duración de la transición CSS
+                                errorDiv.classList.remove('show');
+                                errorDiv.addEventListener('transitionend', function handler() {
+                                    errorDiv.remove();
+                                    errorDiv.removeEventListener('transitionend', handler);
+                                });
                             }
                         }
                     });
@@ -336,7 +456,7 @@
                     container.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
                     container.style.opacity = '1';
                     container.style.transform = 'translateY(0)';
-                }, 100); // Pequeño retraso para asegurar que el CSS inicial se aplique
+                }, 100);
             }
         });
     </script>
