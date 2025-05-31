@@ -11,35 +11,36 @@ use App\Http\Controllers\Auth\GoogleController;
 |----------------------------------
 */
 
-// Landing page
-Route::get('/', [TaskController::class, 'index'])->name('/');
-// Login
-Route::get('/login', [TaskController::class, 'loginForm'])->name('login');
-Route::post('/login', [UserController::class, 'login'])->name('login.submit');
+Route::middleware('guest')->group(function (){
+    // Landing page
+    Route::get('/', [TaskController::class, 'index'])->name('/');
+    // Login
+    Route::get('/login', [TaskController::class, 'loginForm'])->name('login');
+    Route::post('/login', [UserController::class, 'login'])->name('login.submit');
 
-// Registro de usuario
-Route::get('/signup', [UserController::class, 'showSignUpForm'])->name('signup');
-Route::post('/signup', [UserController::class, 'register'])->name('signup.submit');
-// Verificación de cuenta
-Route::get ('/verify', [UserController::class,'showVerifyForm'])->name('verify.view');
-Route::post('/verify', [UserController::class,'verifyAccount'])->name('verify.submit');
-Route::post('/verify/resend',[UserController::class,'resendToken'])->name('verify.resend');
+    // Registro de usuario
+    Route::get('/signup', [UserController::class, 'showSignUpForm'])->name('signup');
+    Route::post('/signup', [UserController::class, 'register'])->name('signup.submit');
+    // Verificación de cuenta
+    Route::get ('/verify', [UserController::class,'showVerifyForm'])->name('verify.view');
+    Route::post('/verify', [UserController::class,'verifyAccount'])->name('verify.submit');
+    Route::post('/verify/resend',[UserController::class,'resendToken'])->name('verify.resend');
 
 
-// Recuperar contraseña
-Route::get('/recuperar_pass', [UserController::class, 'showRecuperarPassForm'])->name('recuperar');
-// Verificar correo
-Route::post('/recuperar_pass', [UserController::class, 'linkRecuperarPass'])->name('recuperarPass');
-// Nueva contraseña
-Route::get('/new_pass', [UserController::class, 'showNewPassForm'])->name('newPass_view');
-Route::post('/new_pass', [UserController::class, 'resetPassword'])->name('newPass');
+    // Recuperar contraseña
+    Route::get('/recuperar_pass', [UserController::class, 'showRecuperarPassForm'])->name('recuperar');
+    // Verificar correo
+    Route::post('/recuperar_pass', [UserController::class, 'linkRecuperarPass'])->name('recuperarPass');
+    // Nueva contraseña
+    Route::get('/new_pass', [UserController::class, 'showNewPassForm'])->name('newPass_view');
+    Route::post('/new_pass', [UserController::class, 'resetPassword'])->name('newPass');
 
-//----------------------------------
-// Google OAuth authentication
-//----------------------------------
-Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
-Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
-
+    //----------------------------------
+    // Google OAuth authentication
+    //----------------------------------
+    Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+    Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+});
 /*
 |----------------------------------
 | Rutas protegidas (requieren auth)

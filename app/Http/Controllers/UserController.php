@@ -242,6 +242,11 @@ class UserController extends Controller
     /** Cerrar sesión */
     public function logout()
     {
+        // Que al cerrar la pestaña se elimine la sesión
+        // y se cierre la sesión de autenticación
+        // Esto es útil para evitar que la sesión persista al cerrar el navegador
+        // Limpiar sesión y cerrar autenticación
+        
         session()->flush();
         Auth::logout();
         return redirect('/');
