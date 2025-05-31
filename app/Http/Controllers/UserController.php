@@ -221,7 +221,7 @@ class UserController extends Controller
     {
         try {
             $request->validate([
-                'email' => 'required|email|exists:users,email', // Validate email exists
+                'email' => 'required|email|exists:users,email',
             ]);
 
             $user = User::where('email', $request->email)->first();
@@ -234,7 +234,7 @@ class UserController extends Controller
             ResetToken::create([
                 'user_id' => $user->id,
                 'token' => $token,
-                'created_at' => Carbon::now(), // Ensure created_at is set for expiration check
+                'created_at' => Carbon::now(),
             ]);
 
             // Enviar correo
@@ -243,7 +243,6 @@ class UserController extends Controller
             return back()->with('status', 'Se ha enviado un código de recuperación de contraseña a tu correo electrónico.');
 
         } catch (ValidationException $e) {
-            // For 'email' not found, Laravel's 'exists' rule will handle it
             return back()->withInput()->withErrors($e->errors());
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Hubo un problema al enviar el código de recuperación. Por favor, inténtalo de nuevo más tarde.');
@@ -269,7 +268,6 @@ class UserController extends Controller
 
             // 2. Buscar usuario
             $user = User::where('email', $request->email)->first();
-            // User existence already checked by 'exists:users,email' validation rule
 
             // 3. Buscar y verificar el token de reseteo
             $record = ResetToken::where('user_id', $user->id)
@@ -290,8 +288,7 @@ class UserController extends Controller
             $user->update([
                 'password' => bcrypt($request->password)
             ]);
-            $record->delete(); // Delete the used token
-
+            $record->delete();
             return redirect()->route('login')->with('status', '¡Contraseña actualizada con éxito! Ahora puedes iniciar sesión con tu nueva contraseña.');
 
         } catch (ValidationException $e) {
@@ -301,25 +298,14 @@ class UserController extends Controller
         }
     }
 
-    // Ver perfil del usuario
+    /** Mostrar perfil de usuario */
     public function showProfile()
     {
         $user = Auth::user();
-        // You might want to handle the case where user is not logged in, though middleware should prevent this.
         if (!$user) {
             return redirect()->route('login')->with('error', 'Debes iniciar sesión para ver tu perfil.');
         }
         return view('userProfile', compact('user'));
-    }
-
-    public function editProfile(Request $request)
-    {
-        // Add logic here to handle profile updates if this route is for saving changes
-        // Otherwise, if it's just to show the form, ensure user is authenticated
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión para editar tu perfil.');
-        }
-        return view('configAccount');
     }
 
     /** Cerrar sesión */
