@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-use Illuminate\Validation\ValidationException; // Import for specific validation errors
-use Exception; // For general exceptions
+use Illuminate\Validation\ValidationException;
+use Exception;
 
 class UserController extends Controller
 {

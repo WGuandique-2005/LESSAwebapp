@@ -25,6 +25,7 @@ class User extends Authenticatable
         'oauth_id',
         'is_active',
         'es_google_oauth',
+        'email_verified_at',
     ];
 
     public function lecciones()
