@@ -561,11 +561,6 @@ class UserController extends Controller
             VerificationToken::where('user_id', $user->id)->delete();
             ResetToken::where('user_id', $user->id)->delete();
             ResetTokenPass::where('user_id', $user->id)->delete();
-            // Cerrar sesión del usuario
-            Auth::logout();
-            // Limpiar la sesión
-            session()->invalidate();
-            session()->flush();
 
             // Redirigir a la página de inicio con mensaje de éxito
             return redirect('/')->with('status', 'Tu cuenta ha sido eliminada exitosamente.');
