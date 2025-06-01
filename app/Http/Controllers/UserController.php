@@ -95,7 +95,6 @@ class UserController extends Controller
 
             $userId = session('verify_user_id');
 
-            // Ensure user ID exists in session
             if (!$userId) {
                 return redirect()->route('signup')->with('error', 'Sesión de verificación expirada o inválida. Por favor, regístrate de nuevo.');
             }
@@ -106,26 +105,26 @@ class UserController extends Controller
                 ->first();
 
             if (!$record) {
-                // Use ValidationException for specific field errors
                 throw ValidationException::withMessages(['token' => 'El código de verificación es inválido.']);
             }
 
             // 3) Verificar expiración (>24h)
             if (Carbon::parse($record->created_at)->addHours(24)->isPast()) {
-                $record->delete(); // Optionally delete expired tokens
+                $record->delete();
                 throw ValidationException::withMessages(['token' => 'El código de verificación ha expirado. Por favor, solicita uno nuevo.']);
             }
 
             // 4) Activar usuario y borrar el token
             $user = User::findOrFail($userId);
             $user->update(['is_active' => true]);
+            // Verificar la fecha de validación del email
+            $user->email_verified_at = Carbon::now();
             $record->delete();
 
             // 5) Enviar correo de bienvenida (wrapped in try-catch for robustness)
             try {
                 Mail::to($user->email)->send(new AccountActivated($user));
             } catch (Exception $mailException) {
-                // Log the mail error but don't prevent user login
                 \Log::error('Error sending account activated email: ' . $mailException->getMessage());
             }
 
