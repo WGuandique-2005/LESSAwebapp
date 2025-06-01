@@ -187,9 +187,7 @@ class UserController extends Controller
 
         $user = User::where('email', $credentials['email'])->first();
 
-        // Check if user exists and if account is active
         if (!$user) {
-            // Provide a generic error message to avoid exposing if an email exists
             throw ValidationException::withMessages([
                 'loginError' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
             ]);
@@ -201,12 +199,10 @@ class UserController extends Controller
         }
 
         if (Auth::attempt($credentials)) {
-            // Regenerate session ID to prevent session fixation attacks
             $request->session()->regenerate();
             return redirect()->route('home')->with('status', '¡Bienvenido de nuevo!');
         }
 
-        // If Auth::attempt fails, it means password was incorrect
         throw ValidationException::withMessages([
             'loginError' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
         ]);
@@ -361,7 +357,6 @@ class UserController extends Controller
      */
     public function showChangePasswordRequestForm()
     {
-        // Ya viene con middleware('auth'), así que solo retornamos la vista.
         return view('changePasswordRequest');
     }
 
@@ -371,7 +366,6 @@ class UserController extends Controller
     public function sendChangePasswordToken(Request $request)
     {
         try {
-            // El usuario está autenticado (middleware auth).
             $user = Auth::user();
 
             // 1) Generar token de 6 caracteres
@@ -506,9 +500,11 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         try {
+            session()->regenerateToken();
             Auth::logout();
             $request->session()->invalidate();
-            $request->session()->regenerateToken(); // Regenerate CSRF token
+            $request->session()->flush();
+            $request->session()->regenerateToken();
             return redirect('/')->with('status', 'Has cerrado sesión exitosamente.');
         } catch (Exception $e) {
             return back()->with('error', 'Hubo un problema al cerrar sesión. Por favor, inténtalo de nuevo.');
