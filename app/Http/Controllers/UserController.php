@@ -226,17 +226,22 @@ class UserController extends Controller
             $token = Str::upper(Str::random(6));
 
             // Eliminar tokens anteriores y crear nuevo
-            ResetToken::where('user_id', $user->id)->delete();
-            ResetToken::create([
+            ResetTokenPass::where('user_id', $user->id)->delete();
+            ResetTokenPass::create([
                 'user_id' => $user->id,
                 'token' => $token,
                 'created_at' => Carbon::now(),
             ]);
 
             // Enviar correo
-            Mail::to($user->email)->send(new RestorePassword($user, $token));
+            if ($user->es_google_oauth) {
+                return back()->withInput()->with('error', 'No puedes restablecer la contraseña de una cuenta autenticada con Google.');
+            }
+            else{
+                Mail::to($user->email)->send(new RestorePassword($user, $token));
+                return back()->with('status', 'Se ha enviado un código de recuperación de contraseña a tu correo electrónico.');
+            }
 
-            return back()->with('status', 'Se ha enviado un código de recuperación de contraseña a tu correo electrónico.');
 
         } catch (ValidationException $e) {
             return back()->withInput()->withErrors($e->errors());
@@ -260,13 +265,33 @@ class UserController extends Controller
                 'email' => 'required|email|exists:users,email',
                 'token' => 'required|string|size:6',
                 'password' => 'required|string|min:8|confirmed',
+            ], [
+                'email.exists' => 'El correo electrónico proporcionado no está registrado.',
+                'token.size' => 'El código de recuperación debe tener 6 dígitos.',
+                'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+                'password.confirmed' => 'Las contraseñas no coinciden.',
             ]);
 
-            // 2. Buscar usuario
             $user = User::where('email', $request->email)->first();
 
-            // 3. Buscar y verificar el token de reseteo
-            $record = ResetToken::where('user_id', $user->id)
+            // SI el correo no está registrado, lanzar excepción
+            if (!$user) {
+                throw ValidationException::withMessages(['email' => 'El correo electrónico proporcionado no está registrado.']);
+            }
+            // Validar que la contraseña sea diferente a la actual
+            if (password_verify($request->password, $user->password)) {
+                throw ValidationException::withMessages(['password' => 'La nueva contraseña no puede ser la misma que la actual.']);
+            }
+            // Verificar que la contraseña y la confirmación coincidan
+            if ($request->password !== $request->password_confirmation) {
+                throw ValidationException::withMessages(['password_confirmation' => 'Las contraseñas no coinciden.']);
+            }
+            // Verificar que el email proporcionado coincida con el usuario
+            if ($user->email !== $request->email) {
+                throw ValidationException::withMessages(['email' => 'El correo electrónico proporcionado no coincide con el usuario.']);
+            }
+            // Verificar si el usuario tiene un token de reseteo
+            $record = ResetTokenPass::where('user_id', $user->id)
                 ->where('token', $request->token)
                 ->first();
 
@@ -274,13 +299,13 @@ class UserController extends Controller
                 throw ValidationException::withMessages(['token' => 'El código de recuperación es inválido.']);
             }
 
-            // 4. Verificar expiración (2h)
+            // Verificar expiración (2h)
             if (Carbon::parse($record->created_at)->addHours(2)->isPast()) {
-                $record->delete(); // Optionally delete expired tokens
+                $record->delete(); // Borrar el token expirado
                 throw ValidationException::withMessages(['token' => 'El código de recuperación ha expirado. Por favor, solicita uno nuevo.']);
             }
 
-            // 5. Cambiar contraseña y borrar token
+            // Cambiar contraseña y borrar token
             $user->update([
                 'password' => bcrypt($request->password)
             ]);

@@ -27,12 +27,13 @@ Route::middleware('guest')->group(function (){
     Route::post('/verify/resend',[UserController::class,'resendToken'])->name('verify.resend');
 
 
-    // Recuperar contraseña
+    // Recuperar contraseña (view)
     Route::get('/recuperar_pass', [UserController::class, 'showRecuperarPassForm'])->name('recuperar');
-    // Verificar correo
+    // Verificar correo (enviar token)
     Route::post('/recuperar_pass', [UserController::class, 'linkRecuperarPass'])->name('recuperarPass');
-    // Nueva contraseña
+    // Nueva contraseña (view)
     Route::get('/new_pass', [UserController::class, 'showNewPassForm'])->name('newPass_view');
+    // Procesar nueva contraseña
     Route::post('/new_pass', [UserController::class, 'resetPassword'])->name('newPass');
 
     //----------------------------------
@@ -51,9 +52,10 @@ Route::middleware('auth')->group(function () {
         return view('home');
     })->name('home');
 
-    // Ver y editar perfil
+    // Ver perfil
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
-    // Mostrar formulario para editar nombre y username
+
+    // Mostrar formulario para editar perfil
     Route::get('/profile/edit', [UserController::class, 'showEditProfileForm'])
         ->name('profile.edit');
     // Procesar actualización de perfil (nombre y username)
