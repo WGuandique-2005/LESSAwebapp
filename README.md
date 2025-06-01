@@ -1,106 +1,156 @@
-# LESSA – Lenguaje de Señas Salvadoreño
+# LESSA – Lenguaje de Señas Salvadoreño 🇸🇻👋
 
-LESSA es una plataforma educativa interactiva que busca facilitar el aprendizaje del Lenguaje de Señas Salvadoreño (LESSA) a través de una experiencia gamificada, intuitiva y accesible. El proyecto está enfocado en promover la inclusión comunicacional mediante el uso de recursos como animaciones, minijuegos, desafíos interactivos, progresión por niveles y un sistema de retroalimentación visual que ayude a mejorar la precisión del usuario al realizar señas.
+![LESSA Banner](https://i.imgur.com/your-image-banner-here.png)
+*(Reemplaza `https://i.imgur.com/your-image-banner-here.png` con la URL de una imagen atractiva que represente tu proyecto, si tienes una. Un banner o logo mejora mucho el aspecto visual.)*
 
-## Objetivos del Proyecto
+LESSA es una **plataforma educativa interactiva** diseñada para hacer que el aprendizaje del Lenguaje de Señas Salvadoreño (LESSA) sea **fácil, divertido y accesible**. Nos enfocamos en la inclusión comunicacional, ofreciendo una experiencia gamificada con:
 
-- Fomentar el aprendizaje del lenguaje de señas salvadoreño de manera accesible e inclusiva.
-- Ofrecer una experiencia atractiva basada en mecánicas de juego (gamificación).
-- Brindar una plataforma web amigable e interactiva para usuarios de todas las edades.
-- Permitir un seguimiento del progreso mediante niveles, desafíos y ejercicios prácticos.
+* ✨ Animaciones detalladas de señas
+* 🎮 Minijuegos y desafíos interactivos
+* 📈 Progresión por niveles para un aprendizaje estructurado
+* 🔍 Sistema de retroalimentación visual para mejorar la precisión
 
-## Tecnologías Utilizadas
+---
 
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Laravel / PHP
-- **Base de datos**: SQLite
-- **Autenticación**: Google OAuth
-- **Diseño y prototipado**: Figma
-- **Gestión del proyecto**: Trello, Google Docs, GitHub
+## 🎯 Objetivos del Proyecto
 
-## Organización del Proyecto
+* **Fomentar** el aprendizaje de LESSA de manera accesible e inclusiva.
+* **Ofrecer** una experiencia atractiva basada en mecánicas de juego (gamificación).
+* **Brindar** una plataforma web amigable e interactiva para usuarios de todas las edades.
+* **Permitir** un seguimiento del progreso mediante niveles, desafíos y ejercicios prácticos.
 
-El desarrollo se realiza utilizando metodologías ágiles, distribuyendo el trabajo en sprints con tareas organizadas mediante épicas e historias de usuario. Esto permite un enfoque iterativo y colaborativo.
+---
 
-### Enlaces importantes del proyecto
+## 🛠️ Tecnologías Utilizadas
 
-- 📄 **[Product Backlog](https://ugbedu-my.sharepoint.com/:x:/g/personal/smss076423_ugb_edu_sv/Eapi1oKlRTZEspPF9jjTorsBCA43wBJgucl2i_ann2TYmQ)**
-- 📄 **[Sprint Backlog](https://ugbedu-my.sharepoint.com/:x:/g/personal/smss076423_ugb_edu_sv/EaBSOhwlRclNqigcsJRra_wB3L288eneTHb3FPSXRcNcvQ?e=kRMlO7)**
-- 📋 **[Tablero Kanban](https://trello.com/invite/b/682888b233ee0e129eac41a0/ATTI2c99d8bc2b6ce8f7c69897eb00639d6693DB55BD/sprint-review-i)**
-- 📋 **[Prototipo en figma](https://www.figma.com/proto/5V4YvHq5NbadccEFSM99o6?node-id=0-1&t=NeQOI4qeubAnkxOT-6)**
+* **Frontend**: HTML, CSS, JavaScript
+* **Backend**: Laravel / PHP
+* **Base de datos**: SQLite
+* **Autenticación**: Google OAuth
+* **Diseño y prototipado**: Figma
+* **Gestión del proyecto**: Trello, Google Docs, GitHub
 
+---
 
+## 🚀 Organización del Proyecto
 
-## Requisitos Previos
+El desarrollo de LESSA sigue **metodologías ágiles**, con el trabajo organizado en **sprints**, épicas e historias de usuario. Esto nos permite un enfoque iterativo y colaborativo, garantizando una entrega de valor constante.
 
-Antes de empezar, asegúrate de tener instalado lo siguiente:
+### 🔗 Enlaces Importantes del Proyecto
 
-* **PHP:** Versión 8.1 o superior. Puedes verificar tu versión con `php -v` en la terminal.
-* **Servidor Web:** Un servidor como Apache o Nginx. Si estás en Windows, XAMPP o WAMP.
-* **Base de Datos:** MySQL o PostgreSQL (u otra base de datos compatible con Laravel).
-* **Composer:** Un gestor de dependencias para PHP. ¡No te preocupes si no lo tienes, te explicamos cómo instalarlo!
+* 📄 **[Product Backlog](https://ugbedu-my.sharepoint.com/:x:/g/personal/smss076423_ugb_edu_sv/Eapi1oKlRTZEspPF9jjTorsBCA43wBJgucl2i_ann2TYmQ)**
+* 📄 **[Sprint Backlog](https://ugbedu-my.sharepoint.com/:x:/g/personal/smss076423_ugb_edu_sv/EaBSOhwlRclNqigcsJRra_wB3L288eneTHb3FPSXRcNcvQ?e=kRMlO7)**
+* 📋 **[Tablero Kanban](https://trello.com/invite/b/682888b233ee0e129eac41a1/ATTI2c99d8bc2b6ce8f7c69897eb00639d6693DB55BD/sprint-review-i)**
+* 🎨 **[Prototipo en Figma](https://www.figma.com/proto/5V4YvHq5NbadccEFSM99o6?node-id=0-1&t=NeQOI4qeubAnkxOT-6)**
+
+---
+
+## 💻 Requisitos Previos
+
+Para que LESSA funcione correctamente en tu máquina, necesitarás:
+
+* **PHP:** Versión **8.1 o superior**. Puedes verificarlo con `php -v` en tu terminal.
+* **Servidor Web:** Un servidor como **Apache** o **Nginx**. Si usas Windows, **XAMPP** o **WAMP** son excelentes opciones que incluyen todo lo necesario.
+* **Base de Datos:** **SQLite** (ya que tu proyecto lo usa) o cualquier otra compatible con Laravel (MySQL/PostgreSQL si decides cambiar).
+* **Composer:** El gestor de dependencias de PHP. ¡Si no lo tienes, te mostramos cómo instalarlo!
 * **Git:** Para clonar este repositorio.
 
 ---
 
-## Instalación de Composer (Si no lo tienes)
+## ⬇️ Instalación de Composer (Si no lo tienes)
 
-Composer es esencial para los proyectos Laravel. Sigue las instrucciones para tu sistema operativo:
+Composer es crucial para los proyectos Laravel. Sigue estos pasos para instalarlo en Windows:
 
 ### En Windows
 
-1.  Descarga el instalador de Composer para Windows desde el sitio oficial: [https://getcomposer.org/Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe)
-2.  Ejecuta `Composer-Setup.exe` y sigue las instrucciones. Asegúrate de marcar la opción para añadir Composer a tu PATH durante la instalación.
-3.  Una vez finalizada la instalación, abre una nueva ventana del Símbolo del sistema o PowerShell y verifica:
+1.  **Descarga el instalador:** Visita el sitio oficial y descarga `Composer-Setup.exe` desde [https://getcomposer.org/Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe).
+2.  **Ejecuta el instalador:** Sigue las instrucciones. **Asegúrate de marcar la opción para añadir Composer a tu PATH** durante la instalación. Esto te permitirá usarlo desde cualquier directorio.
+3.  **Verifica la instalación:** Abre una **nueva** ventana del Símbolo del sistema o PowerShell y ejecuta:
     ```bash
     composer -V
     ```
+    Deberías ver la versión de Composer, lo que indica que se instaló correctamente.
 
 ---
 
-## Pasos para la Configuración del Proyecto
+## ⚙️ Pasos para la Configuración del Proyecto
 
-Sigue estos pasos para poner en marcha el proyecto:
+Sigue estos pasos para tener LESSA funcionando en tu entorno local:
 
 1.  **Clona el Repositorio:**
     ```bash
     git clone [https://github.com/WGuandique-2005/LESSAwebapp](https://github.com/WGuandique-2005/LESSAwebapp)
-    cd [LESSAwebapp]
+    cd LESSAwebapp
     ```
 
 2.  **Instala las Dependencias de Composer:**
-    Una vez dentro de la carpeta del proyecto, ejecuta:
+    Una vez dentro de la carpeta del proyecto (`LESSAwebapp`), ejecuta el siguiente comando. Esto descargará todas las bibliotecas y dependencias que Laravel necesita.
     ```bash
     composer install
     ```
-    Esto descargará todas las bibliotecas y dependencias que Laravel necesita.
 
 3.  **Configura el Archivo de Entorno (`.env`):**
-    Laravel utiliza un archivo `.env` para la configuración específica de tu entorno (base de datos, claves API, etc.).
+    Laravel utiliza un archivo `.env` para almacenar configuraciones específicas de tu entorno (como la base de datos, claves API, etc.).
     * Copia el archivo de ejemplo:
         ```bash
         cp .env.example .env
         ```
+    * **Importante:** Dado que usas **SQLite**, Laravel lo configurará por defecto. Si necesitas cambiar algo, abre el archivo `.env` y ajusta la sección `DB_CONNECTION` si no es `sqlite`.
 
 4.  **Genera la Clave de Aplicación:**
-    Esta clave es crucial para la seguridad de Laravel.
+    Esta clave es fundamental para la seguridad de tu aplicación Laravel.
     ```bash
     php artisan key:generate
     ```
 
 5.  **Ejecuta las Migraciones de la Base de Datos:**
-    Esto creará las tablas necesarias en tu base de datos.
+    Esto creará las tablas necesarias en tu base de datos SQLite.
     ```bash
     php artisan migrate
     ```
-6.  **Servir la Aplicación:**
-    Puedes usar el servidor de desarrollo de Laravel para probar la aplicación rápidamente:
+    Si usas SQLite, esto creará automáticamente el archivo de base de datos si no existe.
+
+6.  **Sirve la Aplicación:**
+    Puedes usar el servidor de desarrollo de Laravel para probar LESSA rápidamente:
     ```bash
     php artisan serve
     ```
-    Esto iniciará un servidor en `http://127.0.0.1:8000` (o un puerto similar). Abre esta URL en tu navegador.
+    Esto iniciará un servidor en `http://127.0.0.1:8000` (o un puerto similar). Abre esta URL en tu navegador y ¡explora LESSA!
 
-    **Alternativa (Configuración con Apache/Nginx):**
-    Para una configuración más permanente, deberás configurar tu servidor web (Apache o Nginx) para que apunte al directorio `public` de este proyecto. Consulta la documentación de Laravel para más detalles sobre [configuración de servidor](https://laravel.com/docs/11.x/deployment#server-requirements).
+    ---
+    **Alternativa: Configuración con Apache/Nginx (Recomendado para producción):**
+    Para una configuración más robusta o permanente, deberás configurar tu servidor web (Apache o Nginx, que vienen con XAMPP) para que apunte al directorio `public` de este proyecto. Consulta la [documentación de Laravel sobre configuración de servidor](https://laravel.com/docs/11.x/deployment#server-requirements) para obtener guías detalladas.
 
-- [GPO01-LESSA-2025]
+---
+
+## ✨ Uso del Proyecto
+
+Una vez que LESSA esté funcionando, podrás:
+
+* **Explorar** los diferentes módulos de aprendizaje.
+* **Participar** en los minijuegos y desafíos.
+* **Seguir** tu progreso a través de los niveles.
+* **Practicar** y recibir retroalimentación visual sobre tus señas.
+
+*(Considera añadir aquí: "Las credenciales de acceso para probar la aplicación en un entorno de desarrollo son: [Usuario/Email] y [Contraseña]" si tienes usuarios de prueba predefinidos.)*
+
+---
+
+## 🤝 Contribución
+
+¡Nos encantaría que contribuyeras a LESSA! Si deseas hacerlo, por favor, sigue el flujo de trabajo estándar de Git:
+1.  Haz un "fork" del repositorio.
+2.  Crea una nueva rama (`git checkout -b feature/tu-caracteristica`).
+3.  Realiza tus cambios y commitea (`git commit -m "feat: añade mi nueva característica"`).
+4.  Empuja tu rama (`git push origin feature/tu-caracteristica`).
+5.  Abre un "pull request" explicando tus cambios.
+
+---
+
+## 📄 Licencia
+
+Este proyecto está licenciado bajo la Licencia **[MIT]**. (Asegúrate de que tu proyecto realmente tenga esta licencia o cámbiala si es otra).
+
+---
+
+**¡Esperamos que disfrutes aprendiendo LESSA!**
