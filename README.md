@@ -1,7 +1,6 @@
 # LESSA – Lenguaje de Señas Salvadoreño 🇸🇻👋
 
-![LESSA Banner](https://i.imgur.com/your-image-banner-here.png)
-*(Reemplaza `https://i.imgur.com/your-image-banner-here.png` con la URL de una imagen atractiva que represente tu proyecto, si tienes una. Un banner o logo mejora mucho el aspecto visual.)*
+![LESSA Banner](https://github.com/WGuandique-2005/LESSAwebapp/blob/main/public/img/logo_sinfondo.png)
 
 LESSA es una **plataforma educativa interactiva** diseñada para hacer que el aprendizaje del Lenguaje de Señas Salvadoreño (LESSA) sea **fácil, divertido y accesible**. Nos enfocamos en la inclusión comunicacional, ofreciendo una experiencia gamificada con:
 
