@@ -84,4 +84,7 @@ Route::middleware('auth')->group(function () {
 
     //logout
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+    // Eliminar cuenta
+    Route::get('/delete_account', [UserController::class, 'destroy'])->name('delete.account');
 });

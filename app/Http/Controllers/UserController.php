@@ -544,4 +544,33 @@ class UserController extends Controller
             return back()->with('error', 'Hubo un problema al cerrar sesión. Por favor, inténtalo de nuevo.');
         }
     }
+
+    /**
+     * Método para destruir
+     */
+    public function destroy(){
+        try {
+            $user = Auth::user();
+            if (!$user) {
+                return redirect()->route('login')->with('error', 'Debes iniciar sesión para eliminar tu cuenta.');
+            }
+
+            // Eliminar el usuario
+            $user->delete();
+            // ELiminar los tokens asociados
+            VerificationToken::where('user_id', $user->id)->delete();
+            ResetToken::where('user_id', $user->id)->delete();
+            ResetTokenPass::where('user_id', $user->id)->delete();
+            // Cerrar sesión del usuario
+            Auth::logout();
+            // Limpiar la sesión
+            session()->invalidate();
+            session()->flush();
+
+            // Redirigir a la página de inicio con mensaje de éxito
+            return redirect('/')->with('status', 'Tu cuenta ha sido eliminada exitosamente.');
+        } catch (Exception $e) {
+            return back()->with('error', 'Hubo un problema al eliminar tu cuenta. Por favor, inténtalo de nuevo más tarde.');
+        }
+    }
 }
