@@ -53,6 +53,30 @@ Route::middleware('auth')->group(function () {
 
     // Ver y editar perfil
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
+    // Mostrar formulario para editar nombre y username
+    Route::get('/profile/edit', [UserController::class, 'showEditProfileForm'])
+        ->name('profile.edit');
+    // Procesar actualización de perfil (nombre y username)
+    Route::post('/profile/edit', [UserController::class, 'updateProfile'])
+        ->name('profile.update');
+
+    // Paso 1: Mostrar formulario para solicitar token de cambio de contraseña
+    Route::get('/change_password_request', [UserController::class, 'showChangePasswordRequestForm'])
+        ->middleware('auth')
+        ->name('password.change.request');
+
+    // Paso 2: Procesar envío del token al correo
+    Route::post('/change_password_request', [UserController::class, 'sendChangePasswordToken'])
+        ->middleware('auth')
+        ->name('password.change.send');
+
+    // Paso 3: Mostrar formulario para ingresar token + nueva contraseña
+    Route::get('/change_password_confirm', [UserController::class, 'showChangePasswordConfirmForm'])
+        ->name('password.change.confirm.view');
+
+    // Paso 4: Procesar el cambio de contraseña con el token
+    Route::post('/change_password_confirm', [UserController::class, 'changePasswordWithToken'])
+        ->name('password.change.confirm');
 
     //logout
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');

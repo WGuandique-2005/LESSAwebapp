@@ -8,6 +8,9 @@ use App\Models\ResetToken;
 use App\Mail\VerifyUser;
 use App\Mail\AccountActivated;
 use App\Mail\RestorePassword;
+use App\Models\ResetTokenPass;
+use App\Mail\UpdatePassword;
+use App\Mail\PasswordUpdatedSuccesful;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -308,41 +311,159 @@ class UserController extends Controller
         return view('userProfile', compact('user'));
     }
 
-    /** Actualizar perfil de usuario */
+    /** 
+     * Mostrar el formulario de edición de perfil 
+     */
     public function showEditProfileForm()
     {
         $user = Auth::user();
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión para editar tu perfil.');
+            return redirect()->route('login')
+                ->with('error', 'Debes iniciar sesión para editar tu perfil.');
         }
         return view('editProfile', compact('user'));
     }
-    public function update(Request $request)
+
+    /** 
+     * Procesar actualización de nombre y username 
+     */
+    public function updateProfile(Request $request)
     {
         try {
             $user = Auth::user();
             if (!$user) {
-                return redirect()->route('login')->with('error', 'Debes iniciar sesión para actualizar tu perfil.');
+                return redirect()->route('login')
+                    ->with('error', 'Debes iniciar sesión para actualizar tu perfil.');
             }
 
-            // Validar los datos del perfil
+            // Validar datos
             $data = $request->validate([
                 'name' => 'required|string|max:255',
                 'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-                'password' => 'nullable|string|min:8|confirmed',
             ]);
 
-            // Actualizar el usuario
+            // Actualizar usuario
             $user->update($data);
 
-            return back()->with('status', 'Perfil actualizado exitosamente.');
-
+            return redirect()->route('profile')
+                ->with('status', 'Perfil actualizado exitosamente.');
         } catch (ValidationException $e) {
             return back()->withInput()->withErrors($e->errors());
         } catch (Exception $e) {
-            return back()->withInput()->with('error', 'Hubo un problema al actualizar tu perfil. Por favor, inténtalo de nuevo.');
+            return back()->withInput()
+                ->with('error', 'Hubo un problema al actualizar tu perfil. Por favor, inténtalo de nuevo.');
         }
     }
+
+
+    /** 
+     * Paso 1: Mostrar formulario para solicitar el token de cambio de contraseña.
+     * Usuario debe estar autenticado.
+     */
+    public function showChangePasswordRequestForm()
+    {
+        // Ya viene con middleware('auth'), así que solo retornamos la vista.
+        return view('changePasswordRequest');
+    }
+
+    /**
+     * Paso 2: Generar token, guardarlo y enviarlo por correo con UpdatePassword.
+     */
+    public function sendChangePasswordToken(Request $request)
+    {
+        try {
+            // El usuario está autenticado (middleware auth).
+            $user = Auth::user();
+
+            // 1) Generar token de 6 caracteres
+            $token = Str::upper(Str::random(6));
+
+            // 2) Eliminar tokens anteriores para este usuario
+            ResetTokenPass::where('user_id', $user->id)->delete();
+
+            // 3) Crear nuevo registro en reset_tokens
+            ResetTokenPass::create([
+                'user_id' => $user->id,
+                'token' => $token,
+                'created_at' => Carbon::now(),
+            ]);
+
+            // 4) Enviar correo al usuario con el mailable UpdatePassword
+            //    Este mailable recibirá (User $user, string $token) en su constructor
+            Mail::to($user->email)->send(new UpdatePassword($user, $token));
+            // 5) Redirigir a la vista de confirmación
+            return redirect()->route('password.change.confirm.view')
+                ->with('status', 'Te hemos enviado un código de cambio de contraseña a tu correo electrónico.');
+
+        } catch (Exception $e) {
+            return back()->with('error', 'No se pudo generar el token. Intenta más tarde.');
+        }
+    }
+
+    /**
+     * Paso 3: Mostrar formulario donde el usuario introduce el token y la nueva contraseña.
+     */
+    public function showChangePasswordConfirmForm()
+    {
+        return view('changePasswordConfirm');
+    }
+
+    /**
+     * Paso 4: Validar token y cambiar contraseña. Luego enviar correo de confirmación.
+     */
+    public function changePasswordWithToken(Request $request)
+    {
+        try {
+            // 1) Validar campos del formulario
+            $request->validate([
+                'email' => 'required|email|exists:users,email',
+                'token' => 'required|string|size:6',
+                'new_password' => 'required|string|min:8|confirmed',
+            ]);
+
+            // 2) Recuperar usuario por email
+            $user = User::where('email', $request->email)->firstOrFail();
+
+            // 3) Recuperar el registro de ResetToken
+            $record = ResetTokenPass::where('user_id', $user->id)
+                ->where('token', $request->token)
+                ->first();
+
+            if (!$record) {
+                throw ValidationException::withMessages([
+                    'token' => 'El código de cambio de contraseña es inválido.'
+                ]);
+            }
+
+            // 4) Verificar expiración (2 horas)
+            if (Carbon::parse($record->created_at)->addHours(2)->isPast()) {
+                $record->delete(); // borrar el token expirado
+                throw ValidationException::withMessages([
+                    'token' => 'El código ha expirado. Por favor, solicita uno nuevo.'
+                ]);
+            }
+
+            // 5) Actualizar la contraseña del usuario
+            $user->update([
+                'password' => bcrypt($request->new_password),
+            ]);
+
+            // 6) Borrar el token luego del uso
+            $record->delete();
+
+            // 7) Enviar correo de confirmación de contraseña actualizada
+            Mail::to($user->email)->send(new PasswordUpdatedSuccesful($user));
+
+            return redirect()->route('home')
+                ->with('status', '¡Contraseña cambiada exitosamente!');
+        } catch (ValidationException $e) {
+            return back()->withInput()->withErrors($e->errors());
+        } catch (Exception $e) {
+            return back()->withInput()->with('error', 'No se pudo cambiar la contraseña. Intenta más tarde.');
+        }
+    }
+
+
 
     /** Cerrar sesión */
     public function logout(Request $request)
