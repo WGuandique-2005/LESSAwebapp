@@ -1,4 +1,4 @@
-# LESSA – Lenguaje de Señas Salvadoreño 🇸🇻👋
+# LESSA – Lenguaje de Señas Salvadoreño👋
 
 LESSA es una **plataforma educativa interactiva** diseñada para hacer que el aprendizaje del Lenguaje de Señas Salvadoreño (LESSA) sea **fácil, divertido y accesible**. Nos enfocamos en la inclusión comunicacional, ofreciendo una experiencia gamificada con:
 
