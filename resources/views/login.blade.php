@@ -415,24 +415,6 @@
                 });
             }
 
-            const sessionMessage = document.getElementById('session-message');
-            if (sessionMessage) {
-                setTimeout(() => {
-                    sessionMessage.classList.add('hidden');
-                }, 5000);
-            }
-
-            const loginErrorMessage = document.getElementById('login-error-message');
-            if (loginErrorMessage) {
-                setTimeout(() => {
-                    loginErrorMessage.classList.remove('show');
-                    loginErrorMessage.addEventListener('transitionend', function handler() {
-                        loginErrorMessage.remove();
-                        loginErrorMessage.removeEventListener('transitionend', handler);
-                    });
-                }, 5000);
-            }
-
             const form = document.querySelector('form');
             if (form) {
                 form.querySelectorAll('input').forEach(input => {
