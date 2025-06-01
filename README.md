@@ -11,7 +11,7 @@ LESSA es una plataforma educativa interactiva que busca facilitar el aprendizaje
 
 ## Tecnologías Utilizadas
 
-- **Frontend**: HTML, CSS, JavaScript (Framework por definir)
+- **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Laravel / PHP
 - **Base de datos**: SQLite
 - **Autenticación**: Google OAuth
@@ -36,6 +36,7 @@ El desarrollo se realiza utilizando metodologías ágiles, distribuyendo el trab
 Antes de empezar, asegúrate de tener instalado lo siguiente:
 
 * **PHP:** Versión 8.1 o superior. Puedes verificar tu versión con `php -v` en la terminal.
+* **Servidor Web:** Un servidor como Apache o Nginx. Si estás en Windows, XAMPP o WAMP son excelentes opciones. Para macOS, MAMP es popular.
 * **Base de Datos:** MySQL o PostgreSQL (u otra base de datos compatible con Laravel).
 * **Composer:** Un gestor de dependencias para PHP. ¡No te preocupes si no lo tienes, te explicamos cómo instalarlo!
 * **Git:** Para clonar este repositorio.
