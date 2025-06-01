@@ -1,7 +1,5 @@
 # LESSA – Lenguaje de Señas Salvadoreño 🇸🇻👋
 
-![LESSA Banner](https://github.com/WGuandique-2005/LESSAwebapp/blob/main/public/img/logo_sinfondo.png)
-
 LESSA es una **plataforma educativa interactiva** diseñada para hacer que el aprendizaje del Lenguaje de Señas Salvadoreño (LESSA) sea **fácil, divertido y accesible**. Nos enfocamos en la inclusión comunicacional, ofreciendo una experiencia gamificada con:
 
 * ✨ Animaciones detalladas de señas
@@ -120,36 +118,8 @@ Sigue estos pasos para tener LESSA funcionando en tu entorno local:
     **Alternativa: Configuración con Apache/Nginx (Recomendado para producción):**
     Para una configuración más robusta o permanente, deberás configurar tu servidor web (Apache o Nginx, que vienen con XAMPP) para que apunte al directorio `public` de este proyecto. Consulta la [documentación de Laravel sobre configuración de servidor](https://laravel.com/docs/11.x/deployment#server-requirements) para obtener guías detalladas.
 
----
-
-## ✨ Uso del Proyecto
-
-Una vez que LESSA esté funcionando, podrás:
-
-* **Explorar** los diferentes módulos de aprendizaje.
-* **Participar** en los minijuegos y desafíos.
-* **Seguir** tu progreso a través de los niveles.
-* **Practicar** y recibir retroalimentación visual sobre tus señas.
-
-*(Considera añadir aquí: "Las credenciales de acceso para probar la aplicación en un entorno de desarrollo son: [Usuario/Email] y [Contraseña]" si tienes usuarios de prueba predefinidos.)*
-
----
-
-## 🤝 Contribución
-
-¡Nos encantaría que contribuyeras a LESSA! Si deseas hacerlo, por favor, sigue el flujo de trabajo estándar de Git:
-1.  Haz un "fork" del repositorio.
-2.  Crea una nueva rama (`git checkout -b feature/tu-caracteristica`).
-3.  Realiza tus cambios y commitea (`git commit -m "feat: añade mi nueva característica"`).
-4.  Empuja tu rama (`git push origin feature/tu-caracteristica`).
-5.  Abre un "pull request" explicando tus cambios.
-
----
-
-## 📄 Licencia
-
-Este proyecto está licenciado bajo la Licencia **[MIT]**. (Asegúrate de que tu proyecto realmente tenga esta licencia o cámbiala si es otra).
 
 ---
 
 **¡Esperamos que disfrutes aprendiendo LESSA!**
+- [GPO01-LESSA-2025]
