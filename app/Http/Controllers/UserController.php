@@ -310,6 +310,8 @@ class UserController extends Controller
                 'password' => bcrypt($request->password)
             ]);
             $record->delete();
+            // Enviar correo de confirmación de cambio de contraseña
+            Mail::to($user->email)->send(new PasswordUpdatedSuccesful($user));
             return redirect()->route('login')->with('status', '¡Contraseña actualizada con éxito! Ahora puedes iniciar sesión con tu nueva contraseña.');
 
         } catch (ValidationException $e) {
