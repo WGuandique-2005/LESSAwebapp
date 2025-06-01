@@ -36,6 +36,7 @@ El desarrollo se realiza utilizando metodologías ágiles, distribuyendo el trab
 Antes de empezar, asegúrate de tener instalado lo siguiente:
 
 * **PHP:** Versión 8.1 o superior. Puedes verificar tu versión con `php -v` en la terminal.
+* **Servidor Web:** Un servidor como Apache o Nginx. Si estás en Windows, XAMPP o WAMP.
 * **Base de Datos:** MySQL o PostgreSQL (u otra base de datos compatible con Laravel).
 * **Composer:** Un gestor de dependencias para PHP. ¡No te preocupes si no lo tienes, te explicamos cómo instalarlo!
 * **Git:** Para clonar este repositorio.
