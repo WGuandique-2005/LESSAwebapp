@@ -19,6 +19,8 @@
             --shadow-light: rgba(0, 0, 0, 0.08);
             --shadow-medium: rgba(0, 0, 0, 0.15);
             --text-secondary: #6c757d;
+            --error-color: #EF4444; /* Tailwind red-500 */
+            --success-color: #22C55E; /* Tailwind green-500 */
 
             --spacing-xs: 0.25rem;
             --spacing-sm: 0.5rem;
@@ -366,16 +368,16 @@
 
         .feedback-message.error {
             color: var(--error-color);
-            background-color: rgba(239, 68, 68, 0.1); /* Light red background */
+            background-color: rgba(239, 68, 68, 0.1)
             border: 1px solid var(--error-color);
         }
 
         .error-message {
             color: var(--error-color);
             font-size: 0.85em;
-            margin-top: -10px; /* Pull error message closer to input */
-            margin-bottom: 16px;
-            display: block; /* Ensure it takes full width */
+            margin-top: -10px;
+            margin-bottom: 6px;
+            display: block;
         }
 
         /* Responsive Layouts */

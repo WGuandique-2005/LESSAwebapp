@@ -297,11 +297,19 @@ class UserController extends Controller
     /** Mostrar perfil de usuario */
     public function showProfile()
     {
-        $user = Auth::user();
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión para ver tu perfil.');
+        try {
+            // Verificar si el usuario está autenticado
+            if (!Auth::check()) {
+                return redirect()->route('login')
+                    ->with('error', 'Debes iniciar sesión para ver tu perfil.');
+            }
+            // Obtener el usuario autenticado
+            $user = Auth::user();
+            return view('userProfile', compact('user'));
+        } catch (Exception $e) {
+            return redirect()->route('login')
+                ->with('error', 'Hubo un problema al acceder a tu perfil. Por favor, inténtalo de nuevo más tarde.');
         }
-        return view('userProfile', compact('user'));
     }
 
     /** 
@@ -373,7 +381,7 @@ class UserController extends Controller
             // Verificar si el usuario tiene una cuenta de Google OAuth
             if (Auth::user()->es_google_oauth) {
                 return redirect()->route('home')
-                    ->with('error', 'No puedes editar el perfil de una cuenta autenticada con Google. Por favor, contacta al soporte.');
+                    ->with('error', 'No puedes editar la contraseña de una cuenta autenticada con Google.');
             }
             else{
                 // Si el usuario está autenticado y no es una cuenta de Google OAuth, mostrar el formulario
