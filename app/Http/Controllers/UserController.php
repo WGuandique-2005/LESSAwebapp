@@ -117,8 +117,6 @@ class UserController extends Controller
             // 4) Activar usuario y borrar el token
             $user = User::findOrFail($userId);
             $user->update(['is_active' => true]);
-            // Verificar la fecha de validación del email
-            $user->email_verified_at = Carbon::now();
             $record->delete();
 
             // 5) Enviar correo de bienvenida (wrapped in try-catch for robustness)
