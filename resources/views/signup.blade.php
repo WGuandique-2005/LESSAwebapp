@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro - LESSA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha512-Fo3rlalr+G/yqW8S8H5f+3zT1xZ6+K/5B5E1Q6Z8c2q5f8+5z7m3gD9c5O6Z7t0+7z9f+2V0P3p3P4p+1Q8+"
+        xintegrity="sha512-Fo3rlalr+G/yqW8S8H5f+3zT1xZ6+K/5B5E1Q6Z8c2q5f8+5z7m3gD9c5O6Z7t0+7z9f+2V0P3p3P4p+1Q8+"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
@@ -22,6 +22,12 @@
             --error-red: #ff6b6b;
             --success-green: rgba(40, 167, 69, 0.8);
             --danger-red: rgba(220, 53, 69, 0.8);
+
+            /* Password strength colors */
+            --strength-weak: #ff6b6b; /* Red */
+            --strength-moderate: #ffcc00; /* Yellow */
+            --strength-strong: #4CAF50; /* Green */
+            --strength-very-strong: #007bff; /* Blue */
         }
 
         * {
@@ -261,6 +267,44 @@
             pointer-events: none;
         }
 
+        /* Password Strength Indicator Styles */
+        .password-strength-indicator {
+            width: 100%;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+
+        .strength-text {
+            font-size: 12px;
+            text-align: right;
+            margin-top: 5px;
+            color: var(--text-light);
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .strength-text.weak { color: var(--strength-weak); }
+        .strength-text.moderate { color: var(--strength-moderate); }
+        .strength-text.strong { color: var(--strength-strong); }
+        .strength-text.very-strong { color: var(--strength-very-strong); }
+
+        .strength-bar.weak { background-color: var(--strength-weak); }
+        .strength-bar.moderate { background-color: var(--strength-moderate); }
+        .strength-bar.strong { background-color: var(--strength-strong); }
+        .strength-bar.very-strong { background-color: var(--strength-very-strong); }
+
+
         @media screen and (max-width: 768px) {
             .container {
                 padding: 30px 20px;
@@ -377,7 +421,7 @@
 
             <div class="input-group">
                 <h2>Correo Electrónico</h2>
-                <input type="email" name="email" placeholder="Correo" value="{{ old('email') }}"
+                <input type="email" name="email" placeholder="email@example.com" value="{{ old('email') }}"
                     class="@error('email') is-invalid @enderror" required autocomplete="email" />
                 @error('email')
                     <div class="error-message show"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>
@@ -386,11 +430,15 @@
 
             <div class="input-group">
                 <h2>Contraseña</h2>
-                <input type="password" name="password" placeholder="Contraseña"
+                <input type="password" name="password" id="password-input" placeholder="Contraseña"
                     class="@error('password') is-invalid @enderror" required autocomplete="new-password" />
                 @error('password')
                     <div class="error-message show"><i class="fa-solid fa-circle-exclamation"></i>{{ $message }}</div>
                 @enderror
+                <div class="password-strength-indicator">
+                    <div id="strength-bar" class="strength-bar"></div>
+                </div>
+                <div id="strength-text" class="strength-text"></div>
             </div>
 
             <div class="input-group">
@@ -415,6 +463,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             const sessionMessage = document.getElementById('session-message');
             const backButton = document.querySelector('.back-button');
+            const passwordInput = document.getElementById('password-input');
+            const strengthBar = document.getElementById('strength-bar');
+            const strengthText = document.getElementById('strength-text');
 
             if (backButton) {
                 backButton.addEventListener('click', function(event) {
@@ -457,6 +508,64 @@
                     container.style.opacity = '1';
                     container.style.transform = 'translateY(0)';
                 }, 100);
+            }
+
+            if (passwordInput && strengthBar && strengthText) {
+                passwordInput.addEventListener('input', function() {
+                    const password = this.value;
+                    updatePasswordStrength(password);
+                });
+
+                function updatePasswordStrength(password) {
+                    let score = 0;
+                    let feedback = '';
+                    let strengthLevel = 'none'; // 'none', 'weak', 'moderate', 'strong', 'very-strong'
+
+                    const hasLowercase = /[a-z]/.test(password);
+                    const hasUppercase = /[A-Z]/.test(password);
+                    const hasNumber = /[0-9]/.test(password);
+                    const hasSymbol = /[^a-zA-Z0-9]/.test(password);
+
+                    if (password.length >= 8) score += 1;
+                    if (password.length >= 10) score += 1;
+                    if (password.length >= 12) score += 1;
+
+                    if (hasLowercase) score += 1;
+                    if (hasUppercase) score += 1;
+                    if (hasNumber) score += 1;
+                    if (hasSymbol) score += 1;
+
+                    if (password.length === 0) {
+                        strengthLevel = 'none';
+                        feedback = '';
+                    } else if (score < 3) {
+                        strengthLevel = 'weak';
+                        feedback = 'Débil';
+                        if (password.length < 8) feedback += ' (mínimo 8 caracteres)';
+                        if (!hasLowercase) feedback += ' (falta minúscula)';
+                        if (!hasUppercase) feedback += ' (falta mayúscula)';
+                        if (!hasNumber) feedback += ' (falta número)';
+                        if (!hasSymbol) feedback += ' (falta símbolo)';
+                    } else if (score < 5) {
+                        strengthLevel = 'moderate';
+                        feedback = 'Moderada';
+                        if (password.length < 10) feedback += ' (considera más caracteres)';
+                        if (!(hasLowercase && hasUppercase && hasNumber && hasSymbol)) feedback += ' (combina tipos)';
+                    } else if (score < 7) {
+                        strengthLevel = 'strong';
+                        feedback = 'Fuerte';
+                        if (password.length < 12) feedback += ' (considera más caracteres)';
+                    } else {
+                        strengthLevel = 'very-strong';
+                        feedback = 'Muy Fuerte';
+                    }
+
+                    // Update UI
+                    strengthBar.style.width = (score / 7) * 100 + '%'; // Max score 7 (3 for length, 4 for types)
+                    strengthBar.className = 'strength-bar ' + strengthLevel;
+                    strengthText.textContent = feedback;
+                    strengthText.className = 'strength-text ' + strengthLevel;
+                }
             }
         });
     </script>
