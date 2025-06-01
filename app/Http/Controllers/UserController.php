@@ -513,6 +513,20 @@ class UserController extends Controller
                 'new_password' => 'required|string|min:8|confirmed',
             ]);
 
+            // 1.1) Validar que la contraseña sea diferente a la actual
+            $user = User::where('email', $request->email)->firstOrFail();
+            if (password_verify($request->new_password, $user->password)) {
+                throw ValidationException::withMessages([
+                    'new_password' => 'La nueva contraseña no puede ser la misma que la actual.'
+                ]);
+            }
+            // 1.2) Validar que el email proporcionado coincida con el usuario
+            if ($user->email !== $request->email) {
+                throw ValidationException::withMessages([
+                    'email' => 'El correo electrónico proporcionado no coincide con el usuario.'
+                ]);
+            }
+
             // 2) Recuperar usuario por email
             $user = User::where('email', $request->email)->firstOrFail();
 
