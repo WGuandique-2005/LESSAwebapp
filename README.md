@@ -25,12 +25,82 @@ El desarrollo se realiza utilizando metodologías ágiles, distribuyendo el trab
 ### Enlaces importantes del proyecto
 
 - 📄 **[Product Backlog](https://ugbedu-my.sharepoint.com/:x:/g/personal/smss076423_ugb_edu_sv/Eapi1oKlRTZEspPF9jjTorsBCA43wBJgucl2i_ann2TYmQ)**
-- 📄 **[Sprint Backlog](https://ugbedu-my.sharepoint.com/:x:/g/personal/smss076423_ugb_edu_sv/Ee3U8wNp0G5Fmyk4NaPBkeYBU_0LZ32U34A1UEIpNKTUDg?e=Jx0Z19)**
+- 📄 **[Sprint Backlog](https://ugbedu-my.sharepoint.com/:x:/g/personal/smss076423_ugb_edu_sv/EaBSOhwlRclNqigcsJRra_wB3L288eneTHb3FPSXRcNcvQ?e=kRMlO7)**
 - 📋 **[Tablero Kanban](https://trello.com/invite/b/682888b233ee0e129eac41a0/ATTI2c99d8bc2b6ce8f7c69897eb00639d6693DB55BD/sprint-review-i)**
 - 📋 **[Prototipo en figma](https://www.figma.com/proto/5V4YvHq5NbadccEFSM99o6?node-id=0-1&t=NeQOI4qeubAnkxOT-6)**
 
-## Estado Actual
 
-Actualmente, el proyecto se encuentra en la fase inicial de desarrollo. Ya se han completado el prototipo visual, la estructuración de los primeros sprints y la integración básica del sistema de autenticación mediante Google OAuth. Se han incorporado nuevas épicas, como **Mecánicas de Gamificación** y **Minijuegos**, para enriquecer la experiencia del usuario y mejorar la organización del backlog.
+
+## Requisitos Previos
+
+Antes de empezar, asegúrate de tener instalado lo siguiente:
+
+* **PHP:** Versión 8.1 o superior. Puedes verificar tu versión con `php -v` en la terminal.
+* **Base de Datos:** MySQL o PostgreSQL (u otra base de datos compatible con Laravel).
+* **Composer:** Un gestor de dependencias para PHP. ¡No te preocupes si no lo tienes, te explicamos cómo instalarlo!
+* **Git:** Para clonar este repositorio.
+
+---
+
+## Instalación de Composer (Si no lo tienes)
+
+Composer es esencial para los proyectos Laravel. Sigue las instrucciones para tu sistema operativo:
+
+### En Windows
+
+1.  Descarga el instalador de Composer para Windows desde el sitio oficial: [https://getcomposer.org/Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe)
+2.  Ejecuta `Composer-Setup.exe` y sigue las instrucciones. Asegúrate de marcar la opción para añadir Composer a tu PATH durante la instalación.
+3.  Una vez finalizada la instalación, abre una nueva ventana del Símbolo del sistema o PowerShell y verifica:
+    ```bash
+    composer -V
+    ```
+
+---
+
+## Pasos para la Configuración del Proyecto
+
+Sigue estos pasos para poner en marcha el proyecto:
+
+1.  **Clona el Repositorio:**
+    ```bash
+    git clone [https://github.com/WGuandique-2005/LESSAwebapp](https://github.com/WGuandique-2005/LESSAwebapp)
+    cd [LESSAwebapp]
+    ```
+    Reemplaza `https://github.com/sindresorhus/del` con la URL real de tu repositorio y `[nombre-de-tu-proyecto]` con el nombre de la carpeta que se creará.
+
+2.  **Instala las Dependencias de Composer:**
+    Una vez dentro de la carpeta del proyecto, ejecuta:
+    ```bash
+    composer install
+    ```
+    Esto descargará todas las bibliotecas y dependencias que Laravel necesita.
+
+3.  **Configura el Archivo de Entorno (`.env`):**
+    Laravel utiliza un archivo `.env` para la configuración específica de tu entorno (base de datos, claves API, etc.).
+    * Copia el archivo de ejemplo:
+        ```bash
+        cp .env.example .env
+        ```
+
+4.  **Genera la Clave de Aplicación:**
+    Esta clave es crucial para la seguridad de Laravel.
+    ```bash
+    php artisan key:generate
+    ```
+
+5.  **Ejecuta las Migraciones de la Base de Datos:**
+    Esto creará las tablas necesarias en tu base de datos.
+    ```bash
+    php artisan migrate
+    ```
+6.  **Servir la Aplicación:**
+    Puedes usar el servidor de desarrollo de Laravel para probar la aplicación rápidamente:
+    ```bash
+    php artisan serve
+    ```
+    Esto iniciará un servidor en `http://127.0.0.1:8000` (o un puerto similar). Abre esta URL en tu navegador.
+
+    **Alternativa (Configuración con Apache/Nginx):**
+    Para una configuración más permanente, deberás configurar tu servidor web (Apache o Nginx) para que apunte al directorio `public` de este proyecto. Consulta la documentación de Laravel para más detalles sobre [configuración de servidor](https://laravel.com/docs/11.x/deployment#server-requirements).
 
 - [GPO01-LESSA-2025]
