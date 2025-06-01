@@ -222,6 +222,7 @@
         </form>
 
         {{-- Enlace para cambiar contraseña --}}
+        <p>¿Quieres cambiar tu contraseña?</p>
         <a href="{{ route('password.change.request') }}" class="btn-link">
             Cambiar contraseña
         </a>

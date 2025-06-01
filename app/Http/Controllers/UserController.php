@@ -309,12 +309,21 @@ class UserController extends Controller
      */
     public function showEditProfileForm()
     {
-        $user = Auth::user();
-        if (!$user) {
+        try{
+            // Verificar si el usuario está autenticado
+            if (!Auth::check()) {
+                return redirect()->route('login')
+                    ->with('error', 'Debes iniciar sesión para editar tu perfil.');
+            }
+            else {
+                // Obtener el usuario autenticado
+                $user = Auth::user();
+                return view('editProfile', compact('user'));
+            }
+        } catch (Exception $e) {
             return redirect()->route('login')
-                ->with('error', 'Debes iniciar sesión para editar tu perfil.');
+                ->with('error', 'Hubo un problema al acceder a tu perfil. Por favor, inténtalo de nuevo más tarde.');
         }
-        return view('editProfile', compact('user'));
     }
 
     /** 
@@ -355,7 +364,26 @@ class UserController extends Controller
      */
     public function showChangePasswordRequestForm()
     {
-        return view('changePasswordRequest');
+        try{
+            // Verificar si el usuario está autenticado
+            if (!Auth::check()) {
+                return redirect()->route('login')
+                    ->with('error', 'Debes iniciar sesión para cambiar tu contraseña.');
+            }
+            // Verificar si el usuario tiene una cuenta de Google OAuth
+            if (Auth::user()->es_google_oauth) {
+                return redirect()->route('home')
+                    ->with('error', 'No puedes editar el perfil de una cuenta autenticada con Google. Por favor, contacta al soporte.');
+            }
+            else{
+                // Si el usuario está autenticado y no es una cuenta de Google OAuth, mostrar el formulario
+                $user = Auth::user();
+                return view('changePasswordRequest', compact('user'));
+            }
+        } catch (Exception $e) {
+            return redirect()->route('login')
+                ->with('error', 'Hubo un problema al acceder a tu cuenta. Por favor, inténtalo de nuevo más tarde.');
+        }
     }
 
     /**
