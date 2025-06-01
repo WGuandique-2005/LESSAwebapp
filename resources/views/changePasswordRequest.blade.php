@@ -184,7 +184,7 @@
             {{-- Reenviar token de cambio de contraseña --}}
             <form method="POST" action="{{ route('password.change.resend') }}">
                 @csrf
-                <button type="submit">Reenviar código de cambio</button>
+                <button type="submit">Reenviar código</button>
             </form>
         </div>
     </div>
