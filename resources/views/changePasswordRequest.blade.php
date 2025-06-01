@@ -181,8 +181,11 @@
                 **Importante:** Revisa tu bandeja de entrada y la carpeta de spam.
                 El correo con el código puede tardar unos minutos en llegar.
             </p>
-            {{-- Consider adding a "Resend code" link here after a delay,
-                 or a "Go back" button. --}}
+            {{-- Reenviar token de cambio de contraseña --}}
+            <form method="POST" action="{{ route('password.change.resend') }}">
+                @csrf
+                <button type="submit">Reenviar código de cambio</button>
+            </form>
         </div>
     </div>
 

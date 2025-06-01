@@ -78,6 +78,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/change_password_confirm', [UserController::class, 'changePasswordWithToken'])
         ->name('password.change.confirm');
 
+    // Paso 5: Ruta para reenviar el token de cambio de contraseña
+    Route::post('/change_password_resend', [UserController::class, 'resendChangePasswordToken'])
+        ->name('password.change.resend');
+
     //logout
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 });

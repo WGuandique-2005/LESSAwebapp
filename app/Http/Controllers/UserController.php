@@ -399,7 +399,45 @@ class UserController extends Controller
             return back()->with('error', 'No se pudo generar el token. Intenta más tarde.');
         }
     }
+    /**
+     * Paso intermedio: reenviar un nuevo token de cambio de contraseña.
+     *
+     * Borra el token anterior, genera uno nuevo y lo envía de nuevo por correo.
+     * Redirige a la vista de confirmación.
+     */
+    public function resendChangePasswordToken(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            if (!$user) {
+                return redirect()->route('login')->with('error', 'Debes iniciar sesión para reenviar el token.');
+            }
 
+            // 1) Borrar tokens anteriores para este usuario
+            ResetTokenPass::where('user_id', $user->id)->delete();
+
+            // 2) Generar token nuevo de 6 caracteres
+            $token = Str::upper(Str::random(6));
+
+            // 3) Insertar el nuevo token en la tabla
+            ResetTokenPass::create([
+                'user_id' => $user->id,
+                'token' => $token,
+                'created_at' => Carbon::now(),
+            ]);
+
+            // 4) Enviar correo con el mailable UpdatePassword
+            Mail::to($user->email)->send(new UpdatePassword($user, $token));
+
+            // 5) Redirigir a la vista de confirmación con mensaje de éxito
+            return redirect()->route('password.change.confirm.view')
+                ->with('status', 'Se ha reenviado un nuevo código de cambio de contraseña a tu correo.');
+
+        } catch (Exception $e) {
+            \Log::error('Error en resendChangePasswordToken: ' . $e->getMessage());
+            return back()->with('error', 'No se pudo reenviar el token. Por favor, intenta de nuevo más tarde.');
+        }
+    }
     /**
      * Paso 3: Mostrar formulario donde el usuario introduce el token y la nueva contraseña.
      */
