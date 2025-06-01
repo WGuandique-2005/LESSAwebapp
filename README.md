@@ -67,7 +67,6 @@ Sigue estos pasos para poner en marcha el proyecto:
     git clone [https://github.com/WGuandique-2005/LESSAwebapp](https://github.com/WGuandique-2005/LESSAwebapp)
     cd [LESSAwebapp]
     ```
-    Reemplaza `https://github.com/sindresorhus/del` con la URL real de tu repositorio y `[nombre-de-tu-proyecto]` con el nombre de la carpeta que se creará.
 
 2.  **Instala las Dependencias de Composer:**
     Una vez dentro de la carpeta del proyecto, ejecuta:
