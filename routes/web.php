@@ -52,6 +52,9 @@ Route::middleware('auth')->group(function () {
         return view('home');
     })->name('home');
 
+    // Info
+    Route::get('/info', [TaskController::class, 'info'])->name('info');
+
     // Ver perfil
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
 

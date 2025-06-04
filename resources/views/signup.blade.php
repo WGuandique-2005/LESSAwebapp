@@ -42,7 +42,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url({{ asset('img/login.png') }}) no-repeat center center/cover;
+            background: url({{ asset('img/signup.png') }}) no-repeat center center/cover;
             position: relative;
             flex-direction: column;
             padding: 20px;

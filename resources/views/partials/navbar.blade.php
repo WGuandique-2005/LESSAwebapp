@@ -323,7 +323,7 @@
                     <a href="{{ route('home') }}">Inicio</a>
                     <a href="#">Practicar</a>
                     <a href="#">Aprender</a>
-                    <a href="#">Info</a>
+                    <a href="{{ route('info') }}">Info</a>
                     @guest
                         <a href="{{ route('login') }}">Login</a>
                     @endguest
