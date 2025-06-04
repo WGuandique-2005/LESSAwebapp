@@ -397,7 +397,11 @@
                 {{ session('error') }}
             </div>
         @endif
-
+        @if (session('google'))
+            <div class="session-message error" id="session-message">
+                {{ session('google') }}
+            </div>
+        @endif
         <form method="POST" action="{{ route('signup.submit') }}" style="width: 100%;">
             @csrf
 

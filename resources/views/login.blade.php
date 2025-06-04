@@ -367,6 +367,11 @@
                 {{ session('error') }}
             </div>
         @endif
+        @if (session('google'))
+            <div class="session-message error" id="google-message">
+                {{ session('google') }}
+            </div>
+        @endif
         @error('loginError')
             <div class="session-message error show" id="login-error-message">
                 <i class="fa-solid fa-circle-exclamation"></i>{{ $message }}

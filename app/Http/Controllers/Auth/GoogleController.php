@@ -74,7 +74,7 @@ class GoogleController extends Controller
             throw ValidationException::withMessages(['google' => 'Error al manejar el callback de Google: ' . $e->getMessage()]);
         } catch (Exception $e) {
             // Maneja cualquier otro error
-            return redirect()->route('login')->withErrors(['google' => 'Error al iniciar sesión con Google: ' . $e->getMessage()]);
+            return back()->withErrors(['google' => 'Error al iniciar sesión con Google: ' . $e->getMessage()]);
         }
     }
 }
