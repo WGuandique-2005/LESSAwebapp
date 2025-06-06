@@ -50,6 +50,8 @@ class UserController extends Controller
                 'oauth_id' => null,
             ]);
 
+            // 
+
             // 3) Generar token de 6 caracteres y guardarlo
             $token = Str::upper(Str::random(6));
             VerificationToken::create([
