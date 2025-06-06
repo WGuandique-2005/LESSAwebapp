@@ -105,7 +105,7 @@ class UserController extends Controller
                 ->first();
 
             if (!$record) {
-                throw ValidationException::withMessages(['token' => 'El código de verificación es inválido.']);
+                throw ValidationException::withMessages(['token' => 'El código de verificación es inválido o ha expirado.']);
             }
 
             // 3) Verificar expiración (>24h)
@@ -123,7 +123,7 @@ class UserController extends Controller
             try {
                 Mail::to($user->email)->send(new AccountActivated($user));
             } catch (Exception $mailException) {
-                \Log::error('Error sending account activated email: ' . $mailException->getMessage());
+                \Log::error('Error enviando codigo a tu email: ' . $mailException->getMessage());
             }
 
 
