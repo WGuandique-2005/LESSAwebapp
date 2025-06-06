@@ -466,7 +466,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const sessionMessage = document.getElementById('session-message');
             const backButton = document.querySelector('.back-button');
             const passwordInput = document.getElementById('password-input');
             const strengthBar = document.getElementById('strength-bar');
@@ -477,12 +476,6 @@
                     event.preventDefault();
                     window.history.back();
                 });
-            }
-
-            if (sessionMessage) {
-                setTimeout(() => {
-                    sessionMessage.classList.add('hidden');
-                }, 5000);
             }
 
             const form = document.querySelector('form');
