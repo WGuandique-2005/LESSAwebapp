@@ -105,7 +105,7 @@ class UserController extends Controller
                 ->first();
 
             if (!$record) {
-                throw ValidationException::withMessages(['token' => 'El código de verificación es inválido o ha expirado. Por favor, solicita uno nuevo.']);
+                throw ValidationException::withMessages(['token' => 'El código de verificación es inválido o ha expirado. Por favor, solicita uno nuevo.3']);
             }
 
             // 3) Verificar expiración (>24h)
