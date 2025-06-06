@@ -17,9 +17,7 @@ use Throwable;
 
 class GoogleController extends Controller
 {
-    /**
-     * Redirige al usuario a la página de autenticación de Google.
-     */
+    
     public function redirectToGoogle(): RedirectResponse
     {
         try {
