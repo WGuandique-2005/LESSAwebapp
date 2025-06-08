@@ -55,6 +55,9 @@ Route::middleware('auth')->group(function () {
     // Info
     Route::get('/info', [TaskController::class, 'info'])->name('info');
 
+    // Sección aprender
+    Route::get('/aprender',[TaskController::class,'aprender'])->name('aprender');
+
     // Ver perfil
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
 

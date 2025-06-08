@@ -20,4 +20,9 @@ class TaskController extends Controller
     {
         return view('info');
     }
+
+    public function aprender()
+    {
+        return view('aprender');
+    }
 }

@@ -66,7 +66,6 @@ class GoogleController extends Controller
                         'password'        => bcrypt(Str::random(16)),
                         'oauth_id'        => $googleUser->getId(),
                         'es_google_oauth' => true,
-                        'is_active'       => true,
                     ]);
                 }
             }
@@ -79,6 +78,7 @@ class GoogleController extends Controller
                 }
             }
 
+            $user->update(['is_active'=>true]);
             Auth::login($user, true);
 
             return redirect()

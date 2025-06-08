@@ -322,7 +322,7 @@
                 <div class="menu" id="mainMenu">
                     <a href="{{ route('home') }}">Inicio</a>
                     <a href="#">Practicar</a>
-                    <a href="#">Aprender</a>
+                    <a href="{{ route('aprender') }}">Aprender</a>
                     <a href="{{ route('info') }}">Info</a>
                     @guest
                         <a href="{{ route('login') }}">Login</a>
