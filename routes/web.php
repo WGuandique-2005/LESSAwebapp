@@ -26,7 +26,6 @@ Route::middleware('guest')->group(function (){
     Route::post('/verify', [UserController::class,'verifyAccount'])->name('verify.submit');
     Route::post('/verify/resend',[UserController::class,'resendToken'])->name('verify.resend');
 
-
     // Recuperar contraseña (view)
     Route::get('/recuperar_pass', [UserController::class, 'showRecuperarPassForm'])->name('recuperar');
     // Verificar correo (enviar token)
@@ -42,11 +41,13 @@ Route::middleware('guest')->group(function (){
     Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
     Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 });
+
 /*
 |----------------------------------
 | Rutas protegidas (requieren auth)
 |----------------------------------
 */
+
 Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('home');
@@ -68,11 +69,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/edit', [UserController::class, 'updateProfile'])
         ->name('profile.update');
 
-    // Mostrar el form de cambio de contraseña
+    // Mostrar el formulario de cambio de contraseña
     Route::get('/change_password', [UserController::class, 'showChangePasswordForm'])
         ->middleware('auth')
         ->name('password.change.form');
-
+    // Procesar el cambio de contraseña
     Route::post('/change_password', [UserController::class, 'changePassword'])
         ->name('password.change');
 
