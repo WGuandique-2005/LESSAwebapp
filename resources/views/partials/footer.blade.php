@@ -109,9 +109,14 @@
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-links">
-                <a href="{{ route('info') }}" class="footer-link">Info</a>
-                <a href="#" class="footer-link">Privacy Policy</a>
-                <a href="#" class="footer-link">Terms of Service</a>
+                @auth
+                    <a href="{{ route('info') }}" class="footer-link">Info</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                @else
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                @endauth
             </div>
             <p class="footer-copyright">&copy; 2025 LESSA. All rights reserved.</p>
         </div>
