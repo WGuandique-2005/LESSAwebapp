@@ -235,16 +235,17 @@ class UserController extends Controller
                 'created_at' => Carbon::now(),
             ]);
 
+            // Guardar user_id en sesión para el proceso de reseteo
+            session(['reset_user_id' => $user->id]);
+
             // Enviar correo
             if ($user->es_google_oauth) {
-                return back()->withInput()->with('error', 'No puedes restablecer la contraseña de una cuenta autenticada con Google.');
+                return back()->withInput()->with('error', 'Error al encontrar el correo, intentalo otra vez.');
             }
             else{
                 Mail::to($user->email)->send(new RestorePassword($user, $token));
                 return back()->with('status', 'Se ha enviado un código de recuperación de contraseña a tu correo electrónico.');
             }
-
-
         } catch (ValidationException $e) {
             return back()->withInput()->withErrors($e->errors());
         } catch (Exception $e) {
@@ -263,22 +264,25 @@ class UserController extends Controller
     {
         try {
             // 1. Validar entrada
+            $userId = session('reset_user_id');
+
+            if (!$userId) {
+                throw ValidationException::withMessages(['token' => 'Sesión expirada. Por favor, solicita un nuevo código.']);
+            }
             $request->validate([
-                'email' => 'required|email|exists:users,email',
                 'token' => 'required|string|size:6',
                 'password' => 'required|string|min:8|confirmed',
             ], [
-                'email.exists' => 'El correo electrónico proporcionado no está registrado.',
                 'token.size' => 'El código de recuperación debe tener 6 dígitos.',
                 'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
                 'password.confirmed' => 'Las contraseñas no coinciden.',
             ]);
 
-            $user = User::where('email', $request->email)->first();
+            $user = User::find($userId);
 
             // SI el correo no está registrado, lanzar excepción
             if (!$user) {
-                throw ValidationException::withMessages(['email' => 'El correo electrónico proporcionado no está registrado.']);
+                throw ValidationException::withMessages(['email' => 'Usuario no encontrada.']);
             }
             // Validar que la contraseña sea diferente a la actual
             if (password_verify($request->password, $user->password)) {
@@ -287,10 +291,6 @@ class UserController extends Controller
             // Verificar que la contraseña y la confirmación coincidan
             if ($request->password !== $request->password_confirmation) {
                 throw ValidationException::withMessages(['password_confirmation' => 'Las contraseñas no coinciden.']);
-            }
-            // Verificar que el email proporcionado coincida con el usuario
-            if ($user->email !== $request->email) {
-                throw ValidationException::withMessages(['email' => 'El correo electrónico proporcionado no coincide con el usuario.']);
             }
             // Verificar si el usuario tiene un token de reseteo
             $record = ResetTokenPass::where('user_id', $user->id)
@@ -312,6 +312,7 @@ class UserController extends Controller
                 'password' => bcrypt($request->password)
             ]);
             $record->delete();
+            session()->forget('reset_user_id');
             // Enviar correo de confirmación de cambio de contraseña
             Mail::to($user->email)->send(new PasswordUpdatedSuccesful($user));
             return redirect()->route('login')->with('status', '¡Contraseña actualizada con éxito! Ahora puedes iniciar sesión con tu nueva contraseña.');

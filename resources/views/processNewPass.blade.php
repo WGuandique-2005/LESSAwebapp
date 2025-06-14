@@ -316,16 +316,6 @@
         @endif
 
         <div class="input-group">
-            <h2>Correo Electrónico</h2>
-            <input type="email" name="email" placeholder="email@example.com" value="{{ old('email') }}" required>
-            @error('email')
-                <ul class="error-list">
-                    <li><i class="fas fa-exclamation-circle"></i> {{ $message }}</li>
-                </ul>
-            @enderror
-        </div>
-
-        <div class="input-group">
             <h2>Código de Recuperación</h2>
             <input type="text" name="token" placeholder="Ingresa tu código de 6 dígitos" value="{{ old('token') }}" required>
             @error('token')

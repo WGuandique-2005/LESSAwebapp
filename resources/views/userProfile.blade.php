@@ -394,7 +394,6 @@
                 <h1>{{ $user->name }}</h1>
                 <p class="username">/{{ $user->username }}</p>
                 <p><i class="fas fa-envelope"></i> {{ $user->email }}</p>
-                <p><i class="fas fa-id-badge"></i> ID de Usuario: <strong>{{ $user->id }}</strong></p>
             </div>
         </header>
 
