@@ -1,5 +1,5 @@
 # LESSA – Lenguaje de Señas Salvadoreño👋
-
+# GPO01-LESSA-2025
 LESSA es una **plataforma educativa interactiva** diseñada para hacer que el aprendizaje del Lenguaje de Señas Salvadoreño (LESSA) sea **fácil, divertido y accesible**. Nos enfocamos en la inclusión comunicacional, ofreciendo una experiencia gamificada con:
 
 * ✨ Animaciones detalladas de señas
@@ -122,4 +122,3 @@ Sigue estos pasos para tener LESSA funcionando en tu entorno local:
 ---
 
 **¡Esperamos que disfrutes aprendiendo LESSA!**
-- [GPO01-LESSA-2025]
