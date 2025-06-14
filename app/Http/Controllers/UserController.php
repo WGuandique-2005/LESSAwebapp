@@ -79,9 +79,24 @@ class UserController extends Controller
     /** Mostrar formulario para ingresar el código */
     public function showVerifyForm()
     {
-        // Ensure that verify_user_id exists in session, otherwise redirect
         if (!session()->has('verify_user_id')) {
             return redirect()->route('signup')->with('error', 'Debes registrarte primero para verificar tu cuenta.');
+        }
+        $userId = session('verify_user_id');
+        $user = User::find($userId);
+
+        // Si el usuario no existe, limpiar sesión y redirigir
+        if (!$user) {
+            session()->forget('verify_user_id');
+            return redirect()->route('signup')->with('error', 'Tu sesión de verificación ha expirado. Regístrate de nuevo.');
+        }
+
+        // Si el usuario no está activo y han pasado más de 5 minutos, eliminarlo y limpiar sesión
+        if (!$user->is_active && $user->created_at->addMinutes(5)->isPast()) {
+            VerificationToken::where('user_id', $userId)->delete();
+            $user->delete();
+            session()->forget('verify_user_id');
+            return redirect()->route('signup')->with('error', 'Tu registro expiró por inactividad. Por favor, regístrate de nuevo.');
         }
         return view('verifyAccount');
     }
@@ -152,7 +167,15 @@ class UserController extends Controller
                 return redirect()->route('signup')->with('error', 'No hay una cuenta pendiente de verificación en tu sesión. Por favor, regístrate de nuevo.');
             }
 
-            $user = User::findOrFail($userId);
+            $user = User::find($userId);
+
+            // Si el usuario no existe o expiró, limpiar sesión y redirigir
+            if (!$user || (!$user->is_active && $user->created_at->addMinutes(5)->isPast())) {
+                VerificationToken::where('user_id', $userId)->delete();
+                if ($user) $user->delete();
+                session()->forget('verify_user_id');
+                return redirect()->route('signup')->with('error', 'Tu registro expiró por inactividad. Por favor, regístrate de nuevo.');
+            }
 
             // Eliminar tokens antiguos para este usuario
             VerificationToken::where('user_id', $userId)->delete();
@@ -165,7 +188,6 @@ class UserController extends Controller
             Mail::to($user->email)->send(new VerifyUser($user, $token));
 
             return back()->with('status', 'Se ha enviado un nuevo código de verificación a tu correo electrónico.');
-
         } catch (Exception $e) {
             return back()->with('error', 'No se pudo reenviar el código de verificación. Por favor, inténtalo de nuevo más tarde.');
         }
@@ -438,7 +460,6 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         try {
-            session()->regenerateToken();
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->flush();
