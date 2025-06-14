@@ -28,8 +28,6 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
             color: var(--text-color);
             line-height: 1.6;
@@ -44,9 +42,13 @@
             max-width: 440px;
             margin: 20px auto;
             text-align: left;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        h1 {
+        h2 {
             text-align: center;
             margin-bottom: 24px;
             color: var(--primary-color);
@@ -61,8 +63,6 @@
             color: var(--text-color);
         }
 
-        input[type="email"],
-        input[type="text"],
         input[type="password"] {
             width: calc(100% - 20px);
             padding: 10px;
@@ -74,8 +74,6 @@
             transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
 
-        input[type="email"]:focus,
-        input[type="text"]:focus,
         input[type="password"]:focus {
             outline: none;
             border-color: var(--primary-color);
@@ -172,8 +170,9 @@
     </style>
 </head>
 <body>
+    <header>@include('partials.navbar')</header>
     <div class="container">
-        <h1>Confirmar cambio de contraseña</h1>
+        <h2>Confirmar cambio de contraseña</h2>
 
         @if(session('status'))
             <p class="feedback-message success">
@@ -189,14 +188,11 @@
             </ul>
         @endif
 
-        <form method="POST" action="{{ route('password.change.confirm') }}">
+        <form method="POST" action="{{ route('password.change') }}">
             @csrf
 
-            <label for="email">Correo electrónico</label>
-            <input type="email" name="email" id="email" value="{{ old('email') }}" required autocomplete="email">
-
-            <label for="token">Código de 6 dígitos</label>
-            <input type="text" name="token" id="token" maxlength="6" value="{{ old('token') }}" required inputmode="numeric" autocomplete="off">
+            <label for="current_password">Ingresa tu contraseña actual</label>
+            <input type="password" name="current_password" id="current_password" required>
 
             <label for="new_password">Nueva contraseña</label>
             <input type="password" name="new_password" id="new_password" required autocomplete="new-password">
@@ -213,6 +209,7 @@
             <button type="submit">Cambiar contraseña</button>
         </form>
     </div>
+    <footer>@include('partials.footer')</footer>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const newPasswordInput = document.getElementById('new_password');

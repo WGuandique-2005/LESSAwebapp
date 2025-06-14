@@ -117,7 +117,7 @@
             font-weight: 600;
             border: 4px solid var(--primary-color);
             box-shadow: var(--shadow-sm);
-            overflow: hidden; /* Ensures image fits if it's an img tag */
+            overflow: hidden;
         }
 
         .profile-avatar img {
@@ -376,7 +376,7 @@
         </p>
     @endif
     <div class="profile-container">
-        <a href="#" class="back-button" onclick="history.back()">
+        <a href="{{ route('home') }}" class="back-button">
             <i class="fas fa-arrow-left"></i> Volver
         </a>
 

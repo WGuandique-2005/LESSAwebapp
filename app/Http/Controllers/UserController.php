@@ -395,175 +395,37 @@ class UserController extends Controller
         }
     }
 
-
-    /** 
-     * Paso 1: Mostrar formulario para solicitar el token de cambio de contraseña.
-     * Usuario debe estar autenticado.
-     */
-    public function showChangePasswordRequestForm()
+    public function showChangePasswordForm()
     {
-        try{
-            // Verificar si el usuario está autenticado
-            if (!Auth::check()) {
-                return redirect()->route('login')
-                    ->with('error', 'Debes iniciar sesión para cambiar tu contraseña.');
-            }
-            // Verificar si el usuario tiene una cuenta de Google OAuth
-            if (Auth::user()->es_google_oauth) {
-                return redirect()->route('home')
-                    ->with('error', 'No puedes editar la contraseña de una cuenta autenticada con Google.');
-            }
-            else{
-                // Si el usuario está autenticado y no es una cuenta de Google OAuth, mostrar el formulario
-                $user = Auth::user();
-                return view('changePasswordRequest', compact('user'));
-            }
-        } catch (Exception $e) {
-            return redirect()->route('login')
-                ->with('error', 'Hubo un problema al acceder a tu cuenta. Por favor, inténtalo de nuevo más tarde.');
-        }
+        return view('changePassword');
     }
-
-    /**
-     * Paso 2: Generar token, guardarlo y enviarlo por correo con UpdatePassword.
-     */
-    public function sendChangePasswordToken(Request $request)
-    {
-        try {
-            $user = Auth::user();
-
-            // 1) Generar token de 6 caracteres
-            $token = Str::upper(Str::random(6));
-
-            // 2) Eliminar tokens anteriores para este usuario
-            ResetTokenPass::where('user_id', $user->id)->delete();
-
-            // 3) Crear nuevo registro en reset_tokens
-            ResetTokenPass::create([
-                'user_id' => $user->id,
-                'token' => $token,
-                'created_at' => Carbon::now(),
-            ]);
-
-            // 4) Enviar correo al usuario con el mailable UpdatePassword
-            //    Este mailable recibirá (User $user, string $token) en su constructor
-            Mail::to($user->email)->send(new UpdatePassword($user, $token));
-            // 5) Redirigir a la vista de confirmación
-            return redirect()->route('password.change.confirm.view')
-                ->with('status', 'Te hemos enviado un código de cambio de contraseña a tu correo electrónico.');
-
-        } catch (Exception $e) {
-            return back()->with('error', 'No se pudo generar el token. Intenta más tarde.');
-        }
-    }
-    /**
-     * Paso intermedio: reenviar un nuevo token de cambio de contraseña.
-     *
-     * Borra el token anterior, genera uno nuevo y lo envía de nuevo por correo.
-     * Redirige a la vista de confirmación.
-     */
-    public function resendChangePasswordToken(Request $request)
+    public function changePassword(Request $request)
     {
         try {
             $user = Auth::user();
             if (!$user) {
-                return redirect()->route('login')->with('error', 'Debes iniciar sesión para reenviar el token.');
+                return redirect()->route('login')->with('error', 'Debes iniciar sesión.');
             }
 
-            // 1) Borrar tokens anteriores para este usuario
-            ResetTokenPass::where('user_id', $user->id)->delete();
-
-            // 2) Generar token nuevo de 6 caracteres
-            $token = Str::upper(Str::random(6));
-
-            // 3) Insertar el nuevo token en la tabla
-            ResetTokenPass::create([
-                'user_id' => $user->id,
-                'token' => $token,
-                'created_at' => Carbon::now(),
-            ]);
-
-            // 4) Enviar correo con el mailable UpdatePassword
-            Mail::to($user->email)->send(new UpdatePassword($user, $token));
-
-            // 5) Redirigir a la vista de confirmación con mensaje de éxito
-            return redirect()->route('password.change.confirm.view')
-                ->with('status', 'Se ha reenviado un nuevo código de cambio de contraseña a tu correo.');
-
-        } catch (Exception $e) {
-            \Log::error('Error en resendChangePasswordToken: ' . $e->getMessage());
-            return back()->with('error', 'No se pudo reenviar el token. Por favor, intenta de nuevo más tarde.');
-        }
-    }
-    /**
-     * Paso 3: Mostrar formulario donde el usuario introduce el token y la nueva contraseña.
-     */
-    public function showChangePasswordConfirmForm()
-    {
-        return view('changePasswordConfirm');
-    }
-
-    /**
-     * Paso 4: Validar token y cambiar contraseña. Luego enviar correo de confirmación.
-     */
-    public function changePasswordWithToken(Request $request)
-    {
-        try {
-            // 1) Validar campos del formulario
             $request->validate([
-                'email' => 'required|email|exists:users,email',
-                'token' => 'required|string|size:6',
+                'current_password' => 'required',
                 'new_password' => 'required|string|min:8|confirmed',
+            ], [
+                'new_password.min' => 'La nueva contraseña debe tener al menos 8 caracteres.',
+                'new_password.confirmed' => 'Las contraseñas no coinciden.',
             ]);
 
-            // 1.1) Validar que la contraseña sea diferente a la actual
-            $user = User::where('email', $request->email)->firstOrFail();
+            if (!password_verify($request->current_password, $user->password)) {
+                throw ValidationException::withMessages(['current_password' => 'La contraseña actual es incorrecta.']);
+            }
+
             if (password_verify($request->new_password, $user->password)) {
-                throw ValidationException::withMessages([
-                    'new_password' => 'La nueva contraseña no puede ser la misma que la actual.'
-                ]);
-            }
-            // 1.2) Validar que el email proporcionado coincida con el usuario
-            if ($user->email !== $request->email) {
-                throw ValidationException::withMessages([
-                    'email' => 'El correo electrónico proporcionado no coincide con el usuario.'
-                ]);
+                throw ValidationException::withMessages(['new_password' => 'La nueva contraseña no puede ser la misma que la actual.']);
             }
 
-            // 2) Recuperar usuario por email
-            $user = User::where('email', $request->email)->firstOrFail();
+            $user->update(['password' => bcrypt($request->new_password)]);
 
-            // 3) Recuperar el registro de ResetToken
-            $record = ResetTokenPass::where('user_id', $user->id)
-                ->where('token', $request->token)
-                ->first();
-
-            if (!$record) {
-                throw ValidationException::withMessages([
-                    'token' => 'El código de cambio de contraseña es inválido.'
-                ]);
-            }
-
-            // 4) Verificar expiración (2 horas)
-            if (Carbon::parse($record->created_at)->addHours(2)->isPast()) {
-                $record->delete(); // borrar el token expirado
-                throw ValidationException::withMessages([
-                    'token' => 'El código ha expirado. Por favor, solicita uno nuevo.'
-                ]);
-            }
-
-            // 5) Actualizar la contraseña del usuario
-            $user->update([
-                'password' => bcrypt($request->new_password),
-            ]);
-
-            // 6) Borrar el token luego del uso
-            $record->delete();
-
-            // 7) Enviar correo de confirmación de contraseña actualizada
-            Mail::to($user->email)->send(new PasswordUpdatedSuccesful($user));
-
-            return redirect()->route('home')
+            return redirect()->route('profile')
                 ->with('status', '¡Contraseña cambiada exitosamente!');
         } catch (ValidationException $e) {
             return back()->withInput()->withErrors($e->errors());
@@ -571,8 +433,6 @@ class UserController extends Controller
             return back()->withInput()->with('error', 'No se pudo cambiar la contraseña. Intenta más tarde.');
         }
     }
-
-
 
     /** Cerrar sesión */
     public function logout(Request $request)

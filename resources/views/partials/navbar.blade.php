@@ -27,13 +27,10 @@
         body {
             font-family: 'Poppins', Arial, sans-serif;
             background-color: #f8f9fa;
-            /* Light background for contrast */
             line-height: 1.6;
             padding-top: 80px;
-            /* Adjust if your navbar's actual height changes */
         }
 
-        /* Navbar Styles */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -46,7 +43,6 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            /* High z-index for the main navbar */
             border-radius: 0;
             box-shadow: 0 6px 12px var(--shadow-medium);
             transition: all 0.3s ease;
