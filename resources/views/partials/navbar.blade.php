@@ -53,6 +53,7 @@
         }
 
         .navbar img {
+            filter: brightness(0) invert(1);
             height: 50px;
             transition: transform 0.3s ease;
         }
