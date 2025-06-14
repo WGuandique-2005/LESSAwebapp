@@ -126,7 +126,7 @@ class UserController extends Controller
             }
 
             // 3) Verificar expiración (>24h)
-            if (Carbon::parse($record->created_at)->addHours(24)->isPast()) {
+            if (Carbon::parse($record->created_at)->addHours(2)->isPast()) {
                 $record->delete();
                 throw ValidationException::withMessages(['token' => 'El código de verificación ha expirado. Por favor, solicita uno nuevo.']);
             }
