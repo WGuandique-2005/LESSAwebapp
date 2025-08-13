@@ -25,4 +25,8 @@ class TaskController extends Controller
     {
         return view('aprender');
     }
+
+    public function lecciones(){
+        return view('lsIntcvs');
+    }
 }
