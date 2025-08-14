@@ -10,7 +10,9 @@ class Leccion extends Model
     protected $fillable = [
         'nivel_id',
         'titulo',
-        'descripcion'
+        'descripcion',
+        'completada',
+        'fecha_completada'
     ];
 
     public function nivel(){

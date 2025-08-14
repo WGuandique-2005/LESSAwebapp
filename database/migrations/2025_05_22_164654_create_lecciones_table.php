@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('nivel_id')->constrained('niveles')->onDelete('cascade');
             $table->string('titulo');
             $table->text('descripcion')->nullable();
+            $table->boolean('completada')->default(false);
+            $table->date('fecha_completada')->nullable();
             $table->timestamps();
 
         });
