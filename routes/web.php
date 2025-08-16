@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LeccionesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
@@ -61,9 +62,9 @@ Route::middleware('auth')->group(function () {
 
     // Lecciones interactivas
     Route::get('/lecciones', [TaskController::class, 'lecciones'])->name('lecciones');
-    
 
     // Temas de las lecciones
+    Route::get('/abecedario',[LeccionesController::class, 'ls1_abecedario'])->name('lecciones.abecedario');
 
     Route::get('/senas',[SenaImgController::class, 'index'])->name(('senas'));
 
