@@ -209,6 +209,44 @@
                 updateCarouselPosition();
             });
 
+            // Soporte para deslizar (swipe) en móviles
+            let touchStartX = null;
+            let touchEndX = null;
+
+            carouselTrack.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            carouselTrack.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipeGesture();
+            });
+
+            function handleSwipeGesture() {
+                if (touchStartX !== null && touchEndX !== null) {
+                    const diff = touchStartX - touchEndX;
+                    if (Math.abs(diff) > 50) { // Umbral mínimo para considerar swipe
+                        if (diff > 0) {
+                            // Swipe izquierda: siguiente slide
+                            currentSlideIndex++;
+                            if (currentSlideIndex >= slides.length) {
+                                currentSlideIndex = 0;
+                            }
+                            updateCarouselPosition();
+                        } else {
+                            // Swipe derecha: slide anterior
+                            currentSlideIndex--;
+                            if (currentSlideIndex < 0) {
+                                currentSlideIndex = slides.length - 1;
+                            }
+                            updateCarouselPosition();
+                        }
+                    }
+                }
+                touchStartX = null;
+                touchEndX = null;
+            }
+
             // Opcional: ajustar el carrusel si la ventana cambia de tamaño
             window.addEventListener('resize', updateCarouselPosition);
         });
