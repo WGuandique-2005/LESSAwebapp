@@ -40,42 +40,58 @@
 
         .carousel-slide {
             flex: 0 0 100%;
-            /* Cada slide ocupa el 100% del ancho del contenedor visible */
             width: 100%;
-            /* Asegura que cada slide tome su ancho completo */
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            padding: 20px;
+            justify-content: center;
+            min-height: 350px;
             box-sizing: border-box;
-            /* Incluye el padding en el cálculo del ancho */
+            padding: 20px;
+            transition: background 0.3s;
         }
 
-        .carousel-slide img {
-            max-width: 250px;
-            /* Ajusta el tamaño de la imagen según sea necesario */
-            height: auto;
+        .slide-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 260px;
+            max-width: 300px;
+            height: 260px;
+            margin-right: 40px;
+        }
+
+        .slide-img img {
+            max-width: 100%;
+            max-height: 240px;
+            object-fit: contain;
             border-radius: 8px;
-            margin-bottom: 20px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #fff;
         }
 
         .slide-content {
-            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+            text-align: left;
         }
 
         .slide-content h2 {
             color: #333;
             margin-top: 0;
             font-size: 2em;
+            font-weight: bold;
         }
 
         .slide-content p {
             color: #555;
             line-height: 1.6;
             font-size: 1.1em;
-            margin-right:5%;
-            margin-left: 5%;
+            margin: 0;
+            word-break: break-word;
         }
 
         .carousel-button {
@@ -105,6 +121,24 @@
         .carousel-button.next {
             right: 10px;
         }
+
+        @media (max-width: 700px) {
+            .carousel-slide {
+                flex-direction: column;
+                min-height: 400px;
+            }
+
+            .slide-img {
+                margin-right: 0;
+                margin-bottom: 20px;
+                height: 180px;
+                max-width: 90vw;
+            }
+
+            .slide-content {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -115,7 +149,9 @@
             {{-- Blade loop para renderizar cada tarjeta de seña --}}
             @foreach ($senas as $sena)
                 <div class="carousel-slide">
-                    <img src="https://drive.google.com/uc?export=view&id={{ $sena['imagen_url'] }}" alt="{{ $sena['nombre'] }}">
+                    <div class="slide-img">
+                        <img src="{{ $sena['ruta'] }}" alt="{{ $sena['nombre'] }}">
+                    </div>
                     <div class="slide-content">
                         <h2>{{ $sena['nombre'] }}</h2>
                         <p>{{ $sena['descripcion'] }}</p>

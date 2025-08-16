@@ -64,7 +64,9 @@ Route::middleware('auth')->group(function () {
     
 
     // Temas de las lecciones
-    
+
+    Route::get('/senas',[SenaImgController::class, 'index'])->name(('senas'));
+
     // Ver perfil
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
 
