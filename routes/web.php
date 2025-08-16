@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/lecciones', [TaskController::class, 'lecciones'])->name('lecciones');
 
     // Temas de las lecciones
-    Route::get('/abecedario',[LeccionesController::class, 'ls1_abecedario'])->name('lecciones.abecedario');
+    Route::get('/lecciones/abecedario',[LeccionesController::class, 'ls1_abecedario'])->name('lecciones.abecedario');
 
     Route::get('/senas',[SenaImgController::class, 'index'])->name(('senas'));
 

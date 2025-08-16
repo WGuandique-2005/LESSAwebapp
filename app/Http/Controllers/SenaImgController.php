@@ -14,6 +14,6 @@ class SenaImgController extends Controller
         if (file_exists($jsonPath)) {
             $senas = json_decode(file_get_contents($jsonPath), true);
         }
-        return view('lessons.ls1_abcd', compact('senas'));
+        return view('senas_carrusel', compact('senas'));
     }
 }
