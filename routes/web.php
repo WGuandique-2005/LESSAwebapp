@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
-
+use App\Http\Controllers\SenaImgController;
 /*
 |----------------------------------
 | Rutas públicas (landing y auth)
@@ -61,7 +61,10 @@ Route::middleware('auth')->group(function () {
 
     // Lecciones interactivas
     Route::get('/lecciones', [TaskController::class, 'lecciones'])->name('lecciones');
+    
 
+    // Temas de las lecciones
+    
     // Ver perfil
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
 
