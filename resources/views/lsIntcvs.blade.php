@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lecciones - LESSA</title>
     <style>
-        /* Basic Reset & Body Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f0f2f5;
-            /* Light gray background */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -27,7 +25,6 @@
             padding: 20px;
         }
 
-        /* Floating Elements (for the scattered shapes) */
         .floating-elements {
             position: absolute;
             top: 0;
@@ -35,20 +32,16 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            /* To hide shapes that go outside */
             pointer-events: none;
-            /* Allows clicks on content below */
         }
 
         .shape {
             position: absolute;
             background-color: rgba(76, 175, 80, 0.6);
-            /* Green with transparency */
             border-radius: 5px;
             opacity: 0.8;
         }
 
-        /* Example positions and sizes for shapes (you'd adjust these for precise replication) */
         .shape-1 {
             top: 5%;
             left: 1%;
@@ -58,7 +51,6 @@
             background-color: #ADD8E6;
         }
 
-        /* LightBlue */
         .shape-2 {
             top: 10%;
             left: 3%;
@@ -68,7 +60,6 @@
             background-color: #FFB6C1;
         }
 
-        /* LightPink */
         .shape-3 {
             top: 15%;
             left: 0.5%;
@@ -78,7 +69,6 @@
             background-color: #90EE90;
         }
 
-        /* LightGreen */
         .shape-4 {
             top: 20%;
             left: 2.5%;
@@ -88,7 +78,6 @@
             background-color: #FFD700;
         }
 
-        /* Gold */
         .shape-5 {
             top: 25%;
             left: 1%;
@@ -229,7 +218,6 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-left: 5%;
-            /* Adjust to make space for floating elements */
             margin-right: 5%;
         }
 
@@ -256,7 +244,7 @@
         /* Progress Bar */
         .progress-container {
             margin-top: 30px;
-            background-color: #020282ff;
+            background-color: #070776ff;
             padding: 15px;
             border-radius: 8px;
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -277,14 +265,11 @@
         }
 
         .progress-bar-inner {
-            background-color: #f3ab05ff;
-            /* Green */
+            background-color: #e6a717ff;
             height: 100%;
             border-radius: 5px;
             width: 0%;
-            /* Initial width, will be set by JS or inline style */
             transition: width 0.5s ease-in-out;
-            /* Smooth transition for progress */
         }
 
         /* Cards Container */
@@ -312,11 +297,9 @@
         .card-image {
             flex-shrink: 0;
             width: 120px;
-            /* Adjust as needed */
             height: auto;
             object-fit: cover;
             margin: 15px;
-            /* Spacing around the image */
             border-radius: 4px;
         }
 
@@ -357,9 +340,7 @@
             height: 20px;
             border-radius: 50%;
             border: 2px solid #ccc;
-            /* Default gray border */
             background-color: white;
-            /* Default white fill */
         }
 
 
@@ -372,8 +353,8 @@
             }
 
             .card-image {
-                width: 100px;
-                height: 70px;
+                width: 85%;
+                height: 55%;
                 margin-bottom: 10px;
             }
 
@@ -398,7 +379,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <header>@include('partials.navbar')</header> 
+    <header>@include('partials.navbar')</header> 
     <main class="container">
         <aside class="floating-elements">
             <div class="shape shape-1"></div>
@@ -438,7 +419,8 @@
             <div class="progress-container">
                 <p>Progreso de Aprendizaje</p>
                 <div class="progress-bar-outer">
-                    <div class="progress-bar-inner" style="width: 20%;"></div> </div>
+                    <div class="progress-bar-inner" style="width: 20%;"></div> 
+                </div>
             </div>
 
             <div class="cards-container">
@@ -449,6 +431,19 @@
                     <div class="card-content">
                         <h3>Abecedario</h3>
                         <p>Aprenderás las letras del abecedario para poder por ejemplo deletrar tu nombre, siglas u otros usos que descubriras.</p>
+                    </div>
+                    <div class="card-status">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{ asset('img/abcd.png') }}" alt="Vocabulario del Hogar y la Familia">
+                    </div>
+                    <div class="card-content">
+                        <h3>Números</h3>
+                        <p>Aprenderás los números del 1 al 100, cantidades más grandes, así como a contar objetos y a hacer preguntas simples sobre cantidades.</p>
                     </div>
                     <div class="card-status">
                         <div class="circle"></div>
@@ -482,6 +477,16 @@
                 </div>
 
                 <div class="card">
+                    <div class="=card-image">
+                        <img src="" alt="animales">
+                    </div>
+                    <div class="card-content">
+                        <h3>Animales y Naturaleza</h3>
+                        <p>Aprenderás a señalar animales comunes (perro, gato, pájaro) y a describir su entorno natural (árbol, río, montaña).</p>
+                    </div>
+                </div>
+
+                <div class="card">
                     <div class="card-image">
                         <img src="https://via.placeholder.com/100x70/E0E0E0/808080?text=Imagen+4" alt="Salud y Emergencias">
                     </div>
@@ -504,6 +509,16 @@
                     </div>
                     <div class="card-status">
                         <div class="circle"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">
+                       <img src="" alt="Extra"> 
+                    </div>
+                    <div class="card-content">
+                        <h3>Extra</h3>
+                        <p>Contenido adicional que puede incluir vocabulario, frases útiles o información cultural relevante.</p>
                     </div>
                 </div>
             </div>

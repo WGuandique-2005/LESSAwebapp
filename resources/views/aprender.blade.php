@@ -325,7 +325,7 @@
                                 <img src="{{ asset('img/diccionario.png') }}" alt="Ilustración de un diccionario de señas" class="card-image">
                             </div>
                             <div class="card-content">
-                                <h3>Diccionario LESSA</h3>
+                                <h3 class="cursor: pointer;">Diccionario LESSA</h3>
                                 <p>Consulta nuestro diccionario de señas con más de 350 palabras, categorizadas
                                     alfabéticamente y por temas. Cada entrada incluye: GIF/imagen de la seña,
                                     definición, contexto de uso y sinónimos.</p>
@@ -335,7 +335,7 @@
                             <div class="card-image-container">
                                 <img src="{{ asset('img/lecciones.png') }}" alt="Ilustración de lecciones organizadas" class="card-image">
                             </div>
-                            <div class="card-content">
+                            <div class="card-content goToLessons" >
                                 <h3>Lecciones Interactivas</h3>
                                 <p>Accede a módulos organizados por niveles de dificultad. Cada lección contiene una
                                     mezcla de teoría, práctica visual y contenido interactivo para asegurar que
@@ -359,6 +359,14 @@
             </div>
         </section>
     </main>
+    <script>
+        addEventListener('DOMContentLoaded', function(){
+            const goToLessons = document.querySelector('.goToLessons');
+            goToLessons.addEventListener('click', function(){
+                window,location.href = "{{  route('lecciones') }}"
+            })
+        })
+    </script>
     <footer>@include('partials.footer')</footer>
 </body>
 
