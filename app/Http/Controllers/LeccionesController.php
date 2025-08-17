@@ -7,6 +7,13 @@ use App\Models\Leccion;
 
 class LeccionesController extends Controller
 {
-    // Sistema de gestión de lecciones, para llevar un historial de las lecciones
-    // que se han completado y cuando se completaron
+    public function ls1_abecedario()
+    {
+        $jsonPath = storage_path('app/senas.json');
+        $senas = [];
+        if (file_exists($jsonPath)) {
+            $senas = json_decode(file_get_contents($jsonPath), true);
+        }
+        return view('lessons.ls1_abcd', compact('senas'));
+    }
 }

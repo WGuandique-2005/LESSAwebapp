@@ -10,14 +10,10 @@ class SenaImgController extends Controller
     public function index()
     {
         $jsonPath = storage_path('app/senas.json');
-
-        if (!File::exists($jsonPath)) {
-            return view('senas_carrusel', ['senas' => []]);
+        $senas = [];
+        if (file_exists($jsonPath)) {
+            $senas = json_decode(file_get_contents($jsonPath), true);
         }
-
-        $senasData = json_decode(File::get($jsonPath), true);
-
-        // Asegúrate de que el nombre de la vista coincida con el nombre de tu archivo .blade.php
-        return view('senas_carrusel', ['senas' => $senasData]);
+        return view('senas_carrusel', compact('senas'));
     }
 }
