@@ -535,7 +535,7 @@
                     formación de cada seña con tu mano dominante. ¡La repetición es la clave!
                 </div>
                 <div class="include-carrusel">
-                    @include('senas_carrusel')
+                    @include('carrusel.abecedario')
                 </div>
                 <span class="badge">¡Visión Aguda!</span>
             </section>

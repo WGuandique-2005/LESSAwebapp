@@ -9,7 +9,7 @@ class LeccionesController extends Controller
 {
     public function ls1_abecedario()
     {
-        $jsonPath = storage_path('app/senas.json');
+        $jsonPath = storage_path('app/abecedario.json');
         $senas = [];
         if (file_exists($jsonPath)) {
             $senas = json_decode(file_get_contents($jsonPath), true);

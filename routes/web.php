@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
     // Temas de las lecciones
     Route::get('/lecciones/abecedario',[LeccionesController::class, 'ls1_abecedario'])->name('lecciones.abecedario');
 
-    Route::get('/senas',[SenaImgController::class, 'index'])->name(('senas'));
+    Route::get('/carrusel/abecedario',[SenaImgController::class, 'index'])->name(('carrusel.abecedario'));
 
     // Ver perfil
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');

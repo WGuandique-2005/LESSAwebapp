@@ -370,192 +370,218 @@
 </head>
 
 <body>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LESSA - Sección de Aprendizaje</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>@include('partials.navbar')</header> 
-    <main class="container">
-        <aside class="floating-elements">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-            <div class="shape shape-5"></div>
-            <div class="shape shape-6"></div>
-            <div class="shape shape-7"></div>
-            <div class="shape shape-8"></div>
-            <div class="shape shape-9"></div>
-            <div class="shape shape-10"></div>
-            <div class="shape shape-11"></div>
-            <div class="shape shape-12"></div>
-            <div class="shape shape-13"></div>
-            <div class="shape shape-14"></div>
-            <div class="shape shape-15"></div>
-            <div class="shape shape-16"></div>
-            <div class="shape shape-17"></div>
-            <div class="shape shape-18"></div>
-            <div class="shape shape-19"></div>
-        </aside>
+    <!DOCTYPE html>
+    <html lang="es">
 
-        <section class="learning-section">
-            <h1>Sección de Aprendizaje</h1>
-            <p class="subtitle">¡Bienvenido a tu zona de Aprendizaje!</p>
-            <p class="description">
-                Aquí es donde obtendrás todo el conocimiento teórico en habilidades reales de comunicación. La
-                sección de Aprendizaje de LESSA está diseñada para ayudarte a desarrollar tus habilidades iniciales
-                en este lenguaje, perfeccionar tus movimientos y obtener contexto de su uso o significados.
-            </p>
-            <p class="reminder">
-                Recuerda: Si nunca lo intentas, ¡nunca sabrás el resultado.
-                ¡Tú puedes!
-            </p>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LESSA - Sección de Aprendizaje</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
 
-            <div class="progress-container">
-                <p>Progreso de Aprendizaje</p>
-                <div class="progress-bar-outer">
-                    <div class="progress-bar-inner" style="width: 20%;"></div> 
-                </div>
-            </div>
+    <body>
+        <header>@include('partials.navbar')</header>
+        <main class="container">
+            <aside class="floating-elements">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+                <div class="shape shape-6"></div>
+                <div class="shape shape-7"></div>
+                <div class="shape shape-8"></div>
+                <div class="shape shape-9"></div>
+                <div class="shape shape-10"></div>
+                <div class="shape shape-11"></div>
+                <div class="shape shape-12"></div>
+                <div class="shape shape-13"></div>
+                <div class="shape shape-14"></div>
+                <div class="shape shape-15"></div>
+                <div class="shape shape-16"></div>
+                <div class="shape shape-17"></div>
+                <div class="shape shape-18"></div>
+                <div class="shape shape-19"></div>
+            </aside>
 
-            <div class="cards-container">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="{{ asset('img/abcd.png') }}" alt="Vocabulario del Hogar y la Familia">
-                    </div>
-                    <div class="card-content">
-                        <h3>Abecedario</h3>
-                        <p>Aprenderás las letras del abecedario para poder por ejemplo deletrar tu nombre, siglas u otros usos que descubriras.</p>
-                    </div>
-                    <div class="card-status">
-                        <div class="circle"></div>
+            <section class="learning-section">
+                <h1>Sección de Aprendizaje</h1>
+                <p class="subtitle">¡Bienvenido a tu zona de Aprendizaje!</p>
+                <p class="description">
+                    Aquí es donde obtendrás todo el conocimiento teórico en habilidades reales de comunicación. La
+                    sección de Aprendizaje de LESSA está diseñada para ayudarte a desarrollar tus habilidades iniciales
+                    en este lenguaje, perfeccionar tus movimientos y obtener contexto de su uso o significados.
+                </p>
+                <p class="reminder">
+                    Recuerda: Si nunca lo intentas, ¡nunca sabrás el resultado.
+                    ¡Tú puedes!
+                </p>
+
+                <div class="progress-container">
+                    <p>Progreso de Aprendizaje</p>
+                    <div class="progress-bar-outer">
+                        <div class="progress-bar-inner" style="width: 20%;"></div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-image">
-                        <img src="{{ asset('img/abcd.png') }}" alt="Vocabulario del Hogar y la Familia">
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('img/abcd.png') }}" alt="Vocabulario del Hogar y la Familia">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="abecedario">Abecedario</h3>
+                            <p>Aprenderás las letras del abecedario para poder por ejemplo deletrar tu nombre, siglas u
+                                otros usos que descubriras.</p>
+                        </div>
+                        <div class="card-status">
+                            <div class="circle"></div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <h3>Números</h3>
-                        <p>Aprenderás los números del 1 al 100, cantidades más grandes, así como a contar objetos y a hacer preguntas simples sobre cantidades.</p>
-                    </div>
-                    <div class="card-status">
-                        <div class="circle"></div>
-                    </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-image">
-                        <img src="{{ asset('img/saludos.png') }}" alt="Saludos y Presentaciones">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('img/numbers.png') }}" alt="Vocabulario del Hogar y la Familia">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="numeros">Números</h3>
+                            <p>Aprenderás los números del 1 al 100, cantidades más grandes, así como a contar objetos y
+                                a hacer preguntas simples sobre cantidades.</p>
+                        </div>
+                        <div class="card-status">
+                            <div class="circle"></div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <h3>Saludos y Presentaciones</h3>
-                        <p>Aprenderás a comunicar saludos como "Hola", "Buenos días", "Buenas noches", "¿Cómo estás?", así como frases para presentarte como "Mi nombre es..." o "Mucho gusto".</p>
-                    </div>
-                    <div class="card-status">
-                        <div class="circle"></div>
-                    </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/100x70/E0E0E0/808080?text=Imagen+3" alt="Alimentos y Bebidas">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('img/saludos.png') }}" alt="Saludos y Presentaciones">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="saludos">Saludos y Presentaciones</h3>
+                            <p>Aprenderás a comunicar saludos como "Hola", "Buenos días", "Buenas noches", "¿Cómo
+                                estás?", así como frases para presentarte como "Mi nombre es..." o "Mucho gusto".</p>
+                        </div>
+                        <div class="card-status">
+                            <div class="circle"></div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <h3>Alimentos y Bebidas</h3>
-                        <p>Practicarás las señas de alimentos comunes (pan, arroz, papa, agua, leche, café) y frases como "Tengo hambre" y "¿Quieres comer?".</p>
-                    </div>
-                    <div class="card-status">
-                        <div class="circle"></div>
-                    </div>
-                </div>
 
-                <div class="card">
-                    <div class="=card-image">
-                        <img src="" alt="animales">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('img/food&drinks.png')}}" alt="Alimentos y Bebidas">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="comida">Alimentos y Bebidas</h3>
+                            <p>Practicarás las señas de alimentos comunes (pan, arroz, papa, agua, leche, café) y frases
+                                como "Tengo hambre" y "¿Quieres comer?".</p>
+                        </div>
+                        <div class="card-status">
+                            <div class="circle"></div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <h3>Animales y Naturaleza</h3>
-                        <p>Aprenderás a señalar animales comunes (perro, gato, pájaro) y a describir su entorno natural (árbol, río, montaña).</p>
-                    </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/100x70/E0E0E0/808080?text=Imagen+4" alt="Salud y Emergencias">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('img/nature.png') }}" alt="Animales">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="animales">Animales y Naturaleza</h3>
+                            <p>Aprenderás a señalar animales comunes (perro, gato, pájaro) y a describir su entorno
+                                natural (árbol, río, montaña).</p>
+                        </div>
+                        <div class="card-status">
+                            <div class="circle"></div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <h3>Salud y Emergencias</h3>
-                        <p>Aprenderás a señalar síntomas básicos ("me duele", "fiebre", "cansado"), a expresar si tienes alguna alergia y reconocer lugares de atención médica ("hospital", "clínica").</p>
-                    </div>
-                    <div class="card-status">
-                        <div class="circle"></div>
-                    </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/100x70/E0E0E0/808080?text=Imagen+5" alt="Emociones y Estados de Ánimo">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('img/health.png') }}" alt="Salud y Emergencias">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="salud">Salud y Emergencias</h3>
+                            <p>Aprenderás a señalar síntomas básicos ("me duele", "fiebre", "cansado"), a expresar si
+                                tienes alguna alergia y reconocer lugares de atención médica ("hospital", "clínica").
+                            </p>
+                        </div>
+                        <div class="card-status">
+                            <div class="circle"></div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <h3>Emociones y Estados de Ánimo</h3>
-                        <p>Explorarás cómo expresar sentimientos como "feliz", "triste", "enojado", "nervioso", "cansado" y preguntas como "¿Cómo te sientes hoy?" o "¿Estás bien?", para poder expresar y entender estados emocionales en conversaciones.</p>
-                    </div>
-                    <div class="card-status">
-                        <div class="circle"></div>
-                    </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-image">
-                       <img src="" alt="Extra"> 
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('img/emotions.png') }}" alt="Emociones y Estados de Ánimo">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="emociones">Emociones y Estados de Ánimo</h3>
+                            <p>Explorarás cómo expresar sentimientos como "feliz", "triste", "enojado", "nervioso",
+                                "cansado" y preguntas como "¿Cómo te sientes hoy?" o "¿Estás bien?", para poder expresar
+                                y entender estados emocionales en conversaciones.</p>
+                        </div>
+                        <div class="card-status">
+                            <div class="circle"></div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <h3>Extra</h3>
-                        <p>Contenido adicional que puede incluir vocabulario, frases útiles o información cultural relevante.</p>
+
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('img/extrals.png') }}" alt="Extra">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="extraLs">Extra</h3>
+                            <p>Contenido adicional que puede incluir vocabulario, frases útiles o información cultural
+                                relevante.</p>
+                        </div>
+                        <div class="card-status">
+                            <div class="circle">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>@include('partials.footer')</footer>
-    <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // Example for progress bar animation
-    const progressBarInner = document.querySelector('.progress-bar-inner');
-    // You'd typically get the actual progress from backend data
-    const currentProgress = 60; // Example: 60% completion
-    progressBarInner.style.width = `${currentProgress}%`;
+            </section>
+        </main>
+        <footer>@include('partials.footer')</footer>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const ls_abcd = document.querySelector('.abecedario');
+                const ls_numeros = document.querySelector('.numeros');
+                const ls_saludos = document.querySelector('.saludos');
+                const ls_comida = document.querySelector('.comida');
+                const ls_animales = document.querySelector('.animales');
+                const ls_salud = document.querySelector('.salud');
+                const ls_emociones = document.querySelector('.emociones');
+                const ls_extra = document.querySelector('.extraLs');
 
-    // Example for card status (e.g., if completed, change circle color)
-    // You would loop through your cards and update their status based on data
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card, index) => {
-        // For demonstration, let's say the first two cards are 'completed'
-        if (index < 2) {
-            const statusCircle = card.querySelector('.card-status .circle');
-            statusCircle.style.backgroundColor = '#4CAF50'; // Green for completed
-            statusCircle.style.borderColor = '#4CAF50';
-        }
-    });
+                // Dirrecionar a la ruta de la lección
+                ls_abcd.addEventListener('click',()=>{
+                    window.location.href="{{ route('lecciones.abecedario') }}"
+                })
 
-    // You could also add event listeners for card clicks, etc.
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-            console.log('Card clicked!');
-            // Add navigation or specific action here
-        });
-    });
-});
-    </script>
-</body>
-</html>
+                const progressBarInner = document.querySelector('.progress-bar-inner');
+                const currentProgress = 20;
+                progressBarInner.style.width = `${currentProgress}%`;
+
+                const cards = document.querySelectorAll('.card');
+                cards.forEach((card, index) => {
+                    if (index < 0) {
+                        const statusCircle = card.querySelector('.card-status .circle');
+                        statusCircle.style.backgroundColor = '#4CAF50';
+                        statusCircle.style.borderColor = '#4CAF50';
+                    }
+                });
+
+                cards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        console.log('Card clicked!');
+                    });
+                });
+            });
+        </script>
+    </body>
+
+    </html>
 </body>
 
 </html>
