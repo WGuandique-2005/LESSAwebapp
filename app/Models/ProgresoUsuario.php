@@ -9,7 +9,8 @@ class ProgresoUsuario extends Model
     protected $fillable = [
         'usuario_id',
         'leccion_id',
-        'completado'
+        'completado',
+        'fecha_completada',
     ];
 
     public function usuario(){

@@ -10,8 +10,4 @@ class Nivel extends Model
         'nombre',
         'descripcion'
     ];
-
-    public function lecciones(){
-        return $this->hasMany(Leccion::class);
-    }
 }

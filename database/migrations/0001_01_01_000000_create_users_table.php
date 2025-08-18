@@ -42,6 +42,19 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        // Añadir un super usuario, que se cree desde un inicio para ver funcionalidades de la aplicación
+        DB::table('users')->insert([
+            'name' => 'admin',
+            'username' => 'admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('admin'),
+            'es_google_oauth' => false,
+            'oauth_id' => null,
+            'is_active' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     public function down(): void
