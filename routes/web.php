@@ -63,9 +63,10 @@ Route::middleware('auth')->group(function () {
     // Lecciones interactivas
     Route::get('/lecciones', [TaskController::class, 'lecciones'])->name('lecciones');
 
-    // Temas de las lecciones
+    // Temas de las lecciones:
     Route::get('/lecciones/abecedario',[LeccionesController::class, 'ls1_abecedario'])->name('lecciones.abecedario');
 
+    // Carruseles:
     Route::get('/carrusel/abecedario',[SenaImgController::class, 'index'])->name(('carrusel.abecedario'));
 
     // Ver perfil
