@@ -3,16 +3,45 @@
     $fullName = $user ? $user->name : '';
     $firstName = explode(' ', $fullName)[0] ?? '';
     $firstName = strtoupper($firstName);
+
+    // Cargamos señas
     $senas = json_decode(file_get_contents(storage_path('app/abecedario.json')), true);
+
+    // Descomponer el nombre en letras (mantiene repeticiones)
     $letrasNombre = preg_split('//u', $firstName, -1, PREG_SPLIT_NO_EMPTY);
-    $letrasUnicas = array_unique($letrasNombre);
+
+    // Conteo de repeticiones por letra
+    $conteoLetras = array_count_values($letrasNombre);
+
+    // Construimos la lista requerida respetando repetidos
+    $letrasRequeridas = [];
+    foreach ($conteoLetras as $letra => $cantidad) {
+        for ($i = 0; $i < $cantidad; $i++) {
+            $letrasRequeridas[] = $letra;
+        }
+    }
+
+    // Letras únicas del nombre (para calcular distractoras)
+    $letrasUnicas = array_keys($conteoLetras);
+
+    // Todas las letras disponibles desde el JSON de señas
     $todasLetras = array_column($senas, 'id');
-    $distractoras = array_diff($todasLetras, $letrasUnicas);
-    shuffle($distractoras);
-    $distractoras = array_slice($distractoras, 0, max(3, count($letrasUnicas)));
-    $letrasJuego = array_merge($letrasUnicas, $distractoras);
+
+    // Distractoras: letras que no están en el nombre (únicas)
+    $distractorasDisponibles = array_values(array_diff($todasLetras, $letrasUnicas));
+
+    // Barajar y elegir algunas distractoras (al menos 3 o igual a número de letras únicas)
+    shuffle($distractorasDisponibles);
+    $numDistractors = max(3, count($letrasUnicas));
+    $distractoras = array_slice($distractorasDisponibles, 0, $numDistractors);
+
+    // Construir el conjunto final: todas las letras requeridas (con repeticiones) + distractoras
+    $letrasJuego = array_merge($letrasRequeridas, $distractoras);
+
+    // Finalmente barajar las cartas para mostrar
     shuffle($letrasJuego);
 @endphp
+
 
 <div class="game-wrap">
     <div class="game-frame">
