@@ -16,4 +16,13 @@ class LeccionesController extends Controller
         }
         return view('lessons.ls1_abcd', compact('senas'));
     }
+
+    public function ls2_numeros(){
+        $jsonPath = storage_path('app/numeros.json');
+        $senas =[];
+        if (file_exists($jsonPath)){
+            $senas = json_decode(file_get_contents($jsonPath),true);
+        }
+        return view('lessons.ls2_nums', compact('senas'));
+    }
 }

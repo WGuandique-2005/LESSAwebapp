@@ -65,9 +65,12 @@ Route::middleware('auth')->group(function () {
 
     // Las lecciones:
     Route::get('/lecciones/abecedario',[LeccionesController::class, 'ls1_abecedario'])->name('lecciones.abecedario');
+    Route::get('/lecciones/numeros',[LeccionesController::class, 'ls2_numeros'])->name('lecciones.numeros');
+    
 
     // Los carruseles:
-    Route::get('/carrusel/abecedario',[SenaImgController::class, 'index'])->name(('carrusel.abecedario'));
+    Route::get('/carrusel/abecedario',[SenaImgController::class, 'abecedario'])->name(('carrusel.abecedario'));
+    Route::get('/carrusel/numeros',[SenaImgController::class, 'numeros'])->name(('carrusel.numeros'));
 
     // Videos educativos
     Route::get('/lecciones/videos', [TaskController::class, 'videos'])->name('lecciones.videos');

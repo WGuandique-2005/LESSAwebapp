@@ -7,7 +7,6 @@
     <title>LESSA - Modern Navbar</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* General Styles */
         :root {
             --primary-blue: #4A90E2;
             --light-blue: #6BB5FF;
@@ -62,12 +61,10 @@
             transform: scale(1.05);
         }
 
-        /* Container for menu-toggle and avatar for better control */
         .nav-right-icons {
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            /* Space between menu toggle and avatar on desktop */
         }
 
         .menu {
@@ -110,7 +107,6 @@
             position: relative;
             cursor: pointer;
             z-index: 1050;
-            /* Higher z-index for avatar and its dropdown */
         }
 
         .avatar {
@@ -168,16 +164,13 @@
             border-radius: 0;
         }
 
-        /* Mobile Menu (Hamburger) */
         .menu-toggle {
             display: none;
-            /* Hidden by default on desktop */
             flex-direction: column;
             cursor: pointer;
             gap: 6px;
             padding: 5px;
             z-index: 1060;
-            /* Higher than everything else if it overlaps with avatar */
         }
 
         .menu-toggle span {
@@ -188,7 +181,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Animation for hamburger to 'X' */
         .menu-toggle.open span:nth-child(1) {
             transform: translateY(9px) rotate(45deg);
         }
@@ -201,7 +193,6 @@
             transform: translateY(-9px) rotate(-45deg);
         }
 
-        /* Responsive Design */
         @media (max-width: 992px) {
             .menu {
                 gap: 1.5rem;
@@ -215,13 +206,10 @@
 
             .menu {
                 display: none;
-                /* Hidden by default in mobile */
                 flex-direction: column;
                 position: absolute;
                 top: 100%;
-                /* Directly below the navbar */
                 right: 10px;
-                /* Position relative to the right edge */
                 background-color: var(--primary-blue);
                 border-radius: 10px;
                 width: 220px;
@@ -233,7 +221,6 @@
                 transform: translateY(-10px);
                 transition: opacity 0.3s ease, transform 0.3s ease;
                 z-index: 1030;
-                /* Ensure mobile menu is below avatar dropdown (1040) but above content */
             }
 
             .menu.show {
@@ -263,27 +250,15 @@
                 /* Show hamburger in mobile */
             }
 
-            /* Adjust nav-right-icons for mobile to align items */
             .nav-right-icons {
                 gap: 1rem;
-                /* Smaller gap between hamburger and avatar on mobile */
             }
-
-            /* Avatar dropdown needs to be adjusted for mobile,
-               since it's still position: absolute and might be close to edge */
             .avatar-dropdown {
                 top: calc(100% + 15px);
-                /* Push it down a bit more */
                 right: 10px;
-                /* Ensure it's not flush with the edge */
             }
 
-            /* Hide desktop menu items that are inside the .menu when mobile menu is active */
             .menu.show~.menu a {
-                /* This selector is tricky and might not work as expected
-                                    if .menu is absolutely positioned and not affecting flow.
-                                    Better to just hide it directly.
-                                    The main menu is already display: none initially on mobile. */
             }
         }
 
@@ -348,13 +323,12 @@
     <script>
         const mainMenu = document.getElementById('mainMenu');
         const menuToggle = document.getElementById('menuToggle');
-        // Check if elements exist before getting them, as they depend on authentication state
         const avatarContainer = document.getElementById('avatarContainer');
         const avatarDropdown = document.getElementById('avatarDropdown');
 
         menuToggle.addEventListener('click', () => {
             mainMenu.classList.toggle('show');
-            menuToggle.classList.toggle('open'); // For hamburger animation
+            menuToggle.classList.toggle('open');
 
             if (avatarDropdown && avatarDropdown.classList.contains('show')) {
                 avatarDropdown.classList.remove('show');

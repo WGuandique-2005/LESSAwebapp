@@ -11,7 +11,7 @@
     <style>
         /* Variables CSS para una gestión de colores y espaciados más sencilla */
         :root {
-            --primary-color: #4CAF50;
+            --primary-color: #004AAD;
             /* Verde vibrante */
             --secondary-color: #2196F3;
             /* Azul para acentos */
@@ -166,13 +166,11 @@
             scroll-snap-align: start;
             box-sizing: border-box;
             max-width: 100%;
-            /* Ensure sections don't overflow */
         }
 
         .section-title {
             font-family: var(--font-family-heading);
             font-size: clamp(2em, 4vw, 3.2em);
-            /* Responsive font size */
             color: var(--primary-color);
             margin-bottom: 25px;
             font-weight: 800;
@@ -192,11 +190,11 @@
 
         /* Progress Bar - Gamification */
         .progress-bar-container {
+            display: flex;
             width: 90%;
             max-width: 700px;
             margin: 0 auto 30px auto;
             padding: 20px 0 10px;
-            /* Adjusted padding */
             position: sticky;
             top: 0;
             background: var(--background-light);
@@ -326,82 +324,25 @@
             .lesson-layout {
                 flex-direction: column;
                 min-height: auto;
-                /* Allows content to push height */
             }
 
-            .sidebar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                margin-top: 15%;
-                width: 100vw;
-                height: 60px;
-                padding: 0 20px;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-                transition: transform 0.3s ease-in-out;
-                /* Add transition for sidebar itself */
-                z-index: 102;
-            }
-
-            .sidebar h2 {
-                margin-bottom: 0;
-                font-size: 1.5em;
-            }
-
-            .sidebar ul {
-                display: flex;
-                /* Always display but control visibility with transform */
-                position: fixed;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: var(--sidebar-bg);
-                flex-direction: column;
-                padding: 10px 0;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-                height: calc(100vh - 60px);
-                overflow-y: auto;
-                transform: translateX(-100%);
-                /* Start hidden */
-                transition: transform 0.28s cubic-bezier(.2, .9, .1, 1);
-                gap: 2px;
-                align-items: center;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .sidebar ul.open {
-                transform: translateX(0);
-                /* Slide in */
-            }
-
-            .sidebar li {
-                width: 90%;
-                text-align: center;
-                border-left: none;
-                border-bottom: 2px solid transparent;
-            }
-
-            .sidebar li:hover,
-            .sidebar li.active {
-                border-left: none;
-                border-bottom-color: var(--sidebar-active);
-            }
-
-            .hamburger {
-                display: block;
-                /* Show hamburger on mobile */
+            .sidebar,
+            .hamburger,
+            .mobile-backdrop {
+                display: none !important;
             }
 
             .main-content {
-                margin-top: 10px;
+                margin-top: 0;
                 height: auto;
                 min-height: calc(100vh - 60px);
                 scroll-snap-type: none;
-                padding: 15px 0;
+                padding: 0;
                 overflow-y: auto;
+            }
+
+            .progress-bar-container {
+                display: none;
             }
 
             section {
@@ -411,9 +352,8 @@
                 box-shadow: none;
                 border-bottom: 1px solid #e0e4ea;
             }
-
+            
             section:last-of-type {
-                /* Remove border for the last section */
                 border-bottom: none;
             }
 
@@ -425,15 +365,6 @@
             .section-desc {
                 font-size: clamp(0.9em, 2.5vw, 1em);
                 margin-bottom: 20px;
-            }
-
-            .progress-bar-container {
-                padding-top: 10px;
-                margin-bottom: 15px;
-            }
-
-            .progress-bar {
-                height: 18px;
             }
 
             .badge {
@@ -449,7 +380,6 @@
             .carousel-slide img {
                 max-width: 90%;
                 max-height: 30vh;
-                /* Adjust for smaller screens */
             }
 
             .carousel-slide h3 {
@@ -554,7 +484,6 @@
             </section>
         </div>
     </div>
-    <footer>@include('partials.footer')</footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const mainContent = document.getElementById('mainContent');
@@ -596,13 +525,11 @@
                 }
             };
 
-            // --- Funcionalidad del Menú Lateral Activo (más robusta) ---
             const updateSidebarActive = () => {
                 let currentActiveSectionId = '';
                 const containerRect = mainContent.getBoundingClientRect();
                 sections.forEach(section => {
                     const rect = section.getBoundingClientRect();
-                    // consideramos la sección activa si su top está dentro del 30% superior del contenedor
                     const relativeTop = rect.top - containerRect.top;
                     if (relativeTop <= (mainContent.clientHeight * 0.25) && (relativeTop + rect.height) > 0) {
                         currentActiveSectionId = section.id;
@@ -631,18 +558,15 @@
 
             // --- Navegación Suave al Hacer Clic en el Sidebar ---
             sidebarLinks.forEach(link => {
-                // click
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetSectionId = link.dataset.section;
-                    // cerrar menu movil si está abierto
                     if (sidebarMenu.classList.contains('open')) {
                         sidebarMenu.classList.remove('open');
                         hamburger.setAttribute('aria-expanded', 'false');
                         mobileBackdrop.classList.remove('open');
                         mobileBackdrop.setAttribute('aria-hidden', 'true');
                     }
-                    // Small timeout to allow menu close animation on mobile, still perform scroll immediately
                     setTimeout(() => scrollToSection(targetSectionId), 60);
                 });
 
@@ -677,7 +601,6 @@
                 }
             });
 
-            // cerrar menu al tocar el backdrop
             mobileBackdrop.addEventListener('click', () => {
                 closeMobileMenu();
             });
@@ -687,15 +610,13 @@
             mainContent.addEventListener('scroll', () => {
                 updateProgressBar();
                 updateSidebarActive();
-            }, { passive: true }); // passive para mejor performance en móviles
+            }, { passive: true });
 
-            // Se ejecuta al cargar la página para establecer el estado inicial
             window.addEventListener('load', () => {
                 updateProgressBar();
                 updateSidebarActive();
             });
 
-            // Ensure updates on resize for both progress and sidebar
             window.addEventListener('resize', () => {
                 updateProgressBar();
                 updateSidebarActive();
