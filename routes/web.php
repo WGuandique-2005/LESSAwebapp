@@ -69,6 +69,9 @@ Route::middleware('auth')->group(function () {
     // Los carruseles:
     Route::get('/carrusel/abecedario',[SenaImgController::class, 'index'])->name(('carrusel.abecedario'));
 
+    // Videos educativos
+    Route::get('/lecciones/videos', [TaskController::class, 'videos'])->name('lecciones.videos');
+
     // Ver perfil
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
 

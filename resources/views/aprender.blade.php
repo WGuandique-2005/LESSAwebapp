@@ -342,7 +342,7 @@
                                     comprendes cada seña y su contexto de uso.</p>
                             </div>
                         </div>
-                        <div class="learn-card">
+                        <div class="learn-card goToVideos" style="cursos:pointer;">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/videos.png') }}" alt="Ilustración de videos educativos" class="card-image">
                             </div>
@@ -364,6 +364,11 @@
             const goToLessons = document.querySelector('.goToLessons');
             goToLessons.addEventListener('click', function(){
                 window,location.href = "{{  route('lecciones') }}"
+            })
+
+            const goToVideos = document.querySelector('.goToVideos')
+            goToVideos.addEventListener('click', function(){
+                window.location.href = "{{ route('lecciones.videos') }}"
             })
         })
     </script>

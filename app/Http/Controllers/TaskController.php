@@ -29,4 +29,8 @@ class TaskController extends Controller
     public function lecciones(){
         return view('lsIntcvs');
     }
+
+    public function videos(){
+        return view(('lessons.Evideos'));
+    }
 }
