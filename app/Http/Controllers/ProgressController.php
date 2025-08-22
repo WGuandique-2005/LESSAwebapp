@@ -7,8 +7,10 @@ use App\Models\ProgresoUsuario;
 
 class ProgressController extends Controller
 {
-    public function ls1_complete(){
-        try{
+    public function ls1_complete(Request $request)
+    {
+
+        try {
             $userId = auth()->id();
             $leccionId = 1; // ID de la lección de abecedario
             $fechaCompletado = now();
@@ -28,7 +30,7 @@ class ProgressController extends Controller
                 'fecha_completada' => $fechaCompletado,
             ]);
             return redirect()->route('lecciones')->with('success', 'Lección completada exitosamente');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             // Manejo de errores
             return redirect()->route('lecciones')->withErrors(['error' => 'Error al completar la lección']);
         }

@@ -26,6 +26,6 @@ class SenaImgController extends Controller
         return view('carrusel.numeros', compact('senas'));
     }
         public function deletra_nombre(){
-            return view('minijuegos.MJ_nombre');
+            return view('test.abecedario');
         }
 }

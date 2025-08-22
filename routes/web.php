@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function () {
     // Las lecciones:
     Route::get('/lecciones/abecedario',[LeccionesController::class, 'ls1_abecedario'])->name('lecciones.abecedario');
     Route::post('/lecciones/abecedario/complete', [ProgressController::class, 'ls1_complete'])->name('lecciones.abecedario.complete');
+    Route::get('/lecciones/abecedario/test', [SenaImgController::class, 'deletra_nombre'])->name('ls1_abecedario_test');
+    
     Route::get('/lecciones/numeros',[LeccionesController::class, 'ls2_numeros'])->name('lecciones.numeros');
     
 
@@ -75,8 +77,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/carrusel/numeros',[SenaImgController::class, 'numeros'])->name(('carrusel.numeros'));
 
     // Mini juegos
-    Route::get('/lecciones/abecedario/test', [SenaImgController::class, 'deletra_nombre'])->name('ls1_abecedario_test');
-
     // Videos educativos
     Route::get('/lecciones/videos', [TaskController::class, 'videos'])->name('lecciones.videos');
 
