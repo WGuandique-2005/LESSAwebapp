@@ -105,9 +105,7 @@
     </div>
 </div>
 
-<!-- (styles same as before) -->
 <style>
-    /* (copia tus estilos anteriores aquí tal cual) */
     :root {
         --bg: #f5f8fb;
         --card: #ffffff;
@@ -412,7 +410,7 @@
         color: var(--muted);
     }
 
-    @media (max-width: 520px) {
+    @media (max-width: 720px) {
         .game-frame {
             max-width: 420px;
         }
