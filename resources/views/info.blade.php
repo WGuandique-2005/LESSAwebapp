@@ -449,8 +449,8 @@
                         <p>Videos educativos</p>
                     </div>
                 </div>
-                <div class="btn-info">
-                    <a href="#" class="btn btn-primary">Ver sección -></a>
+                <div class="btn-info" style="cursor: pointer;">
+                    <a href="{{ route('lecciones') }}" class="btn btn-primary">Ver sección -></a>
                 </div>
             </div>
         </section>

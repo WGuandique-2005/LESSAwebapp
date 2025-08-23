@@ -70,7 +70,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/lecciones/abecedario/complete', [ProgressController::class, 'ls1_complete'])->name('lecciones.abecedario.complete');
     
     Route::get('/lecciones/numeros',[LeccionesController::class, 'ls2_numeros'])->name('lecciones.numeros');
-    
+    Route::get('/lecciones/numeros/test', [SenaImgController::class, 'conecta_numeros'])->name('ls2_numeros_test');
+    Route::post('/lecciones/numeros/complete', [ProgressController::class, 'ls2_complete'])->name('lecciones.numeros.complete');
 
     // Los carruseles:
     Route::get('/carrusel/abecedario',[SenaImgController::class, 'abecedario'])->name(('carrusel.abecedario'));

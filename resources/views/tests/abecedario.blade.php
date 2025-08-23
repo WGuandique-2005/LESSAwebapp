@@ -41,6 +41,7 @@
     // Finalmente barajar las cartas para mostrar
     shuffle($letrasJuego);
 @endphp
+<head><title>Abecedario: Test</title></head>
 @include('partials.navbar')
 <div class="game-wrap">
     <div class="game-frame">

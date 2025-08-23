@@ -478,7 +478,7 @@
                     y desbloquear nuevos niveles en tu camino para dominar LESSA. Cada seña aprendida te acerca más a
                     una comunicación inclusiva y significativa.
                 </div>
-                <span class="badge goToTest">¡Vamos a practicar!</span>
+                <span class="badge goToTest" style="cursor: pointer;">¡Vamos a practicar!</span>
                 <div class="motivational" id="motivationalMsg">¡Tú puedes lograrlo! Completa los ejercicios para ganar
                     más insignias.</div>
             </section>

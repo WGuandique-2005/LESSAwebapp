@@ -478,7 +478,7 @@
                     para obtener insignias y desbloquear nuevos niveles. Cada número aprendido mejora tu capacidad de
                     comunicar cantidades con fluidez.
                 </div>
-                <span class="badge">¡Contador Pro!</span>
+                <span class="badge goToTest" style="cursor: pointer;">¡Vamos a practicar!</span>
                 <div class="motivational" id="motivationalMsg">¡Tú puedes lograrlo! Practica los números para ganar más insignias.</div>
             </section>
         </div>
@@ -514,13 +514,13 @@
 
                 // Mensajes motivacionales basados en el progreso
                 if (percent < 25) {
-                    motivationalMsg.textContent = '¡Sigue practicando los números! Cada seña te acerca a la fluidez. ✨';
+                    motivationalMsg.textContent = '¡Sigue explorando! Cada seña te acerca a un mundo nuevo. ✨';
                 } else if (percent < 50) {
-                    motivationalMsg.textContent = '¡Vas muy bien con los números! Sigue así. 💪';
+                    motivationalMsg.textContent = '¡Vas muy bien! Tu dedicación se nota. ¡No te rindas! 💪';
                 } else if (percent < 75) {
-                    motivationalMsg.textContent = '¡Casi lo tienes! Unos movimientos más y dominas la lección. 🎉';
+                    motivationalMsg.textContent = '¡Ya casi terminas! Estás a un paso de dominar el abecedario. 🎉';
                 } else {
-                    motivationalMsg.textContent = '¡Excelente! Has completado la lección de números. ¡Eres un campeón! 🏆';
+                    motivationalMsg.textContent = '¡Excelente! Has completado la lección del abecedario. ¡Eres un campeón! 🏆';
                 }
             };
 
@@ -628,6 +628,11 @@
                     scrollToSection(idFromHash);
                 }, 120);
             }
+
+            const goToTest = document.querySelector('.goToTest');
+            goToTest.addEventListener('click', () => {
+                window.location.href = '/lecciones/numeros/test';
+            });
         });
     </script>
 </body>
