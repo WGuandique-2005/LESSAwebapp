@@ -26,6 +26,18 @@ class SenaImgController extends Controller
         }
         return view('carrusel.numeros', compact('senas'));
     }
+
+    public function saludos()
+    {
+        $jsonPath = storage_path('app/saludos.json');
+        $senas = [];
+        if (file_exists($jsonPath)) {
+            $senas = json_decode(file_get_contents($jsonPath), true);
+        }
+        return view('carrusel.saludos', compact('senas'));
+    }
+
+    // Actividades de practica de las lecciones:
     public function deletra_nombre()
     {
         return view('tests.abecedario');
@@ -33,5 +45,9 @@ class SenaImgController extends Controller
 
     public function conecta_numeros(){
         return view('tests.numeros');
+    }
+
+    public function memorama_saludos(){
+        return view('tests.saludos');
     }
 }
