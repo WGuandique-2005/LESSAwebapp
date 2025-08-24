@@ -474,12 +474,12 @@
                 </div>
 
                 <div class="cards-container">
-                    <div class="card">
+                    <div class="card abecedario" style="cursor: pointer;">
                         <div class="card-image">
                             <img src="{{ asset('img/abcd.png') }}" alt="Vocabulario del Hogar y la Familia">
                         </div>
                         <div class="card-content">
-                            <h3 class="abecedario">Abecedario</h3>
+                            <h3>Abecedario</h3>
                             <p>Aprenderás las letras del abecedario para poder por ejemplo deletrar tu nombre, siglas u
                                 otros usos que descubriras.</p>
                         </div>
@@ -488,12 +488,12 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card numeros" style="cursor: pointer;">
                         <div class="card-image">
                             <img src="{{ asset('img/numbers.png') }}" alt="Vocabulario del Hogar y la Familia">
                         </div>
                         <div class="card-content">
-                            <h3 class="numeros">Números</h3>
+                            <h3>Números</h3>
                             <p>Aprenderás los números del 1 al 100, cantidades más grandes, así como a contar objetos y
                                 a hacer preguntas simples sobre cantidades.</p>
                         </div>
@@ -605,6 +605,9 @@
                 // Dirrecionar a la ruta de la lección
                 ls_abcd.addEventListener('click',()=>{
                     window.location.href="{{ route('lecciones.abecedario') }}"
+                })
+                ls_numeros.addEventListener('click',()=>{
+                    window.location.href="{{ route(('lecciones.numeros')) }}"
                 })
 
                 const progressBarInner = document.querySelector('.progress-bar-inner');

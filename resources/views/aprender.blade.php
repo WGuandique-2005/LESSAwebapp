@@ -331,18 +331,18 @@
                                     definición, contexto de uso y sinónimos.</p>
                             </div>
                         </div>
-                        <div class="learn-card">
+                        <div class="learn-card goToLessons" style="cursor: pointer;">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/lecciones.png') }}" alt="Ilustración de lecciones organizadas" class="card-image">
                             </div>
-                            <div class="card-content goToLessons" >
+                            <div class="card-content" >
                                 <h3>Lecciones Interactivas</h3>
                                 <p>Accede a módulos organizados por niveles de dificultad. Cada lección contiene una
                                     mezcla de teoría, práctica visual y contenido interactivo para asegurar que
                                     comprendes cada seña y su contexto de uso.</p>
                             </div>
                         </div>
-                        <div class="learn-card goToVideos" style="cursos:pointer;">
+                        <div class="learn-card goToVideos" style="cursor: pointer;">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/videos.png') }}" alt="Ilustración de videos educativos" class="card-image">
                             </div>

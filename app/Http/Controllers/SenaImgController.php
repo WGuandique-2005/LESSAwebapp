@@ -17,15 +17,21 @@ class SenaImgController extends Controller
         return view('carrusel.abecedario', compact('senas'));
     }
 
-        public function numeros(){
+    public function numeros()
+    {
         $jsonPath = storage_path('app/numeros.json');
-        $senas =[];
-        if (file_exists($jsonPath)){
-            $senas = json_decode(file_get_contents($jsonPath),true);
+        $senas = [];
+        if (file_exists($jsonPath)) {
+            $senas = json_decode(file_get_contents($jsonPath), true);
         }
         return view('carrusel.numeros', compact('senas'));
     }
-        public function deletra_nombre(){
-            return view('minijuegos.MJ_nombre');
-        }
+    public function deletra_nombre()
+    {
+        return view('tests.abecedario');
+    }
+
+    public function conecta_numeros(){
+        return view('tests.numeros');
+    }
 }

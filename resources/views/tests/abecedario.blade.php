@@ -41,8 +41,8 @@
     // Finalmente barajar las cartas para mostrar
     shuffle($letrasJuego);
 @endphp
-
-
+<head><title>Abecedario: Test</title></head>
+@include('partials.navbar')
 <div class="game-wrap">
     <div class="game-frame">
         <header class="game-header">
@@ -104,10 +104,8 @@
         </div>
     </div>
 </div>
-
-<!-- (styles same as before) -->
+@include('partials.footer')
 <style>
-    /* (copia tus estilos anteriores aquí tal cual) */
     :root {
         --bg: #f5f8fb;
         --card: #ffffff;
@@ -121,23 +119,32 @@
         --shadow-soft: 0 8px 24px rgba(12, 24, 60, 0.06);
     }
 
+    /* Reset mobile */
+    html, body {
+        height: 100%;
+        margin: 0;
+        background: linear-gradient(180deg, var(--bg), #ffffff);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
     .game-wrap {
-        min-height: calc(100vh - 80px);
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
-        background: linear-gradient(180deg, var(--bg), #ffffff);
+        padding: 18px;
+        box-sizing: border-box;
         font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
     .game-frame {
-        width: 100%;
-        max-width: 760px;
+        width: min(760px, 96vw);
         display: flex;
         flex-direction: column;
         gap: 14px;
         align-items: stretch;
+        margin: 0 auto;
+        box-sizing: border-box;
     }
 
     .game-header {
@@ -145,8 +152,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        padding: 8px 12px;
-        margin-bottom: -6px;
+        padding: 6px 10px;
     }
 
     .title {
@@ -154,7 +160,6 @@
         margin: 0;
         color: #0f172a;
         font-weight: 700;
-        letter-spacing: 0.02em;
     }
 
     .subtitle {
@@ -163,11 +168,7 @@
         color: var(--muted);
     }
 
-    .target-name {
-        color: var(--accent);
-        font-weight: 800;
-        letter-spacing: .08em;
-    }
+    .target-name { color: var(--accent); font-weight: 800; letter-spacing: .06em; }
 
     .progress-pill {
         position: relative;
@@ -196,240 +197,155 @@
         opacity: 0.98;
     }
 
-    .progress-label {
-        position: relative;
-        z-index: 2;
-        font-size: 0.8rem;
-        color: #04203b;
-        font-weight: 700;
-        letter-spacing: .02em;
-    }
+    .progress-label { position: relative; z-index: 2; font-size: 0.8rem; color: #04203b; font-weight:700; }
 
     .compact-card {
         background: var(--card);
         border-radius: var(--radius);
         box-shadow: var(--shadow-soft);
-        border: 1px solid rgba(13, 27, 62, 0.04);
+        border: 1px solid rgba(13,27,62,0.04);
         overflow: hidden;
     }
 
-    .card-body {
-        padding: 14px;
-    }
+    .card-body { padding: 14px; box-sizing: border-box; }
 
-    .target-row {
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-    }
+    .target-row { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom: 10px; }
 
     .letra-box {
         min-width: 36px;
         min-height: 36px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 6px 10px;
-        border-radius: 10px;
-        background: linear-gradient(180deg, #f1f8ff, #ffffff);
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:6px 10px;
+        border-radius:10px;
+        background: linear-gradient(180deg,#f1f8ff,#ffffff);
         color: var(--accent);
-        font-weight: 800;
-        box-shadow: 0 6px 18px rgba(7, 34, 102, 0.04);
-        font-size: 0.98rem;
+        font-weight:800;
+        font-size:0.98rem;
+        box-shadow: 0 6px 18px rgba(7,34,102,0.04);
     }
 
+    /* GRID: default desktop */
     .sena-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-        gap: 10px;
-        align-items: start;
+        display:grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
         margin: 6px 0 12px;
+        align-items: start;
     }
 
     .sena-card {
-        --pad: 8px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
-        padding: var(--pad);
-        background: linear-gradient(180deg, #ffffff, #fbfdff);
-        border-radius: 10px;
-        border: 1px solid rgba(10, 25, 60, 0.04);
-        box-shadow: 0 8px 18px rgba(8, 20, 45, 0.03);
-        cursor: pointer;
-        transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-        text-decoration: none;
-        color: inherit;
-        outline: none;
-        user-select: none;
-        height: 158px;
-        justify-content: space-between;
-    }
-
-    .sena-card:hover,
-    .sena-card:focus {
-        transform: translateY(-4px);
-        box-shadow: 0 14px 36px rgba(8, 20, 45, 0.06);
-        border-color: rgba(10, 100, 255, 0.08);
-    }
-
-    .sena-media {
-        display: flex;
-        align-items: center;
+        position: relative;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        padding:10px;
+        background: linear-gradient(180deg,#fff,#fbfdff);
+        border-radius:10px;
+        border:1px solid rgba(10,25,60,0.04);
+        box-shadow:0 8px 18px rgba(8,20,45,0.03);
+        cursor:pointer;
+        transition: transform .14s ease, box-shadow .14s ease;
+        min-height: 150px;
         justify-content: center;
-        width: 100%;
-        height: 100%;
+        text-align: center;
     }
+
+    .sena-card:hover, .sena-card:focus { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(8,20,45,0.06); }
+
+    .sena-media { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
 
     .sena-img {
         width: 92px;
         height: 92px;
         object-fit: contain;
-        border-radius: 8px;
-        pointer-events: none;
-        background: linear-gradient(180deg, #fff, #f7fbff);
-        border: 1px solid rgba(10, 25, 60, 0.03);
+        border-radius:8px;
+        background: linear-gradient(180deg,#fff,#f7fbff);
+        border:1px solid rgba(10,25,60,0.03);
+        pointer-events:none;
     }
 
     .order-badge {
-        position: absolute;
-        top: 6px;
-        right: 6px;
-        min-width: 26px;
-        min-height: 26px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        position:absolute;
+        top:8px;
+        right:8px;
+        min-width:28px;
+        min-height:28px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
         background: transparent;
-        color: #fff;
-        font-weight: 700;
-        font-size: 0.82rem;
-        border-radius: 50%;
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+        color:#fff;
+        font-weight:700;
+        font-size:0.88rem;
+        border-radius:50%;
+        box-shadow:0 6px 14px rgba(0,0,0,0.08);
         transition: all .18s ease;
     }
 
-    .sena-card.acertado {
-        background: #f2fbf4;
-        border-color: rgba(22, 163, 74, 0.12);
-    }
+    .sena-card.acertado { background:#f2fbf4; border-color: rgba(22,163,74,0.12); }
+    .order-badge.acertado { background: var(--success); color:#fff; }
+    .sena-card.incorrecto { background:#fff6f7; border-color: rgba(239,68,68,0.12); animation: shake .36s; }
+    .order-badge.incorrecto { background: var(--danger); color:#fff; }
 
-    .order-badge.acertado {
-        background: var(--success);
-        color: #fff;
-    }
+    @keyframes shake { 0%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}100%{transform:translateX(0)} }
 
-    .sena-card.incorrecto {
-        background: #fff6f7;
-        border-color: rgba(239, 68, 68, 0.12);
-        animation: shake .36s;
-    }
-
-    .order-badge.incorrecto {
-        background: var(--danger);
-        color: #fff;
-    }
-
-    @keyframes shake {
-        0% {
-            transform: translateX(0)
-        }
-
-        20% {
-            transform: translateX(-6px)
-        }
-
-        40% {
-            transform: translateX(6px)
-        }
-
-        60% {
-            transform: translateX(-4px)
-        }
-
-        80% {
-            transform: translateX(4px)
-        }
-
-        100% {
-            transform: translateX(0)
-        }
-    }
-
-    .actions-row {
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-        align-items: center;
-        margin-top: 8px;
-        flex-wrap: wrap;
-    }
+    .actions-row { display:flex; gap:8px; justify-content:center; align-items:center; margin-top:8px; flex-wrap:wrap; }
 
     .btn-ghost {
-        background: transparent;
-        border: 1px solid rgba(10, 25, 60, 0.06);
-        color: #0b254a;
-        padding: 8px 10px;
-        border-radius: 10px;
-        font-weight: 700;
-        font-size: 0.9rem;
-        cursor: pointer;
+        background:transparent;
+        border:1px solid rgba(10,25,60,0.06);
+        color:#0b254a;
+        padding:8px 10px;
+        border-radius:10px;
+        font-weight:700;
+        cursor:pointer;
     }
-
-    .btn-ghost:hover {
-        background: rgba(10, 25, 60, 0.03);
-        transform: translateY(-2px);
-    }
-
     .btn-primary {
-        background: linear-gradient(90deg, var(--accent), var(--accent-2));
-        color: #fff;
-        border: none;
-        padding: 8px 12px;
-        border-radius: 10px;
-        font-weight: 800;
-        cursor: pointer;
-        box-shadow: 0 8px 24px rgba(10, 95, 255, 0.12);
+        background: linear-gradient(90deg,var(--accent),var(--accent-2));
+        color:#fff;
+        border:none;
+        padding:8px 12px;
+        border-radius:10px;
+        font-weight:800;
+        cursor:pointer;
+    }
+    .btn-primary[disabled], .btn-primary[aria-disabled="true"] { opacity:.6; cursor:not-allowed; }
+
+    #mensaje { min-height:22px; text-align:center; margin-top:6px; font-weight:700; color:var(--muted); }
+
+    /* -------- Responsive breakpoints -------- */
+    /* tablet */
+    @media (max-width: 1024px) {
+        .sena-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .sena-img { width: 84px; height: 84px; }
+        .game-frame { width: min(720px, 96vw); }
     }
 
-    .btn-primary[disabled],
-    .btn-primary[aria-disabled="true"] {
-        opacity: 0.6;
-        cursor: not-allowed;
-        filter: grayscale(10%);
-        box-shadow: none;
-        transform: none;
+    /* mobile */
+    @media (max-width: 720px) {
+        .game-wrap { align-items: flex-start; padding: 14px; }
+        .game-frame { margin-top: 4vh; width: min(720px, 96vw); }
+        .compact-card { border-radius: 10px; }
+        .sena-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .sena-card { min-height: 120px; padding: 8px; }
+        .sena-img { width: 72px; height: 72px; }
+        .letra-box { min-width: 34px; min-height: 34px; font-size: 0.96rem; }
+        .progress-pill { width: 100px; height: 26px; }
+        .actions-row { gap: 6px; }
+        /* make buttons easier to tap: stack when narrow */
+        .actions-row button { flex: 1 1 auto; min-width: 0; }
+        .title { font-size: 1rem; }
     }
 
-    #mensaje {
-        min-height: 22px;
-        text-align: center;
-        margin-top: 6px;
-        font-weight: 700;
-        color: var(--muted);
-    }
-
-    @media (max-width: 520px) {
-        .game-frame {
-            max-width: 420px;
-        }
-
-        .sena-card {
-            height: 148px;
-        }
-
-        .sena-img {
-            width: 82px;
-            height: 82px;
-        }
-
-        .progress-pill {
-            width: 100px;
-            height: 26px;
-        }
+    /* very small phones */
+    @media (max-width: 420px) {
+        .sena-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .sena-card { min-height: 112px; }
+        .sena-img { width: 64px; height: 64px; }
+        .progress-pill { width: 90px; height: 24px; }
+        .game-frame { margin-top: 3vh; }
     }
 </style>
 
@@ -462,7 +378,6 @@
             progressBar.setAttribute('aria-valuenow', percent);
             progressLabel.textContent = percent + '%';
 
-            // habilitar / deshabilitar el botón Completar
             if (actual === total) {
                 btnComplete.disabled = false;
                 btnComplete.setAttribute('aria-disabled', 'false');
@@ -528,47 +443,26 @@
                 actual++;
                 updateProgress();
                 mensajeEl.innerHTML = '';
-                if (actual === total) {
-                    setTimeout(showSuccess, 180);
-                }
+                if (actual === total) setTimeout(showSuccess, 180);
             } else {
                 card.classList.add('incorrecto');
                 const badge = card.querySelector('.order-badge');
                 badge.textContent = '✕';
                 badge.classList.add('incorrecto');
                 showTemporaryError('¡Ups! Seleccionaste una seña incorrecta. Reiniciando...');
-                setTimeout(() => {
-                    resetAttempt();
-                    mensajeEl.innerHTML = '';
-                }, 700);
+                setTimeout(() => { resetAttempt(); mensajeEl.innerHTML = ''; }, 700);
             }
         }
 
         cards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                e.preventDefault();
-                handleSelect(card);
-            });
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleSelect(card);
-                }
-            });
+            card.addEventListener('click', (e) => { e.preventDefault(); handleSelect(card); });
+            card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleSelect(card); }});
             card.setAttribute('tabindex', '0');
-            card.addEventListener('touchstart', () => {
-                card.classList.add('touched');
-                setTimeout(() => card.classList.remove('touched'), 200);
-            });
+            card.addEventListener('touchstart', () => { card.classList.add('touched'); setTimeout(() => card.classList.remove('touched'), 200); });
         });
 
-        btnReset.addEventListener('click', () => {
-            resetAttempt();
-            mensajeEl.innerHTML = '<span style="color:var(--muted)">Intento reiniciado.</span>';
-        });
-        btnReveal.addEventListener('click', () => {
-            revealAnswer();
-        });
+        btnReset.addEventListener('click', () => { resetAttempt(); mensajeEl.innerHTML = '<span style="color:var(--muted)">Intento reiniciado.</span>'; });
+        btnReveal.addEventListener('click', () => { revealAnswer(); });
         btnHint.addEventListener('click', () => {
             const next = targetSeq[actual];
             if (!next) return;
@@ -585,16 +479,14 @@
             if (actual === total) showSuccess();
         });
 
-        // prevenir submit si no está completo (verificación extra en cliente)
         completeForm.addEventListener('submit', (e) => {
             if (actual !== total) {
                 e.preventDefault();
                 mensajeEl.innerHTML = '<span style="color:var(--danger)">No puedes completar la lección hasta deletrear correctamente.</span>';
-                // breve enfoque visual
-                window.scrollTo({ top: (document.querySelector('.game-wrap').offsetTop - 30), behavior: 'smooth' });
+                const y = Math.max(0, document.querySelector('.game-wrap').offsetTop - 20);
+                window.scrollTo({ top: y, behavior: 'smooth' });
                 return false;
             }
-            // Si llega aquí, el formulario se enviará. Recomendado: validar también en servidor.
         });
 
         // init
