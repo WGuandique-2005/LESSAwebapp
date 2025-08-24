@@ -25,4 +25,13 @@ class LeccionesController extends Controller
         }
         return view('lessons.ls2_nums', compact('senas'));
     }
+
+    public function ls3_saludos(){
+        $jsonPath = storage_path('app/saludos.json');
+        $senas =[];
+        if(file_exists($jsonPath)){
+            $senas = json_decode(file_get_contents($jsonPath), true);
+        }
+        return view('lessons.ls3_saludos', compact('senas'));
+    }
 }

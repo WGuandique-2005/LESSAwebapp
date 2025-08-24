@@ -73,9 +73,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/lecciones/numeros/test', [SenaImgController::class, 'conecta_numeros'])->name('ls2_numeros_test');
     Route::post('/lecciones/numeros/complete', [ProgressController::class, 'ls2_complete'])->name('lecciones.numeros.complete');
 
+    Route::get('/lecciones/saludos',[LeccionesController::class, 'ls3_saludos'])->name('lecciones.saludos');
+    Route::get('/lecciones/saludos/test', [SenaImgController::class, 'memorama_saludos'])->name('ls3_saludos_test');
+    Route::post('/lecciones/saludos/complete', [ProgressController::class, 'ls3_complete'])->name('lecciones.saludos.complete');
+
     // Los carruseles:
     Route::get('/carrusel/abecedario',[SenaImgController::class, 'abecedario'])->name(('carrusel.abecedario'));
     Route::get('/carrusel/numeros',[SenaImgController::class, 'numeros'])->name(('carrusel.numeros'));
+    Route::get('/carrusel/saludos',[SenaImgController::class, 'saludos'])->name(('carrusel.saludos'));
 
     // Mini juegos
     // Videos educativos
