@@ -518,9 +518,9 @@
                 } else if (percent < 50) {
                     motivationalMsg.textContent = '¡Vas muy bien! Tu dedicación se nota. ¡No te rindas! 💪';
                 } else if (percent < 75) {
-                    motivationalMsg.textContent = '¡Ya casi terminas! Estás a un paso de dominar el abecedario. 🎉';
+                    motivationalMsg.textContent = '¡Ya casi terminas! Estás a un paso de dominar los numeros. 🎉';
                 } else {
-                    motivationalMsg.textContent = '¡Excelente! Has completado la lección del abecedario. ¡Eres un campeón! 🏆';
+                    motivationalMsg.textContent = '¡Excelente! Has completado la lección de los numeros. ¡Eres un campeón! 🏆';
                 }
             };
 
