@@ -10,7 +10,7 @@
     }, $numerosJuego);
     shuffle($significados);
 @endphp
-
+<head><title>Números: Test</title></head>
 @include('partials.navbar')
 
 <div class="game-wrap">

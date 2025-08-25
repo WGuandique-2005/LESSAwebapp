@@ -502,7 +502,7 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card saludos" style="cursor: pointer;">
                         <div class="card-image">
                             <img src="{{ asset('img/saludos.png') }}" alt="Saludos y Presentaciones">
                         </div>
@@ -609,6 +609,9 @@
                 ls_numeros.addEventListener('click',()=>{
                     window.location.href="{{ route(('lecciones.numeros')) }}"
                 })
+                ls_saludos.addEventListener('click',()=>{
+                    window.location.href="{{ route('lecciones.saludos') }}"
+                })
 
                 const progressBarInner = document.querySelector('.progress-bar-inner');
                 const currentProgress = {{ $progresoPorcentaje }};
@@ -616,7 +619,7 @@
 
                 const cards = document.querySelectorAll('.card');
                 cards.forEach((card, index) => {
-                    if (index < 0) {
+                    if (index < 3) {
                         const statusCircle = card.querySelector('.card-status .circle');
                         statusCircle.style.backgroundColor = '#4CAF50';
                         statusCircle.style.borderColor = '#4CAF50';

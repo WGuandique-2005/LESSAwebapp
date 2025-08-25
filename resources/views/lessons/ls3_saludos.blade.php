@@ -474,7 +474,7 @@
                     el significado.
                 </div>
                 <div class="include-carrusel">
-                    @include('carrusel.numeros')
+                    @include('carrusel.saludos')
                 </div>
                 <span class="badge">¡Visión Inclusiva!</span>
             </section>

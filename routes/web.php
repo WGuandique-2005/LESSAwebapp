@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
-use App\Http\Controllers\SenaImgController;
 use App\Http\Controllers\ProgressController;
 /*
 |----------------------------------
@@ -66,23 +65,20 @@ Route::middleware('auth')->group(function () {
 
     // Las lecciones:
     Route::get('/lecciones/abecedario',[LeccionesController::class, 'ls1_abecedario'])->name('lecciones.abecedario');
-    Route::get('/lecciones/abecedario/test', [SenaImgController::class, 'deletra_nombre'])->name('ls1_abecedario_test');
+    Route::get('/lecciones/abecedario/test', [LeccionesController::class, 'deletra_nombre'])->name('ls1_abecedario_test');
     Route::post('/lecciones/abecedario/complete', [ProgressController::class, 'ls1_complete'])->name('lecciones.abecedario.complete');
     
     Route::get('/lecciones/numeros',[LeccionesController::class, 'ls2_numeros'])->name('lecciones.numeros');
-    Route::get('/lecciones/numeros/test', [SenaImgController::class, 'conecta_numeros'])->name('ls2_numeros_test');
+    Route::get('/lecciones/numeros/test', [LeccionesController::class, 'conecta_numeros'])->name('ls2_numeros_test');
     Route::post('/lecciones/numeros/complete', [ProgressController::class, 'ls2_complete'])->name('lecciones.numeros.complete');
 
     Route::get('/lecciones/saludos',[LeccionesController::class, 'ls3_saludos'])->name('lecciones.saludos');
-    Route::get('/lecciones/saludos/test', [SenaImgController::class, 'memorama_saludos'])->name('ls3_saludos_test');
+    Route::get('/lecciones/saludos/test', [LeccionesController::class, 'memorama_saludos'])->name('ls3_saludos_test');
     Route::post('/lecciones/saludos/complete', [ProgressController::class, 'ls3_complete'])->name('lecciones.saludos.complete');
 
-    // Los carruseles:
-    Route::get('/carrusel/abecedario',[SenaImgController::class, 'abecedario'])->name(('carrusel.abecedario'));
-    Route::get('/carrusel/numeros',[SenaImgController::class, 'numeros'])->name(('carrusel.numeros'));
-    Route::get('/carrusel/saludos',[SenaImgController::class, 'saludos'])->name(('carrusel.saludos'));
-
     // Mini juegos
+
+
     // Videos educativos
     Route::get('/lecciones/videos', [TaskController::class, 'videos'])->name('lecciones.videos');
 

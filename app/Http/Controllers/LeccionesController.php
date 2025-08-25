@@ -34,4 +34,18 @@ class LeccionesController extends Controller
         }
         return view('lessons.ls3_saludos', compact('senas'));
     }
+    
+    // Actividades de practica de las lecciones:
+    public function deletra_nombre()
+    {
+        return view('tests.abecedario');
+    }
+
+    public function conecta_numeros(){
+        return view('tests.numeros');
+    }
+
+    public function memorama_saludos(){
+        return view('tests.saludos');
+    }
 }
