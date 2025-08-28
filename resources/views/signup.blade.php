@@ -20,10 +20,14 @@
             --shadow-light: rgba(0, 0, 0, 0.3);
             --blur-strength: 15px;
 
-            --strength-weak: #ff6b6b; /* Red */
-            --strength-moderate: #ffcc00; /* Yellow */
-            --strength-strong: #4CAF50; /* Green */
-            --strength-very-strong: #007bff; /* Blue */
+            --strength-weak: #ff6b6b;
+            /* Red */
+            --strength-moderate: #ffcc00;
+            /* Yellow */
+            --strength-strong: #4CAF50;
+            /* Green */
+            --strength-very-strong: #007bff;
+            /* Blue */
 
             --primary: #0A2463;
             --secondary: #3E92CC;
@@ -82,7 +86,7 @@
             right: 30px;
             width: 160px;
             height: 160px;
-            background: url({{ asset('img/logo_sinfondo.png') }}) center/contain no-repeat;
+            background: url({{ asset('img/logo2.png') }}) center/contain no-repeat;
             z-index: 10;
         }
 
@@ -220,6 +224,7 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
+
         /* Alerts */
         .alerts {
             display: flex;
@@ -296,15 +301,37 @@
             transition: color 0.3s ease-in-out;
         }
 
-        .strength-text.weak { color: var(--strength-weak); }
-        .strength-text.moderate { color: var(--strength-moderate); }
-        .strength-text.strong { color: var(--strength-strong); }
-        .strength-text.very-strong { color: var(--strength-very-strong); }
+        .strength-text.weak {
+            color: var(--strength-weak);
+        }
 
-        .strength-bar.weak { background-color: var(--strength-weak); }
-        .strength-bar.moderate { background-color: var(--strength-moderate); }
-        .strength-bar.strong { background-color: var(--strength-strong); }
-        .strength-bar.very-strong { background-color: var(--strength-very-strong); }
+        .strength-text.moderate {
+            color: var(--strength-moderate);
+        }
+
+        .strength-text.strong {
+            color: var(--strength-strong);
+        }
+
+        .strength-text.very-strong {
+            color: var(--strength-very-strong);
+        }
+
+        .strength-bar.weak {
+            background-color: var(--strength-weak);
+        }
+
+        .strength-bar.moderate {
+            background-color: var(--strength-moderate);
+        }
+
+        .strength-bar.strong {
+            background-color: var(--strength-strong);
+        }
+
+        .strength-bar.very-strong {
+            background-color: var(--strength-very-strong);
+        }
 
 
         @media screen and (max-width: 768px) {
@@ -389,54 +416,54 @@
     <div class="container">
         <h1>Registrarse</h1>
 
-            <!-- Alerts -->
-            <div class="alerts" id="alerts" aria-live="polite" aria-atomic="true">
-                @if(session('status'))
-                    <div class="alert alert-success" data-auto-hide>
-                        <div class="left">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <div class="msg">{{ session('status') }}</div>
-                        </div>
-                        <button class="close" aria-label="Cerrar">×</button>
+        <!-- Alerts -->
+        <div class="alerts" id="alerts" aria-live="polite" aria-atomic="true">
+            @if(session('status'))
+                <div class="alert alert-success" data-auto-hide>
+                    <div class="left">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <div class="msg">{{ session('status') }}</div>
                     </div>
-                @endif
+                    <button class="close" aria-label="Cerrar">×</button>
+                </div>
+            @endif
 
-                @if(session('error'))
-                    <div class="alert alert-error" data-auto-hide>
-                        <div class="left">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <div class="msg">{{ session('error') }}</div>
-                        </div>
-                        <button class="close" aria-label="Cerrar">×</button>
+            @if(session('error'))
+                <div class="alert alert-error" data-auto-hide>
+                    <div class="left">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <div class="msg">{{ session('error') }}</div>
                     </div>
-                @endif
+                    <button class="close" aria-label="Cerrar">×</button>
+                </div>
+            @endif
 
-                @if($errors->any())
-                    <div class="alert alert-error" data-auto-hide="false">
-                        <div class="left">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <div class="msg">
-                                <div style="font-weight:900; margin-bottom:6px;">Corrige los siguientes errores:</div>
-                                <ul style="padding-left:18px; margin:0;">
-                                    @foreach($errors->all() as $err)
-                                        <li style="font-weight:800;">{{ $err }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+            @if($errors->any())
+                <div class="alert alert-error" data-auto-hide="false">
+                    <div class="left">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <div class="msg">
+                            <div style="font-weight:900; margin-bottom:6px;">Corrige los siguientes errores:</div>
+                            <ul style="padding-left:18px; margin:0;">
+                                @foreach($errors->all() as $err)
+                                    <li style="font-weight:800;">{{ $err }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        <button class="close" aria-label="Cerrar">×</button>
                     </div>
-                @endif
-            </div>
+                    <button class="close" aria-label="Cerrar">×</button>
+                </div>
+            @endif
+        </div>
         <form method="POST" action="{{ route('signup.submit') }}" style="width: 100%;">
             @csrf
 
@@ -499,7 +526,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.alert button.close').forEach(btn => {
                 btn.addEventListener('click', function () { const a = this.closest('.alert'); if (!a) return; a.style.opacity = '0'; a.style.transform = 'translateY(-8px)'; setTimeout(() => a.remove(), 280); });
             });
@@ -514,7 +541,7 @@
             const form = document.querySelector('form');
             if (form) {
                 form.querySelectorAll('input').forEach(input => {
-                    input.addEventListener('input', function() {
+                    input.addEventListener('input', function () {
                         if (this.classList.contains('is-invalid')) {
                             this.classList.remove('is-invalid');
                             const errorDiv = this.nextElementSibling;
@@ -542,7 +569,7 @@
             }
 
             if (passwordInput && strengthBar && strengthText) {
-                passwordInput.addEventListener('input', function() {
+                passwordInput.addEventListener('input', function () {
                     const password = this.value;
                     updatePasswordStrength(password);
                 });

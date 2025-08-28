@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Establecer Nueva Contraseña - LESSA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        xintegrity="sha512-Fo3rlalr+G/yqW8S8H5f+3zT1xZ6+K/5B5E1Q6Z8c2q5f8+5z7m3gD9c5O6Z7t0+7z9f+2V0P3p3P4p+1Q8+"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
@@ -22,36 +21,33 @@
             --success-green: rgba(40, 167, 69, 0.8);
             --danger-red: rgba(220, 53, 69, 0.8);
             --border-radius: 10px;
-
-            /* Password strength colors */
-            --strength-weak: #ff6b6b; /* Red */
-            --strength-moderate: #ffcc00; /* Yellow */
-            --strength-strong: #4CAF50; /* Green */
-            --strength-very-strong: #007bff; /* Blue */
+            --strength-weak: #ff6b6b;
+            --strength-moderate: #ffcc00;
+            --strength-strong: #4CAF50;
+            --strength-very-strong: #007bff;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
             min-height: 100vh;
+            font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
             display: flex;
             justify-content: center;
             align-items: center;
             background: url({{ asset('img/login.png') }}) no-repeat center center/cover;
-            position: relative;
-            flex-direction: column;
             padding: 20px;
+            flex-direction: column;
         }
 
         .container {
             width: 90%;
             max-width: 500px;
-            background: rgba(22, 66, 71, 0.7);
+            background: rgba(10, 36, 99, 0.88);
             backdrop-filter: blur(var(--blur-strength));
             border-radius: 20px;
             padding: 40px;
@@ -60,9 +56,7 @@
             align-items: center;
             box-shadow: 0 8px 32px var(--shadow-light);
             color: var(--text-light);
-            position: relative;
             z-index: 5;
-            flex-shrink: 0;
         }
 
         .logo {
@@ -71,21 +65,67 @@
             right: 30px;
             width: 160px;
             height: 160px;
-            background: url({{ asset('img/logo_sinfondo.png') }}) center/contain no-repeat;
-            z-index: 10;
+            background: url({{ asset('img/logo2.png') }}) center/contain no-repeat;
+        }
+
+        /* Alerts */
+        .alerts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .alert {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .alert .left {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex: 1;
+        }
+
+        .alert .msg {
+            color: #fff;
+            text-align: left;
+        }
+
+        .alert-success {
+            background: linear-gradient(90deg, var(--success), #45b75a);
+        }
+
+        .alert-error {
+            background: linear-gradient(90deg, var(--danger), #c83a3a);
+        }
+
+        .alert button.close {
+            background: transparent;
+            border: 0;
+            color: inherit;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 6px;
         }
 
         h1 {
             font-size: 32px;
             margin-bottom: 20px;
-            color: var(--text-light);
             text-align: center;
         }
 
         h2 {
             font-size: 16px;
             margin-bottom: 5px;
-            color: var(--text-light);
             align-self: flex-start;
             padding-left: 5px;
         }
@@ -99,12 +139,12 @@
             width: 100%;
             padding: 12px;
             border: 1px solid transparent;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             font-size: 16px;
             background: var(--input-bg);
             color: var(--text-light);
             outline: none;
-            transition: border-color 0.3s ease, background-color 0.3s ease;
+            transition: 0.3s;
         }
 
         input:focus {
@@ -116,25 +156,24 @@
             color: #ddd;
         }
 
-        .action-btn { /* Renamed from login-btn */
+        .action-btn {
             width: 100%;
             padding: 12px;
             border: none;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             background-color: var(--primary-blue);
             color: var(--text-light);
+            margin-top: 10px;
+            transition: 0.3s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .action-btn:hover {
-            background-color: var(--primary-blue-dark);
+            background: var(--primary-blue-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         .back-button {
@@ -142,22 +181,20 @@
             align-items: center;
             gap: 8px;
             margin-top: 20px;
-            color: var(--text-light);
-            background-color: var(--secondary-orange);
             padding: 10px 20px;
+            background: var(--secondary-orange);
+            color: var(--text-light);
             border-radius: 8px;
-            text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            transition: 0.3s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            z-index: 10;
         }
 
         .back-button:hover {
-            background-color: var(--text-light);
+            background: var(--text-light);
             color: var(--secondary-orange);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         .back-container {
@@ -166,7 +203,6 @@
             justify-content: center;
         }
 
-        /* Feedback and Error Messages */
         .feedback-message {
             padding: 12px 20px;
             border-radius: 10px;
@@ -174,24 +210,15 @@
             width: 100%;
             text-align: center;
             font-weight: bold;
-            opacity: 1;
-            transition: opacity 0.5s ease-in-out;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .feedback-message.success {
-            background-color: var(--success-green);
-            color: white;
+            background: var(--success-green);
         }
 
         .feedback-message.error {
-            background-color: var(--danger-red);
-            color: white;
-        }
-
-        .feedback-message.hidden {
-            opacity: 0;
-            pointer-events: none;
+            background: var(--danger-red);
         }
 
         .error-list {
@@ -204,57 +231,66 @@
         .error-list li {
             color: var(--error-red);
             font-size: 13px;
-            margin-bottom: 5px;
             display: flex;
-            align-items: center;
             gap: 5px;
-            padding-left: 5px;
         }
 
-        .error-list li i {
-            font-size: 14px;
-        }
-
-        /* Password Strength Indicator Styles */
         .password-strength-indicator {
             width: 100%;
             height: 8px;
-            background-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 4px;
             margin-top: 8px;
             overflow: hidden;
-            position: relative;
         }
 
         .strength-bar {
             height: 100%;
             width: 0%;
             border-radius: 4px;
-            transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            transition: width 0.3s ease, background-color 0.3s ease;
         }
 
         .strength-text {
             font-size: 12px;
             text-align: right;
             margin-top: 5px;
-            color: var(--text-light);
             font-weight: bold;
-            transition: color 0.3s ease-in-out;
         }
 
-        .strength-text.weak { color: var(--strength-weak); }
-        .strength-text.moderate { color: var(--strength-moderate); }
-        .strength-text.strong { color: var(--strength-strong); }
-        .strength-text.very-strong { color: var(--strength-very-strong); }
+        .strength-text.weak {
+            color: var(--strength-weak);
+        }
 
-        .strength-bar.weak { background-color: var(--strength-weak); }
-        .strength-bar.moderate { background-color: var(--strength-moderate); }
-        .strength-bar.strong { background-color: var(--strength-strong); }
-        .strength-bar.very-strong { background-color: var(--strength-very-strong); }
+        .strength-text.moderate {
+            color: var(--strength-moderate);
+        }
 
+        .strength-text.strong {
+            color: var(--strength-strong);
+        }
 
-        /* Responsive Adjustments */
-        @media screen and (max-width: 768px) {
+        .strength-text.very-strong {
+            color: var(--strength-very-strong);
+        }
+
+        .strength-bar.weak {
+            background: var(--strength-weak);
+        }
+
+        .strength-bar.moderate {
+            background: var(--strength-moderate);
+        }
+
+        .strength-bar.strong {
+            background: var(--strength-strong);
+        }
+
+        .strength-bar.very-strong {
+            background: var(--strength-very-strong);
+        }
+
+        @media (max-width:768px) {
             .container {
                 padding: 30px 20px;
                 margin-top: 80px;
@@ -270,14 +306,9 @@
             h1 {
                 font-size: 28px;
             }
-
-            .back-button {
-                padding: 8px 15px;
-                font-size: 14px;
-            }
         }
 
-        @media screen and (max-width: 480px) {
+        @media (max-width:480px) {
             .container {
                 padding: 25px 15px;
             }
@@ -286,7 +317,10 @@
                 font-size: 24px;
             }
 
-            h2, input, .action-btn, .back-button {
+            h2,
+            input,
+            .action-btn,
+            .back-button {
                 font-size: 14px;
             }
 
@@ -299,44 +333,86 @@
 
 <body>
     <div class="logo"></div>
+    <!-- Alerts -->
+    <div class="alerts" id="alerts" aria-live="polite" aria-atomic="true">
+        @if(session('status'))
+            <div class="alert alert-success" data-auto-hide>
+                <div class="left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <div class="msg">{{ session('status') }}</div>
+                </div>
+                <button class="close" aria-label="Cerrar">×</button>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-error" data-auto-hide>
+                <div class="left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <div class="msg">{{ session('error') }}</div>
+                </div>
+                <button class="close" aria-label="Cerrar">×</button>
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="alert alert-error" data-auto-hide="false">
+                <div class="left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <div class="msg">
+                        <div style="font-weight:900; margin-bottom:6px;">Corrige los siguientes errores:</div>
+                        <ul style="padding-left:18px; margin:0;">
+                            @foreach($errors->all() as $err)
+                                <li style="font-weight:800;">{{ $err }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                <button class="close" aria-label="Cerrar">×</button>
+            </div>
+        @endif
+    </div>
     <form action="{{ route('newPass') }}" method="POST" class="container">
         @csrf
-        <h1>Establecer Nueva Contraseña</h1>
-        <p style="text-align: center; margin-bottom: 20px;">Por favor, ingresa el correo electrónico asociado a tu cuenta, el código de recuperación que recibiste, y tu nueva contraseña.</p>
+        <h1>Nueva Contraseña</h1>
+        <p style="text-align:center; margin-bottom:20px;">Ingresa el código de recuperación recibido y tu nueva
+            contraseña.</p>
 
         @if(session('status'))
-            <p class="feedback-message success" id="session-message">
-                {{ session('status') }}
-            </p>
+            <p class="feedback-message success">{{ session('status') }}</p>
         @endif
         @if(session('error'))
-            <p class="feedback-message error" id="session-message">
-                {{ session('error') }}
-            </p>
+            <p class="feedback-message error">{{ session('error') }}</p>
         @endif
 
         <div class="input-group">
             <h2>Código de Recuperación</h2>
-            <input type="text" name="token" placeholder="Ingresa tu código de 6 dígitos" value="{{ old('token') }}" required>
-            @error('token')
-                <ul class="error-list">
-                    <li><i class="fas fa-exclamation-circle"></i> {{ $message }}</li>
-                </ul>
-            @enderror
+            <input type="text" name="token" placeholder="Código de 6 dígitos" value="{{ old('token') }}" required>
+            @error('token') <ul class="error-list">
+                <li><i class="fas fa-exclamation-circle"></i> {{ $message }}</li>
+            </ul> @enderror
         </div>
 
         <div class="input-group">
             <h2>Nueva Contraseña</h2>
-            <input type="password" name="password" id="password-input" placeholder="Nueva contraseña (mínimo 8 caracteres)" required>
+            <input type="password" name="password" id="password-input"
+                placeholder="Nueva contraseña (mínimo 8 caracteres)" required>
             <div class="password-strength-indicator">
                 <div id="strength-bar" class="strength-bar"></div>
             </div>
             <div id="strength-text" class="strength-text"></div>
-            @error('password')
-                <ul class="error-list">
-                    <li><i class="fas fa-exclamation-circle"></i> {{ $message }}</li>
-                </ul>
-            @enderror
+            @error('password') <ul class="error-list">
+                <li><i class="fas fa-exclamation-circle"></i> {{ $message }}</li>
+            </ul> @enderror
         </div>
 
         <div class="input-group">
@@ -353,68 +429,40 @@
     </form>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             const passwordInput = document.getElementById('password-input');
             const strengthBar = document.getElementById('strength-bar');
             const strengthText = document.getElementById('strength-text');
+            passwordInput.addEventListener('input', e => updateStrength(e.target.value));
 
-            if (passwordInput && strengthBar && strengthText) {
-                passwordInput.addEventListener('input', function() {
-                    const password = this.value;
-                    updatePasswordStrength(password);
-                });
+            function updateStrength(password) {
+                let score = 0;
+                if (password.length >= 8) score++;
+                if (password.length >= 10) score++;
+                if (password.length >= 12) score++;
+                if (/[a-z]/.test(password)) score++;
+                if (/[A-Z]/.test(password)) score++;
+                if (/[0-9]/.test(password)) score++;
+                if (/[^a-zA-Z0-9]/.test(password)) score++;
 
-                function updatePasswordStrength(password) {
-                    let score = 0;
-                    let feedback = '';
-                    let strengthLevel = 'none';
+                let level = 'weak', feedback = 'Débil';
+                if (score < 3) { level = 'weak'; feedback = 'Débil'; }
+                else if (score < 5) { level = 'moderate'; feedback = 'Moderada'; }
+                else if (score < 7) { level = 'strong'; feedback = 'Fuerte'; }
+                else { level = 'very-strong'; feedback = 'Muy Fuerte'; }
 
-                    const hasLowercase = /[a-z]/.test(password);
-                    const hasUppercase = /[A-Z]/.test(password);
-                    const hasNumber = /[0-9]/.test(password);
-                    const hasSymbol = /[^a-zA-Z0-9]/.test(password);
-
-                    if (password.length >= 8) score += 1;
-                    if (password.length >= 10) score += 1;
-                    if (password.length >= 12) score += 1;
-
-                    if (hasLowercase) score += 1;
-                    if (hasUppercase) score += 1;
-                    if (hasNumber) score += 1;
-                    if (hasSymbol) score += 1;
-
-                    if (password.length === 0) {
-                        strengthLevel = 'none';
-                        feedback = '';
-                    } else if (score < 3) {
-                        strengthLevel = 'weak';
-                        feedback = 'Débil';
-                        if (password.length < 8) feedback += ' (mínimo 8 caracteres)';
-                        if (!hasLowercase) feedback += ' (falta minúscula)';
-                        if (!hasUppercase) feedback += ' (falta mayúscula)';
-                        if (!hasNumber) feedback += ' (falta número)';
-                        if (!hasSymbol) feedback += ' (falta símbolo)';
-                    } else if (score < 5) {
-                        strengthLevel = 'moderate';
-                        feedback = 'Moderada';
-                        if (password.length < 10) feedback += ' (considera más caracteres)';
-                        if (!(hasLowercase && hasUppercase && hasNumber && hasSymbol)) feedback += ' (combina tipos)';
-                    } else if (score < 7) {
-                        strengthLevel = 'strong';
-                        feedback = 'Fuerte';
-                        if (password.length < 12) feedback += ' (considera más caracteres)';
-                    } else {
-                        strengthLevel = 'very-strong';
-                        feedback = 'Muy Fuerte';
-                    }
-
-                    // Update UI
-                    strengthBar.style.width = (score / 7) * 100 + '%';
-                    strengthBar.className = 'strength-bar ' + strengthLevel;
-                    strengthText.textContent = feedback;
-                    strengthText.className = 'strength-text ' + strengthLevel;
-                }
+                strengthBar.style.width = (score / 7) * 100 + '%';
+                strengthBar.className = 'strength-bar ' + level;
+                strengthText.textContent = feedback;
+                strengthText.className = 'strength-text ' + level;
             }
+
+            document.querySelectorAll('.alert button.close').forEach(btn => {
+                btn.addEventListener('click', function () { const a = this.closest('.alert'); if (!a) return; a.style.opacity = '0'; a.style.transform = 'translateY(-8px)'; setTimeout(() => a.remove(), 280); });
+            });
+            document.querySelectorAll('.alert[data-auto-hide]').forEach(a => {
+                setTimeout(() => { if (!document.body.contains(a)) return; a.style.opacity = '0'; a.style.transform = 'translateY(-8px)'; setTimeout(() => { if (a) a.remove(); }, 300); }, 7000);
+            });
         });
     </script>
 </body>
