@@ -19,13 +19,13 @@
             text-align: center;
         }
         .hero-section h1 {
-            font-size: 2.8em;
+            font-size: 2em;
             font-weight: 700;
             margin-bottom: 18px;
             letter-spacing: 1.5px;
         }
         .hero-section p {
-            font-size: 1.2em;
+            font-size: 1em;
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.6;
@@ -49,9 +49,6 @@
             padding: 8px 0 8px 8px;
             border-left: 6px solid #4CAF50;
             border-radius: 0 12px 12px 0;
-            position: sticky;
-            top: 70px;
-            z-index: 2;
         }
         .video-card {
             background: #fff;
