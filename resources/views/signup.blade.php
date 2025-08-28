@@ -76,8 +76,8 @@
             position: relative;
             z-index: 5;
             flex-shrink: 0;
-            margin-top: 100px;
-            margin-bottom: 20px;
+            margin-top: 2%;
+            margin-bottom: 2%;
         }
 
         .logo {
@@ -201,28 +201,6 @@
         .links a:hover {
             color: var(--secondary-orange);
             text-decoration: underline;
-        }
-
-        .back-button {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            color: var(--text-light);
-            background-color: var(--secondary-orange);
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-        }
-
-        .back-button:hover {
-            background-color: var(--text-light);
-            color: var(--secondary-orange);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         /* Alerts */
@@ -362,9 +340,10 @@
 
         @media screen and (max-width: 480px) {
             .container {
-                padding: 25px 15px;
-                margin-top: 100px;
-                margin-bottom: 30px;
+                padding: 10px 10px;
+                margin-top: 2%;
+                margin-bottom: 3%;
+                width: 80%;
             }
 
             h1 {
@@ -409,10 +388,7 @@
 </head>
 
 <body>
-
-    <a class="back-button" href="{{ url()->previous() }}">Volver</a>
     <div class="logo"></div>
-
     <div class="container">
         <h1>Registrarse</h1>
 
