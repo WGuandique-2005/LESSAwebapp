@@ -1,0 +1,182 @@
+[
+  {
+    "id": "A",
+    "nombre": "Letra A",
+    "descripcion": "Con tu mano dominante, cierra todos los dedos hacia la palma dejando el pulgar extendido hacia un lado, tocando ligeramente el lateral del dedo índice. La palma debe de quedar orientada hacia enfrente.",
+    "ruta": "/img/senas/Aa.png"
+  },
+  {
+    "id": "B",
+    "nombre": "Letra B",
+    "descripcion": "Extiende todos los dedos juntos hacia arriba, manteniéndolos rectos, y luego coloca el pulgar cruzado sobre la palma en la base del meñique. La palma debe mirar hacia adelante.",
+    "ruta": "/img/senas/Bb.png"
+  },
+  {
+    "id": "C",
+    "nombre": "Letra C",
+    "descripcion": "Forma una curva con todos los dedos como si tuvieras una pelota pequeña. El pulgar y los dedos deben crear la forma de la letra “c”. Mantén la palma viendo hacia un lado.",
+    "ruta": "/img/senas/Cc.png"
+  },
+  {
+    "id": "CH",
+    "nombre": "Letra CH",
+    "descripcion": "Con la palma mirando hacia nuestro cuerpo. Extendemos y unimos el dedo índice y el dedo medio, apuntando hacia un lado, mientras levantamos el pulgar formando un ángulo recto con ellos. Los dedos anular y meñique permanecen flexionados hacia la palma.",
+    "ruta": "/img/senas/Ch.png"
+  },
+  {
+    "id": "D",
+    "nombre": "Letra D",
+    "descripcion": "Mantén el dedo índice apuntando hacia arriba y une las yemas de los demás dedos con el pulgar, formando un círculo. El índice se mantiene recto para simular la forma de una “D”.",
+    "ruta": "/img/senas/Dd.png"
+  },
+  {
+    "id": "E",
+    "nombre": "Letra E",
+    "descripcion": "Dobla todos los dedos hacia la palma, pero sin cerrarlos completamente, dejando que las puntas de los dedos toquen la base del pulgar.",
+    "ruta": "/img/senas/Ee.png"
+  },
+  {
+    "id": "F",
+    "nombre": "Letra F",
+    "descripcion": "Une la punta del pulgar con la del índice formando un círculo pequeño, mientras los otros tres dedos permanecen extendidos hacia arriba.",
+    "ruta": "/img/senas/Ff.png"
+  },
+  {
+    "id": "G",
+    "nombre": "Letra G",
+    "descripcion": "Extiende el pulgar y el índice de forma paralela, apuntando hacia un lado, y dobla ligeramente los demás dedos hacia la palma.",
+    "ruta": "/img/senas/Gg.png"
+  },
+  {
+    "id": "H",
+    "nombre": "Letra H",
+    "descripcion": "Extiende el índice y el dedo del medio paralelos entre sí y apunta hacia un lado, mientras los otros dedos están doblados hacia la palma y el pulgar descansa sobre ellos.",
+    "ruta": "/img/senas/Hh.png"
+  },
+  {
+    "id": "I",
+    "nombre": "Letra I",
+    "descripcion": "Cierra todos los dedos menos el meñique, que quede extendido hacia arriba, el pulgar se apoya suavemente contra los dedos doblados.",
+    "ruta": "/img/senas/Ii.png"
+  },
+  {
+    "id": "J",
+    "nombre": "Letra J",
+    "descripcion": "Empieza en la posición de la letra “i” y dibuja con el meñique en el aire la forma de la letra “j” hacia abajo y hacia un lado.",
+    "ruta": "/img/senas/Jj.png"
+  },
+  {
+    "id": "K",
+    "nombre": "Letra K",
+    "descripcion": "Extiende el índice y el medio en forma de “V”, pero el pulgar extendido hacia adelante y apoyando en la base del dedo medio.",
+    "ruta": "/img/senas/Kk.png"
+  },
+  {
+    "id": "L",
+    "nombre": "Letra L",
+    "descripcion": "Extiende el índice y el pulgar en ángulo recto, formando una “L” clara, mientras los demás dedos permanecen doblados hacia la palma.",
+    "ruta": "/img/senas/Ll.png"
+  },
+  {
+    "id": "LL",
+    "nombre": "Doble L",
+    "descripcion": "Realiza dos veces seguidas el gesto de la “L” moviendo ligeramente la mano hacia un lado para marcar la doble letra.",
+    "ruta": "/img/senas/Llll.png"
+  },
+  {
+    "id": "M",
+    "nombre": "Letra M",
+    "descripcion": "Dobla los dedos índice, medio y anular sobre el pulgar, que queda cubierto por ellos, mientras el meñique se mantiene doblado junto a los demás.",
+    "ruta": "/img/senas/Mm.png"
+  },
+  {
+    "id": "N",
+    "nombre": "Letra N",
+    "descripcion": "Similar a la M, pero solo doblamos los dedos índice y medio sobre el pulgar, dejando el anular y meñique recogidos.",
+    "ruta": "/img/senas/Nn.png"
+  },
+  {
+    "id": "Ñ",
+    "nombre": "Letra Ñ",
+    "descripcion": "Se realiza la letra N añadiendo un pequeño movimiento ondulado de la mano, como una curva en el aire, para diferenciarla.",
+    "ruta": "/img/senas/Ññ.png"
+  },
+  {
+    "id": "O",
+    "nombre": "Letra O",
+    "descripcion": "Une las puntas de todos los dedos con el pulgar formando un círculo, representando la letra “O”.",
+    "ruta": "/img/senas/Oo.png"
+  },
+  {
+    "id": "P",
+    "nombre": "Letra P",
+    "descripcion": "Extiende el índice y el medio hacia adelante formando una ligera separación entre ellos, mientras que el pulgar está extendido y apoyado en la base del dedo medio. Inclina la muñeca hacia abajo de forma que las puntas de los dedos apunten hacia el suelo.",
+    "ruta": "/img/senas/Pp.png"
+  },
+  {
+    "id": "Q",
+    "nombre": "Letra Q",
+    "descripcion": "Extiende el pulgar y el índice hacia abajo, apuntando ambos en dirección al suelo. Mantén los otros tres dedos doblados hacia la palma y la muñeca ligeramente inclinada hacia adelante.",
+    "ruta": "/img/senas/Qq.png"
+  },
+  {
+    "id": "R",
+    "nombre": "Letra R",
+    "descripcion": "Cruza el dedo índice sobre el dedo medio formando una X con ellos, mientras los otros dedos permanecen doblados hacia la palma.",
+    "ruta": "/img/senas/Rr.png"
+  },
+  {
+    "id": "RR",
+    "nombre": "Doble R",
+    "descripcion": "Realiza el gesto de la “R” dos veces seguidas con un pequeño movimiento lateral para marcar la doble letra.",
+    "ruta": "/img/senas/RRrr.png"
+  },
+  {
+    "id": "S",
+    "nombre": "Letra S",
+    "descripcion": "Cierra el puño colocando el pulgar por encima de los dedos, apuntando hacia arriba.",
+    "ruta": "/img/senas/Ss.png"
+  },
+  {
+    "id": "T",
+    "nombre": "Letra T",
+    "descripcion": "Cierra el puño pero coloca el pulgar entre el índice y el medio, asomando ligeramente hacia afuera.",
+    "ruta": "/img/senas/Tt.png"
+  },
+  {
+    "id": "U",
+    "nombre": "Letra U",
+    "descripcion": "Extiende el índice y el medio juntos y paralelos hacia arriba, con los otros dedos doblados hacia la palma.",
+    "ruta": "/img/senas/Uu.png"
+  },
+  {
+    "id": "V",
+    "nombre": "Letra V",
+    "descripcion": "Extiende el índice y el medio en forma de V, con los demás dedos doblados hacia la palma.",
+    "ruta": "/img/senas/Vv.png"
+  },
+  {
+    "id": "W",
+    "nombre": "Letra W",
+    "descripcion": "Extiende el índice, medio y anular separados entre sí formando una W, mientras el meñique y el pulgar están recogidos.",
+    "ruta": "/img/senas/Ww.png"
+  },
+  {
+    "id": "X",
+    "nombre": "Letra X",
+    "descripcion": "Dobla el índice en forma de garra apuntando hacia arriba, mientras los demás dedos permanecen cerrados en la palma.",
+    "ruta": "/img/senas/Xx.png"
+  },
+  {
+    "id": "Y",
+    "nombre": "Letra Y",
+    "descripcion": "Extiende el pulgar y meñique hacia los lados, mientras los otros tres dedos permanecen doblados hacia la palma.",
+    "ruta": "/img/senas/Yy.png"
+  },
+  {
+    "id": "Z",
+    "nombre": "Letra Z",
+    "descripcion": "Con el índice extendido, dibuja en el aire la forma de la letra Z comenzando hacia un lado, bajando en diagonal y terminando con un trazo horizontal.",
+    "ruta": "/img/senas/Zz.png"
+  }
+]

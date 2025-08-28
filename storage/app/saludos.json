@@ -1,0 +1,170 @@
+[
+    {
+        "id": "0",
+        "nombre": "Hola!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Hola!.png"
+    },
+    {
+        "id": "1",
+        "nombre": "Buenos días!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Buenos dias!.png"
+    },
+    {
+        "id": "2",
+        "nombre": "Mucho gusto!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Mucho gusto!.png"
+    },
+    {
+        "id": "3",
+        "nombre": "Permiso",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Permiso.png"
+    },
+    {
+        "id": "4",
+        "nombre": "Suerte!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Suerte!.png"
+    },
+    {
+        "id": "5",
+        "nombre": "Por favor!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Por favor!.png"
+    },
+    {
+        "id": "6",
+        "nombre": "Salud!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Salud!.png"
+    },
+    {
+        "id": "7",
+        "nombre": "Respeto",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Respeto.png"
+    },
+    {
+        "id": "8",
+        "nombre": "Perdon!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Perdon!.png"
+    },
+    {
+        "id": "9",
+        "nombre": "Nos vemos!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Nos vemos!.png"
+    },
+    {
+        "id": "10",
+        "nombre": "Mal!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Mal!.png"
+    },
+    {
+        "id": "11",
+        "nombre": "Gracias!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Gracias!.png"
+    },
+    {
+        "id": "12",
+        "nombre": "Felicidades!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Felicidades!.png"
+    },
+    {
+        "id": "13",
+        "nombre": "Dudar",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Dudar.png"
+    },
+    {
+        "id": "14",
+        "nombre": "Depende",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Depende.png"
+    },
+    {
+        "id": "15",
+        "nombre": "De nada!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/De nada!.png"
+    },
+    {
+        "id": "16",
+        "nombre": "Cuidate!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Cuidate!.png"
+    },
+    {
+        "id": "17",
+        "nombre": "Bien!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Bien!.png"
+    },
+    {
+        "id": "18",
+        "nombre": "Adios!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Adios!.png"
+    },
+    {
+        "id": "19",
+        "nombre": "Aplausos",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Aplausos.png"
+    },
+    {
+        "id": "20",
+        "nombre": "Bienvenido!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Bienvenido!.png"
+    },
+    {
+        "id": "21",
+        "nombre": "Buenas tardes!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Buenas tardes!.png"
+    },
+    {
+        "id": "22",
+        "nombre": "Dios bendiga!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Dios bendiga!.png"
+    },
+    {
+        "id": "23",
+        "nombre": "Feliz año nuevo!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Feliz año nuevo!.png"
+    },
+    {
+        "id": "24",
+        "nombre": "Feliz cumpleaños!",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Feliz cumpleaños!.png"
+    },
+    {
+        "id": "25",
+        "nombre": "Feliz navidad",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Feliz navidad.png"
+    },
+    {
+        "id": "26",
+        "nombre": "Igualmente",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Igualmente.png"
+    },
+    {
+        "id": "27",
+        "nombre": "Tal vez",
+        "descripcion": "",
+        "ruta": "/img/Saludos/Tal vez.png"
+    }
+]

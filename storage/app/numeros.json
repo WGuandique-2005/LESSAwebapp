@@ -1,0 +1,183 @@
+[
+    {
+        "id": "0",
+        "nombre": "Número 0",
+        "descripcion": "Con toda la mano, hacemos un círculo como representando el 0.",
+        "ruta": "/img/numeros/0.png"
+    },
+    {
+        "id": "1",
+        "nombre": "Número 1",
+        "descripcion": "Mano dominante con palma al frente. Se extiende únicamente el dedo índice mientras los demás permanecen doblados hacia la palma.",
+        "ruta": "/img/numeros/1.png"
+    },
+    {
+        "id": "2",
+        "nombre": "Número 2",
+        "descripcion": "Palma hacia adelante. Se extienden el dedo índice y el medio, los demás permanecen doblados hacia la palma.",
+        "ruta": "/img/numeros/2.png"
+    },
+    {
+        "id": "3",
+        "nombre": "Número 3",
+        "descripcion": "Con la palma al frente, se extienden el pulgar, el índice y el medio. Los otros dos dedos se mantienen recogidos.",
+        "ruta": "/img/numeros/3.png"
+    },
+    {
+        "id": "4",
+        "nombre": "Número 4",
+        "descripcion": "Con la palma hacia adelante, se extienden los cuatro dedos (índice, medio, anular y meñique), mientras el pulgar queda doblado hacia la palma.",
+        "ruta": "/img/numeros/4.png"
+    },
+    {
+        "id": "5",
+        "nombre": "Número 5",
+        "descripcion": "Se abre completamente la mano, con todos los dedos extendidos y separados, mostrando la palma al frente.",
+        "ruta": "/img/numeros/5.png"
+    },
+    {
+        "id": "6",
+        "nombre": "Número 6",
+        "descripcion": "Colocamos la palma hacia adelante. Mientras la otra mano levantamos el índice hacia arriba, mientras los otros permanecen hacia abajo con el pulgar encima del dedo medio.",
+        "ruta": "/img/numeros/6.png"
+    },
+    {
+        "id": "7",
+        "nombre": "Número 7",
+        "descripcion": "Una palma queda hacia frente, mientras en la otra mano extendemos el dedo medio y el índice y los demás dedos hacia abajo con el pulgar encima del anular.",
+        "ruta": "/img/numeros/7.png"
+    },
+    {
+        "id": "8",
+        "nombre": "Número 8",
+        "descripcion": "Unimos el dedo medio con el índice y extendemos los demás dedos con la palma hacia adelante.",
+        "ruta": "/img/numeros/8.png"
+    },
+    {
+        "id": "9",
+        "nombre": "Número 9",
+        "descripcion": "Extendemos los cuatro dedos (índice, medio, anular y meñique) con la palma hacia adelante, mientras la otra mano la dejamos totalmente extendida con la palma hacia adelante.",
+        "ruta": "/img/numeros/9.png"
+    },
+    {
+        "id": "10",
+        "nombre": "Número 10",
+        "descripcion": "Extendemos ambas manos con  la palma de la mano, hacia enfrente, con todos los dedos extendidos.",
+        "ruta": "/img/numeros/10.png"
+    },
+        {
+        "id": "11",
+        "nombre": "Número 11",
+        "descripcion": "Se realiza primero la seña del número 10 y, de forma seguida y en el mismo espacio, la seña del número 1 (índice extendido).",
+        "ruta": "/img/numeros/11.png"
+    },
+    {
+        "id": "12",
+        "nombre": "Número 12",
+        "descripcion": "Se realiza primero la seña del número 10 y, de forma seguida, la seña del número 2 (índice y medio extendidos).",
+        "ruta": "/img/numeros/12.png"
+    },
+    {
+        "id": "13",
+        "nombre": "Número 13",
+        "descripcion": "Se realiza primero la seña del número 10 y, de forma seguida, la seña del número 3 (índice, medio y anular extendidos).",
+        "ruta": "/img/numeros/13.png"
+    },
+    {
+        "id": "14",
+        "nombre": "Número 14",
+        "descripcion": "Se realiza primero la seña del número 10 y, de forma seguida, la seña del número 4 (cuatro dedos extendidos, pulgar doblado).",
+        "ruta": "/img/numeros/14.png"
+    },
+    {
+        "id": "15",
+        "nombre": "Número 15",
+        "descripcion": "Se realiza primero la seña del número 10 y, de forma seguida, la seña del número 5 (mano abierta con los cinco dedos extendidos).",
+        "ruta": "/img/numeros/15.png"
+    },
+    {
+        "id": "16",
+        "nombre": "Número 16",
+        "descripcion": "Se realiza primero la seña del número 10 y, de forma seguida, la seña del número 6 (pulgar dominante tocando el meñique de la mano base).",
+        "ruta": "/img/numeros/16.png"
+    },
+    {
+        "id": "17",
+        "nombre": "Número 17",
+        "descripcion": "Se realiza primero la seña del número 10 y, de forma seguida, la seña del número 7 (pulgar dominante tocando el anular de la mano base).",
+        "ruta": "/img/numeros/17.png"
+    },
+    {
+        "id": "18",
+        "nombre": "Número 18",
+        "descripcion": "Se realiza primero la seña del número 10 y, de forma seguida, la seña del número 8 (pulgar dominante tocando el medio de la mano base).",
+        "ruta": "/img/numeros/18.png"
+    },
+    {
+        "id": "19",
+        "nombre": "Número 19",
+        "descripcion": "Se realiza primero la seña del número 10 y, de forma seguida, la seña del número 9 (pulgar dominante tocando el índice de la mano base).",
+        "ruta": "/img/numeros/19.png"
+    },
+    {
+        "id": "20",
+        "nombre": "Número 20",
+        "descripcion": "Se extienden juntos el índice y el medio, se mantiene la palma al frente y se hace un movimiento de giro de la muñeca hacia afuera.",
+        "ruta": "/img/numeros/20.png"
+    },
+    {
+        "id": "30",
+        "nombre": "Número 30",
+        "descripcion": "Se realiza la seña del número 3 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "ruta": "/img/numeros/30.png"
+    },
+    {
+        "id": "40",
+        "nombre": "Número 40",
+        "descripcion": "Se realiza la seña del número 4 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "ruta": "/img/numeros/40.png"
+    },
+    {
+        "id": "50",
+        "nombre": "Número 50",
+        "descripcion": "Se realiza la seña del número 5 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "ruta": "/img/numeros/50.png"
+    },
+    {
+        "id": "60",
+        "nombre": "Número 60",
+        "descripcion": "Se realiza la seña del número 6 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "ruta": "/img/numeros/60.png"
+    },
+    {
+        "id": "70",
+        "nombre": "Número 70",
+        "descripcion": "Se realiza la seña del número 7 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "ruta": "/img/numeros/70.png"
+    },
+    {
+        "id": "80",
+        "nombre": "Número 80",
+        "descripcion": "Se realiza la seña del número 8 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "ruta": "/img/numeros/80.png"
+    },
+    {
+        "id": "90",
+        "nombre": "Número 90",
+        "descripcion": "Se realiza la seña del número 9 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "ruta": "/img/numeros/90.png"
+    },
+    {
+        "id": "100",
+        "nombre": "Número 100",
+        "descripcion": "Se extiende la mano completamente abierta (número 5), luego se cierra el puño y se hace un movimiento de giro de muñeca hacia adelante representando el 100.",
+        "ruta": "/img/numeros/100.png"
+    },
+    {
+    "id": "1000",
+    "nombre": "Número 1000",
+    "descripcion": "Se realiza la seña del número 1 (índice extendido con palma al frente) y luego, con la mano en forma de puño, se apoya suavemente la punta de los dedos sobre la palma de la mano no dominante extendida, indicando el valor de mil.",
+    "ruta": "/img/numeros/1000.png"
+    }
+]
+
