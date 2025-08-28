@@ -19,15 +19,23 @@
             --input-border-focus: #F4A261;
             --shadow-light: rgba(0, 0, 0, 0.3);
             --blur-strength: 15px;
-            --error-red: #ff6b6b;
-            --success-green: rgba(40, 167, 69, 0.8);
-            --danger-red: rgba(220, 53, 69, 0.8);
 
-            /* Password strength colors */
             --strength-weak: #ff6b6b; /* Red */
             --strength-moderate: #ffcc00; /* Yellow */
             --strength-strong: #4CAF50; /* Green */
             --strength-very-strong: #007bff; /* Blue */
+
+            --primary: #0A2463;
+            --secondary: #3E92CC;
+            --accent: #FFD166;
+            --glass: rgba(10, 36, 99, 0.86);
+            --muted-white: rgba(255, 255, 255, 0.95);
+            --danger: #d9534f;
+            --success: #4CB944;
+            --radius: 18px;
+            --shadow-lg: 0 18px 50px rgba(8, 29, 68, 0.36);
+            --shadow-sm: 0 8px 24px rgba(8, 29, 68, 0.18);
+            --transition: all .28s ease;
         }
 
         * {
@@ -52,7 +60,7 @@
         .container {
             width: 70%;
             max-width: 500px;
-            background: rgba(22, 66, 71, 0.7);
+            background: rgba(10, 36, 99, 0.88);
             backdrop-filter: blur(var(--blur-strength));
             border-radius: 20px;
             padding: 40px;
@@ -212,60 +220,53 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
+        /* Alerts */
+        .alerts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+        }
 
-        .error-message {
-            color: var(--error-red);
-            font-size: 13px;
-            margin-top: 5px;
-            padding-left: 5px;
+        .alert {
             display: flex;
             align-items: center;
-            opacity: 0;
-            height: 0;
-            overflow: hidden;
-            transition: opacity 0.4s ease-in-out, height 0.4s ease-in-out, margin-top 0.4s ease-in-out;
-        }
-
-        .error-message.show {
-            opacity: 1;
-            height: auto;
-            margin-top: 5px;
-        }
-
-        .error-message i {
-            margin-right: 8px;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-weight: 700;
             font-size: 14px;
+            box-shadow: var(--shadow-sm);
         }
 
-        .input-group input.is-invalid {
-            border: 1px solid var(--error-red);
+        .alert .left {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex: 1;
         }
 
-        .session-message {
-            padding: 12px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            width: 100%;
-            text-align: center;
-            font-weight: bold;
-            opacity: 1;
-            transition: opacity 0.5s ease-in-out;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        .alert .msg {
+            color: #fff;
+            text-align: left;
         }
 
-        .session-message.success {
-            background-color: var(--success-green);
-            color: white;
+        .alert-success {
+            background: linear-gradient(90deg, var(--success), #45b75a);
         }
 
-        .session-message.error {
-            background-color: var(--danger-red);
-            color: white;
+        .alert-error {
+            background: linear-gradient(90deg, var(--danger), #c83a3a);
         }
 
-        .session-message.hidden {
-            opacity: 0;
-            pointer-events: none;
+        .alert button.close {
+            background: transparent;
+            border: 0;
+            color: inherit;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 6px;
         }
 
         /* Password Strength Indicator Styles */
@@ -382,27 +383,60 @@
 
 <body>
 
-    <a class="back-button">Volver</a>
+    <a class="back-button" href="{{ url()->previous() }}">Volver</a>
     <div class="logo"></div>
 
     <div class="container">
         <h1>Registrarse</h1>
 
-        @if (session('success'))
-            <div class="session-message success" id="session-message">
-                {{ session('success') }}
+            <!-- Alerts -->
+            <div class="alerts" id="alerts" aria-live="polite" aria-atomic="true">
+                @if(session('status'))
+                    <div class="alert alert-success" data-auto-hide>
+                        <div class="left">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <div class="msg">{{ session('status') }}</div>
+                        </div>
+                        <button class="close" aria-label="Cerrar">×</button>
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="alert alert-error" data-auto-hide>
+                        <div class="left">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <div class="msg">{{ session('error') }}</div>
+                        </div>
+                        <button class="close" aria-label="Cerrar">×</button>
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-error" data-auto-hide="false">
+                        <div class="left">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <div class="msg">
+                                <div style="font-weight:900; margin-bottom:6px;">Corrige los siguientes errores:</div>
+                                <ul style="padding-left:18px; margin:0;">
+                                    @foreach($errors->all() as $err)
+                                        <li style="font-weight:800;">{{ $err }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <button class="close" aria-label="Cerrar">×</button>
+                    </div>
+                @endif
             </div>
-        @endif
-        @if (session('error'))
-            <div class="session-message error" id="session-message">
-                {{ session('error') }}
-            </div>
-        @endif
-        @if (session('google'))
-            <div class="session-message error" id="session-message">
-                {{ session('google') }}
-            </div>
-        @endif
         <form method="POST" action="{{ route('signup.submit') }}" style="width: 100%;">
             @csrf
 
@@ -466,17 +500,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const backButton = document.querySelector('.back-button');
+            document.querySelectorAll('.alert button.close').forEach(btn => {
+                btn.addEventListener('click', function () { const a = this.closest('.alert'); if (!a) return; a.style.opacity = '0'; a.style.transform = 'translateY(-8px)'; setTimeout(() => a.remove(), 280); });
+            });
+            document.querySelectorAll('.alert[data-auto-hide]').forEach(a => {
+                setTimeout(() => { if (!document.body.contains(a)) return; a.style.opacity = '0'; a.style.transform = 'translateY(-8px)'; setTimeout(() => { if (a) a.remove(); }, 300); }, 7000);
+            });
+
             const passwordInput = document.getElementById('password-input');
             const strengthBar = document.getElementById('strength-bar');
             const strengthText = document.getElementById('strength-text');
-
-            if (backButton) {
-                backButton.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    window.history.back();
-                });
-            }
 
             const form = document.querySelector('form');
             if (form) {
@@ -540,10 +573,10 @@
                         strengthLevel = 'weak';
                         feedback = 'Débil';
                         if (password.length < 8) feedback += ' (mínimo 8 caracteres)';
-                        if (!hasLowercase) feedback += ' (falta minúscula)';
-                        if (!hasUppercase) feedback += ' (falta mayúscula)';
-                        if (!hasNumber) feedback += ' (falta número)';
-                        if (!hasSymbol) feedback += ' (falta símbolo)';
+                        if (!hasLowercase) feedback += ' (minúscula)';
+                        if (!hasUppercase) feedback += ' (mayúscula)';
+                        if (!hasNumber) feedback += ' (número)';
+                        if (!hasSymbol) feedback += ' (símbolo)';
                     } else if (score < 5) {
                         strengthLevel = 'moderate';
                         feedback = 'Moderada';
