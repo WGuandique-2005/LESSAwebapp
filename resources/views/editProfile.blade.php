@@ -163,19 +163,11 @@
             color: #fff;
         }
 
-        /* Basic header/footer styling for context */
         header,
         footer {
             width: 100%;
-            padding: 15px 0;
         }
 
-        header {
-            position: sticky;
-            /* Sticky header */
-            top: 0;
-            z-index: 100;
-        }
     </style>
 </head>
 
