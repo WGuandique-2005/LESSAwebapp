@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProgresoUsuario;
+use App\Models\Leccion;
+
 
 class ProgressController extends Controller
 {
@@ -89,5 +91,21 @@ class ProgressController extends Controller
             // Manejo de errores
             return redirect()->route('lecciones')->withErrors(['error' => 'Error al completar la lección']);
         }
+    }
+
+    public function miProgreso(){
+    $userId = auth()->id();
+
+    $totalLecciones = Leccion::count();
+    $leccionesCompletadas = ProgresoUsuario::where('usuario_id', $userId)
+        ->where('completado', true)
+        ->with('leccion')
+        ->get();
+
+    $porcentaje = $totalLecciones > 0 
+        ? round(($leccionesCompletadas->count() / $totalLecciones) * 100) 
+        : 0;
+
+    return view('miProgreso', compact('leccionesCompletadas', 'porcentaje'));
     }
 }

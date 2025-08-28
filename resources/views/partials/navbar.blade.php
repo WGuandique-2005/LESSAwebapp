@@ -373,7 +373,7 @@
                     <a href="{{ route('aprender') }}">Aprender</a>
                     <a href="#">Practicar</a>
                     <a href="{{ route('info') }}">Info</a>
-                    <a href="#">Mi progreso</a>
+                    <a href="{{ route('miProgreso') }}">Mi progreso</a>
                 @endguest
             </nav>
 
@@ -422,7 +422,7 @@
                 <a href="{{ route('aprender') }}">Aprender</a>
                 <a href="#">Practicar</a>
                 <a href="{{ route('info') }}">Info</a>
-                <a href="#">Mi progreso</a>
+                <a href="{{ route('miProgreso') }}">Mi progreso</a>
             @endguest
         </nav>
 

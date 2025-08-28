@@ -84,6 +84,8 @@ Route::middleware('auth')->group(function () {
 
     // Ver perfil
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
+    // Ver progreso
+    Route::get('/miProgreso',[ProgressController::class, 'miProgreso'])->name('miProgreso');
 
     // Mostrar formulario para editar perfil
     Route::get('/profile/edit', [UserController::class, 'showEditProfileForm'])
