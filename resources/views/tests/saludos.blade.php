@@ -569,7 +569,7 @@
             }
         }
 
-        function revealAll(duration = 3000) {
+        function revealAll(duration = 3500) {
             if (lock) return;
             cards.forEach(c => c.classList.add('flipped'));
             setTimeout(() => {

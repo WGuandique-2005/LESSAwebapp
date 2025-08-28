@@ -2,317 +2,465 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Recuperar Contraseña - LESSA</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        xintegrity="sha512-Fo3rlalr+G/yqW8S8H5f+3zT1xZ6+K/5B5E1Q6Z8c2q5f8+5z7m3gD9c5O6Z7t0+7z9f+2V0P3p3P4p+1Q8+"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
     <style>
         :root {
-            --primary-blue: #4285f4;
-            --primary-blue-dark: #3367d6;
-            --secondary-orange: #F4A261;
-            --text-light: #fff;
-            --input-bg: rgba(255, 255, 255, 0.2);
-            --input-border-focus: #F4A261;
-            --shadow-light: rgba(0, 0, 0, 0.3);
-            --blur-strength: 15px;
-            --error-red: #ff6b6b;
-            --success-green: rgba(40, 167, 69, 0.8);
-            --danger-red: rgba(220, 53, 69, 0.8);
-            --border-radius: 10px; /* Added for consistency */
+            --primary: #0A2463;
+            --secondary: #3E92CC;
+            --accent: #FFD166;
+            --glass: rgba(10, 36, 99, 0.86);
+            --muted-white: rgba(255, 255, 255, 0.95);
+            --danger: #d9534f;
+            --success: #4CB944;
+            --radius: 18px;
+            --shadow-lg: 0 18px 50px rgba(8, 29, 68, 0.36);
+            --shadow-sm: 0 8px 24px rgba(8, 29, 68, 0.18);
+            --transition: all .28s ease;
         }
 
         * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
         }
 
         body {
+            margin: 0;
+            font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+            background: url("{{ asset('img/login.png') }}") center/cover no-repeat;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            background: url({{ asset('img/login.png') }}) no-repeat center center/cover;
-            position: relative;
-            flex-direction: column; /* Allows content to stack vertically */
-            padding: 20px; /* Added for small screen padding */
+            justify-content: center;
+            padding: 24px;
+            color: var(--muted-white);
         }
 
-        .container {
-            width: 90%; /* Adjusted for better mobile fit */
-            max-width: 500px;
-            background: rgba(22, 66, 71, 0.7);
-            backdrop-filter: blur(var(--blur-strength));
-            border-radius: 20px;
-            padding: 40px;
+        /* Main card */
+        .card {
+            width: 100%;
+            max-width: 980px;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            background: linear-gradient(180deg, rgba(10, 36, 99, 0.96), rgba(10, 36, 99, 0.9));
+            border-radius: calc(var(--radius) + 2px);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            min-height: clamp(420px, 58vh, 720px);
+        }
+
+        .panel {
+            padding: clamp(20px, 3.6vw, 40px);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            box-shadow: 0 8px 32px var(--shadow-light);
-            color: var(--text-light);
+            justify-content: center;
+            gap: 12px;
             position: relative;
-            z-index: 5;
-            flex-shrink: 0; /* Prevents shrinking on smaller screens */
         }
 
-        .logo {
+        .back {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            width: 160px;
-            height: 160px;
-            background: url({{ asset('img/logo_sinfondo.png') }}) center/contain no-repeat;
-            z-index: 10;
+            left: 18px;
+            top: 18px;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .back:hover {
+            transform: translateY(-3px);
+            background: #fff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .brand .logo {
+            width: 56px;
+            height: 56px;
+            background: url("{{ asset('img/logo2.png') }}") center/contain no-repeat;
+        }
+
+        .brand h3 {
+            margin: 0;
+            color: var(--muted-white);
+            font-size: 18px;
+            letter-spacing: 0.3px;
         }
 
         h1 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: var(--text-light);
-            text-align: center;
+            margin: 0;
+            font-size: 26px;
+            color: var(--muted-white);
         }
 
-        h2 {
-            font-size: 16px;
-            margin-bottom: 5px;
-            color: var(--text-light);
-            align-self: flex-start; /* Aligns label to the start */
-            padding-left: 5px;
+        .subtitle {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            font-size: 14px;
         }
 
-        .input-group {
-            width: 100%;
-            margin-bottom: 20px;
+        /* Alerts */
+        .alerts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
         }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid transparent;
-            border-radius: 10px;
-            font-size: 16px;
-            background: var(--input-bg);
-            color: var(--text-light);
+        .alert {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .alert .left {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex: 1;
+        }
+
+        .alert .msg {
+            color: #fff;
+            text-align: left;
+        }
+
+        .alert-success {
+            background: linear-gradient(90deg, var(--success), #45b75a);
+        }
+
+        .alert-error {
+            background: linear-gradient(90deg, var(--danger), #c83a3a);
+        }
+
+        .alert button.close {
+            background: transparent;
+            border: 0;
+            color: inherit;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        /* Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        input[type="email"] {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: #fff;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 15px;
             outline: none;
-            transition: border-color 0.3s ease, background-color 0.3s ease;
-        }
-
-        input:focus {
-            border-color: var(--input-border-focus);
-            background-color: rgba(255, 255, 255, 0.3);
+            transition: var(--transition);
         }
 
         input::placeholder {
-            color: #ddd;
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        .action-btn { /* Renamed from login-btn for generic use */
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            background-color: var(--primary-blue);
-            color: var(--text-light);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        input:focus {
+            box-shadow: 0 12px 30px rgba(62, 146, 204, 0.06);
+            border-color: rgba(255, 209, 102, 0.45);
+            background: rgba(255, 255, 255, 0.08);
         }
 
-        .action-btn:hover {
-            background-color: var(--primary-blue-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        .is-invalid {
+            border-color: rgba(255, 120, 120, 0.9) !important;
         }
 
-        .back-button {
-            display: inline-flex; /* Use flex for icon alignment */
-            align-items: center;
-            gap: 8px; /* Space between icon and text */
-            margin-top: 20px;
-            color: var(--text-light);
-            background-color: var(--secondary-orange);
-            padding: 10px 20px;
-            border-radius: 8px; /* Slightly more rounded */
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-        }
-
-        .back-button:hover {
-            background-color: var(--text-light);
-            color: var(--secondary-orange);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .back-container {
-            width: 100%;
+        .field-error {
+            color: #ffdede;
+            font-weight: 700;
             display: flex;
-            justify-content: center;
-        }
-
-        /* Feedback and Error Messages */
-        .feedback-message {
-            padding: 12px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            width: 100%;
-            text-align: center;
-            font-weight: bold;
-            opacity: 1;
-            transition: opacity 0.5s ease-in-out;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .feedback-message.success {
-            background-color: var(--success-green);
-            color: white;
-        }
-
-        .feedback-message.error {
-            background-color: var(--danger-red);
-            color: white;
-        }
-
-        .feedback-message.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .error-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 10px;
-            width: 100%;
-        }
-
-        .error-list li {
-            color: var(--error-red);
+            align-items: center;
+            gap: 8px;
             font-size: 13px;
-            margin-bottom: 5px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 6px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 0;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: var(--shadow-sm);
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: var(--secondary);
+        }
+
+        .links {
+            margin-top: 10px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.92);
+            text-align: center;
+        }
+
+        .links a {
+            color: var(--accent);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        /* Visual aside */
+        .visual {
+            background: linear-gradient(180deg, rgba(62, 146, 204, 0.12), rgba(10, 36, 99, 0.18));
             display: flex;
             align-items: center;
-            gap: 5px;
-            padding-left: 5px;
+            justify-content: center;
+            padding: 28px;
+            position: relative;
         }
 
-        .error-list li i {
-            font-size: 14px;
-        }
-
-        .change-password-link {
+        .visual .inner {
+            max-width: 320px;
             text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
+            color: rgba(255, 255, 255, 0.96);
         }
 
-        .change-password-link a {
-            color: var(--secondary-orange);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
+        .visual h3 {
+            margin: 0 0 10px;
+            font-size: 22px;
+            color: var(--muted-white);
         }
 
-        .change-password-link a:hover {
-            color: var(--text-light);
-            text-decoration: underline;
+        .visual p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
         }
 
-        /* Responsive Adjustments */
-        @media screen and (max-width: 768px) {
-            .container {
-                padding: 30px 20px;
-                margin-top: 80px;
+        @media (max-width:980px) {
+            .card {
+                grid-template-columns: 1fr;
+                min-height: auto;
+                max-width: 680px;
             }
 
-            .logo {
-                width: 80px; /* Smaller logo */
-                height: 80px;
-                top: 20px;
-                right: 20px;
+            .visual {
+                display: none;
+            }
+
+            .back {
+                left: 12px;
+                top: 12px;
+            }
+        }
+
+        @media (max-width:420px) {
+            .panel {
+                padding: 18px;
             }
 
             h1 {
-                font-size: 28px;
-            }
-
-            .back-button {
-                padding: 8px 15px;
-                font-size: 14px;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .container {
-                padding: 25px 15px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-
-            h2, input, .action-btn, .back-button {
-                font-size: 14px;
-            }
-
-            .back-button {
-                padding: 7px 12px;
+                font-size: 20px;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="logo"></div>
-    <form action="{{ route('recuperarPass') }}" method="POST" class="container">
-        @csrf
-        <h1>Recuperar Contraseña</h1>
-        <p style="text-align: center; margin-bottom: 20px;">Ingresa tu correo electrónico para recibir un código de recuperación.</p>
 
-        @if(session('status'))
-            <p class="feedback-message success" id="session-message">
-                {{ session('status') }}
-            </p>
-        @endif
-        @if(session('error'))
-            <p class="feedback-message error" id="session-message">
-                {{ session('error') }}
-            </p>
-        @endif
+    <a id="backBtn" class="back" href="/login" aria-label="Volver">← Volver</a>
 
-        <div class="input-group">
-            <h2>Correo Electrónico</h2>
-            <input type="email" name="email" placeholder="email@example.com" value="{{ old('email') }}" required />
-            @error('email')
-                <ul class="error-list">
-                    <li><i class="fas fa-exclamation-circle"></i> {{ $message }}</li>
-                </ul>
-            @enderror
-        </div>
-
-        <button type="submit" class="action-btn">Solicitar Código de Recuperación</button>
-
-        <div class="back-container">
-            <a href="{{ route('login') }}" class="back-button">
-                <i class="fas fa-arrow-left"></i> Volver al Inicio de Sesión
-            </a>
-        </div>
-
-        @if (session('status'))
-            <div class="change-password-link">
-                <a href="{{ route('newPass_view') }}">¿Ya tienes el código? Cambia tu contraseña aquí.</a>
+    <main class="card" role="main" aria-labelledby="recoverTitle">
+        <section class="panel" aria-label="Recuperar contraseña">
+            <div class="brand">
+                <div class="logo" aria-hidden="true"></div>
+                <h3>LESSA</h3>
             </div>
-        @endif
-    </form>
+
+            <h1 id="recoverTitle">Recuperar contraseña</h1>
+            <p class="subtitle">Introduce tu correo para enviarte un código de recuperación.</p>
+
+            <!-- Alerts -->
+            <div class="alerts" id="alerts" aria-live="polite" aria-atomic="true">
+                @if(session('status'))
+                    <div class="alert alert-success" data-auto-hide>
+                        <div class="left">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <div class="msg">{{ session('status') }}</div>
+                        </div>
+                        <button class="close" aria-label="Cerrar">×</button>
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="alert alert-error" data-auto-hide>
+                        <div class="left">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <div class="msg">{{ session('error') }}</div>
+                        </div>
+                        <button class="close" aria-label="Cerrar">×</button>
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-error" data-auto-hide="false">
+                        <div class="left">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <div class="msg">
+                                <div style="font-weight:900; margin-bottom:6px;">Corrige los siguientes errores:</div>
+                                <ul style="padding-left:18px; margin:0;">
+                                    @foreach($errors->all() as $err)
+                                        <li style="font-weight:800;">{{ $err }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <button class="close" aria-label="Cerrar">×</button>
+                    </div>
+                @endif
+            </div>
+
+            <!-- Form -->
+            <form id="recoverForm" action="{{ route('recuperarPass') }}" method="POST" novalidate>
+                @csrf
+
+                <div class="field">
+                    <label for="email">Correo electrónico</label>
+                    <input id="email" name="email" type="email" placeholder="tu@correo.com" value="{{ old('email') }}"
+                        required class="@error('email') is-invalid @enderror" />
+                    @error('email') <div class="field-error"><i class="fa-solid fa-circle-exclamation"></i>
+                    {{ $message }}</div> @enderror
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">Solicitar código</button>
+                </div>
+            </form>
+
+            <div class="links" style="margin-top:14px;">
+                <a href="{{ route('login') }}" style="color:var(--accent); font-weight:800;">¿Recordaste tu contraseña?
+                    Inicia sesión</a>
+            </div>
+
+            @if(session('status'))
+                <div style="margin-top:14px; text-align:center;">
+                    <a href="{{ route('newPass_view') }}" class="links" style="font-weight:800; color:var(--accent);">¿Ya
+                        tienes el código? Cambia tu contraseña aquí.</a>
+                </div>
+            @endif
+        </section>
+
+        <aside class="visual" aria-hidden="true">
+            <div class="inner">
+                <h3>Recupera el acceso</h3>
+                <p>Te enviaremos un código al correo para restablecer tu contraseña de forma segura.</p>
+                <div style="height:20px"></div>
+                <img src="{{ asset('img/illustration_recover.png') }}" alt=""
+                    style="max-width:240px; opacity:0.96; filter: drop-shadow(0 12px 30px rgba(8,29,68,0.22));">
+            </div>
+        </aside>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Back button behaviour
+            const backBtn = document.getElementById('backBtn');
+            if (backBtn) backBtn.addEventListener('click', function (e) { e.preventDefault(); window.history.back(); });
+
+            // Clear invalid state when user types
+            const form = document.getElementById('recoverForm');
+            if (form) {
+                form.querySelectorAll('input').forEach(input => {
+                    input.addEventListener('input', function () {
+                        if (this.classList.contains('is-invalid')) this.classList.remove('is-invalid');
+                        const fe = this.parentElement.querySelector('.field-error');
+                        if (fe) fe.remove();
+                    });
+                });
+            }
+
+            // Alerts: close & auto-hide
+            document.querySelectorAll('.alert button.close').forEach(btn => {
+                btn.addEventListener('click', function () { const a = this.closest('.alert'); if (!a) return; a.style.opacity = '0'; a.style.transform = 'translateY(-8px)'; setTimeout(() => a.remove(), 280); });
+            });
+            document.querySelectorAll('.alert[data-auto-hide]').forEach(a => {
+                setTimeout(() => { if (!document.body.contains(a)) return; a.style.opacity = '0'; a.style.transform = 'translateY(-8px)'; setTimeout(() => { if (a) a.remove(); }, 300); }, 7000);
+            });
+
+            // initial micro animation
+            const card = document.querySelector('.card');
+            if (card) { card.style.opacity = '0'; card.style.transform = 'translateY(6px)'; setTimeout(() => { card.style.transition = 'opacity .45s ease, transform .45s ease'; card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 40); }
+
+            // If server validation flagged fields, focus the first one
+            @if($errors->any())
+                (function () { const first = document.querySelector('.is-invalid'); if (first) first.focus(); })();
+            @endif
+});
+    </script>
 </body>
 
 </html>
