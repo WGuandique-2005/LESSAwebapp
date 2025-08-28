@@ -619,7 +619,7 @@
 
                 const cards = document.querySelectorAll('.card');
                 cards.forEach((card, index) => {
-                    if (index < 3) {
+                    if (index < {{ $completadas }}) {
                         const statusCircle = card.querySelector('.card-status .circle');
                         statusCircle.style.backgroundColor = '#4CAF50';
                         statusCircle.style.borderColor = '#4CAF50';

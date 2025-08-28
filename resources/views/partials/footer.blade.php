@@ -220,15 +220,15 @@
                     <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24">
                                 <path
                                     d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2l-8 5L4 6h16z" />
-                            </svg></span><span>info@lessa.com</span></li>
+                            </svg></span><span>wguandique2006@gmail.com</span></li>
                     <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24">
                                 <path
                                     d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.36 11.36 0 003.55.57 1 1 0 011 1v3.8a1 1 0 01-1 1A18 18 0 014 5a1 1 0 011-1h3.79a1 1 0 011 1 11.36 11.36 0 00.57 3.55 1 1 0 01-.21 1.11l-2.53 2.13z" />
-                            </svg></span><span>+503 2250-6789</span></li>
+                            </svg></span><span>+503 7941-9140</span></li>
                     <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24">
                                 <path
                                     d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" />
-                            </svg></span><span>San Salvador, El Salvador</span></li>
+                            </svg></span><span>San Miguel, El Salvador</span></li>
                 </ul>
             </div>
         </div>

@@ -102,27 +102,27 @@
         }
 
         .hero-text h2 {
-            font-size: var(--font-size-xxl);
+            font-size: var(--font-size-xl);
             font-weight: 700;
             margin-bottom: var(--spacing-md);
             color: var(--white);
         }
 
         .hero-text h2 {
-            font-size: var(--font-size-xl);
+            font-size: var(--font-size-md);
             font-weight: 600;
             margin-bottom: var(--spacing-md);
             color: var(--white);
         }
 
         .hero-text p {
-            font-size: var(--font-size-lg);
+            font-size: var(--font-size-sm);
             margin-bottom: var(--spacing-xl);
             color: var(--white);
         }
 
         .learn-sections {
-            padding: var(--spacing-xxl) 0;
+            padding: var(--spacing-xl) 0;
         }
 
         .section-header {
@@ -131,7 +131,7 @@
         }
 
         .section-header h2 {
-            font-size: var(--font-size-xxl);
+            font-size: var(--font-size-xl);
             color: var(--dark-gray);
             margin-bottom: var(--spacing-md);
             font-weight: 700;
@@ -191,21 +191,21 @@
         }
 
         .card-content {
-            padding: var(--spacing-lg);
+            padding: var(--spacing-sm);
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
         .card-content h3 {
-            font-size: var(--font-size-lg);
+            font-size: var(--font-size-sm);
             color: var(--primary-blue);
             margin-bottom: var(--spacing-sm);
             font-weight: 600;
         }
 
         .card-content p {
-            font-size: var(--font-size-base);
+            font-size: var(--font-size-sm);
             color: var(--text-secondary);
             flex-grow: 1;
         }

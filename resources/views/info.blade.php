@@ -92,52 +92,47 @@
             gap: var(--spacing-xl);
         }
 
-        .hero-logo {
-            max-width: 180px;
-            margin-bottom: var(--spacing-md);
-            filter: brightness(0) invert(1);
-        }
-
         .hero-text {
             max-width: 700px;
             padding: var(--spacing-sm);
         }
 
         .hero-text h1 {
-            font-size: var(--font-size-xxl);
+            font-size: var(--font-size-xl);
             font-weight: 700;
             margin-bottom: var(--spacing-sm);
             line-height: 1.2;
         }
 
         .hero-text h3 {
-            font-size: var(--font-size-lg);
+            font-size: var(--font-size-md);
             font-weight: 600;
             margin-bottom: var(--spacing-md);
             color: rgba(255, 255, 255, 0.9);
         }
 
         .hero-text p {
-            font-size: var(--font-size-md);
+            font-size: var(--font-size-sm);
             margin-bottom: var(--spacing-lg);
             color: rgba(255, 255, 255, 0.8);
         }
 
         .features-section {
             background-color: var(--white);
-            padding: var(--spacing-lg);
+            padding: var(--spacing-sm);
             border-radius: var(--border-radius);
             box-shadow: 0 8px 20px var(--shadow-medium);
             text-align: center;
             position: relative;
             z-index: 2;
-            margin-top: var(--spacing-xl);
+            margin-top: var(--spacing-md);
             width: 100%;
+
             max-width: 380px;
         }
 
         .features-section h3 {
-            font-size: var(--font-size-xl);
+            font-size: var(--font-size-md);
             color: var(--success-color);
             margin-bottom: var(--spacing-md);
             font-weight: 700;
@@ -155,7 +150,7 @@
         }
 
         .feature-item p {
-            font-size: var(--font-size-base);
+            font-size: var(--font-size-sm);
             color: var(--dark-gray);
             font-weight: 500;
         }
@@ -163,7 +158,7 @@
         .info-section {
             display: flex;
             background-color: var(--white);
-            margin-top: var(--spacing-xl);
+            margin-top: var(--spacing-sm);
             border-radius: var(--border-radius);
             box-shadow: 0 4px 15px var(--shadow-light);
             overflow: hidden;
@@ -222,7 +217,7 @@
 
         .info-logo-overlay p {
             color: var(--white);
-            font-size: var(--font-size-md);
+            font-size: var(--font-size-sm);
             font-weight: 600;
             background-color: var(--primary-orange);
             padding: var(--spacing-xs) var(--spacing-md);
@@ -238,10 +233,11 @@
             flex-direction: column;
             justify-content: center;
             background-color: var(--white);
+            max-width: fit-content
         }
 
         .info-right h3 {
-            font-size: var(--font-size-xl);
+            font-size: var(--font-size-md);
             color: var(--success-color);
             margin-bottom: var(--spacing-md);
             font-weight: 700;
@@ -249,7 +245,7 @@
         }
 
         .info-right p {
-            font-size: var(--font-size-base);
+            font-size: var(--font-size-sm);
             color: var(--text-color);
             margin-bottom: var(--spacing-lg);
         }
@@ -270,12 +266,12 @@
 
         .info-item p {
             margin: 0;
-            font-size: var(--font-size-base);
+            font-size: var(--font-size-sm);
             color: var(--text-color);
         }
 
         .info-item p b {
-            font-size: var(--font-size-md);
+            font-size: var(--font-size-sm);
             color: var(--dark-gray);
         }
 
@@ -283,7 +279,7 @@
             margin-top: var(--spacing-lg);
             text-align: center;
             background-color: var(--primary-blue);
-            padding: var(--spacing-sm) var(--spacing-lg);
+            padding: var(--spacing-sm) var(--spacing-sm);
             border-radius: var(--border-radius);
             cursor: pointer;
             transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
@@ -300,17 +296,8 @@
         .btn-info a {
             color: var(--white);
             text-decoration: none;
-            font-weight: 600;
-            font-size: var(--font-size-lg);
+            font-size: var(--font-size-sm);
             display: block;
-        }
-
-        footer {
-            background-color: var(--dark-gray);
-            color: var(--white);
-            padding: var(--spacing-md) 0;
-            text-align: center;
-            margin-top: var(--spacing-xxl);
         }
 
         @media (min-width: 768px) {
@@ -370,7 +357,6 @@
                 class="hero-bg-img">
             <div class="container hero-content">
                 <div class="hero-text">
-                    <img src="{{ asset('img/logo_sinfondo.png') }}" alt="LESSA Logo" class="hero-logo">
                     <h1 style="color: white;">Bienvenid@ a LESSA</h1>
                     <h3>¡Nos alegra tenerte aquí una vez más!</h3>
                     <p>Tu dedicación a aprender el Lenguaje de Señas Salvadoreño nos inspira. Desde esta sección puedes acceder rápidamente
@@ -397,7 +383,7 @@
             </div>
             <div class="info-right">
                 <h3>¡Retos que desafiarán tus conocimientos!</h3>
-                <p>La motivación es clave en cualquier proceso de aprendizaje. Por eso, hemos incorporado una sección dinámica con desafíos, pruebas rápidas, juegos visuales y recompensas (insignias, puntos, desbloqueos). Aquí podrás aplicar tus conocimientos de forma divertida y retadora.</p>
+                <p>La motivación es clave en cualquier proceso de aprendizaje. Por eso, hemos incorporado una sección dinámica con desafíos, pruebas rápidas, juegos visuales y recompensas.</p>
                 <div class="info-item">
                     <i class="fas fa-play-circle icon"></i>
                     <div>
@@ -430,7 +416,7 @@
             </div>
             <div class="info-right">
                 <h3>Contamos con lecciones interactivas</h3>
-                <p>Nuestro núcleo educativo está compuesto por lecciones organizadas por niveles de dificultad (Básico, Intermedio y Avanzado). Estas lecciones están diseñadas para adaptarse a tu ritmo de aprendizaje, brindándote explicaciones claras, retroalimentación inmediata y recursos complementarios.</p>
+                <p>Nuestro núcleo educativo está compuesto por lecciones organizadas por niveles de dificultad. Estas lecciones están diseñadas para adaptarse a tu ritmo de aprendizaj.</p>
                 <div class="info-item">
                     <i class="fas fa-play-circle icon"></i>
                     <div>
@@ -463,7 +449,7 @@
             </div>
             <div class="info-right">
                 <h3>Sigue Aprendiendo</h3>
-                <p>Accede a tu progreso aquí para seguir motivándote en tu aprendizaje de LESSA. Cada avance refleja tu esfuerzo y dedicación para construir una comunicación más inclusiva. Recuerda que cada palabra y cada señal que dominas te acerca más a un mundo sin barreras. ¡Sigue adelante y celebra cada logro en tu camino!</p>
+                <p>Accede a tu progreso aquí para seguir motivándote en tu aprendizaje de LESSA. Cada avance refleja tu esfuerzo y dedicación para construir una comunicación más inclusiva. Sigue adelante y celebra cada logro en tu camino!</p>
                 <div class="info-item">
                     <i class="fas fa-play-circle icon"></i>
                     <div>

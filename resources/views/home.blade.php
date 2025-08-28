@@ -86,17 +86,17 @@
         }
 
         .hero-logo {
-            max-width: 150px;
-            margin-bottom: var(--spacing-lg);
+            max-width: 80px;
+            margin-bottom: var(--spacing-sm);
             filter: brightness(0) invert(1);
             /* Para que el logo se vea blanco */
         }
 
         .hero-text {
-            max-width: 800px;
+            max-width: 700px;
         }
 
-        .hero-text h1 {
+        .hero-text h2 {
             font-size: var(--font-size-xxl);
             font-weight: 700;
             margin-bottom: var(--spacing-md);
@@ -110,28 +110,28 @@
 
 
         .hero-text p {
-            font-size: var(--font-size-lg);
+            font-size: var(--font-size-sm);
             margin-bottom: var(--spacing-xl);
         }
 
         .features-section {
             background-color: var(--white);
-            padding: var(--spacing-lg) var(--spacing-xl);
+            padding: var(--spacing-sm) var(--spacing-sm);
             border-radius: var(--border-radius);
             box-shadow: 0 4px 12px var(--shadow-light);
             text-align: center;
             position: relative;
             z-index: 2;
             margin-top: var(--spacing-xl);
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 500px;
+            margin-left: 5%;
+            margin-right: 5%;
         }
 
         .features-section h2 {
-            font-size: var(--font-size-xl);
+            font-size: var(--font-size-md);
             color: var(--dark-gray);
-            margin-bottom: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
         }
 
         .feature-item {
@@ -150,7 +150,7 @@
         }
 
         .practice-sections {
-            padding: var(--spacing-xxl) 0;
+            padding: var(--spacing-md) 0;
         }
 
         .section-header {
@@ -159,7 +159,7 @@
         }
 
         .section-header h2 {
-            font-size: var(--font-size-xl);
+            font-size: var(--font-size-lg);
             color: var(--dark-gray);
             margin-bottom: var(--spacing-md);
         }
@@ -238,7 +238,7 @@
             flex-grow: 1;
         }
 
-        .card-content h3 {
+        .card-content h4 {
             font-size: var(--font-size-lg);
             color: var(--dark-gray);
             margin-bottom: var(--spacing-sm);
@@ -307,7 +307,7 @@
         }
 
 
-        .progress-card h3 {
+        .progress-card h4 {
             font-size: var(--font-size-lg);
             color: var(--dark-gray);
             margin-bottom: var(--spacing-sm);
@@ -340,7 +340,7 @@
             flex-grow: 1;
         }
 
-        .tip-content h3 {
+        .tip-content h4 {
             font-size: var(--font-size-base);
             color: var(--dark-gray);
             margin-bottom: var(--spacing-sm);
@@ -440,9 +440,9 @@
                 class="hero-bg-img">
             <div class="container hero-content">
                 <div class="hero-text">
-                    <img src="{{ asset('img/logo_sinfondo.png') }}" alt="LESSA Logo" class="hero-logo">
-                    <h1 style="color: white;">Bienvenido, {{ Auth::user()->name }}</h1>
-                    <h3>Aquí es donde transformas todo tu conocimiento teórico en habilidades de comunicación.</h3>
+                    <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="hero-logo">
+                    <h2 style="color: white;">Bienvenido, {{ Auth::user()->name }}</h2>
+                    <h4>Aquí es donde transformas todo tu conocimiento teórico en habilidades de comunicación.</h4>
                     <p>La sección de práctica de LESSA está diseñada para ayudarte a fortalecer tu confianza como
                         profesional. ¡No más dudas, adquiere confianza en el uso del Lenguaje de Señas Salvadoreño!</p>
                 </div>
@@ -469,7 +469,7 @@
                     <div class="sidebar-practice">
                         <div class="tip-card">
                             <div class="tip-content">
-                                <h3>Consejo</h3>
+                                <h4>Consejo</h4>
                                 <p>¡Recuerda practicar frente a un espejo para observar tu posición corporal y gestos
                                     faciales! Esto te ayudará a asegurarte de que tu señas sean naturales. ¡La práctica
                                     constante es la mejor manera de mejorar tu fluidez y confianza!</p>
@@ -479,7 +479,7 @@
                             <div class="progress-circle">
                                 <span>50%</span>
                             </div>
-                            <h3>Abecedario</h3>
+                            <h4>Abecedario</h4>
                             <p>Nivel III</p>
                             <p>¡Puedes avanzar al segundo nivel!</p>
                         </div>
@@ -491,7 +491,7 @@
                                 <img src="{{ asset('img/letters.png') }}" alt="Abecedario" class="card-image">
                             </div>
                             <div class="card-content">
-                                <h3>Abecedario</h3>
+                                <h4>Abecedario</h4>
                                 <p>Domínalo a la perfección; esta es una excelente forma de desarrollar coordinación
                                     motriz y familiarizarte con la estructura de LESSA.</p>
                             </div>
@@ -501,7 +501,7 @@
                                 <img src="{{ asset('img/phrases.png') }}" alt="Frases practice" class="card-image">
                             </div>
                             <div class="card-content">
-                                <h3>Frases</h3>
+                                <h4>Frases</h4>
                                 <p>Explora estructuras poblacionales con temas, preguntas básicas, presentaciones y
                                     frases habituales.</p>
                             </div>
@@ -513,7 +513,7 @@
                                     class="card-image">
                             </div>
                             <div class="card-content">
-                                <h3>Vocabulario Útil</h3>
+                                <h4>Vocabulario Útil</h4>
                                 <p>Descubre un amplio conjunto de palabras que son esenciales en múltiples contextos.
                                 </p>
                             </div>
@@ -525,7 +525,7 @@
                                     class="card-image">
                             </div>
                             <div class="card-content">
-                                <h3>Términos Comunes</h3>
+                                <h4>Términos Comunes</h4>
                                 <p>Sumérgete en un diccionario de fácil recuperación que te ayudará a comunicarte
                                     fácilmente.</p>
                             </div>

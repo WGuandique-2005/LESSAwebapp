@@ -161,6 +161,7 @@
         .btn-link:hover {
             background-color: var(--primary-color);
             color: #fff;
+            max-width: fit-content
         }
 
         header,
