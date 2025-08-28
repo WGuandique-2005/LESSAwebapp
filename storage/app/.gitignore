@@ -2,6 +2,3 @@
 !private/
 !public/
 !.gitignore
-!/storage/app/abecedario.json
-!/storage/app/numeros.json
-!/storage/app/saludos.json
