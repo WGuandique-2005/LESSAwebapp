@@ -461,7 +461,6 @@
 
 <script>
     (function () {
-        // Elements
         const dropZones = Array.from(document.querySelectorAll('.drop-zone'));
         const draggables = Array.from(document.querySelectorAll('.draggable'));
         const mensajeEl = document.getElementById('mensaje');
@@ -474,10 +473,9 @@
 
         let total = dropZones.length;
         let correctas = 0;
-        let assignments = {}; // { dropId: signId }
-        let selectedSign = null; // for tap-to-connect
+        let assignments = {};
+        let selectedSign = null;
 
-        // Utility to update UI progress and hidden input
         function updateProgress() {
             const percent = Math.round((correctas / total) * 100) || 0;
             progressBar.style.width = percent + '%';
@@ -487,13 +485,13 @@
             if (correctas === total) {
                 btnComplete.disabled = false;
                 btnComplete.setAttribute('aria-disabled', 'false');
+                mensajeEl.innerHTML = '<span style="color:var(--success); font-size:1.1rem;">🎉 ¡Felicidades! Has completado todas las conexiones correctamente. 🎉</span>';
             } else {
                 btnComplete.disabled = true;
                 btnComplete.setAttribute('aria-disabled', 'true');
             }
         }
 
-        // Reset game
         function resetGame() {
             assignments = {};
             correctas = 0;
@@ -512,7 +510,6 @@
             updateProgress();
         }
 
-        // Drag & drop handlers
         draggables.forEach(d => {
             d.addEventListener('dragstart', (e) => {
                 d.setAttribute('aria-grabbed', 'true');
@@ -524,16 +521,13 @@
                 d.setAttribute('aria-grabbed', 'false');
             });
 
-            // keyboard activation for accessibility (Enter to select)
             d.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    // emulate tap-to-select
                     toggleSelectSign(d);
                 }
             });
 
-            // click/tap select for mobile
             d.addEventListener('click', (e) => {
                 e.preventDefault();
                 toggleSelectSign(d);
@@ -541,7 +535,6 @@
         });
 
         dropZones.forEach(z => {
-            // Drag over / drop
             z.addEventListener('dragover', (e) => {
                 e.preventDefault();
                 z.classList.add('over');
@@ -557,13 +550,11 @@
                 tryAssign(z, signEl);
             });
 
-            // Click/tap on drop zone to complete selectedSign (tap-to-connect)
             z.addEventListener('click', (e) => {
                 if (!selectedSign) return;
                 tryAssign(z, selectedSign);
             });
 
-            // keyboard support to drop onto focused zone
             z.addEventListener('keydown', (e) => {
                 if ((e.key === 'Enter' || e.key === ' ') && selectedSign) {
                     e.preventDefault();
@@ -572,19 +563,15 @@
             });
         });
 
-        // Try to assign signEl to drop zone z
         function tryAssign(z, signEl) {
             const dropId = z.dataset.id;
             const signId = signEl.dataset.id;
 
-            // If already assigned to this drop (same), ignore
             if (assignments[dropId] === signId) return;
 
-            // If sign already used somewhere else, ignore (prevent duplicate)
             const used = Object.values(assignments).includes(signId);
             if (used) {
                 mensajeEl.innerHTML = '<span style="color:var(--muted)">Esa tarjeta ya fue usada.</span>';
-                // optionally shake the used drop
                 const usedDrop = dropZones.find(d => assignments[d.dataset.id] === signId);
                 if (usedDrop) {
                     usedDrop.classList.add('incorrecto');
@@ -593,9 +580,7 @@
                 return;
             }
 
-            // Check correct match: IDs must equal
             if (dropId === signId) {
-                // mark success
                 z.classList.remove('incorrecto');
                 z.classList.add('acertado');
                 z.querySelector('.drop-target').textContent = signEl.querySelector('.significado-nombre').textContent;
@@ -604,7 +589,6 @@
                 correctas = Object.keys(assignments).length;
                 mensajeEl.innerHTML = '<span style="color:var(--success)">¡Correcto!</span>';
             } else {
-                // visual feedback for incorrect
                 z.classList.add('incorrecto');
                 z.querySelector('.drop-target').textContent = signEl.querySelector('.significado-nombre').textContent;
                 mensajeEl.innerHTML = '<span style="color:var(--danger)">¡No corresponde ese significado!</span>';
@@ -615,7 +599,6 @@
                 }, 800);
             }
 
-            // clear selectedSign if was tap-to-select
             if (selectedSign) {
                 selectedSign.classList.remove('selected');
                 selectedSign = null;
@@ -623,40 +606,29 @@
             updateProgress();
         }
 
-        // toggle select sign for tap-to-connect
         function toggleSelectSign(el) {
-            // if already selected, unselect
             if (selectedSign === el) {
                 el.classList.remove('selected');
                 selectedSign = null;
                 mensajeEl.innerHTML = '<span style="color:var(--muted)">Selecciona una seña o arrastra una tarjeta.</span>';
                 return;
             }
-            // unselect previous
             if (selectedSign) selectedSign.classList.remove('selected');
             selectedSign = el;
             el.classList.add('selected');
             mensajeEl.innerHTML = '<span style="color:var(--muted)">Toca la seña donde quieres colocar: <strong>' + (el.querySelector('.significado-nombre')?.textContent || '') + '</strong></span>';
         }
 
-        // Initialize keyboard accessibility focus styles (enter to pick sign, then enter on drop to assign)
-        // Reset button
         btnReset.addEventListener('click', resetGame);
 
-        // Form submission: only allow if all correct
         completeForm.addEventListener('submit', function (e) {
             if (correctas !== total) {
                 e.preventDefault();
                 mensajeEl.innerHTML = '<span style="color:var(--danger)">Debes conectar todas las señas correctamente.</span>';
                 return false;
             }
-            // else proceed — server should also validate assignments
         });
 
-        // init
         resetGame();
-
-        // Small enhancement: support touch drag on some browsers using pointer events fallback
-        // (We already support tap-to-connect, which covers mobile.)
     })();
 </script>

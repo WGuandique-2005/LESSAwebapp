@@ -466,7 +466,7 @@
                     ¡Tú puedes!
                 </p>
 
-                <div class="progress-container">
+                <div class="progress-container goToProgress" style="cursor: pointer;">
                     <p>Progreso de Aprendizaje</p>
                     <div class="progress-bar-outer">
                         <div class="progress-bar-inner" style="width: 20%;"></div>
@@ -518,34 +518,6 @@
 
                     <div class="card">
                         <div class="card-image">
-                            <img src="{{ asset('img/food&drinks.png')}}" alt="Alimentos y Bebidas">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="comida">Alimentos y Bebidas</h3>
-                            <p>Practicarás las señas de alimentos comunes (pan, arroz, papa, agua, leche, café) y frases
-                                como "Tengo hambre" y "¿Quieres comer?".</p>
-                        </div>
-                        <div class="card-status">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{ asset('img/nature.png') }}" alt="Animales">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="animales">Animales y Naturaleza</h3>
-                            <p>Aprenderás a señalar animales comunes (perro, gato, pájaro) y a describir su entorno
-                                natural (árbol, río, montaña).</p>
-                        </div>
-                        <div class="card-status">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image">
                             <img src="{{ asset('img/health.png') }}" alt="Salud y Emergencias">
                         </div>
                         <div class="card-content">
@@ -568,6 +540,34 @@
                             <p>Explorarás cómo expresar sentimientos como "feliz", "triste", "enojado", "nervioso",
                                 "cansado" y preguntas como "¿Cómo te sientes hoy?" o "¿Estás bien?", para poder expresar
                                 y entender estados emocionales en conversaciones.</p>
+                        </div>
+                        <div class="card-status">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('img/food&drinks.png')}}" alt="Alimentos y Bebidas">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="comida">Alimentos y Bebidas</h3>
+                            <p>Practicarás las señas de alimentos comunes (pan, arroz, papa, agua, leche, café) y frases
+                                como "Tengo hambre" y "¿Quieres comer?".</p>
+                        </div>
+                        <div class="card-status">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('img/nature.png') }}" alt="Animales">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="animales">Animales y Naturaleza</h3>
+                            <p>Aprenderás a señalar animales comunes (perro, gato, pájaro) y a describir su entorno
+                                natural (árbol, río, montaña).</p>
                         </div>
                         <div class="card-status">
                             <div class="circle"></div>
@@ -601,6 +601,11 @@
                 const ls_salud = document.querySelector('.salud');
                 const ls_emociones = document.querySelector('.emociones');
                 const ls_extra = document.querySelector('.extraLs');
+                const goToProgress = document.querySelector('.goToProgress');
+
+                goToProgress.addEventListener('click', () => {
+                    window.location.href = "{{ route('miProgreso') }}";
+                });
 
                 // Dirrecionar a la ruta de la lección
                 ls_abcd.addEventListener('click',()=>{

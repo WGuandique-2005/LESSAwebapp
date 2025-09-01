@@ -30,7 +30,7 @@ class ProgressController extends Controller
                 'completado' => true,
                 'fecha_completada' => $fechaCompletado,
             ]);
-            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente');
+            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente, ¡Felicidades!, puedes pasar a la siguiente lección');
         } catch (\Exception $e) {
             // Manejo de errores
             return redirect()->route('lecciones')->withErrors(['error' => 'Error al completar la lección']);
@@ -58,7 +58,7 @@ class ProgressController extends Controller
                 'completado' => true,
                 'fecha_completada' => $fechaCompletado,
             ]);
-            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente');
+            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente, ¡Felicidades!, puedes pasar a la siguiente lección');
         } catch (\Exception $e) {
             // Manejo de errores
             return redirect()->route('lecciones')->withErrors(['status' => 'Error al completar la lección']);
@@ -86,7 +86,7 @@ class ProgressController extends Controller
                 'completado' => true,
                 'fecha_completada' => $fechaCompletado,
             ]);
-            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente');
+            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente, ¡Felicidades!, puedes pasar a la siguiente lección');
         } catch (\Exception $e) {
             // Manejo de errores
             return redirect()->route('lecciones')->withErrors(['error' => 'Error al completar la lección']);
