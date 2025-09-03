@@ -319,6 +319,54 @@
             gap: 8px;
         }
 
+        /* Botón de Ayuda */
+        .lessa-help-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--secondary);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 2px solid #fff;
+            cursor: pointer;
+            transition: transform .22s ease, box-shadow .22s ease;
+            position: relative;
+        }
+
+        .lessa-help-btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 0 6px rgba(62, 146, 204, 0.10);
+        }
+
+        /* Tooltip */
+        .lessa-help-btn::after {
+            content: "¿Necesitas ayuda?";
+            position: absolute;
+            bottom: calc(100% - 80px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #080b26;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .25s ease, transform .25s ease;
+            pointer-events: none;
+        }
+
+        .lessa-help-btn:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-3px);
+        }
+
         /* Responsive behaviour */
         @media (max-width: 992px) {
             .lessa-navbar-inner {
@@ -385,6 +433,7 @@
                 </button>
 
                 <div class="lessa-actions">
+                    <button class="lessa-help-btn" aria-label="Ayuda">?</button>
                     @guest
                         <button class="lessa-btn lessa-btn--outline"
                             onclick="location.href='{{ url('/login') }}'">Ingresar</button>
