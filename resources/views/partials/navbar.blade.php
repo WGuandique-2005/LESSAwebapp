@@ -346,10 +346,9 @@
         .lessa-help-btn::after {
             content: "¿Necesitas ayuda?";
             position: absolute;
-            bottom: calc(100% - 80px);
-            left: 50%;
+            left: calc(100% - 125px);
             transform: translateX(-50%);
-            background: #080b26;
+            background: var(--secondary);
             color: #fff;
             padding: 6px 10px;
             border-radius: 8px;
