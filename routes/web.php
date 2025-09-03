@@ -76,6 +76,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/lecciones/saludos/test', [LeccionesController::class, 'memorama_saludos'])->name('ls3_saludos_test');
     Route::post('/lecciones/saludos/complete', [ProgressController::class, 'ls3_complete'])->name('lecciones.saludos.complete');
 
+    Route::get('/lecciones/salud',[LeccionesController::class, 'ls4_salud'])->name('lecciones.salud');
+    Route::get('/lecciones/salud/test', [LeccionesController::class, 'memorama_salud'])->name('ls4_salud_test');
+    Route::post('/lecciones/salud/complete', [ProgressController::class, 'ls4_complete'])->name('lecciones.salud.complete');
+
     // Mini juegos
 
 

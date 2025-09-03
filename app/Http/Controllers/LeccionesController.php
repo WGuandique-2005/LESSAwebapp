@@ -35,6 +35,15 @@ class LeccionesController extends Controller
         return view('lessons.ls3_saludos', compact('senas'));
     }
     
+        public function ls4_salud(){
+        $jsonPath = storage_path('app/salud.json');
+        $senas =[];
+        if(file_exists($jsonPath)){
+            $senas = json_decode(file_get_contents($jsonPath), true);
+        }
+        return view('lessons.ls4_salud', compact('senas'));
+    }
+    
     // Actividades de practica de las lecciones:
     public function deletra_nombre()
     {
@@ -47,5 +56,9 @@ class LeccionesController extends Controller
 
     public function memorama_saludos(){
         return view('tests.saludos');
+    }
+
+    public function memorama_salud(){
+        return view('tests.salud');
     }
 }

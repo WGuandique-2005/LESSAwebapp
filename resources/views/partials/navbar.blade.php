@@ -424,7 +424,6 @@
                 @endguest
             </nav>
 
-            <!-- Right side: hamburger (mobile) + actions -->
             <div class="lessa-right">
                 <button class="lessa-menu-toggle" id="lessaMenuToggle" aria-label="Abrir menú" aria-expanded="false"
                     aria-controls="lessaMobilePanel">
@@ -439,7 +438,6 @@
                         <button class="lessa-btn lessa-btn--primary"
                             onclick="location.href='{{ url('/signup') }}'">Registrarse</button>
                     @else
-                        <!-- Avatar visible on all sizes; on mobile it triggers bottom-sheet -->
                         <div class="lessa-avatar-container" id="lessaAvatarContainer" aria-haspopup="true"
                             aria-expanded="false">
                             <div class="lessa-avatar" id="lessaUserAvatar">
@@ -457,7 +455,6 @@
         </div>
     </div>
 
-    <!-- Mobile backdrop + panel (keeps DOM outside so it won't conflict) -->
     <div class="lessa-mobile-backdrop" id="lessaBackdrop" tabindex="-1"></div>
 
     <aside class="lessa-mobile-panel" id="lessaMobilePanel" aria-hidden="true" aria-labelledby="lessaMenuToggle">
@@ -497,7 +494,6 @@
 
     </aside>
 
-    <!-- Bottom sheet for avatar on small screens -->
     <div class="lessa-bottom-sheet" id="lessaBottomSheet" role="dialog" aria-hidden="true">
         <div class="sheet-content">
             <div style="display:flex; align-items:center; gap:12px;">
@@ -540,7 +536,6 @@
 
             const focusableSelector = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
 
-            /* --- Utilities --- */
             function getFocusable(el) {
                 if (!el) return [];
                 return Array.from(el.querySelectorAll(focusableSelector)).filter(Boolean);
@@ -558,7 +553,6 @@
                     return;
                 }
 
-                // handle Tab cycling
                 if (e.key === 'Tab') {
                     const focusables = getFocusable(activeTrapContainer);
                     if (focusables.length === 0) {
@@ -589,7 +583,6 @@
                 document.body.style.overflow = lock ? 'hidden' : '';
             }
 
-            /* --- Mobile Panel --- */
             function openMobile() {
                 if (!mobilePanel || !backdrop || !toggle) return;
                 prevActiveElement = document.activeElement;
@@ -602,7 +595,6 @@
                 activeTrapContainer = mobilePanel;
                 setBodyScrollLock(true);
 
-                // focus first focusable
                 const focusables = getFocusable(mobilePanel);
                 (focusables[0] || mobilePanel).focus();
 
@@ -622,14 +614,12 @@
 
                 document.removeEventListener('keydown', trapKeyHandler);
 
-                // restore focus if possible
                 if (prevActiveElement && typeof prevActiveElement.focus === 'function') {
                     prevActiveElement.focus();
                     prevActiveElement = null;
                 }
             }
 
-            /* --- Bottom Sheet (Avatar on mobile) --- */
             function openBottomSheet() {
                 if (!bottomSheet || !backdrop) return;
                 prevActiveElement = document.activeElement;
@@ -663,24 +653,20 @@
                 }
             }
 
-            /* --- Avatar dropdown (desktop) --- */
             function toggleAvatarDropdown() {
                 if (!avatarDropdown || !avatarContainer) return;
                 const isOpen = avatarDropdown.classList.toggle('show');
                 avatarContainer.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 
-                // close mobile panel if open
                 if (mobilePanel && mobilePanel.classList.contains('show')) closeMobile();
             }
 
-            /* --- Event listeners --- */
             if (toggle) {
                 toggle.addEventListener('click', (ev) => {
                     ev.stopPropagation();
                     const shown = mobilePanel && mobilePanel.classList.contains('show');
                     if (shown) closeMobile(); else openMobile();
 
-                    // ensure avatar dropdown closed when toggling menu
                     if (avatarDropdown && avatarDropdown.classList.contains('show')) {
                         avatarDropdown.classList.remove('show');
                         avatarContainer && avatarContainer.setAttribute('aria-expanded', 'false');
@@ -703,16 +689,13 @@
                     ev.stopPropagation();
                     const isMobile = window.innerWidth <= 768;
                     if (isMobile) {
-                        // mobile: open bottom sheet; close mobile panel first
                         closeMobile();
                         openBottomSheet();
                     } else {
-                        // desktop: toggle small dropdown
                         toggleAvatarDropdown();
                     }
                 });
 
-                // close avatar dropdown on outside click
                 document.addEventListener('click', (e) => {
                     if (!avatarContainer.contains(e.target) && avatarDropdown && avatarDropdown.classList.contains('show')) {
                         avatarDropdown.classList.remove('show');
@@ -723,7 +706,6 @@
 
             if (bottomClose) bottomClose.addEventListener('click', (e) => { e.stopPropagation(); closeBottomSheet(); });
 
-            // universal ESC support even if no trap active
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     if (mobilePanel && mobilePanel.classList.contains('show')) closeMobile();
@@ -732,7 +714,6 @@
                 }
             });
 
-            // keep UI consistent on resize
             let resizeTimer = null;
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimer);

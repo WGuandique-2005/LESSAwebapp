@@ -516,7 +516,7 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card salud" style="cursor: pointer;">
                         <div class="card-image">
                             <img src="{{ asset('img/health.png') }}" alt="Salud y Emergencias">
                         </div>
@@ -617,6 +617,9 @@
                 ls_saludos.addEventListener('click',()=>{
                     window.location.href="{{ route('lecciones.saludos') }}"
                 })
+                ls_salud.addEventListener('click', () => {
+                    window.location.href = "{{ route('lecciones.salud') }}"
+                });
 
                 const progressBarInner = document.querySelector('.progress-bar-inner');
                 const currentProgress = {{ $progresoPorcentaje }};
