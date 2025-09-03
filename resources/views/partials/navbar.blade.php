@@ -471,6 +471,7 @@
                 <a href="#">Practicar</a>
                 <a href="{{ route('info') }}">Info</a>
                 <a href="{{ route('miProgreso') }}">Mi progreso</a>
+                <a href="#">Ayuda</a>
             @endguest
         </nav>
 
