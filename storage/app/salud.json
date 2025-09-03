@@ -1,0 +1,122 @@
+[
+    {
+        "id": 0,
+        "nombre": "Dolor",
+        "descripcion": "Con una expresion de molestia o afliccion, haremos un circulo con todos nuestros dedos para seguidamente abrirlos hacia afuera repetidamente.",
+        "ruta": "/img/Salud/dolor.png"
+    },
+    {
+        "id": 1,
+        "nombre": "Sintomas",
+        "descripcion": "Con una expresion de molestia o afliccion, con una mano con palma hacia el pecho y con todos los dedos extendidos excepto el medio haremos movimientos hacia arriba y abajo.",
+        "ruta": "/img/Salud/sintomas.png"
+    },
+    {
+        "id": 2,
+        "nombre": "Fiebre",
+        "descripcion": "Con una expresion de molestia o afliccion en nuestro rostro, usaremos ambos dedos indices con uno sobre el otro formando una cruz, luego lo subiremos hasta la punta del otro para representar la subida de temperatura.",
+        "ruta": "/img/Salud/fiebre.png"
+    },
+    {
+        "id": 3,
+        "nombre": "Mareos",
+        "descripcion": "Apuntaremos hacia arriba con nuestro dedo indice, seguidamente realizaremos movimientos circulares con nuestra mano.",
+        "ruta": "/img/Salud/mareo.png"
+    },
+    {
+        "id": 4,
+        "nombre": "Vomito",
+        "descripcion": "Con una expresion de asco o nausea, con una mano cubriendo nuestra boca realizaremos un movimiento hacia afuera con nuestra palma.",
+        "ruta": "/img/Salud/vomito.png"
+    },
+    {
+        "id": 5,
+        "nombre": "Diarrea",
+        "descripcion": "Colocaremos un pulgar dentro de nuestro puno con un movimiento lento sacamos el pulgar hacia abajo extendiendo los dedos.",
+        "ruta": "/img/Salud/diarrea.png"
+    },
+    {
+        "id": 6,
+        "nombre": "Cancer",
+        "descripcion": "Colocaremos ambas manos enfrente de nuestro pecho con una en posicion vertical y la otra colocada desde la parte inferior de la palma seguidamente se haran movimientos de apertura parcial de palma mientras la subimos hasta la punta de los dedos.",
+        "ruta": "/img/Salud/cancer.png"
+    },
+    {
+        "id": 7,
+        "nombre": "Jarabe",
+        "descripcion": "Con ambas manos realizaremos un movimiento circular como si estuvieras abriendo un frasco, luego hacemos como que vertemos el frasco en una cuchara, y finalmente llevamos la cuchara a nuestra boca para simular que la tomamos.",
+        "ruta": "/img/Salud/jarabe.png"
+    },
+    {
+        "id": 8,
+        "nombre": "Tos",
+        "descripcion": "Lo representamos con el puno colocado en nuestro pecho y luego lo movemos hacia adelante y hacia atras repetidas veces, con una cara de ahogamiento.",
+        "ruta": "/img/Salud/tos.png"
+    },
+    {
+        "id": 9,
+        "nombre": "Gripe",
+        "descripcion": "Colocamos nuestro pulgar e indice cerca del cuello realizando movimientos cortos hacia arriba y abajo, despues colocamos nuestra mano sobre nuestra nariz haciendo un movimiento hacia abajo.",
+        "ruta": "/img/Salud/gripe.png"
+    },
+    {
+        "id": 10,
+        "nombre": "Escalofrios",
+        "descripcion": "Cruzamos nuestros brazos con las palmas sobre nuestros antebrazos con movimientos hacia arriba y hacia abajo.",
+        "ruta": "/img/Salud/escalofríos.png"
+    },
+    {
+        "id": 11,
+        "nombre": "Vacuna",
+        "descripcion": "Con nuestro dedo pulgar, indice y medio doblados un poco manteniendo los demas doblados hacia la palma, colocaremos nuestra mano sobre nuestro hombro para doblar por completo nuestros dedos simulando la accion de aplicar una inyeccion.",
+        "ruta": "/img/Salud/vacuna.png"
+    },
+    {
+        "id": 12,
+        "nombre": "Medicina",
+        "descripcion": "Mantenemos una mano con la palma hacia arriba y con la otra realizamos un movimiento como si tomamos algo de ella para posteriormente hacer un gesto con el indice hacia la boca repitiendolo dos veces.",
+        "ruta": "/img/Salud/medicina.png"
+    },
+    {
+        "id": 13,
+        "nombre": "Hospital",
+        "descripcion": "Extendemos un brazo con el puno y con la otra mano formamos un circulo con el pulgar e indice, con los demas dedos doblados hacia la palma, realizando movimientos hacia arriba y abajo a lo largo del brazo.",
+        "ruta": "/img/Salud/hospital.png"
+    },
+    {
+        "id": 14,
+        "nombre": "Emergencia",
+        "descripcion": "Elevamos nuestro brazo con los dedos extendidos y los agitamos de manera rapida hacia arriba y hacia abajo, acompanado de una expresion facial de urgencia o preocupacion.",
+        "ruta": "/img/Salud/emergencia.png"
+    },
+    {
+        "id": 15,
+        "nombre": "Suero",
+        "descripcion": "Con el brazo extendido, el indice y pulgar hacen un movimiento en la parte interior del brazo simulando la colocacion de una intravenosa. Luego, con ambas manos se forma la figura de una bolsa de suero.",
+        "ruta": "/img/Salud/suero.png"
+    },
+    {
+        "id": 16,
+        "nombre": "Reposo",
+        "descripcion": "Cruzamos ambos brazos con los dedos extendidos en el pecho mientras cerramos los ojos como si estuvieramos durmiendo.",
+        "ruta": "/img/Salud/reposo.png"
+    },
+    {
+        "id": 17,
+        "nombre": "Rayos X",
+        "descripcion": "Cruzamos los dedos indice y medio con los demas doblados hacia la palma y luego doblamos rapidamente el dedo medio hacia la palma.",
+        "ruta": "/img/Salud/rayos x.png"
+    },
+    {
+        "id": 18,
+        "nombre": "Examen de sangre",
+        "descripcion": "Primero extendemos nuestro brazo, apuntamos a el con el indice y el pulgar como si sostuvieramos una jeringa extrayendo sangre, luego apuntamos la cien con el indice y finalmente lo colocamos en la palma de la otra mano.",
+        "ruta": "/img/Salud/examen_de_sangre.png"
+    },
+    {
+        "id": 19,
+        "nombre": "Ultra",
+        "descripcion": "Iniciamos haciendo movimientos circulares en el vientre con nuestro puno, luego con ambas manos formamos un marco con el indice y pulgar extendidos, senalamos con el indice hacia el ojo y luego hacia el marco, y finalizamos repitiendo los movimientos circulares en el vientre.",
+        "ruta": "/img/Salud/ultra.png"
+    }
+]
