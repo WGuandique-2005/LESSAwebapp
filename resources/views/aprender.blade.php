@@ -299,7 +299,7 @@
             <img src="{{ asset('img/aprender.png') }}" alt="Background image of San Salvador Monument"
                 class="hero-bg-img">
             <div class="container hero-content">
-                <img src="{{ asset('img/logo_sinfondo.png') }}" alt="LESSA Logo" class="hero-logo">
+                <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="hero-logo">
                 <div class="hero-text">
                     <h2>Sección de Aprendizaje</h2>
                     <h3>¡Comienza tu viaje con LESSA!</h3>

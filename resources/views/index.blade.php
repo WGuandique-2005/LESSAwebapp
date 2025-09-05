@@ -724,7 +724,7 @@
                                         class="author-img">
                                     <div class="author-info">
                                         <h4>María González</h4>
-                                        <p>Docente</p>
+                                        <p>Estudiantes</p>
                                     </div>
                                 </div>
                             </div>
