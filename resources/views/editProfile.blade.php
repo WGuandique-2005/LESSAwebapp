@@ -9,17 +9,13 @@
     <style>
         :root {
             --primary-color: #4A90E2;
-            /* A modern blue */
             --primary-hover-color: #357ABD;
             --text-color: #333;
             --placeholder-color: #999;
             --border-color: #E0E0E0;
             --error-color: #EF4444;
-            /* Tailwind red-500 */
             --success-color: #22C55E;
-            /* Tailwind green-500 */
             --background-color: #F8F9FA;
-            /* Light gray background */
             --card-background: #FFFFFF;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --border-radius: 8px;
@@ -32,11 +28,9 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            /* Allow header/footer on top/bottom */
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* Use min-height for flexible content */
             color: var(--text-color);
         }
 
@@ -47,9 +41,7 @@
             box-shadow: var(--shadow);
             width: 100%;
             max-width: 400px;
-            /* Constrain max width for better readability */
             margin: 20px auto;
-            /* Add margin for spacing from header/footer */
         }
 
         h1 {
@@ -69,9 +61,7 @@
 
         input[type="text"],
         input[type="email"] {
-            /* Added email as a common profile field */
             width: calc(100% - 20px);
-            /* Account for padding */
             padding: 10px;
             margin-bottom: 16px;
             border: 1px solid var(--border-color);
@@ -122,8 +112,7 @@
             /* Ensure it takes full width */
         }
 
-        button,
-        .btn-link {
+        button, .btn-link {
             width: 100%;
             padding: 12px;
             border: none;
@@ -133,11 +122,9 @@
             font-weight: 700;
             transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
             text-decoration: none;
-            /* For btn-link */
-            display: block;
-            /* For btn-link */
-            text-align: center;
-            /* For btn-link */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         button {
@@ -146,6 +133,9 @@
             margin-top: 16px;
         }
 
+        .btn-link{
+            width: auto;
+        }
         button:hover {
             background-color: var(--primary-hover-color);
         }
@@ -155,13 +145,11 @@
             color: var(--primary-color);
             margin-top: 18px;
             border: 1px solid var(--primary-color);
-            /* Add a border for better visual weight */
         }
 
         .btn-link:hover {
             background-color: var(--primary-color);
             color: #fff;
-            max-width: fit-content
         }
 
         header,
@@ -206,12 +194,11 @@
             @enderror
 
             <button type="submit">Guardar cambios</button>
+            <p>¿Quieres cambiar tu contraseña?</p>
+            <a href="{{ route('password.change.form') }}" class="btn-link">
+                Cambiar contraseña
+            </a>
         </form>
-
-        <p>¿Quieres cambiar tu contraseña?</p>
-        <a href="{{ route('password.change.form') }}" class="btn-link">
-            Cambiar contraseña
-        </a>
     </div>
 
     <footer>@include('partials.footer')</footer>
