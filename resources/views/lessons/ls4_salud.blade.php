@@ -417,10 +417,10 @@
     <div class="lesson-layout">
         <nav class="sidebar" role="navigation" aria-label="Menú de lección">
             <span class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">&#9776;</span>
-            <h2>Números</h2>
+            <h2>Salud</h2>
             <ul id="sidebarMenu" aria-hidden="false">
                 <li class="active" data-section="intro" role="button" tabindex="0">Introducción</li>
-                <li data-section="abc" role="button" tabindex="0">salud y frases en LESSA</li>
+                <li data-section="abc" role="button" tabindex="0">Salud y frases en LESSA</li>
                 <li data-section="letras" role="button" tabindex="0">El vocabulario</li>
                 <li data-section="practica" role="button" tabindex="0">Práctica</li>
             </ul>
