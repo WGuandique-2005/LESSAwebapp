@@ -377,7 +377,7 @@
             <div class="info-left">
                 <img src="{{ asset('img/centroHistorico.png') }}" alt="Person signing" class="info-left-bg">
                 <div class="info-logo-overlay">
-                    <img src="{{ asset('img/logo_sinfondo.png') }}" alt="ESSA Logo">
+                    <img src="{{ asset('img/logo2.png') }}" alt="ESSA Logo">
                     <p>Lenguaje de Señas Salvadoreño</p>
                 </div>
             </div>
@@ -411,7 +411,7 @@
             <div class="info-left">
                 <img src="{{ asset('img/interactiveLessons.png') }}" alt="Person signing" class="info-left-bg">
                 <div class="info-logo-overlay">
-                    <img src="{{ asset('img/logo_sinfondo.png') }}" alt="ESSA Logo">
+                    <img src="{{ asset('img/logo2.png') }}" alt="ESSA Logo">
                 </div>
             </div>
             <div class="info-right">
@@ -444,7 +444,7 @@
             <div class="info-left">
                 <img src="{{ asset('img/progress.png') }}" alt="Person signing" class="info-left-bg">
                 <div class="info-logo-overlay">
-                    <img src="{{ asset('img/logo_sinfondo.png') }}" alt="ESSA Logo">
+                    <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo">
                 </div>
             </div>
             <div class="info-right">
@@ -472,7 +472,7 @@
                     </div>
                 </div>
                 <div class="btn-info">
-                    <a href="#" class="btn btn-primary">Ver sección -></a>
+                    <a href="{{ route('miProgreso') }}" class="btn btn-primary">Ver sección -></a>
                 </div>
             </div>
         </section>
