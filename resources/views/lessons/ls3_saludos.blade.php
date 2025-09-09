@@ -417,7 +417,7 @@
     <div class="lesson-layout">
         <nav class="sidebar" role="navigation" aria-label="Menú de lección">
             <span class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">&#9776;</span>
-            <h2>Números</h2>
+            <h2>Saludos</h2>
             <ul id="sidebarMenu" aria-hidden="false">
                 <li class="active" data-section="intro" role="button" tabindex="0">Introducción</li>
                 <li data-section="abc" role="button" tabindex="0">Saludos y frases en LESSA</li>

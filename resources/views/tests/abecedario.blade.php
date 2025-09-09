@@ -75,7 +75,7 @@
                         @endphp
                         @if($sena)
                             <button class="sena-card" data-letra="{{ $letra }}" aria-pressed="false"
-                                aria-label="Seña {{ $letra }}" title="{{ $alt }}">
+                                aria-label="Seña {{ $letra }}">
                                 <div class="sena-media">
                                     <img src="{{ $sena['ruta'] }}" alt="{{ $alt }}" class="sena-img" loading="lazy"
                                         draggable="false">
