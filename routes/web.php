@@ -66,7 +66,12 @@ Route::middleware('auth')->group(function () {
     // Lecciones interactivas
     Route::get('/lecciones', [TaskController::class, 'lecciones'])->name('lecciones');
 
-    // Las lecciones:
+    /*
+    |----------------------------------|
+    | Las lecciones                    |
+    |----------------------------------|
+    */
+
     Route::get('/lecciones/abecedario',[LeccionesController::class, 'ls1_abecedario'])->name('lecciones.abecedario');
     Route::get('/lecciones/abecedario/test', [LeccionesController::class, 'deletra_nombre'])->name('ls1_abecedario_test');
     Route::post('/lecciones/abecedario/complete', [ProgressController::class, 'ls1_complete'])->name('lecciones.abecedario.complete');
@@ -83,8 +88,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/lecciones/salud/test', [LeccionesController::class, 'memorama_salud'])->name('ls4_salud_test');
     Route::post('/lecciones/salud/complete', [ProgressController::class, 'ls4_complete'])->name('lecciones.salud.complete');
 
-    // Mini juegos
-
+    /*
+    |----------------------------------|
+    | Minijuegos                       |
+    |----------------------------------|
+    */
 
     // Videos educativos
     Route::get('/lecciones/videos', [TaskController::class, 'videos'])->name('lecciones.videos');
