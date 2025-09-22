@@ -60,6 +60,9 @@ Route::middleware('auth')->group(function () {
     // Sección aprender
     Route::get('/aprender',[TaskController::class,'aprender'])->name('aprender');
 
+    // Sección practicar
+    Route::get('/practicar', [TaskController::class, 'practicar'])->name('practicar');
+
     // Lecciones interactivas
     Route::get('/lecciones', [TaskController::class, 'lecciones'])->name('lecciones');
 
