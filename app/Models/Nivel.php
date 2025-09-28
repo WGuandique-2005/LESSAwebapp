@@ -8,6 +8,7 @@ class Nivel extends Model
 {
     protected $fillable = [
         'nombre',
-        'descripcion'
+        'completado',
+        'fecha_completado',
     ];
 }

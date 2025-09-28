@@ -8,7 +8,8 @@ class RecompensasUsuario extends Model
 {
     protected $fillable = [
         'usuario_id',
-        'recompensa_id'
+        'recompensa_id',
+        'estado'
     ];
 
     public function usuario(){

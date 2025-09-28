@@ -8,7 +8,8 @@ class PuntosUsuario extends Model
 {
     protected $fillable = [
         'usuario_id',
-        'puntos'
+        'nivel_id',
+        'puntos_obtenidos'
     ];
 
     public function usuario(){

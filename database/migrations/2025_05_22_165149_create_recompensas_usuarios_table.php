@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('recompensa_id')->constrained('recompensas')->onDelete('cascade');
+            $table->string('estado')->default('bloqueada');
             $table->timestamps();
         });
     }

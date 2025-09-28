@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('puntos_usuarios', function (Blueprint $table) {
             $table->id();
             $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
-            $table->integer('puntos');
+            $table->foreignId('nivel_id')->constrained('niveles')->onDelete('cascade');
+            $table->integer('puntos_obtenidos')->default(0);
             $table->timestamps();
         });
     }

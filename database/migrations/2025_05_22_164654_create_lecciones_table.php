@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('lecciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nivel_id');
+            $table->foreignId('leccion_id');
             $table->string('titulo');
             $table->timestamps();
 
@@ -21,14 +21,10 @@ return new class extends Migration
 
         // Ingresar las lecciones
         DB::table('lecciones')->insert([
-            ['nivel_id' => 1, 'titulo' => 'Abecedario'],
-            ['nivel_id' => 2, 'titulo' => 'Números'],
-            ['nivel_id' => 3, 'titulo' => 'Saludos'],
-            ['nivel_id' => 4, 'titulo' => 'Salud'],
-            ['nivel_id' => 5, 'titulo' => 'Emociones'],
-            ['nivel_id' => 6, 'titulo' => 'Comida'],
-            ['nivel_id' => 7, 'titulo' => 'Animales'],
-            ['nivel_id' => 8, 'titulo' => 'Extra'],
+            ['leccion_id' => 1, 'titulo' => 'Abecedario'],
+            ['leccion_id' => 2, 'titulo' => 'Números'],
+            ['leccion_id' => 3, 'titulo' => 'Saludos'],
+            ['leccion_id' => 4, 'titulo' => 'Salud'],
         ]);
     }
 

@@ -9,7 +9,7 @@ class Leccion extends Model
 {
     protected $table = 'lecciones';
     protected $fillable = [
-        'nivel_id',
+        'leccion_id',
         'titulo',
     ];
 
