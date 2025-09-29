@@ -6,6 +6,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\NivelesController;
 /*
 |----------------------------------
 | Rutas públicas (landing y auth)
@@ -62,6 +63,9 @@ Route::middleware('auth')->group(function () {
 
     // Sección practicar
     Route::get('/practicar', [TaskController::class, 'practicar'])->name('practicar');
+
+    // Nivel Abecadario
+    Route::get('/practicar/abecedario', [NivelesController::class, 'abecedario'])->name('nivel.abecedario');
 
     // Lecciones interactivas
     Route::get('/lecciones', [TaskController::class, 'lecciones'])->name('lecciones');

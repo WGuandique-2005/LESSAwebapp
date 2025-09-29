@@ -530,64 +530,6 @@
                             <div class="circle"></div>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{ asset('img/emotions.png') }}" alt="Emociones y Estados de Ánimo">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="emociones">Emociones y Estados de Ánimo</h3>
-                            <p>Explorarás cómo expresar sentimientos como "feliz", "triste", "enojado", "nervioso",
-                                "cansado" y preguntas como "¿Cómo te sientes hoy?" o "¿Estás bien?", para poder expresar
-                                y entender estados emocionales en conversaciones.</p>
-                        </div>
-                        <div class="card-status">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{ asset('img/food&drinks.png')}}" alt="Alimentos y Bebidas">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="comida">Alimentos y Bebidas</h3>
-                            <p>Practicarás las señas de alimentos comunes (pan, arroz, papa, agua, leche, café) y frases
-                                como "Tengo hambre" y "¿Quieres comer?".</p>
-                        </div>
-                        <div class="card-status">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{ asset('img/nature.png') }}" alt="Animales">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="animales">Animales y Naturaleza</h3>
-                            <p>Aprenderás a señalar animales comunes (perro, gato, pájaro) y a describir su entorno
-                                natural (árbol, río, montaña).</p>
-                        </div>
-                        <div class="card-status">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{ asset('img/extrals.png') }}" alt="Extra">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="extraLs">Extra</h3>
-                            <p>Contenido adicional que puede incluir vocabulario, frases útiles o información cultural
-                                relevante.</p>
-                        </div>
-                        <div class="card-status">
-                            <div class="circle">
-                            </div>
-                        </div>
-                    </div>
             </section>
         </main>
         <footer>@include('partials.footer')</footer>
@@ -596,11 +538,7 @@
                 const ls_abcd = document.querySelector('.abecedario');
                 const ls_numeros = document.querySelector('.numeros');
                 const ls_saludos = document.querySelector('.saludos');
-                const ls_comida = document.querySelector('.comida');
-                const ls_animales = document.querySelector('.animales');
                 const ls_salud = document.querySelector('.salud');
-                const ls_emociones = document.querySelector('.emociones');
-                const ls_extra = document.querySelector('.extraLs');
                 const goToProgress = document.querySelector('.goToProgress');
 
                 goToProgress.addEventListener('click', () => {

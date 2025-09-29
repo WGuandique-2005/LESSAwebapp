@@ -418,7 +418,7 @@
                 @else
                     <a href="/">Inicio</a>
                     <a href="{{ route('aprender') }}">Aprender</a>
-                    <a href="#">Practicar</a>
+                    <a href="{{ route('practicar') }}">Practicar</a>
                     <a href="{{ route('info') }}">Info</a>
                     <a href="{{ route('miProgreso') }}">Mi progreso</a>
                 @endguest
@@ -465,7 +465,7 @@
             @else
                 <a href="/">Inicio</a>
                 <a href="{{ route('aprender') }}">Aprender</a>
-                <a href="#">Practicar</a>
+                <a href="{{ route('practicar') }}">Practicar</a>
                 <a href="{{ route('info') }}">Info</a>
                 <a href="{{ route('miProgreso') }}">Mi progreso</a>
                 <a href="#">Ayuda</a>
@@ -544,7 +544,6 @@
             function trapKeyHandler(e) {
                 if (!activeTrapContainer) return;
 
-                // ESC closes everything
                 if (e.key === 'Escape') {
                     e.preventDefault();
                     closeMobile();
@@ -624,7 +623,7 @@
                 if (!bottomSheet || !backdrop) return;
                 prevActiveElement = document.activeElement;
                 bottomSheet.classList.add('show');
-                backdrop.classList.add('show'); // reuse same backdrop
+                backdrop.classList.add('show');
                 bottomSheet.setAttribute('aria-hidden', 'false');
 
                 activeTrapContainer = bottomSheet;
