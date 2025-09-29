@@ -374,7 +374,7 @@
                 </div>
                 <div class="learn-sections-layout">
                     <div class="main-learn-grid">
-                        <div class="learn-card">
+                        <div class="learn-card goToLevelAbecedario" style="cursor: pointer;">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/abcd.png') }}" alt="Abecedario" class="card-image">
                             </div>
@@ -383,7 +383,7 @@
                                 <p>Aprenderás las letras del abecedario para poder por ejemplo deletrar tu nombre, siglas u otros usos que descubrirás.</p>
                             </div>
                         </div>
-                        <div class="learn-card">
+                        <div class="learn-card goToLevelNumeros" style="cursor: pointer;">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/numbers.png') }}" alt="Números" class="card-image">
                             </div>
@@ -392,7 +392,7 @@
                                 <p>Aprenderás los números del 1 al 100, cantidades más grandes, así como a contar objetos y a hacer preguntas simples sobre cantidades.</p>
                             </div>
                         </div>
-                        <div class="learn-card">
+                        <div class="learn-card goToLevelSaludos" style="cursor: pointer;">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/saludos.png') }}" alt="Saludos y Presentaciones" class="card-image">
                             </div>
@@ -401,7 +401,7 @@
                                 <p>Aprenderás a comunicar saludos como "Hola", "Buenos días", "Buenas noches", "¿Cómo estás?", así como frases para presentarte como "Mi nombre es..." o "Mucho gusto".</p>
                             </div>
                         </div>
-                        <div class="learn-card">
+                        <div class="learn-card goToLevelSalud" style="cursor: pointer;">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/health.png') }}" alt="Salud y Emergencias" class="card-image">
                             </div>
@@ -418,52 +418,40 @@
     </main>
     <footer>@include('partials.footer')</footer>
     <script>
-        addEventListener('DOMContentLoaded', function () {
-            // Function to handle card redirection
-            function setupCardRedirects() {
-                const goToLessons = document.querySelector('.goToLessons');
-                if (goToLessons) {
-                    goToLessons.addEventListener('click', function () {
-                        window.location.href = "{{ route('lecciones') }}"
-                    });
-                }
-
-                const goToQuizzes = document.querySelector('.goToQuizzes');
-                if (goToQuizzes) {
-                    goToQuizzes.addEventListener('click', function () {
-                        window.location.href = "{{ route('/') }}"
-                    });
-                }
-
-                const goToSimulator = document.querySelector('.goToSimulator');
-                if (goToSimulator) {
-                    goToSimulator.addEventListener('click', function () {
-                        window.location.href = "{{ route('/') }}"
-                    });
-                }
-
-                // If the dictionary card is meant to be clickable
-                const goToDictionary = document.querySelector('.learn-card:first-child h3');
-                if (goToDictionary) {
-                    // Find the parent card element to make the whole card clickable for consistency
-                    const dictionaryCard = goToDictionary.closest('.learn-card');
-                    if(dictionaryCard) {
-                         dictionaryCard.style.cursor = 'pointer';
-                         dictionaryCard.addEventListener('click', function () {
-                             window.location.href = "{{ route('/') }}"
-                         });
-                    }
-                }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Corrige los selectores agregando el punto (.) para seleccionar por clase
+            const goToLevelAbecedario = document.querySelector('.goToLevelAbecedario');
+            if(goToLevelAbecedario){
+                goToLevelAbecedario.addEventListener('click', function() {
+                    window.location.href = "{{ route('nivel.abecedario') }}";
+                });
             }
 
-            setupCardRedirects();
-        })
+            const goToLevelNumeros = document.querySelector('.goToLevelNumeros');
+            if(goToLevelNumeros){
+                goToLevelNumeros.addEventListener('click', function() {
+                    window.location.href = "{{ route('nivel.numeros') }}";
+                });
+            }
 
-        // Animación de barra de progreso (solo para demo)
-        document.addEventListener('DOMContentLoaded', function() {
+            const goToLevelSaludos = document.querySelector('.goToLevelSaludos');
+            if(goToLevelSaludos){
+                goToLevelSaludos.addEventListener('click', function() {
+                    window.location.href = "{{ route('nivel.saludos') }}";
+                });
+            }
+
+            const goToLevelSalud = document.querySelector('.goToLevelSalud');
+            if(goToLevelSalud){
+                goToLevelSalud.addEventListener('click', function() {
+                    window.location.href = "{{ route('nivel.salud') }}";
+                });
+            }
+
+            // Animación de barra de progreso (solo para demo)
             const progressBar = document.querySelector('.progress-bar-inner');
             setTimeout(() => {
-                progressBar.style.width = '20%';
+                progressBar.style.width = '0%';
             }, 200);
         });
     </script>

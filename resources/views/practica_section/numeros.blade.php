@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nivel Abecedario: Mini-Juegos - LESSA</title>
+    <title>Nivel Cifras: Mini-Juegos - LESSA</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -17,10 +17,13 @@
             --dark-gray: #212529;
             --text-color: #212529;
             --white: #ffffff;
-            --success-color: #22C55E;
-            --dark-blue-overlay: rgba(30, 58, 138, 0.7); /* Nuevo: Overlay semi-transparente */
+            --success-color: #069c5e; /* Un verde más oscuro y sólido */
+            
+            /* Colores específicos del Nivel Cifras (temática de cálculo/contabilidad) */
+            --level-color-main: #6b4dff; /* Púrpura/Violeta para distinguir de azul (Abecedario) */
+            --dark-overlay: rgba(107, 77, 255, 0.75);
 
-            /* Espaciado */
+            /* Espaciado, Tipografía y Componentes (Iguales a la versión anterior) */
             --spacing-xs: 0.25rem;
             --spacing-sm: 0.5rem;
             --spacing-md: 1rem;
@@ -28,7 +31,6 @@
             --spacing-xl: 2rem;
             --spacing-xxl: 3rem;
 
-            /* Tipografía */
             --font-family-primary: 'Poppins', sans-serif;
             --font-size-base: 1rem;
             --font-size-sm: 0.9rem;
@@ -36,7 +38,6 @@
             --font-size-lg: 1.35rem;
             --font-size-xl: 2.5rem;
             --font-size-xxl: 3rem;
-            --font-size-xxxl: 4rem;
 
             --border-radius: 12px;
             --transition-speed: 0.3s;
@@ -57,10 +58,9 @@
             padding: 0 var(--spacing-md);
         }
 
-        /* --- HERO SECTION: Specific to the Alphabet Level --- */
+        /* --- HERO SECTION: Nivel Cifras --- */
         .hero-section {
-            /* Usamos solo un color base sólido para que el overlay de la imagen sea el que dé el toque de color */
-            background-color: #1e3a8a; 
+            background-color: var(--level-color-main); 
             padding: var(--spacing-xl) 0;
             color: var(--white);
             position: relative;
@@ -71,7 +71,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Nuevo elemento: La capa de color que asegura el contraste */
         .hero-section::before {
             content: '';
             position: absolute;
@@ -79,26 +78,25 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Utilizamos la variable de color azul oscuro semitransparente */
-            background-color: var(--dark-blue-overlay); 
+            /* Utilizamos el overlay púrpura/violeta */
+            background-color: var(--dark-overlay); 
             z-index: 1;
         }
 
-        .hero-logo {
-            display: none;
-        }
+
 
         .hero-text {
             text-align: center;
             width: 100%;
-            position: relative; /* Asegura que el texto esté sobre la capa (z-index: 2) */
+            position: relative; 
             z-index: 2; 
         }
 
         .hero-text h2 {
             font-size: var(--font-size-xxl);
             font-weight: 800;
-            color: var(--secondary-yellow);
+            /* Color amarillo para destacar */
+            color: var(--secondary-yellow); 
             margin-bottom: var(--spacing-sm);
         }
 
@@ -115,7 +113,7 @@
         }
         /* --- END HERO SECTION --- */
         
-        /* --- PROGRESS CIRCLE: Focused on the specific level --- */
+        /* --- PROGRESS CIRCLE (Estilos sin cambios, solo se adapta el color de éxito) --- */
         .progress-and-intro-container {
             padding: var(--spacing-xl) 0;
             display: flex;
@@ -134,7 +132,8 @@
 
         .progress-info h4 {
             font-size: var(--font-size-md);
-            color: var(--primary-blue);
+            /* Usamos el color del nivel */
+            color: var(--level-color-main);
             margin-bottom: var(--spacing-sm);
             font-weight: 700;
         }
@@ -165,7 +164,7 @@
         }
 
         .progress-circle-bar {
-            stroke: var(--success-color); /* Color de progreso */
+            stroke: var(--success-color); 
             stroke-width: 10;
             stroke-linecap: round;
             fill: none;
@@ -188,6 +187,7 @@
         }
 
         .section-header h2 {
+            /* Usamos el color principal de la aplicación */
             color: var(--primary-orange);
             font-size: var(--font-size-xl);
             text-transform: uppercase;
@@ -208,7 +208,8 @@
             overflow: hidden;
             transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
             cursor: pointer;
-            border-top: 5px solid var(--primary-orange);
+            /* Usamos el color del nivel como borde de destaque */
+            border-top: 5px solid var(--level-color-main);
             text-align: center;
             padding: var(--spacing-lg);
         }
@@ -216,7 +217,7 @@
         .game-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border-top-color: var(--primary-blue);
+            border-top-color: var(--primary-orange);
         }
 
         .game-card .icon {
@@ -237,14 +238,14 @@
             color: var(--text-secondary);
         }
 
-        /* Colores de Icono Específicos */
-        .game-card.game-1 .icon { color: #f94144; } /* Rojo */
-        .game-card.game-2 .icon { color: #f8961e; } /* Naranja */
-        .game-card.game-3 .icon { color: #43aa8b; } /* Verde */
-        .game-card.game-4 .icon { color: #277da1; } /* Azul */
+        /* Colores de Icono Específicos para NÚMEROS */
+        .game-card.game-1 .icon { color: #f94144; } /* Lógico */
+        .game-card.game-2 .icon { color: #2ecc71; } /* Cálculo */
+        .game-card.game-3 .icon { color: #f39c12; } /* Tiempo */
+        .game-card.game-4 .icon { color: #3498db; } /* Secuencia */
 
 
-        /* Responsive adjustments */
+        /* Responsive adjustments (Sin cambios) */
         @media (min-width: 768px) {
             .hero-text {
                 text-align: left;
@@ -278,11 +279,11 @@
         <section class="hero-section">
             <div class="container hero-content">
                 <div class="hero-text">
-                    <h2>NIVEL 1: EL ABECEDARIO</h2>
-                    <h3>¡Consolida las 27 señas del alfabeto LESSA con nuestros mini-juegos!</h3>
-                    <p>La dactilología es la base de la comunicación en Señas. Estos juegos te ayudarán a memorizar la
-                        forma correcta de cada letra y a aumentar tu velocidad de deletreo. ¡Completa los 4 desafíos para
-                        dominar el nivel!</p>
+                    <h2>NIVEL 2: CIFRAS Y CONTEO</h2>
+                    <h3>¡Domina la numeración en LESSA, desde el 0 hasta el 1,000!</h3>
+                    <p>La capacidad de contar y comunicar cantidades es crucial. Estos mini-juegos te desafiarán a reconocer,
+                        producir y ordenar números grandes y pequeños. ¡Completa el 100% de este nivel para avanzar a las Señas
+                        Básicas!</p>
                 </div>
             </div>
         </section>
@@ -293,45 +294,45 @@
                     <svg class="progress-circle" viewBox="0 0 40 40">
                         <circle class="progress-circle-bg" cx="20" cy="20" r="15.9155"></circle>
                         <circle class="progress-circle-bar" cx="20" cy="20" r="15.9155"
-                            style="stroke-dasharray: 100; stroke-dashoffset: 75;"></circle>
+                            style="stroke-dasharray: 100; stroke-dashoffset: 50;"></circle>
                     </svg>
-                    <span class="progress-text" id="progress-percent">25%</span>
+                    <span class="progress-text" id="progress-percent">50%</span>
                 </div>
                 <div class="progress-info">
                     <h4>PROGRESO DEL NIVEL</h4>
-                    <p>Has completado **1 de 4** mini-juegos. Sigue practicando para desbloquear el siguiente nivel de
-                        LESSA. ¡Cada juego cuenta!</p>
+                    <p>Has completado **2 de 4** mini-juegos. Estás a mitad de camino para dominar la numeración. ¡Solo dos
+                        desafíos más!</p>
                 </div>
             </div>
             <section class="learn-sections">
                 <div class="section-header">
-                    <h2>Mini-Juegos de Dactilología</h2>
+                    <h2>Mini-Juegos de Numeración</h2>
                 </div>
                 <div class="learn-sections-layout">
                     <div class="main-game-grid">
-                        <div class="game-card game-1" onclick="window.location.href='/juegos/abecedario/adivina-letra'">
-                            <span class="icon">🔍</span>
-                            <h3>Adivina la Letra</h3>
-                            <p>Se te mostrará una seña y deberás identificar la letra correcta entre múltiples opciones.
-                                ¡Rapidez y precisión!</p>
+                        <div class="game-card game-1" onclick="window.location.href='/juegos/cifras/que-numero-es'">
+                            <span class="icon">🔢</span>
+                            <h3>¿Qué Número Es?</h3>
+                            <p>Se te mostrará la seña de un número y deberás escribir o seleccionar la cifra correspondiente.
+                                Incluye números de tres y cuatro dígitos.</p>
                         </div>
-                        <div class="game-card game-2" onclick="window.location.href='/juegos/abecedario/deletreo-rapido'">
-                            <span class="icon">⚡</span>
-                            <h3>Carrera de Deletreo</h3>
-                            <p>Deletrea palabras simples en un tiempo limitado. Perfecto para practicar la fluidez entre
-                                señas consecutivas.</p>
+                        <div class="game-card game-2" onclick="window.location.href='/juegos/cifras/calculo-rapido'">
+                            <span class="icon">➕</span>
+                            <h3>Matemáticas en Señas</h3>
+                            <p>Resuelve operaciones matemáticas sencillas. Debes leer las señas de los números y responder
+                                con rapidez la seña del resultado.</p>
                         </div>
-                        <div class="game-card game-3" onclick="window.location.href='/juegos/abecedario/memoria-señas'">
-                            <span class="icon">🧠</span>
-                            <h3>Parejas de Señas</h3>
-                            <p>Encuentra pares de cartas: imagen de la seña y la letra escrita. Fortalece tu memoria
-                                visual a largo plazo.</p>
+                        <div class="game-card game-3" onclick="window.location.href='/juegos/cifras/contexto-numerico'">
+                            <span class="icon">⏰</span>
+                            <h3>Números en Contexto</h3>
+                            <p>Relaciona las señas de números con conceptos de la vida real como horas, fechas o precios.
+                                ¡Aplica lo que sabes!</p>
                         </div>
-                        <div class="game-card game-4" onclick="window.location.href='/juegos/abecedario/practica-trazado'">
-                            <span class="icon">✍️</span>
-                            <h3>Trazado de Señas</h3>
-                            <p>Sigue el movimiento guiado de la seña en pantalla con tu mano (o simulación de gesto).
-                                Enfocado en la producción correcta.</p>
+                        <div class="game-card game-4" onclick="window.location.href='/juegos/cifras/secuencia-señas'">
+                            <span class="icon">➡️</span>
+                            <h3>Sigue la Secuencia</h3>
+                            <p>Se te dará un número de inicio y deberás hacer la seña de los siguientes tres números en orden
+                                consecutivo. ¡Practica el conteo!</p>
                         </div>
                     </div>
                 </div>
@@ -345,20 +346,22 @@
             const progressCircleBar = document.querySelector('.progress-circle-bar');
             const progressText = document.getElementById('progress-percent');
             
-            // Simulación del progreso (4 juegos, 1 completado = 25%)
+            // Simulación del progreso (4 juegos, 2 completados = 50%)
             const totalGames = 4;
-            const completedGames = 0; 
-            const currentProgress = Math.round((completedGames / totalGames) * 100); 
+            const completedGames = 2; // Simulación: 2 juegos completados
+            const currentProgress = Math.round((completedGames / totalGames) * 100); // 50
             
+            // Fórmula para el círculo SVG: 2 * Pi * Radio (2 * 3.14159 * 15.9155) = 100
             const circumference = 100;
             const offset = circumference - (currentProgress / 100) * circumference;
 
+            // Ajuste el valor inicial de la barra SVG y el texto
             progressCircleBar.style.strokeDashoffset = offset;
             progressText.textContent = currentProgress + '%';
 
-            // Aplicar la animación (solo se usa el setTimeout para que la animación se vea, no es estrictamente necesario)
+            // Animación (opcional, para visualización dinámica)
             setTimeout(() => {
-                progressCircleBar.style.strokeDashoffset = offset;
+                 progressCircleBar.style.strokeDashoffset = offset;
             }, 100); 
         });
     </script>

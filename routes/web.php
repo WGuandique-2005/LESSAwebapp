@@ -64,8 +64,11 @@ Route::middleware('auth')->group(function () {
     // Sección practicar
     Route::get('/practicar', [TaskController::class, 'practicar'])->name('practicar');
 
-    // Nivel Abecadario
+    // Niveles
     Route::get('/practicar/abecedario', [NivelesController::class, 'abecedario'])->name('nivel.abecedario');
+    Route::get('/practicar/numeros', [NivelesController::class, 'numeros'])->name('nivel.numeros');
+    Route::get('/practicar/saludos', [NivelesController::class, 'saludos'])->name('nivel.saludos');
+    Route::get('/practicar/salud', [NivelesController::class, 'salud'])->name('nivel.salud');
 
     // Lecciones interactivas
     Route::get('/lecciones', [TaskController::class, 'lecciones'])->name('lecciones');
