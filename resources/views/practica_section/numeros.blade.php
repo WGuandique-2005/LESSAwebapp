@@ -310,7 +310,7 @@
                 </div>
                 <div class="learn-sections-layout">
                     <div class="main-game-grid">
-                        <div class="game-card game-1" onclick="window.location.href='/juegos/cifras/que-numero-es'">
+                        <div class="game-card game-1" onclick="window.location.href='/practicar/numeros/adivina'">
                             <span class="icon">🔢</span>
                             <h3>¿Qué Número Es?</h3>
                             <p>Se te mostrará la seña de un número y deberás escribir o seleccionar la cifra correspondiente.

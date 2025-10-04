@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adivina la letra</title>
+    <title>Adivina el Número</title>
 <style>
     /* 1. Tipografía y Variables */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
@@ -298,8 +298,8 @@
     <header>@include('partials.navbar')</header>
     <div class="container">
         <div class="game-container">
-            <h1>Mini-Juego: ¿Qué Letra Es? (Abecedario)</h1>
-            <p class="text-secondary">Observa la seña y selecciona la letra correcta. Tienes un límite de **10
+            <h1>Mini-Juego: ¿Qué Número Es?</h1>
+            <p class="text-secondary">Observa la seña y selecciona el número correcto. Tienes un límite de **10
                 preguntas**.</p>
 
             <div class="progress-bar">
@@ -309,7 +309,7 @@
 
             <div class="question-card">
                 <img id="sign-image" class="sign-image" src="" alt="Seña a adivinar">
-                <h2 id="question-text">¿Qué letra representa esta seña?</h2>
+                <h2 id="question-text">¿Qué número representa esta seña?</h2>
             </div>
 
             <div class="options-grid" id="options-grid">
@@ -317,7 +317,7 @@
 
             <p class="feedback-message" id="feedback-message"></p>
 
-            <form id="score-form" action="{{ route('nivel.abecedario.adivina.complete') }}" method="POST"
+            <form id="score-form" action="{{ route('nivel.numeros.adivina.complete') }}" method="POST"
                 style="display: none;">
                 @csrf
                 <input type="hidden" name="errors_count" id="errors-input">
@@ -337,16 +337,16 @@
     </div>
     <footer>@include('partials.footer')</footer>
     <script>
-        // 1. Datos del Abecedario (Pasados desde el Controller)
-        // El controlador NivelesController::abecedario_adivina pasa estos datos.
-        const abecedarioData = @json($abecedarioData);
+        // 1. Datos del Números (Pasados desde el Controller)
+        // El controlador NivelesController::numeros_adivina pasa estos datos.
+        const numerosData = @json($numerosData);
 
         // 2. Variables de Estado
         let questions = []; // Array de las 10 preguntas
         let currentQuestionIndex = 0;
         let errorsCount = 0;
         const TOTAL_QUESTIONS = 10;
-        const TOTAL_LETTERS = abecedarioData.length; // Usa la longitud real de los datos pasados
+        const TOTAL_LETTERS = numerosData.length; // Usa la longitud real de los datos pasados
 
         // 3. Elementos del DOM
         const signImage = document.getElementById('sign-image');
@@ -373,7 +373,7 @@
          */
         function generateQuestions() {
             // Baraja la data del abecedario
-            const shuffledData = [...abecedarioData]; // Copia el array para no modificar el original
+            const shuffledData = [...numerosData]; // Copia el array para no modificar el original
             shuffleArray(shuffledData);
 
             // Limita a 10 preguntas o al número total de letras
@@ -386,7 +386,7 @@
 
                 // Generar 3 opciones incorrectas únicas
                 while (options.size < 4) {
-                    const randomLetter = abecedarioData[Math.floor(Math.random() * TOTAL_LETTERS)];
+                    const randomLetter = numerosData[Math.floor(Math.random() * TOTAL_LETTERS)];
                     // Asegúrate de que la opción incorrecta no sea la misma que la correcta
                     if (randomLetter.id !== correctLetter.id) {
                         options.add(randomLetter.id);
@@ -492,8 +492,8 @@
             if (errorsCount === 0) {
                 points = 10;
                 title = '¡PERFECTO! 🤩';
-                message = 'No tuviste ningún error. ¡Dominas el Abecedario a la perfección! Has ganado el máximo de puntos.';
-            } else if (errorsCount <= 2) {
+                message = 'No tuviste ningún error. ¡Dominas los Números a la perfección! Has ganado el máximo de puntos.';
+            } else if (errorsCount <= 4) {
                 points = 5;
                 title = '¡MUY BIEN! 👍';
                 message = `Tuviste ${errorsCount} error(es). Demuestras gran precisión. ¡Sigue practicando para alcanzar la perfección!`;
@@ -517,11 +517,11 @@
         // Inicialización del juego
         document.addEventListener('DOMContentLoaded', () => {
             // Asegurarse de que los datos fueron cargados
-            if (abecedarioData.length > 0) {
+            if (numerosData.length > 0) {
                 generateQuestions();
                 renderQuestion();
             } else {
-                document.getElementById('question-text').textContent = 'Error: No se pudieron cargar los datos del abecedario.';
+                document.getElementById('question-text').textContent = 'Error: No se pudieron cargar los datos de los números.';
             }
         });
 
