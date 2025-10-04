@@ -404,7 +404,7 @@
     @php
         use App\Models\ProgresoUsuario;
         $userId = Auth::id();
-        $totalLecciones = 8;
+        $totalLecciones = 4;
         $completadas = ProgresoUsuario::where('usuario_id', $userId)->where('completado', true)->count();
         $progresoPorcentaje = $totalLecciones > 0 ? round(($completadas / $totalLecciones) * 100) : 0;
     @endphp

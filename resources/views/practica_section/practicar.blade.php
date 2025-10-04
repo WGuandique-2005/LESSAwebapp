@@ -362,14 +362,14 @@
         </section>
         <div class="container">
             <div class="progress-container">
-                <p>Progreso de Aprendizaje</p>
+                <p>Progreso Global</p>
                 <div class="progress-bar-outer">
                     <div class="progress-bar-inner" style="width: 20%;"></div>
                 </div>
             </div>
             <section class="learn-sections">
                 <div class="section-header">
-                    <h2>Lecciones de LESSA</h2>
+                    <h2>Actividades de LESSA</h2>
                     <p>Selecciona una lección para practicar y reforzar tus conocimientos en el Lenguaje de Señas Salvadoreño.</p>
                 </div>
                 <div class="learn-sections-layout">

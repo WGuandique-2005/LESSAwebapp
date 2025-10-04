@@ -309,7 +309,7 @@
                 </div>
                 <div class="learn-sections-layout">
                     <div class="main-game-grid">
-                        <div class="game-card game-1" onclick="window.location.href='/juegos/abecedario/adivina-letra'">
+                        <div class="game-card game-1" onclick="window.location.href='/practicar/abecedario/adivina'">
                             <span class="icon">🔍</span>
                             <h3>Adivina la Letra</h3>
                             <p>Se te mostrará una seña y deberás identificar la letra correcta entre múltiples opciones.

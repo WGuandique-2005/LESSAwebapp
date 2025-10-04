@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\NivelesController;
+use App\Http\Controllers\PuntosUsuarioController;
+
 /*
 |----------------------------------
 | Rutas públicas (landing y auth)
@@ -65,7 +67,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/practicar', [TaskController::class, 'practicar'])->name('practicar');
 
     // Niveles
+
+    // Abecedario
     Route::get('/practicar/abecedario', [NivelesController::class, 'abecedario'])->name('nivel.abecedario');
+    Route::get('/practicar/abecedario/adivina', [NivelesController::class, 'abecedario_adivina'])->name('nivel.abecedario.adivina');
+    Route::post('/practicar/abecedario/adivina/complete', [PuntosUsuarioController::class, 'completeAbecedarioAdivina'])->name('nivel.abecedario.adivina.complete');
+
+    Route::get('/practicar/abecedario/deletrea', [NivelesController::class, 'abecedario_deletrea'])->name('nivel.abecedario.deletrea');
+    Route::get('/practicar/abecedario/conecta', [NivelesController::class, 'abecedario_conecta'])->name('nivel.abecedario.conecta');
+    Route::get('/practicar/abecedario/extra', [NivelesController::class, 'abecedario_extra'])->name('nivel.abecedario.extra');
+
     Route::get('/practicar/numeros', [NivelesController::class, 'numeros'])->name('nivel.numeros');
     Route::get('/practicar/saludos', [NivelesController::class, 'saludos'])->name('nivel.saludos');
     Route::get('/practicar/salud', [NivelesController::class, 'salud'])->name('nivel.salud');
@@ -82,6 +93,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/lecciones/abecedario',[LeccionesController::class, 'ls1_abecedario'])->name('lecciones.abecedario');
     Route::get('/lecciones/abecedario/test', [LeccionesController::class, 'deletra_nombre'])->name('ls1_abecedario_test');
     Route::post('/lecciones/abecedario/complete', [ProgressController::class, 'ls1_complete'])->name('lecciones.abecedario.complete');
+    Route::post('/practicar/abecedario/adivina/complete', [PuntosUsuarioController::class, 'completeAbecedarioAdivina'])->name('nivel.abecedario.adivina.complete');
+
     
     Route::get('/lecciones/numeros',[LeccionesController::class, 'ls2_numeros'])->name('lecciones.numeros');
     Route::get('/lecciones/numeros/test', [LeccionesController::class, 'conecta_numeros'])->name('ls2_numeros_test');
