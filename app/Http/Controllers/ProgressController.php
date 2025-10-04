@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProgresoUsuario;
+use App\Models\PuntosUsuario;
+use App\Models\Nivel;
 use App\Models\Leccion;
 
 
@@ -121,19 +123,43 @@ class ProgressController extends Controller
         }
     }
 
-    public function miProgreso(){
-    $userId = auth()->id();
+    public function miProgreso()
+    {
+        $userId = auth()->id();
 
-    $totalLecciones = Leccion::count();
-    $leccionesCompletadas = ProgresoUsuario::where('usuario_id', $userId)
-        ->where('completado', true)
-        ->with('leccion')
-        ->get();
+        // Lecciones
+        $totalLecciones = Leccion::count();
+        $leccionesCompletadas = ProgresoUsuario::where('usuario_id', $userId)
+            ->where('completado', true)
+            ->with('leccion')
+            ->get();
+        $porcentajeLecciones = $totalLecciones > 0
+            ? round(($leccionesCompletadas->count() / $totalLecciones) * 100)
+            : 0;
 
-    $porcentaje = $totalLecciones > 0 
-        ? round(($leccionesCompletadas->count() / $totalLecciones) * 100) 
-        : 0;
+        // Niveles completados (consulta robusta usando join)
+        // Asegurate que la tabla se llame 'puntos_usuarios' y la columna de relacion sea 'nivel_id'
+        $nivelesCompletados = Nivel::join('puntos_usuarios as pu', 'niveles.id', '=', 'pu.nivel_id')
+            ->where('pu.usuario_id', $userId)
+            ->select('niveles.*', 'pu.puntos_obtenidos', 'pu.fecha_completado as fecha_finalizado')
+            ->get();
 
-    return view('miProgreso', compact('leccionesCompletadas', 'porcentaje'));
+        $totalNiveles = Nivel::count();
+        $porcentajeNiveles = $totalNiveles > 0
+            ? round(($nivelesCompletados->count() / $totalNiveles) * 100)
+            : 0;
+
+        $porcentaje = round(($porcentajeLecciones + $porcentajeNiveles) / 2);
+
+        return view('miProgreso', compact(
+            'leccionesCompletadas',
+            'porcentajeLecciones',
+            'nivelesCompletados',
+            'porcentajeNiveles',
+            'porcentaje'
+        ));
     }
+
+
 }
+

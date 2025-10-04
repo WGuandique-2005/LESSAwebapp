@@ -82,7 +82,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/practicar/numeros/adivina/complete', [PuntosUsuarioController::class, 'completeNumerosAdivina'])->name('nivel.numeros.adivina.complete');
 
     Route::get('/practicar/saludos', [NivelesController::class, 'saludos'])->name('nivel.saludos');
+    Route::get('/practicar/saludos/adivina', [NivelesController::class, 'saludos_adivina'])->name('nivel.saludos.adivina');
+    Route::post('/practicar/saludos/adivina/complete', [PuntosUsuarioController::class, 'completeSaludosAdivina'])->name('nivel.saludos.adivina.complete');
+    
     Route::get('/practicar/salud', [NivelesController::class, 'salud'])->name('nivel.salud');
+    Route::get('/practicar/salud/adivina', [NivelesController::class, 'salud_adivina'])->name('nivel.salud.adivina');
+    Route::post('/practicar/salud/adivina/complete', [PuntosUsuarioController::class, 'completeSaludAdivina'])->name('nivel.salud.adivina.complete');
 
     // Lecciones interactivas
     Route::get('/lecciones', [TaskController::class, 'lecciones'])->name('lecciones');

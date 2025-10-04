@@ -60,7 +60,37 @@ class NivelesController extends Controller
     function saludos(){
         return view('practica_section.saludos');
     }
+
+    function saludos_adivina(){
+        // Define la ruta al archivo JSON
+        $jsonPath = storage_path('app/saludos.json');
+        $saludosData = [];
+
+        // Verifica si el archivo existe antes de cargarlo
+        if (file_exists($jsonPath)) {
+            // Carga y decodifica el JSON. Si falla, $saludosData será un array vacío.
+            $saludosData = json_decode(file_get_contents($jsonPath), true) ?? [];
+        }
+
+        // Pasa los datos del abecedario a la vista
+        return view('practica_section.saludos.A1_adivina', compact('saludosData'));
+    }
+
     function salud(){
         return view('practica_section.salud');
+    }
+
+    function salud_adivina(){
+        // Define la ruta al archivo JSON
+        $jsonPath = storage_path('app/salud.json');
+        $saludData = [];
+
+        // Verifica si el archivo existe antes de cargarlo
+        if (file_exists($jsonPath)) {
+            $saludData = json_decode(file_get_contents($jsonPath), true) ?? [];
+        }
+
+        // Pasa los datos de salud a la vista
+        return view('practica_section.salud.A1_adivina', compact('saludData'));
     }
 }

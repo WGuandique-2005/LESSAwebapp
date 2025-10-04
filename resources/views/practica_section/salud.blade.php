@@ -307,7 +307,7 @@
                 </div>
                 <div class="learn-sections-layout">
                     <div class="main-game-grid">
-                        <div class="game-card game-1" onclick="window.location.href='/juegos/salud/cuerpo-señas'">
+                        <div class="game-card game-1" onclick="window.location.href='/practicar/salud/adivina'">
                             <span class="icon">🦴</span>
                             <h3>Señas del Cuerpo</h3>
                             <p>Identifica las señas correspondientes a diferentes partes del cuerpo humano (cabeza, brazo,

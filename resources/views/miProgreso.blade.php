@@ -196,6 +196,13 @@
         <!-- Lecciones -->
         <div class="completed-lessons">
             <h3 class="section-title">Lecciones Completadas</h3>
+            <div class="overall-progress" style="margin-bottom: 30px;">
+                <h3>Progreso de Lecciones</h3>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar" style="width: {{ $porcentajeLecciones }}%;"></div> 
+                </div>
+                <div class="progress-text">{{ $porcentajeLecciones }}% Completado</div>
+            </div>
             @if ($leccionesCompletadas->isEmpty())
                 <div class="no-lessons">
                     <p>Aún no has completado ninguna lección. ¡Comienza a aprender hoy mismo! ✨</p>
@@ -207,6 +214,40 @@
                         <li class="lesson-item">
                             <span class="lesson-name">{{ $progreso->leccion->titulo }}</span>
                             <span class="completion-date">✅ Completado el: {{ \Carbon\Carbon::parse($progreso->fecha_completada)->format('d/m/Y') }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+
+
+        <div class="completed-levels" style="margin-top: 50px;">
+            <h3 class="section-title">Minijuegos Completados (Niveles) 🎮</h3>
+            
+            <div class="overall-progress" style="margin-bottom: 30px;">
+                <h3>Progreso de Minijuegos</h3>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar" style="width: {{ $porcentajeNiveles }}%;"></div> 
+                </div>
+                <div class="progress-text">{{ $porcentajeNiveles }}% Completado</div>
+            </div>
+
+            @if ($nivelesCompletados->isEmpty())
+                <div class="no-lessons">
+                    <p>Aún no has completado ningún minijuego. ¡Demuestra tu dominio! 💪</p>
+                    <a href="{{ route('practicar') }}" class="start-btn">Explorar Minijuegos</a>
+                </div>
+            @else
+                <ul class="lessons-list">
+                    @foreach ($nivelesCompletados as $nivel)
+                        <li class="lesson-item">
+                            <span class="lesson-name">{{ $nivel->nombre }}</span>
+                            <span class="completion-date">
+                                🏆 Puntos obtenidos: {{ $nivel->puntos_obtenidos }}
+                            </span>
+                            <span class="completion-date">
+                                Finalizado el: {{ \Carbon\Carbon::parse($nivel->fecha_finalizado)->format('d/m/Y') }}
+                            </span>
                         </li>
                     @endforeach
                 </ul>

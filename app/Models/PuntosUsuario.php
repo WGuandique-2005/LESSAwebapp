@@ -17,4 +17,9 @@ class PuntosUsuario extends Model
     public function usuario(){
         return $this->belongsTo(User::class);
     }
+
+    public function nivel()
+    {
+        return $this->belongsTo(Nivel::class, 'nivel_id', 'nivel_id');
+    }
 }

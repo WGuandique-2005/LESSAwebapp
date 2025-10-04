@@ -308,7 +308,7 @@
                 </div>
                 <div class="learn-sections-layout">
                     <div class="main-game-grid">
-                        <div class="game-card game-1" onclick="window.location.href='/juegos/social/responde-saludo'">
+                        <div class="game-card game-1" onclick="window.location.href='/practicar/saludos/adivina'">
                             <span class="icon">💬</span>
                             <h3>Reacción al Saludo</h3>
                             <p>Se te presenta un saludo (ej. "Hola" o "Buenos días"). Debes responder con la seña de
