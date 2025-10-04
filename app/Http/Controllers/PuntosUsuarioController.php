@@ -3,23 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PuntosUsuario; // Usar el modelo de log proporcionado
-use Illuminate\Support\Facades\DB; // Para transacciones atómicas
+use App\Models\PuntosUsuario;
+use Illuminate\Support\Facades\DB;
 
 class PuntosUsuarioController extends Controller
 {
-    // Función existente (la dejamos como referencia o la eliminamos si no se usa)
-    public function abecedarioAdivina(Request $request)
-    {
-        $user = auth()->user();
-        if (!$user) {
-            return response()->json(['message' => 'Usuario no autenticado'], 401);
-        }
-        // Lógica para asignar puntos por completar la actividad
-    }
-
     /**
-     * Completa la actividad de Abecedario: Adivina la Seña (ABC1) y asigna puntos.
+     * Completa las actividades: Asignar puntos.
      */
     public function completeAbecedarioAdivina(Request $request)
     {
@@ -60,7 +50,6 @@ class PuntosUsuarioController extends Controller
             $puntosUsuario = PuntosUsuario::where('usuario_id', $user->id)
                 ->where('nivel_id', $activityId)
                 ->first();
-
             if ($puntosUsuario) {
                 // Si existe, actualiza el puntaje
                 $puntosUsuario->puntos_obtenidos = $points;
@@ -71,6 +60,8 @@ class PuntosUsuarioController extends Controller
                     'usuario_id' => $user->id,
                     'nivel_id' => $activityId,
                     'puntos_obtenidos' => $points,
+                    'completado' => true,
+                    'fecha_completado' => now(),
                 ]);
             }
 

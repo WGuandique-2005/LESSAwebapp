@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('nivel_id')->constrained('niveles')->onDelete('cascade');
             $table->integer('puntos_obtenidos')->default(0);
+            // Estado y fecha de completado
+            $table->boolean('completado')->default(false);
+            $table->timestamp('fecha_completado')->nullable();
             $table->timestamps();
         });
     }
