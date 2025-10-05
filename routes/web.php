@@ -73,6 +73,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/practicar/abecedario/adivina', [NivelesController::class, 'abecedario_adivina'])->name('nivel.abecedario.adivina');
     Route::post('/practicar/abecedario/adivina/complete', [PuntosUsuarioController::class, 'completeAbecedarioAdivina'])->name('nivel.abecedario.adivina.complete');
 
+    Route::get('/practicar/abecedario/conecta', [NivelesController::class, 'abecedario_conecta'])->name('nivel.abecedario.conecta');
+    Route::post('/practicar/abecedario/conecta/complete', [PuntosUsuarioController::class, 'completeAbecedarioConecta'])->name('lecciones.abecedario.conecta.complete');
+
     Route::get('/practicar/abecedario/deletrea', [NivelesController::class, 'abecedario_deletrea'])->name('nivel.abecedario.deletrea');
     Route::get('/practicar/abecedario/conecta', [NivelesController::class, 'abecedario_conecta'])->name('nivel.abecedario.conecta');
     Route::get('/practicar/abecedario/extra', [NivelesController::class, 'abecedario_extra'])->name('nivel.abecedario.extra');

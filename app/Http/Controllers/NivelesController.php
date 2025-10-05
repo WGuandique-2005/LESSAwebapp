@@ -26,12 +26,31 @@ class NivelesController extends Controller
         return view('practica_section.abecedario.A1_adivina', compact('abecedarioData'));
     }
 
+
     function abecedario_deletrea(){
-        return view('practica_section.abecedario.a2_deletrea');
+        // Define la ruta al archivo JSON
+        $jsonPath = storage_path('app/abecedario.json');
+        $abecedarioData = [];
+
+        // Verifica si el archivo existe antes de cargarlo
+        if (file_exists($jsonPath)) {
+            // Carga y decodifica el JSON. Si falla, $abecedarioData será un array vacío.
+            $abecedarioData = json_decode(file_get_contents($jsonPath), true) ?? [];
+        }
+        return view('practica_section.abecedario.a2_deletrea', compact('abecedarioData'));
     }
 
     function abecedario_conecta(){
-        return view('practica_section.abecedario.a3_conecta');
+        // Define la ruta al archivo JSON
+        $jsonPath = storage_path('app/abecedario.json');
+        $abecedarioData = [];
+
+        // Verifica si el archivo existe antes de cargarlo
+        if (file_exists($jsonPath)) {
+            // Carga y decodifica el JSON. Si falla, $abecedarioData será un array vacío.
+            $abecedarioData = json_decode(file_get_contents($jsonPath), true) ?? [];
+        }
+        return view('practica_section.abecedario.a3_conecta', compact('abecedarioData'));
     }
 
     function abecedario_extra(){

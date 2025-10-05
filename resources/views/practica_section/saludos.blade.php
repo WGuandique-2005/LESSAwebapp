@@ -310,9 +310,9 @@
                     <div class="main-game-grid">
                         <div class="game-card game-1" onclick="window.location.href='/practicar/saludos/adivina'">
                             <span class="icon">💬</span>
-                            <h3>Reacción al Saludo</h3>
-                            <p>Se te presenta un saludo (ej. "Hola" o "Buenos días"). Debes responder con la seña de
-                                cortesía adecuada o la continuación lógica.</p>
+                            <h3>Adivina el Saludo</h3>
+                            <p>Se te mostrará una seña y deberás identificar el Saludo correcto entre múltiples opciones.
+                                ¡Rapidez y precisión!</p>
                         </div>
                         <div class="game-card game-2" onclick="window.location.href='/juegos/social/ordenar-dialogo'">
                             <span class="icon">🔄</span>

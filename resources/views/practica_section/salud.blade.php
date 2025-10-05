@@ -310,8 +310,8 @@
                         <div class="game-card game-1" onclick="window.location.href='/practicar/salud/adivina'">
                             <span class="icon">🦴</span>
                             <h3>Señas del Cuerpo</h3>
-                            <p>Identifica las señas correspondientes a diferentes partes del cuerpo humano (cabeza, brazo,
-                                pierna, etc.) a alta velocidad.</p>
+                            <p>Identifica las señas correspondientes a diferente vocabulario aprendido durantes las lecciones, se te mostrará una seña y deberás identificar la correcta entre múltiples opciones.
+                                ¡Rapidez y precisión!</p>
                         </div>
                         <div class="game-card game-2" onclick="window.location.href='/juegos/salud/describir-sintomas'">
                             <span class="icon">🤒</span>

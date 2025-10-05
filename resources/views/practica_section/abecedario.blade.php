@@ -321,7 +321,7 @@
                             <p>Deletrea palabras simples en un tiempo limitado. Perfecto para practicar la fluidez entre
                                 señas consecutivas.</p>
                         </div>
-                        <div class="game-card game-3" onclick="window.location.href='/juegos/abecedario/memoria-señas'">
+                        <div class="game-card game-3" onclick="window.location.href='/practicar/abecedario/conecta'">
                             <span class="icon">🧠</span>
                             <h3>Parejas de Señas</h3>
                             <p>Encuentra pares de cartas: imagen de la seña y la letra escrita. Fortalece tu memoria
