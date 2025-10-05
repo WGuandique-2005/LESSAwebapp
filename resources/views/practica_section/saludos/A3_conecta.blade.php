@@ -1,17 +1,17 @@
 @php
-    // Cargar datos de Abecedario y tomar 6 aleatorios
-    $abecedario = json_decode(file_get_contents(storage_path('app/abecedario.json')), true) ?? [];
-    shuffle($abecedario);
+    // Cargar datos de saludos y tomar 6 aleatorios
+    $saludos = json_decode(file_get_contents(storage_path('app/saludos.json')), true) ?? [];
+    shuffle($saludos);
     // Aseguramos que tome un máximo de 6 elementos para una partida manejable
-    $abecedarioJuego = array_slice($abecedario, 0, min(6, count($abecedario)));
+    $saludosJuego = array_slice($saludos, 0, min(6, count($saludos)));
 
     // Preparar significados y barajarlos
     $significados = array_map(function ($n) {
         return ['id' => $n['id'], 'nombre' => $n['nombre']];
-    }, $abecedarioJuego);
+    }, $saludosJuego);
     shuffle($significados);
 @endphp
-<head><title>Abecedario: Conecta</title></head>
+<head><title>Saludos: Conecta</title></head>
 @include('partials.navbar')
 
 <div class="game-wrap">
@@ -39,7 +39,7 @@
                     <div class="sena-column" aria-label="Señas (destinatarios)">
                         <h3 class="col-title">Señas</h3>
                         <div class="sena-grid" id="senaGrid">
-                            @foreach($abecedarioJuego as $num)
+                            @foreach($saludosJuego as $num)
                                 <div class="sena-card drop-zone" data-id="{{ $num['id'] }}" tabindex="0"
                                     aria-dropeffect="none">
                                     <div class="sena-media">
@@ -66,7 +66,7 @@
                 </div>
 
                 <form id="completeForm" class="actions-row" method="POST"
-                    action="{{ route('lecciones.abecedario.conecta.complete') }}">
+                    action="{{ route('lecciones.saludos.conecta.complete') }}">
                     @csrf
                     <input type="hidden" name="errors_count" id="errorsCountInput" value="0">
                     
@@ -770,17 +770,17 @@
             e.preventDefault(); 
         });
 
-        // Enviar el formulario y redirigir al nivel abecedario
+        // Enviar el formulario y redirigir al nivel saludos
         btnContinue.addEventListener('click', function () {
             // Cambia la acción del formulario si es necesario
-            completeForm.action = "{{ route('lecciones.abecedario.conecta.complete') }}";
+            completeForm.action = "{{ route('lecciones.saludos.conecta.complete') }}";
             completeForm.submit();
         });
 
         // Enviar el formulario y redirigir a mi progreso
         btnMiProgreso.addEventListener('click', function () {
             // Cambia la acción del formulario si es necesario
-            completeForm.action = "{{ route('lecciones.abecedario.conecta.complete') }}";
+            completeForm.action = "{{ route('lecciones.saludos.conecta.complete') }}";
             // Crea un input oculto para saber que quiere ir a mi progreso
             let redirectInput = document.createElement('input');
             redirectInput.type = 'hidden';

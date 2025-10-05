@@ -320,11 +320,11 @@
                             <p>Ordena una serie de señas para formar una conversación coherente de presentación (ej.
                                 Nombre, ¿Cómo estás?, Gusto en conocerte).</p>
                         </div>
-                        <div class="game-card game-3" onclick="window.location.href='/juegos/social/memoria-social'">
+                        <div class="game-card game-3" onclick="window.location.href='/practicar/saludos/conecta'">
                             <span class="icon">🙏</span>
-                            <h3>La Señal Correcta</h3>
-                            <p>Identifica la seña correcta de "Gracias", "Por favor", o "Disculpa" entre un grupo de señas
-                                similares. ¡Enfocado en la precisión!</p>
+                            <h3>Parejas de Señas</h3>
+                            <p>Encuentra pares de cartas: imagen de la seña y el Saludo mostrado. Fortalece tu memoria
+                                visual a largo plazo.</p>
                         </div>
                         <div class="game-card game-4" onclick="window.location.href='/juegos/social/rol-play-presentacion'">
                             <span class="icon">🎭</span>
