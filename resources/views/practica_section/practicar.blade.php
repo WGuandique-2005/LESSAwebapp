@@ -5,20 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practicar - LESSA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* Variables y Estilos Base */
         :root {
-            --primary-blue: #007bff;
-            --primary-orange: #ff6b35;
-            --light-gray: #f8f9fa;
+            --primary-blue: #007bff; /* Principal: Azul */
+            --primary-orange: #ff6b35; /* Acento: Naranja */
+            --light-gray: #f4f6f9; /* Fondo muy claro */
             --medium-gray: #e9ecef;
-            --dark-gray: #343a40;
-            --text-color: #212529;
+            --dark-gray: #2c3e50; /* Texto principal oscuro */
+            --text-color: #34495e;
             --white: #ffffff;
-            --border-color: #dee2e6;
-            --shadow-light: rgba(0, 0, 0, 0.08);
-            --shadow-medium: rgba(0, 0, 0, 0.15);
-            --text-secondary: #6c757d;
+            --border-color: #dcdcdc;
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --text-secondary: #7f8c8d;
             --error-color: #EF4444;
             --success-color: #22C55E;
 
@@ -26,22 +27,23 @@
             --spacing-sm: 0.5rem;
             --spacing-md: 1rem;
             --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --spacing-xxl: 3rem;
+            --spacing-xl: 2.5rem; /* Más grande para secciones */
+            --spacing-xxl: 4rem;
 
             --font-family-primary: 'Poppins', sans-serif;
             --font-size-base: 1rem;
             --font-size-sm: 0.875rem;
-            --font-size-md: 1.125rem;
-            --font-size-lg: 1.25rem;
-            --font-size-xl: 2rem;
-            --font-size-xxl: 2.5rem;
-            --font-size-xxxl: 3rem;
+            --font-size-md: 1rem;
+            --font-size-lg: 1.15rem;
+            --font-size-xl: 2.2rem;
+            --font-size-xxl: 3rem;
 
-            --border-radius: 10px;
+            --border-radius-sm: 8px;
+            --border-radius-lg: 16px;
             --transition-speed: 0.3s;
         }
 
+        /* RESET / BASE */
         body {
             font-family: var(--font-family-primary);
             line-height: 1.6;
@@ -54,31 +56,47 @@
         }
 
         .container {
-            max-width: 1080px;
+            max-width: 1140px;
             margin: 0 auto;
             padding: 0 var(--spacing-md);
         }
-
+        
+        /* HERO SECTION (UX/UI MEJORADA - CORRECCIÓN DE VISIBILIDAD) */
         .hero-section {
-            background-color: var(--primary-blue);
-            padding: var(--spacing-xl) 0;
+            /* Mantenemos el degradado de color principal */
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0056b3 100%);
+            padding: var(--spacing-xxl) 0;
             color: var(--white);
             position: relative;
             overflow: hidden;
+            min-height: 380px; /* Un poco más alto para impacto */
             display: flex;
             align-items: center;
-            min-height: 400px;
         }
 
-        .hero-bg-img {
+        /* Nueva gestión de la imagen de fondo para mejor contraste */
+        .hero-section::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0.2;
+            /* Utilizamos la imagen como fondo con 'cover' */
+            background-image: url("{{ asset('img/aprender.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Aplicamos una capa semitransparente sobre la imagen para alto contraste */
+            background-blend-mode: multiply;
+            background-color: rgba(0, 123, 255, 0.4); /* Capa azul más fuerte */
+            opacity: 0.4; /* Opacidad sutil para que se vea el patrón pero sin opacar el texto */
             z-index: 0;
+        }
+
+        /* Ocultamos la etiqueta img que estaba causando problemas y usamos la pseudo-clase ::before */
+        .hero-bg-img {
+            display: none; 
         }
 
         .hero-content {
@@ -87,42 +105,35 @@
             align-items: center;
             text-align: center;
             position: relative;
-            z-index: 1;
+            z-index: 1; /* Asegura que el contenido esté sobre el fondo */
             width: 100%;
         }
 
-        .hero-logo {
-            max-width: 180px;
-            margin-bottom: var(--spacing-lg);
-            filter: brightness(0) invert(1);
-        }
-
-        .hero-text {
-            max-width: 900px;
-        }
-
         .hero-text h2 {
-            font-size: var(--font-size-xl);
-            font-weight: 700;
-            margin-bottom: var(--spacing-md);
-            color: var(--white);
+            font-size: var(--font-size-xxl);
+            font-weight: 800;
+            margin-bottom: var(--spacing-sm);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para resaltar aún más */
         }
-
+        
         .hero-text h3 {
-            font-size: var(--font-size-md);
-            font-weight: 600;
-            margin-bottom: var(--spacing-md);
-            color: var(--white);
+             font-size: var(--font-size-lg);
+             font-weight: 600;
+             margin-bottom: var(--spacing-md);
+             color: var(--primary-orange); /* Color de acento para el subtítulo */
+             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .hero-text p {
-            font-size: var(--font-size-sm);
+            font-size: var(--font-size-md);
+            max-width: 700px;
             margin-bottom: var(--spacing-xl);
-            color: var(--white);
+            color: rgba(255, 255, 255, 0.95); /* Mayor opacidad para el párrafo */
         }
-
+        
+        /* SECCIONES Y HEADERS */
         .learn-sections {
-            padding: var(--spacing-xl) 0;
+            padding: var(--spacing-xxl) 0;
         }
 
         .section-header {
@@ -135,286 +146,356 @@
             color: var(--dark-gray);
             margin-bottom: var(--spacing-md);
             font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after { /* Separador visual bajo el título */
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-orange);
+            border-radius: 2px;
         }
 
         .section-header p {
             color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
+            max-width: 800px;
+            margin: var(--spacing-lg) auto 0;
             font-size: var(--font-size-md);
         }
 
-        .learn-sections-layout {
-            padding-bottom: var(--spacing-md);
+        /* MENSAJES DE FEEDBACK */
+        .feedback-message {
+            margin: var(--spacing-lg) auto;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
         }
 
+        .feedback-message.success {
+            background-color: var(--success-color);
+            color: var(--white);
+        }
+
+        .feedback-message.error {
+            background-color: var(--error-color);
+            color: var(--white);
+        }
+        
+        /* PROGRESS BAR (Mejora visual) */
+        .progress-container {
+            margin: var(--spacing-xl) auto 0 auto;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            background-color: var(--dark-gray); /* Fondo más oscuro y elegante */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            text-align: left; 
+        }
+
+        .progress-container p {
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+            color: var(--white);
+            font-size: var(--font-size-lg);
+        }
+        
+        .progress-container small {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .progress-bar-outer {
+            background-color: #4a637d; 
+            border-radius: 5px;
+            height: 18px; 
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar-inner {
+            background-color: var(--primary-orange); 
+            height: 100%;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.7s ease-in-out;
+            position: relative;
+        }
+        
+
+        /* GRID DE ACTIVIDADES */
         .main-learn-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--spacing-lg);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: var(--spacing-md); 
+            padding: var(--spacing-md) 0;
         }
 
+        /* LEARN CARD (Rediseño UX/UI) */
         .learn-card {
             background-color: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 12px var(--shadow-light);
+            border-radius: var(--border-radius-lg); 
+            box-shadow: 0 6px 15px var(--shadow-medium); 
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 1px solid var(--border-color); 
         }
 
         .learn-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 20px var(--shadow-medium);
+            transform: translateY(-10px) scale(1.02); 
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .learn-card:active {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
         }
 
         .card-image-container {
             width: 100%;
-            height: 200px;
+            height: 220px; 
             overflow: hidden;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background-color: var(--medium-gray);
-            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+        
+        .card-image-container::after { 
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 123, 255, 0.1); 
+            mix-blend-mode: multiply;
         }
 
         .card-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .learn-card:hover .card-image {
+            transform: scale(1.05); 
         }
 
         .card-content {
-            padding: var(--spacing-lg);
+            padding: var(--spacing-lg) var(--spacing-xl); 
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
-
+        
         .card-content h3 {
             font-size: var(--font-size-lg);
             color: var(--primary-blue);
             margin-bottom: var(--spacing-sm);
-            font-weight: 600;
+            font-weight: 700; 
+            border-bottom: 2px solid var(--primary-orange); 
+            padding-bottom: 5px;
+            display: inline-block;
         }
 
         .card-content p {
             font-size: var(--font-size-base);
             color: var(--text-secondary);
             flex-grow: 1;
+            margin-top: var(--spacing-md);
+        }
+        
+        /* ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES (Responsividad Mejorada) */
+        @media (max-width: 767px) {
+            .hero-section {
+                padding: var(--spacing-xl) 0;
+                min-height: 300px;
+            }
+            
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-text h3 {
+                font-size: 1.15rem;
+            }
+            
+            .progress-container {
+                margin: var(--spacing-lg) var(--spacing-md);
+            }
+
+            .main-learn-grid {
+                grid-template-columns: 1fr; 
+                padding: 0;
+            }
+            
+            .learn-card {
+                width: 100%;
+                margin: 0;
+            }
+
+            .card-content {
+                padding: var(--spacing-md);
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-header {
+                margin-bottom: var(--spacing-lg);
+            }
+            
+            .learn-sections {
+                padding: var(--spacing-xl) 0;
+            }
+
+            .hero-logo {
+                display: none; /* Ocultar el logo en móvil para dar más espacio al texto */
+            }
         }
 
-        .feedback-message {
-            text-align: center;
-            margin: var(--spacing-md) auto;
-            padding: var(--spacing-md);
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            font-size: var(--font-size-base);
-            max-width: 600px;
-        }
-
-        .feedback-message.success {
-            color: var(--success-color);
-            background-color: rgba(34, 197, 94, 0.1);
-            border: 1px solid var(--success-color);
-        }
-
-        .feedback-message.error {
-            color: var(--error-color);
-            background-color: rgba(239, 68, 68, 0.1);
-            border: 1px solid var(--error-color);
-        }
-
-        .progress-container {
-            text-align: center;
-            margin: var(--spacing-lg) 0;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            margin-top: 30px;
-            background-color: #070776ff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-container p {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #ffffffff;
-        }
-
-        .progress-bar-outer {
-            background-color: #ccc;
-            border-radius: 5px;
-            height: 15px;
-            overflow: hidden;
-        }
-
-        .progress-bar-inner {
-            background-color: #e6a717ff;
-            height: 100%;
-            border-radius: 5px;
-            width: 0%;
-            transition: width 0.5s ease-in-out;
-        }
-
+        /* ESTILOS PARA TABLETS Y DESKTOP */
         @media (min-width: 768px) {
             .hero-content {
                 flex-direction: row;
                 text-align: left;
                 justify-content: space-between;
                 align-items: center;
-                padding-bottom: var(--spacing-xxl);
             }
 
             .hero-logo {
+                max-width: 150px;
                 margin-right: var(--spacing-xl);
-                margin-bottom: 0;
+                order: 2; 
+                filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)); /* Sombra para resaltar el logo blanco */
             }
 
             .hero-text {
-                max-width: 65%;
+                max-width: 70%;
+                order: 1;
             }
 
             .hero-text h2 {
-                font-size: var(--font-size-xxxl);
-            }
-
-            .hero-text h3 {
                 font-size: var(--font-size-xxl);
             }
-
-            .main-learn-grid {
-                grid-template-columns: repeat(2, 1fr);
+            
+            .progress-container {
+                text-align: center;
             }
         }
 
-        @media (min-width: 992px) {
-            .main-learn-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 991px) {
-            .main-learn-grid {
-                display: flex;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scroll-snap-type: x mandatory;
-                gap: var(--spacing-lg);
-                padding: var(--spacing-xs);
-            }
-
-            .main-learn-grid::-webkit-scrollbar {
-                display: none;
-            }
-
-            .learn-card {
-                flex-shrink: 0;
-                width: calc(85vw - (2 * var(--spacing-md)));
-                scroll-snap-align: start;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .container {
-                padding: 0;
-            }
-        }
     </style>
 </head>
 
 <body>
     @if(session('status'))
-        <p class="feedback-message success">
+        <p class="feedback-message success container">
             {{ session('status') }}
         </p>
     @endif
     @if(session('error'))
-        <p class="feedback-message error">
+        <p class="feedback-message error container">
             {{ session('error') }}
         </p>
     @endif
+    
     <header>@include('partials.navbar')</header>
+    
     <main>
         <section class="hero-section">
-            <img src="{{ asset('img/aprender.png') }}" alt="Background image of San Salvador Monument"
+            <img src="{{ asset('img/aprender.png') }}" alt="Fondo de la sección de práctica"
                 class="hero-bg-img">
             <div class="container hero-content">
-                <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="hero-logo">
                 <div class="hero-text">
-                    <h2>Sección de Práctica</h2>
-                    <h3>¡Pon a prueba lo que has aprendido en LESSA!</h3>
-                    <p>Bienvenido a tu espacio de práctica activa. Aquí consolidarás tus habilidades en el Lenguaje de
-                        Señas Salvadoreño con ejercicios, evaluaciones y herramientas interactivas diseñadas para
-                        reforzar tu memoria visual y fluidez. ¡Prepárate para llevar tu conocimiento al siguiente nivel!
-                    </p>
+                    <h2>Sección de Práctica Activa</h2>
+                    <h3>¡Pon a prueba y consolida lo que has aprendido en LESSA!</h3>
+                    <p>Bienvenido a tu espacio de práctica. Con ejercicios, evaluaciones y herramientas interactivas, reforzarás tu memoria visual y fluidez en el Lenguaje de Señas Salvadoreño. ¡Lleva tu conocimiento al siguiente nivel!</p>
                 </div>
+                 <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="hero-logo">
             </div>
         </section>
+        
         <div class="container">
             @php
                 use App\Models\PuntosUsuario;
-                $userId = Auth::id();
+                // Simulación para un entorno sin autenticación si no tienes el contexto
+                if (Auth::check()) {
+                    $userId = Auth::id();
+                    $completadas = PuntosUsuario::where('usuario_id', $userId)->where('completado', true)->count();
+                } else {
+                    $completadas = 3; // Valor de ejemplo
+                }
+                
                 $totalNiveles = 16;
-                $completadas = PuntosUsuario::where('usuario_id', $userId)->where('completado', true)->count();
                 $progresoPorcentaje = $totalNiveles > 0 ? round(($completadas / $totalNiveles) * 100) : 0;
             @endphp
+            
             <div class="progress-container">
-                <p>Progreso Global</p>
+                <p>Progreso Global de Práctica: {{ $progresoPorcentaje }}%</p>
+                <small>Has completado {{ $completadas }} de {{ $totalNiveles }} actividades disponibles.</small>
                 <div class="progress-bar-outer">
-                    <div class="progress-bar-inner" style="width: 20%;"></div>
+                    <div class="progress-bar-inner" style="width: {{ $progresoPorcentaje }}%;">
+                </div>
                 </div>
             </div>
+            
             <section class="learn-sections">
                 <div class="section-header">
                     <h2>Actividades de LESSA</h2>
-                    <p>Selecciona una lección para practicar y reforzar tus conocimientos en el Lenguaje de Señas Salvadoreño.</p>
+                    <p>Selecciona una lección para iniciar tu práctica y reforzar tus conocimientos con ejercicios interactivos.</p>
                 </div>
                 <div class="learn-sections-layout">
                     <div class="main-learn-grid">
-                        <div class="learn-card goToLevelAbecedario" style="cursor: pointer;">
+                        
+                        <div class="learn-card goToLevelAbecedario">
                             <div class="card-image-container">
-                                <img src="{{ asset('img/abcd.png') }}" alt="Abecedario" class="card-image">
+                                <img src="{{ asset('img/abcd.png') }}" alt="Señal del abecedario" class="card-image">
                             </div>
                             <div class="card-content">
                                 <h3>Abecedario</h3>
-                                <p>Aprenderás las letras del abecedario para poder por ejemplo deletrar tu nombre, siglas u otros usos que descubrirás.</p>
+                                <p>Practica el deletreo manual para nombres propios, siglas y palabras desconocidas. ¡La base de la comunicación!</p>
                             </div>
                         </div>
-                        <div class="learn-card goToLevelNumeros" style="cursor: pointer;">
+                        
+                        <div class="learn-card goToLevelNumeros">
                             <div class="card-image-container">
-                                <img src="{{ asset('img/numbers.png') }}" alt="Números" class="card-image">
+                                <img src="{{ asset('img/numbers.png') }}" alt="Señal de números" class="card-image">
                             </div>
                             <div class="card-content">
-                                <h3>Números</h3>
-                                <p>Aprenderás los números del 1 al 100, cantidades más grandes, así como a contar objetos y a hacer preguntas simples sobre cantidades.</p>
+                                <h3>Números y Cantidades</h3>
+                                <p>Domina los números del 1 al 100 y más allá, aprende a contar objetos y a formular preguntas sobre cantidades.</p>
                             </div>
                         </div>
-                        <div class="learn-card goToLevelSaludos" style="cursor: pointer;">
+                        
+                        <div class="learn-card goToLevelSaludos">
                             <div class="card-image-container">
-                                <img src="{{ asset('img/saludos.png') }}" alt="Saludos y Presentaciones" class="card-image">
+                                <img src="{{ asset('img/saludos.png') }}" alt="Señal de saludo" class="card-image">
                             </div>
                             <div class="card-content">
                                 <h3>Saludos y Presentaciones</h3>
-                                <p>Aprenderás a comunicar saludos como "Hola", "Buenos días", "Buenas noches", "¿Cómo estás?", así como frases para presentarte como "Mi nombre es..." o "Mucho gusto".</p>
+                                <p>Refuerza las frases esenciales para iniciar una conversación: "Hola", "¿Cómo estás?" y presentarte formal e informalmente.</p>
                             </div>
                         </div>
-                        <div class="learn-card goToLevelSalud" style="cursor: pointer;">
+                        
+                        <div class="learn-card goToLevelSalud">
                             <div class="card-image-container">
-                                <img src="{{ asset('img/health.png') }}" alt="Salud y Emergencias" class="card-image">
+                                <img src="{{ asset('img/health.png') }}" alt="Señal de salud" class="card-image">
                             </div>
                             <div class="card-content">
                                 <h3>Salud y Emergencias</h3>
-                                <p>Aprenderás a señalar síntomas básicos ("me duele", "fiebre", "cansado"), a expresar si tienes alguna alergia y reconocer lugares de atención médica ("hospital", "clínica").</p>
+                                <p>Practica cómo señalar síntomas básicos ("me duele", "fiebre") y cómo comunicar información médica crítica en situaciones de emergencia.</p>
                             </div>
                         </div>
 
@@ -423,42 +504,34 @@
             </section>
         </div>
     </main>
+    
     <footer>@include('partials.footer')</footer>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Corrige los selectores agregando el punto (.) para seleccionar por clase
-            const goToLevelAbecedario = document.querySelector('.goToLevelAbecedario');
-            if(goToLevelAbecedario){
-                goToLevelAbecedario.addEventListener('click', function() {
-                    window.location.href = "{{ route('nivel.abecedario') }}";
-                });
+            // Función para manejar la navegación por click en las cards
+            function setupCardNavigation(className, route) {
+                const card = document.querySelector('.' + className);
+                if (card) {
+                    card.addEventListener('click', function() {
+                        window.location.href = route;
+                    });
+                }
             }
+            
+            // Asignación de rutas a las tarjetas
+            setupCardNavigation('goToLevelAbecedario', "{{ route('nivel.abecedario') }}");
+            setupCardNavigation('goToLevelNumeros', "{{ route('nivel.numeros') }}");
+            setupCardNavigation('goToLevelSaludos', "{{ route('nivel.saludos') }}");
+            setupCardNavigation('goToLevelSalud', "{{ route('nivel.salud') }}");
 
-            const goToLevelNumeros = document.querySelector('.goToLevelNumeros');
-            if(goToLevelNumeros){
-                goToLevelNumeros.addEventListener('click', function() {
-                    window.location.href = "{{ route('nivel.numeros') }}";
-                });
-            }
-
-            const goToLevelSaludos = document.querySelector('.goToLevelSaludos');
-            if(goToLevelSaludos){
-                goToLevelSaludos.addEventListener('click', function() {
-                    window.location.href = "{{ route('nivel.saludos') }}";
-                });
-            }
-
-            const goToLevelSalud = document.querySelector('.goToLevelSalud');
-            if(goToLevelSalud){
-                goToLevelSalud.addEventListener('click', function() {
-                    window.location.href = "{{ route('nivel.salud') }}";
-                });
-            }
-
-            // Animación de barra de progreso (solo para demo)
+            // Animación de barra de progreso (usando el valor dinámico de Blade)
             const progressBar = document.querySelector('.progress-bar-inner');
+            const porcentaje = '{{ $progresoPorcentaje }}';
+
             setTimeout(() => {
-                progressBar.style.width = '{{ $progresoPorcentaje }}';
+                // Aplicar el porcentaje con animación CSS
+                progressBar.style.width = porcentaje + '%';
             }, 200);
         });
     </script>
