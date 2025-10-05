@@ -325,11 +325,11 @@
                             <p>Se te mostrará una seña y deberás identificar el Saludo correcto entre múltiples opciones.
                                 ¡Rapidez y precisión!</p>
                         </div>
-                        <div class="game-card game-2" onclick="window.location.href='/juegos/social/ordenar-dialogo'">
+                        <div class="game-card game-2" onclick="window.location.href='/practicar/saludos/memorama'">
                             <span class="icon">🔄</span>
-                            <h3>Diálogo Ordenado</h3>
-                            <p>Ordena una serie de señas para formar una conversación coherente de presentación (ej.
-                                Nombre, ¿Cómo estás?, Gusto en conocerte).</p>
+                            <h3>Memorama de señas</h3>
+                            <p>Encuentra pares de cartas: imagen de la seña y el gesto correspondiente. Fortalece tu capacidad
+                                de reconocimiento y memoria visual.</p>
                         </div>
                         <div class="game-card game-3" onclick="window.location.href='/practicar/saludos/conecta'">
                             <span class="icon">🙏</span>

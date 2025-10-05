@@ -327,11 +327,11 @@
                             <p>Se te mostrará la seña de un número y deberás escribir o seleccionar la cifra correspondiente.
                                 Incluye números de tres y cuatro dígitos.</p>
                         </div>
-                        <div class="game-card game-2" onclick="window.location.href='/juegos/cifras/calculo-rapido'">
+                        <div class="game-card game-2" onclick="window.location.href='/practicar/numeros/memorama'">
                             <span class="icon">➕</span>
-                            <h3>Matemáticas en Señas</h3>
-                            <p>Resuelve operaciones matemáticas sencillas. Debes leer las señas de los números y responder
-                                con rapidez la seña del resultado.</p>
+                            <h3>Memorama de señas</h3>
+                            <p>Encuentra pares de cartas: imagen de la seña y el gesto correspondiente. Fortalece tu capacidad
+                                de reconocimiento y memoria visual.</p>
                         </div>
                         <div class="game-card game-3" onclick="window.location.href='/practicar/numeros/conecta'">
                             <span class="icon">🧠</span>

@@ -324,11 +324,11 @@
                             <p>Identifica las señas correspondientes a diferente vocabulario aprendido durantes las lecciones, se te mostrará una seña y deberás identificar la correcta entre múltiples opciones.
                                 ¡Rapidez y precisión!</p>
                         </div>
-                        <div class="game-card game-2" onclick="window.location.href='/juegos/salud/describir-sintomas'">
+                        <div class="game-card game-2" onclick="window.location.href='/practicar/salud/memorama'">
                             <span class="icon">🤒</span>
-                            <h3>¿Qué Te Sucede?</h3>
-                            <p>Se te muestra un síntoma (ej. "Tengo fiebre") y debes seleccionar la seña que mejor lo
-                                describe o viceversa.</p>
+                            <h3>Memorama de señas</h3>
+                            <p>Encuentra pares de cartas: imagen de la seña y el gesto correspondiente. Fortalece tu capacidad
+                                de reconocimiento y memoria visual.</p>
                         </div>
                         <div class="game-card game-3" onclick="window.location.href='/practicar/salud/conecta'">
                             <span class="icon">🚨</span>

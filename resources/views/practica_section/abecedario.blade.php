@@ -326,11 +326,11 @@
                             <p>Se te mostrará una seña y deberás identificar la letra correcta entre múltiples opciones.
                                 ¡Rapidez y precisión!</p>
                         </div>
-                        <div class="game-card game-2" onclick="window.location.href='/juegos/abecedario/deletreo-rapido'">
+                        <div class="game-card game-2" onclick="window.location.href='/practicar/abecedario/memorama'">
                             <span class="icon">⚡</span>
-                            <h3>Carrera de Deletreo</h3>
-                            <p>Deletrea palabras simples en un tiempo limitado. Perfecto para practicar la fluidez entre
-                                señas consecutivas.</p>
+                            <h3>Memorama de señas</h3>
+                            <p>Encuentra pares de cartas: imagen de la seña y el gesto correspondiente. Fortalece tu capacidad
+                                de reconocimiento y memoria visual.</p>
                         </div>
                         <div class="game-card game-3" onclick="window.location.href='/practicar/abecedario/conecta'">
                             <span class="icon">🧠</span>
