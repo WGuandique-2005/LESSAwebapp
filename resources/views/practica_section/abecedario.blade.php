@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nivel Abecedario: Mini-Juegos - LESSA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             /* Colores Base */
@@ -177,7 +177,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: var(--font-size-xl);
+            font-size: var(--font-size-md);
             font-weight: 800;
             color: var(--success-color);
         }
@@ -288,18 +288,29 @@
         </section>
 
         <div class="container">
+            @php
+                use App\Models\PuntosUsuario;
+                $userId = Auth::id();
+                $totalNiveles = 4;
+                // Donde ID de la leccion comience con 'ABC'
+                $completado = PuntosUsuario::where('usuario_id', $userId)
+                    ->where('completado', true)
+                    ->where('nivel_id', 'like', 'ABC%')
+                    ->count();
+                $progresoPorcentaje = $totalNiveles > 0 ? round(($completado / $totalNiveles) * 100) : 0;
+            @endphp
             <div class="progress-and-intro-container">
                 <div class="progress-circle-container">
-                    <svg class="progress-circle" viewBox="0 0 40 40">
-                        <circle class="progress-circle-bg" cx="20" cy="20" r="15.9155"></circle>
-                        <circle class="progress-circle-bar" cx="20" cy="20" r="15.9155"
+                    <svg class="progress-circle" viewBox="0 0 80 80">
+                        <circle class="progress-circle-bg" cx="40" cy="40" r="35"></circle>
+                        <circle class="progress-circle-bar" cx="40" cy="40" r="35"
                             style="stroke-dasharray: 100; stroke-dashoffset: 75;"></circle>
                     </svg>
-                    <span class="progress-text" id="progress-percent">25%</span>
+                    <span class="progress-text" id="progress-percent"></span>
                 </div>
                 <div class="progress-info">
                     <h4>PROGRESO DEL NIVEL</h4>
-                    <p>Has completado **1 de 4** mini-juegos. Sigue practicando para desbloquear el siguiente nivel de
+                    <p><strong>Has completado {{ $completado }} de {{ $totalNiveles }} mini-juegos.</strong> Sigue practicando para seguir afinando tus habilidades en dactilología con
                         LESSA. ¡Cada juego cuenta!</p>
                 </div>
             </div>
@@ -341,13 +352,11 @@
     <footer>@include('partials.footer')</footer>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Configuración del Círculo de Progreso
             const progressCircleBar = document.querySelector('.progress-circle-bar');
             const progressText = document.getElementById('progress-percent');
             
-            // Simulación del progreso (4 juegos, 1 completado = 25%)
             const totalGames = 4;
-            const completedGames = 0; 
+            const completedGames = {{ $completado }}; 
             const currentProgress = Math.round((completedGames / totalGames) * 100); 
             
             const circumference = 100;
@@ -356,7 +365,6 @@
             progressCircleBar.style.strokeDashoffset = offset;
             progressText.textContent = currentProgress + '%';
 
-            // Aplicar la animación (solo se usa el setTimeout para que la animación se vea, no es estrictamente necesario)
             setTimeout(() => {
                 progressCircleBar.style.strokeDashoffset = offset;
             }, 100); 

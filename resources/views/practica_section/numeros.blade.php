@@ -176,7 +176,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: var(--font-size-xl);
+            font-size: var(--font-size-md);
             font-weight: 800;
             color: var(--success-color);
         }
@@ -289,19 +289,30 @@
         </section>
 
         <div class="container">
+            @php
+                use App\Models\PuntosUsuario;
+                $userId = Auth::id();
+                $totalNiveles = 4;
+                // Donde ID de la leccion comience con 'ABC'
+                $completado = PuntosUsuario::where('usuario_id', $userId)
+                    ->where('completado', true)
+                    ->where('nivel_id', 'like', 'ABC%')
+                    ->count();
+                $progresoPorcentaje = $totalNiveles > 0 ? round(($completado / $totalNiveles) * 100) : 0;
+            @endphp
             <div class="progress-and-intro-container">
                 <div class="progress-circle-container">
-                    <svg class="progress-circle" viewBox="0 0 40 40">
-                        <circle class="progress-circle-bg" cx="20" cy="20" r="15.9155"></circle>
-                        <circle class="progress-circle-bar" cx="20" cy="20" r="15.9155"
-                            style="stroke-dasharray: 100; stroke-dashoffset: 50;"></circle>
+                    <svg class="progress-circle" viewBox="0 0 80 80">
+                        <circle class="progress-circle-bg" cx="40" cy="40" r="35"></circle>
+                        <circle class="progress-circle-bar" cx="40" cy="40" r="35"
+                            style="stroke-dasharray: 100; stroke-dashoffset: 75;"></circle>
                     </svg>
-                    <span class="progress-text" id="progress-percent">50%</span>
+                    <span class="progress-text" id="progress-percent"></span>
                 </div>
                 <div class="progress-info">
                     <h4>PROGRESO DEL NIVEL</h4>
-                    <p>Has completado **2 de 4** mini-juegos. Estás a mitad de camino para dominar la numeración. ¡Solo dos
-                        desafíos más!</p>
+                    <p><strong>Has completado {{ $completado }} de {{ $totalNiveles }} mini-juegos.</strong> Sigue practicando para seguir afinando tus habilidades en dactilología con
+                        LESSA. ¡Cada juego cuenta!</p>
                 </div>
             </div>
             <section class="learn-sections">
@@ -346,22 +357,18 @@
             const progressCircleBar = document.querySelector('.progress-circle-bar');
             const progressText = document.getElementById('progress-percent');
             
-            // Simulación del progreso (4 juegos, 2 completados = 50%)
             const totalGames = 4;
-            const completedGames = 2; // Simulación: 2 juegos completados
+            const completedGames = {{ $completado }};
             const currentProgress = Math.round((completedGames / totalGames) * 100); // 50
             
-            // Fórmula para el círculo SVG: 2 * Pi * Radio (2 * 3.14159 * 15.9155) = 100
             const circumference = 100;
             const offset = circumference - (currentProgress / 100) * circumference;
 
-            // Ajuste el valor inicial de la barra SVG y el texto
             progressCircleBar.style.strokeDashoffset = offset;
             progressText.textContent = currentProgress + '%';
 
-            // Animación (opcional, para visualización dinámica)
             setTimeout(() => {
-                 progressCircleBar.style.strokeDashoffset = offset;
+                progressCircleBar.style.strokeDashoffset = offset;
             }, 100); 
         });
     </script>

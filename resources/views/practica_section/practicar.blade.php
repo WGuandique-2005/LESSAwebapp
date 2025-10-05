@@ -361,6 +361,13 @@
             </div>
         </section>
         <div class="container">
+            @php
+                use App\Models\PuntosUsuario;
+                $userId = Auth::id();
+                $totalNiveles = 16;
+                $completadas = PuntosUsuario::where('usuario_id', $userId)->where('completado', true)->count();
+                $progresoPorcentaje = $totalNiveles > 0 ? round(($completadas / $totalNiveles) * 100) : 0;
+            @endphp
             <div class="progress-container">
                 <p>Progreso Global</p>
                 <div class="progress-bar-outer">
@@ -451,7 +458,7 @@
             // Animación de barra de progreso (solo para demo)
             const progressBar = document.querySelector('.progress-bar-inner');
             setTimeout(() => {
-                progressBar.style.width = '0%';
+                progressBar.style.width = '{{ $progresoPorcentaje }}';
             }, 200);
         });
     </script>

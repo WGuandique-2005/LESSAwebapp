@@ -35,7 +35,7 @@ class LeccionesController extends Controller
         return view('lessons.ls3_saludos', compact('senas'));
     }
     
-        public function ls4_salud(){
+    public function ls4_salud(){
         $jsonPath = storage_path('app/salud.json');
         $senas =[];
         if(file_exists($jsonPath)){
