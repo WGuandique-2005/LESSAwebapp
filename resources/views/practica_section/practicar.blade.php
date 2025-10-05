@@ -377,7 +377,7 @@
 
             .hero-logo {
                 max-width: 150px;
-                margin-right: var(--spacing-xl);
+                margin-right: var(--spacing-md);
                 order: 2; 
                 filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)); /* Sombra para resaltar el logo blanco */
             }
@@ -388,7 +388,7 @@
             }
 
             .hero-text h2 {
-                font-size: var(--font-size-xxl);
+                font-size: var(--font-size-xl);
             }
             
             .progress-container {
@@ -419,7 +419,7 @@
                 class="hero-bg-img">
             <div class="container hero-content">
                 <div class="hero-text">
-                    <h2>Sección de Práctica Activa</h2>
+                    <h2>Sección de Práctica</h2>
                     <h3>¡Pon a prueba y consolida lo que has aprendido en LESSA!</h3>
                     <p>Bienvenido a tu espacio de práctica. Con ejercicios, evaluaciones y herramientas interactivas, reforzarás tu memoria visual y fluidez en el Lenguaje de Señas Salvadoreño. ¡Lleva tu conocimiento al siguiente nivel!</p>
                 </div>
