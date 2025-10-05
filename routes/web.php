@@ -66,40 +66,48 @@ Route::middleware('auth')->group(function () {
     // Sección practicar
     Route::get('/practicar', [TaskController::class, 'practicar'])->name('practicar');
 
-    // Niveles
-
+    /*
+    |----------------------------------|
+    | Minijuegos                       |
+    |----------------------------------|
+    */
     // Abecedario
     Route::get('/practicar/abecedario', [NivelesController::class, 'abecedario'])->name('nivel.abecedario');
     Route::get('/practicar/abecedario/adivina', [NivelesController::class, 'abecedario_adivina'])->name('nivel.abecedario.adivina');
     Route::post('/practicar/abecedario/adivina/complete', [PuntosUsuarioController::class, 'completeAbecedarioAdivina'])->name('nivel.abecedario.adivina.complete');
 
+    Route::get('/practicar/abecedario/deletrea', [NivelesController::class, 'abecedario_deletrea'])->name('nivel.abecedario.deletrea');
+
+    Route::get('/practicar/abecedario/conecta', [NivelesController::class, 'abecedario_conecta'])->name('nivel.abecedario.conecta');
     Route::get('/practicar/abecedario/conecta', [NivelesController::class, 'abecedario_conecta'])->name('nivel.abecedario.conecta');
     Route::post('/practicar/abecedario/conecta/complete', [PuntosUsuarioController::class, 'completeAbecedarioConecta'])->name('lecciones.abecedario.conecta.complete');
 
-    Route::get('/practicar/abecedario/deletrea', [NivelesController::class, 'abecedario_deletrea'])->name('nivel.abecedario.deletrea');
-    Route::get('/practicar/abecedario/conecta', [NivelesController::class, 'abecedario_conecta'])->name('nivel.abecedario.conecta');
     Route::get('/practicar/abecedario/extra', [NivelesController::class, 'abecedario_extra'])->name('nivel.abecedario.extra');
 
+    // Números
     Route::get('/practicar/numeros', [NivelesController::class, 'numeros'])->name('nivel.numeros');
     Route::get('/practicar/numeros/adivina', [NivelesController::class, 'numeros_adivina'])->name('nivel.numeros.adivina');
     Route::post('/practicar/numeros/adivina/complete', [PuntosUsuarioController::class, 'completeNumerosAdivina'])->name('nivel.numeros.adivina.complete');
 
+    Route::get('/practicar/numeros/conecta', [NivelesController::class, 'numeros_conecta'])->name('nivel.numeros.conecta');
+    Route::post('/practicar/numeros/conecta/complete', [PuntosUsuarioController::class, 'completeNumerosConecta'])->name('lecciones.numeros.conecta.complete');
+
+    // Saludos
     Route::get('/practicar/saludos', [NivelesController::class, 'saludos'])->name('nivel.saludos');
     Route::get('/practicar/saludos/adivina', [NivelesController::class, 'saludos_adivina'])->name('nivel.saludos.adivina');
     Route::post('/practicar/saludos/adivina/complete', [PuntosUsuarioController::class, 'completeSaludosAdivina'])->name('nivel.saludos.adivina.complete');
     
+    // Salud
     Route::get('/practicar/salud', [NivelesController::class, 'salud'])->name('nivel.salud');
     Route::get('/practicar/salud/adivina', [NivelesController::class, 'salud_adivina'])->name('nivel.salud.adivina');
     Route::post('/practicar/salud/adivina/complete', [PuntosUsuarioController::class, 'completeSaludAdivina'])->name('nivel.salud.adivina.complete');
-
-    // Lecciones interactivas
-    Route::get('/lecciones', [TaskController::class, 'lecciones'])->name('lecciones');
 
     /*
     |----------------------------------|
     | Las lecciones                    |
     |----------------------------------|
     */
+    Route::get('/lecciones', [TaskController::class, 'lecciones'])->name('lecciones');
 
     Route::get('/lecciones/abecedario',[LeccionesController::class, 'ls1_abecedario'])->name('lecciones.abecedario');
     Route::get('/lecciones/abecedario/test', [LeccionesController::class, 'deletra_nombre'])->name('ls1_abecedario_test');
@@ -116,12 +124,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/lecciones/salud',[LeccionesController::class, 'ls4_salud'])->name('lecciones.salud');
     Route::get('/lecciones/salud/test', [LeccionesController::class, 'memorama_salud'])->name('ls4_salud_test');
     Route::post('/lecciones/salud/complete', [ProgressController::class, 'ls4_complete'])->name('lecciones.salud.complete');
-
-    /*
-    |----------------------------------|
-    | Minijuegos                       |
-    |----------------------------------|
-    */
 
     // Videos educativos
     Route::get('/lecciones/videos', [TaskController::class, 'videos'])->name('lecciones.videos');

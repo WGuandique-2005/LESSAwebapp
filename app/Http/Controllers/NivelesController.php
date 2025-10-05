@@ -76,6 +76,16 @@ class NivelesController extends Controller
         return view('practica_section.numeros.A1_adivina', compact('numerosData'));
     }
 
+    function numeros_conecta(){
+        $jsonPath = storage_path('app/numeros.json');
+        $numerosData = [];
+
+        if (file_exists($jsonPath)) {
+            $numerosData = json_decode(file_get_contents($jsonPath), true) ?? [];
+        }
+        return view('practica_section.numeros.A3_conecta', compact('numerosData'));
+    }
+    
     function saludos(){
         return view('practica_section.saludos');
     }

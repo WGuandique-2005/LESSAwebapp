@@ -322,11 +322,11 @@
                             <p>Resuelve operaciones matemáticas sencillas. Debes leer las señas de los números y responder
                                 con rapidez la seña del resultado.</p>
                         </div>
-                        <div class="game-card game-3" onclick="window.location.href='/juegos/cifras/contexto-numerico'">
-                            <span class="icon">⏰</span>
-                            <h3>Números en Contexto</h3>
-                            <p>Relaciona las señas de números con conceptos de la vida real como horas, fechas o precios.
-                                ¡Aplica lo que sabes!</p>
+                        <div class="game-card game-3" onclick="window.location.href='/practicar/numeros/conecta'">
+                            <span class="icon">🧠</span>
+                            <h3>Parejas de Señas</h3>
+                            <p>Encuentra pares de cartas: imagen de la seña y el número mostrado. Fortalece tu memoria
+                                visual a largo plazo.</p>
                         </div>
                         <div class="game-card game-4" onclick="window.location.href='/juegos/cifras/secuencia-señas'">
                             <span class="icon">➡️</span>
