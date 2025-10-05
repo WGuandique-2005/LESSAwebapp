@@ -334,8 +334,8 @@
                         </div>
                         <div class="game-card game-3" onclick="window.location.href='/practicar/abecedario/conecta'">
                             <span class="icon">🧠</span>
-                            <h3>Parejas de Señas</h3>
-                            <p>Encuentra pares de cartas: imagen de la seña y la letra escrita. Fortalece tu memoria
+                            <h3>Conecta</h3>
+                            <p>Conecta la imagen de la seña y la letra escrita. Fortalece tu memoria
                                 visual a largo plazo.</p>
                         </div>
                         <div class="game-card game-4" onclick="window.location.href='/juegos/abecedario/practica-trazado'">

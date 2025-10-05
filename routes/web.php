@@ -79,7 +79,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/practicar/abecedario/adivina', [NivelesController::class, 'abecedario_adivina'])->name('nivel.abecedario.adivina');
     Route::post('/practicar/abecedario/adivina/complete', [PuntosUsuarioController::class, 'completeAbecedarioAdivina'])->name('nivel.abecedario.adivina.complete');
 
-    Route::get('/practicar/abecedario/deletrea', [NivelesController::class, 'abecedario_deletrea'])->name('nivel.abecedario.deletrea');
+    Route::get('/practicar/abecedario/memorama', [NivelesController::class, 'abecedario_memorama'])->name('nivel.abecedario.memorama');
+    Route::post('/practicar/abecedario/memorama/complete', [PuntosUsuarioController::class, 'completeAbecedarioMemorama'])->name('lecciones.abecedario.memorama.complete');
 
     Route::get('/practicar/abecedario/conecta', [NivelesController::class, 'abecedario_conecta'])->name('nivel.abecedario.conecta');
     Route::get('/practicar/abecedario/conecta', [NivelesController::class, 'abecedario_conecta'])->name('nivel.abecedario.conecta');
@@ -92,6 +93,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/practicar/numeros/adivina', [NivelesController::class, 'numeros_adivina'])->name('nivel.numeros.adivina');
     Route::post('/practicar/numeros/adivina/complete', [PuntosUsuarioController::class, 'completeNumerosAdivina'])->name('nivel.numeros.adivina.complete');
 
+    Route::get('/practicar/numeros/memorama', [NivelesController::class, 'numeros_memorama'])->name('nivel.numeros.memorama');
+    Route::post('/practicar/numeros/memorama/complete', [PuntosUsuarioController::class, 'completeNumerosMemorama'])->name('lecciones.numeros.memorama.complete');
+
     Route::get('/practicar/numeros/conecta', [NivelesController::class, 'numeros_conecta'])->name('nivel.numeros.conecta');
     Route::post('/practicar/numeros/conecta/complete', [PuntosUsuarioController::class, 'completeNumerosConecta'])->name('lecciones.numeros.conecta.complete');
 
@@ -100,6 +104,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/practicar/saludos/adivina', [NivelesController::class, 'saludos_adivina'])->name('nivel.saludos.adivina');
     Route::post('/practicar/saludos/adivina/complete', [PuntosUsuarioController::class, 'completeSaludosAdivina'])->name('nivel.saludos.adivina.complete');
 
+    Route::get('/practicar/saludos/memorama', [NivelesController::class, 'saludos_memorama'])->name('nivel.saludos.memorama');
+    Route::post('/practicar/saludos/memorama/complete', [PuntosUsuarioController::class, 'completeSaludosMemorama'])->name('lecciones.saludos.memorama.complete');
+
     Route::get('/practicar/saludos/conecta', [NivelesController::class, 'saludos_conecta'])->name('nivel.saludos.conecta');
     Route::post('/practicar/saludos/conecta/complete', [PuntosUsuarioController::class, 'completeSaludosConecta'])->name('lecciones.saludos.conecta.complete');
     
@@ -107,6 +114,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/practicar/salud', [NivelesController::class, 'salud'])->name('nivel.salud');
     Route::get('/practicar/salud/adivina', [NivelesController::class, 'salud_adivina'])->name('nivel.salud.adivina');
     Route::post('/practicar/salud/adivina/complete', [PuntosUsuarioController::class, 'completeSaludAdivina'])->name('nivel.salud.adivina.complete');
+
+    Route::get('/practicar/salud/memorama', [NivelesController::class, 'salud_memorama'])->name('nivel.salud.memorama');
+    Route::post('/practicar/salud/memorama/complete', [PuntosUsuarioController::class, 'completeSaludMemorama'])->name('lecciones.salud.memorama.complete');
 
     Route::get('/practicar/salud/conecta', [NivelesController::class, 'salud_conecta'])->name('nivel.salud.conecta');
     Route::post('/practicar/salud/conecta/complete', [PuntosUsuarioController::class, 'completeSaludConecta'])->name('lecciones.salud.conecta.complete');

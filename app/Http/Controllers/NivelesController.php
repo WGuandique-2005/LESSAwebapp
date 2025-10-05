@@ -28,9 +28,9 @@ class NivelesController extends Controller
     }
 
 
-    function abecedario_deletrea(){
+    function abecedario_memorama(){
         $abecedarioData = $this->cargarDatos('abecedario');
-        return view('practica_section.abecedario.a2_deletrea', compact('abecedarioData'));
+        return view('practica_section.abecedario.a2_memorama', compact('abecedarioData'));
     }
 
     function abecedario_conecta(){
@@ -51,6 +51,11 @@ class NivelesController extends Controller
         return view('practica_section.numeros.A1_adivina', compact('numerosData'));
     }
 
+    function numeros_memorama(){
+        $numerosData = $this->cargarDatos('numeros');
+        return view('practica_section.numeros.A2_memorama', compact('numerosData'));
+    }
+
     function numeros_conecta(){
         $numerosData = $this->cargarDatos('numeros');
         return view('practica_section.numeros.A3_conecta', compact('numerosData'));
@@ -65,6 +70,11 @@ class NivelesController extends Controller
         return view('practica_section.saludos.A1_adivina', compact('saludosData'));
     }
 
+    function saludos_memorama(){
+        $saludosData = $this->cargarDatos('saludos');
+        return view('practica_section.saludos.A2_memorama', compact('saludosData'));
+    }
+
     function saludos_conecta(){
         $saludosData = $this->cargarDatos('saludos');
         return view('practica_section.saludos.A3_conecta', compact('saludosData'));
@@ -77,6 +87,11 @@ class NivelesController extends Controller
     function salud_adivina(){
         $saludData = $this->cargarDatos('salud');
         return view('practica_section.salud.A1_adivina', compact('saludData'));
+    }
+
+    function salud_memorama(){
+        $saludosData = $this->cargarDatos('saludos');
+        return view('practica_section.saludos.A2_memorama', compact('saludosData'));
     }
 
     function salud_conecta(){

@@ -20,7 +20,7 @@ return new class extends Migration
         // Indice de los niveles, que se insertara a la bd, (cada seccion tiene 4actividades), se le asignara un id especifico
         DB::table('niveles')->insert([
             ['id' => 'ABC1', 'nombre' => 'Abecedario - Adivina'],
-            ['id' => 'ABC2', 'nombre' => 'Abecedario - Deletrea'],
+            ['id' => 'ABC2', 'nombre' => 'Abecedario - Memorama'],
             ['id' => 'ABC3', 'nombre' => 'Abecedario - Conecta'],
             ['id' => 'ABC4', 'nombre' => 'Abecedario - Extra'],
             ['id' => 'NUM1', 'nombre' => 'Números - Adivina'],
