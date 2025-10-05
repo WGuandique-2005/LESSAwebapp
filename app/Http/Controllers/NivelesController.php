@@ -7,39 +7,34 @@ use App\Models\Nivel;
 
 class NivelesController extends Controller
 {
+    // Método privado para cargar datos JSON por nivel
+    private function cargarDatos($archivo)
+    {
+        $jsonPath = storage_path("app/{$archivo}.json");
+        $data = [];
+        if (file_exists($jsonPath)) {
+            $data = json_decode(file_get_contents($jsonPath), true) ?? [];
+        }
+        return $data;
+    }
+
     function abecedario(){
         return view('practica_section.abecedario');
     }
 
     function abecedario_adivina(){
-        $jsonPath = storage_path('app/abecedario.json');
-        $abecedarioData = [];
-
-        if (file_exists($jsonPath)) {
-            $abecedarioData = json_decode(file_get_contents($jsonPath), true) ?? [];
-        }
-
+        $abecedarioData = $this->cargarDatos('abecedario');
         return view('practica_section.abecedario.A1_adivina', compact('abecedarioData'));
     }
 
 
     function abecedario_deletrea(){
-        $jsonPath = storage_path('app/abecedario.json');
-        $abecedarioData = [];
-
-        if (file_exists($jsonPath)) {
-            $abecedarioData = json_decode(file_get_contents($jsonPath), true) ?? [];
-        }
+        $abecedarioData = $this->cargarDatos('abecedario');
         return view('practica_section.abecedario.a2_deletrea', compact('abecedarioData'));
     }
 
     function abecedario_conecta(){
-        $jsonPath = storage_path('app/abecedario.json');
-        $abecedarioData = [];
-
-        if (file_exists($jsonPath)) {
-            $abecedarioData = json_decode(file_get_contents($jsonPath), true) ?? [];
-        }
+        $abecedarioData = $this->cargarDatos('abecedario');
         return view('practica_section.abecedario.a3_conecta', compact('abecedarioData'));
     }
 
@@ -52,23 +47,12 @@ class NivelesController extends Controller
     }
 
     function numeros_adivina(){
-        $jsonPath = storage_path('app/numeros.json');
-        $numerosData = [];
-
-        if (file_exists($jsonPath)) {
-            $numerosData = json_decode(file_get_contents($jsonPath), true) ?? [];
-        }
-
+        $numerosData = $this->cargarDatos('numeros');
         return view('practica_section.numeros.A1_adivina', compact('numerosData'));
     }
 
     function numeros_conecta(){
-        $jsonPath = storage_path('app/numeros.json');
-        $numerosData = [];
-
-        if (file_exists($jsonPath)) {
-            $numerosData = json_decode(file_get_contents($jsonPath), true) ?? [];
-        }
+        $numerosData = $this->cargarDatos('numeros');
         return view('practica_section.numeros.A3_conecta', compact('numerosData'));
     }
 
@@ -77,23 +61,12 @@ class NivelesController extends Controller
     }
 
     function saludos_adivina(){
-        $jsonPath = storage_path('app/saludos.json');
-        $saludosData = [];
-
-        if (file_exists($jsonPath)) {
-            $saludosData = json_decode(file_get_contents($jsonPath), true) ?? [];
-        }
-
+        $saludosData = $this->cargarDatos('saludos');
         return view('practica_section.saludos.A1_adivina', compact('saludosData'));
     }
 
     function saludos_conecta(){
-        $jsonPath = storage_path('app/saludos.json');
-        $saludosData = [];
-
-        if (file_exists($jsonPath)) {
-            $saludosData = json_decode(file_get_contents($jsonPath), true) ?? [];
-        }
+        $saludosData = $this->cargarDatos('saludos');
         return view('practica_section.saludos.A3_conecta', compact('saludosData'));
     }
 
@@ -102,23 +75,12 @@ class NivelesController extends Controller
     }
 
     function salud_adivina(){
-        $jsonPath = storage_path('app/salud.json');
-        $saludData = [];
-
-        if (file_exists($jsonPath)) {
-            $saludData = json_decode(file_get_contents($jsonPath), true) ?? [];
-        }
-
+        $saludData = $this->cargarDatos('salud');
         return view('practica_section.salud.A1_adivina', compact('saludData'));
     }
 
     function salud_conecta(){
-        $jsonPath = storage_path('app/salud.json');
-        $saludData = [];
-
-        if (file_exists($jsonPath)) {
-            $saludData = json_decode(file_get_contents($jsonPath), true) ?? [];
-        }
+        $saludData = $this->cargarDatos('salud');
         return view('practica_section.salud.A3_conecta', compact('saludData'));
     }
 }
