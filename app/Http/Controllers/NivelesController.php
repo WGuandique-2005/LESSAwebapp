@@ -111,4 +111,14 @@ class NivelesController extends Controller
 
         return view('practica_section.salud.A1_adivina', compact('saludData'));
     }
+
+    function salud_conecta(){
+        $jsonPath = storage_path('app/salud.json');
+        $saludData = [];
+
+        if (file_exists($jsonPath)) {
+            $saludData = json_decode(file_get_contents($jsonPath), true) ?? [];
+        }
+        return view('practica_section.salud.A3_conecta', compact('saludData'));
+    }
 }

@@ -319,11 +319,11 @@
                             <p>Se te muestra un síntoma (ej. "Tengo fiebre") y debes seleccionar la seña que mejor lo
                                 describe o viceversa.</p>
                         </div>
-                        <div class="game-card game-3" onclick="window.location.href='/juegos/salud/frases-emergencia'">
+                        <div class="game-card game-3" onclick="window.location.href='/practicar/salud/conecta'">
                             <span class="icon">🚨</span>
-                            <h3>Alerta Rápida</h3>
-                            <p>Traduce rápidamente frases de emergencia del español a la seña (ej. "Necesito un médico",
-                                "Me duele aquí"). ¡La velocidad salva vidas!</p>
+                            <h3>Parejas de Señas</h3>
+                            <p>Encuentra pares de cartas: imagen de la seña y el Saludo mostrado. Fortalece tu memoria
+                                visual a largo plazo.</p>
                         </div>
                         <div class="game-card game-4" onclick="window.location.href='/juegos/salud/vocabulario-medico'">
                             <span class="icon">💊</span>

@@ -105,6 +105,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/practicar/salud/adivina', [NivelesController::class, 'salud_adivina'])->name('nivel.salud.adivina');
     Route::post('/practicar/salud/adivina/complete', [PuntosUsuarioController::class, 'completeSaludAdivina'])->name('nivel.salud.adivina.complete');
 
+    Route::get('/practicar/salud/conecta', [NivelesController::class, 'salud_conecta'])->name('nivel.salud.conecta');
+    Route::post('/practicar/salud/conecta/complete', [PuntosUsuarioController::class, 'completeSaludConecta'])->name('lecciones.salud.conecta.complete');
+
     /*
     |----------------------------------|
     | Las lecciones                    |
