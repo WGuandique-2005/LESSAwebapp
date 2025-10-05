@@ -66,6 +66,9 @@ Route::middleware('auth')->group(function () {
     // Sección practicar
     Route::get('/practicar', [TaskController::class, 'practicar'])->name('practicar');
 
+    // Sección de ayuda
+    Route::get('/ayuda',[TaskController::class,'ayuda'])->name('ayuda');
+
     /*
     |----------------------------------|
     | Minijuegos                       |

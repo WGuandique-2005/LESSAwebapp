@@ -431,7 +431,9 @@
                 </button>
 
                 <div class="lessa-actions">
-                    <button class="lessa-help-btn" aria-label="Ayuda">?</button>
+                    <a href="{{ route('ayuda') }}" style="text-decoration: none;">
+                        <button class="lessa-help-btn" aria-label="Ayuda">?</button>
+                    </a>
                     @guest
                         <button class="lessa-btn lessa-btn--outline"
                             onclick="location.href='{{ url('/login') }}'">Ingresar</button>
@@ -468,7 +470,7 @@
                 <a href="{{ route('practicar') }}">Practicar</a>
                 <a href="{{ route('info') }}">Info</a>
                 <a href="{{ route('miProgreso') }}">Mi progreso</a>
-                <a href="#">Ayuda</a>
+                <a href="{{ route('ayuda') }}" style="text-decoration: none;" >Ayuda</a>
             @endguest
         </nav>
 

@@ -37,4 +37,8 @@ class TaskController extends Controller
     public function practicar(){
         return view('practica_section.practicar');
     }
+
+    public function ayuda(){
+        return view('ayuda');
+    }
 }

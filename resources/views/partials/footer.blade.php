@@ -210,7 +210,7 @@
                 <ul class="footer-links">
                     <li><a href="#">Diccionario LESSA</a></li>
                     <li><a href="#">Guía de uso</a></li>
-                    <li><a href="#">Preguntas frecuentes</a></li>
+                    <li><a href="{{ route('ayuda') }}">Preguntas frecuentes</a></li>
                 </ul>
             </div>
             <div class="animate-on-scroll">
