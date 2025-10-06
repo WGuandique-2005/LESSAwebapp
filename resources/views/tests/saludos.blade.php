@@ -602,6 +602,18 @@
             setMessage('Sugerencia aplicada.');
         }
 
+        // Mostrar todas las cartas al inicio por 5 segundos
+        function showAllCardsPreview() {
+            cards.forEach(c => c.classList.add('flipped'));
+            setMessage('Observa las cartas. ¡Tienes 5 segundos!', 'success');
+            lock = true;
+            setTimeout(() => {
+                cards.forEach(c => c.classList.remove('flipped'));
+                setMessage('Toca o presiona Enter para voltear las cartas.');
+                lock = false;
+            }, 5000);
+        }
+
         // Event handlers
         cards.forEach(card => {
             card.addEventListener('click', (e) => {
@@ -645,7 +657,8 @@
 
         // initialize
         resetGame(false);
-        setTimeout(() => setMessage('Toca o presiona Enter para voltear las cartas.'), 120);
+        showAllCardsPreview();
+        setTimeout(() => setMessage('Toca o presiona Enter para voltear las cartas.'), 5120);
 
         // Expose for debugging (optional)
         window.memoramaGame = { reset: resetGame, reveal: revealAll, hint: hintAction };
