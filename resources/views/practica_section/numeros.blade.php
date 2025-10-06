@@ -296,7 +296,7 @@
                 // Donde ID de la leccion comience con 'ABC'
                 $completado = PuntosUsuario::where('usuario_id', $userId)
                     ->where('completado', true)
-                    ->where('nivel_id', 'like', 'ABC%')
+                    ->where('nivel_id', 'like', 'NUM%')
                     ->count();
                 $progresoPorcentaje = $totalNiveles > 0 ? round(($completado / $totalNiveles) * 100) : 0;
             @endphp
