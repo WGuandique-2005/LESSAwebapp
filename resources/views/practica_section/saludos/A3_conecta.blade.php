@@ -11,7 +11,8 @@
     }, $saludosJuego);
     shuffle($significados);
 @endphp
-<head><title>Saludos: Conecta</title></head>
+<head><title>Saludos: Conecta</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"></head>
 @include('partials.navbar')
 
 <div class="game-wrap">

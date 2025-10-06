@@ -11,7 +11,8 @@
     }, $numerosJuego);
     shuffle($significados);
 @endphp
-<head><title>Números: Conecta</title></head>
+<head><title>Números: Conecta</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"></head>
 @include('partials.navbar')
 
 <div class="game-wrap">

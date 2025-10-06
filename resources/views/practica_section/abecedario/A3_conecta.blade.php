@@ -11,7 +11,8 @@
     }, $abecedarioJuego);
     shuffle($significados);
 @endphp
-<head><title>Abecedario: Conecta</title></head>
+<head><title>Abecedario: Conecta</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"></head>
 @include('partials.navbar')
 
 <div class="game-wrap">

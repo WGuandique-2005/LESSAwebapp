@@ -22,7 +22,8 @@
     }
     shuffle($cartas);
 @endphp
-<head><title>Salud: Test</title></head>
+<head><title>Salud: Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"></head>
 @include('partials.navbar')
 <main class="memorama-app" id="memoramaApp">
     <div class="container">
