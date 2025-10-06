@@ -472,4 +472,222 @@ class PuntosUsuarioController extends Controller
             return redirect()->route('nivel.salud')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
         }
     }
+
+    public function completeAbecedarioMemorama(Request $request)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
+        }
+
+        $errorsCount = (int) $request->input('errors_count', 0);
+        $activityId = 'ABC2';
+
+        $points = 0;
+        $message = '';
+        $title = '';
+
+        if ($errorsCount <= 0) {
+            $points = 10;
+            $title = '¡PERFECTO! 🤩';
+            $message = 'No tuviste ningún error. ¡Dominio total! Has ganado el máximo de puntos.';
+        } elseif ($errorsCount <= 6) {
+            $points = 5;
+            $title = '¡MUY BIEN! 👍';
+            $message = "Tuviste {$errorsCount} error(es). Demuestras gran precisión.";
+        } else {
+            $points = 2;
+            $title = '¡BUEN INTENTO! 💪';
+            $message = "Tuviste {$errorsCount} errores. Repite la actividad para dominar las señas.";
+        }
+
+        try {
+            DB::beginTransaction();
+            $puntosUsuario = PuntosUsuario::where('usuario_id', $user->id)
+                ->where('nivel_id', $activityId)
+                ->first();
+            if ($puntosUsuario) {
+                $puntosUsuario->puntos_obtenidos = $points;
+                $puntosUsuario->save();
+            } else {
+                PuntosUsuario::create([
+                    'usuario_id' => $user->id,
+                    'nivel_id' => $activityId,
+                    'puntos_obtenidos' => $points,
+                    'completado' => true,
+                    'fecha_completado' => now(),
+                ]);
+            }
+            DB::commit();
+            return redirect()->route('nivel.abecedario')->with('success', "{$title} {$message} Puntos obtenidos: +{$points}.");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('nivel.abecedario')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
+        }
+    }
+
+    public function completeNumerosMemorama(Request $request)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
+        }
+
+        $errorsCount = (int) $request->input('errors_count', 0);
+        $activityId = 'NUM2';
+
+        $points = 0;
+        $message = '';
+        $title = '';
+
+        if ($errorsCount <= 0) {
+            $points = 10;
+            $title = '¡PERFECTO! 🤩';
+            $message = 'No tuviste ningún error. ¡Dominio total! Has ganado el máximo de puntos.';
+        } elseif ($errorsCount <= 6) {
+            $points = 5;
+            $title = '¡MUY BIEN! 👍';
+            $message = "Tuviste {$errorsCount} error(es). Demuestras gran precisión.";
+        } else {
+            $points = 2;
+            $title = '¡BUEN INTENTO! 💪';
+            $message = "Tuviste {$errorsCount} errores. Repite la actividad para dominar las señas.";
+        }
+
+        try {
+            DB::beginTransaction();
+            $puntosUsuario = PuntosUsuario::where('usuario_id', $user->id)
+                ->where('nivel_id', $activityId)
+                ->first();
+            if ($puntosUsuario) {
+                $puntosUsuario->puntos_obtenidos = $points;
+                $puntosUsuario->save();
+            } else {
+                PuntosUsuario::create([
+                    'usuario_id' => $user->id,
+                    'nivel_id' => $activityId,
+                    'puntos_obtenidos' => $points,
+                    'completado' => true,
+                    'fecha_completado' => now(),
+                ]);
+            }
+            DB::commit();
+            return redirect()->route('nivel.numeros')->with('success', "{$title} {$message} Puntos obtenidos: +{$points}.");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('nivel.numeros')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
+        }
+    }
+
+    public function completeSaludosMemorama(Request $request)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
+        }
+
+        $errorsCount = (int) $request->input('errors_count', 0);
+        $activityId = 'SL2';
+
+        $points = 0;
+        $message = '';
+        $title = '';
+
+        if ($errorsCount <= 0) {
+            $points = 10;
+            $title = '¡PERFECTO! 🤩';
+            $message = 'No tuviste ningún error. ¡Dominio total! Has ganado el máximo de puntos.';
+        } elseif ($errorsCount <= 6) {
+            $points = 5;
+            $title = '¡MUY BIEN! 👍';
+            $message = "Tuviste {$errorsCount} error(es). Demuestras gran precisión.";
+        } else {
+            $points = 2;
+            $title = '¡BUEN INTENTO! 💪';
+            $message = "Tuviste {$errorsCount} errores. Repite la actividad para dominar las señas.";
+        }
+
+        try {
+            DB::beginTransaction();
+            $puntosUsuario = PuntosUsuario::where('usuario_id', $user->id)
+                ->where('nivel_id', $activityId)
+                ->first();
+            if ($puntosUsuario) {
+                $puntosUsuario->puntos_obtenidos = $points;
+                $puntosUsuario->save();
+            } else {
+                PuntosUsuario::create([
+                    'usuario_id' => $user->id,
+                    'nivel_id' => $activityId,
+                    'puntos_obtenidos' => $points,
+                    'completado' => true,
+                    'fecha_completado' => now(),
+                ]);
+            }
+            DB::commit();
+            return redirect()->route('nivel.saludos')->with('success', "{$title} {$message} Puntos obtenidos: +{$points}.");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('nivel.saludos')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
+        }
+    }
+
+    public function completeSaludMemorama(Request $request)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
+        }
+
+        $errorsCount = (int) $request->input('errors_count', 0);
+        $activityId = 'SALUD2';
+
+        $points = 0;
+        $message = '';
+        $title = '';
+
+        if ($errorsCount <= 0) {
+            $points = 10;
+            $title = '¡PERFECTO! 🤩';
+            $message = 'No tuviste ningún error. ¡Dominio total! Has ganado el máximo de puntos.';
+        } elseif ($errorsCount <= 6) {
+            $points = 5;
+            $title = '¡MUY BIEN! 👍';
+            $message = "Tuviste {$errorsCount} error(es). Demuestras gran precisión.";
+        } else {
+            $points = 2;
+            $title = '¡BUEN INTENTO! 💪';
+            $message = "Tuviste {$errorsCount} errores. Repite la actividad para dominar las señas.";
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $puntosUsuario = PuntosUsuario::where('usuario_id', $user->id)
+                ->where('nivel_id', $activityId)
+                ->first();
+            if ($puntosUsuario) {
+                $puntosUsuario->puntos_obtenidos = $points;
+                $puntosUsuario->save();
+            } else {
+                PuntosUsuario::create([
+                    'usuario_id' => $user->id,
+                    'nivel_id' => $activityId,
+                    'puntos_obtenidos' => $points,
+                    'completado' => true,
+                    'fecha_completado' => now(),
+                ]);
+            }
+
+            DB::commit();
+
+            if ($request->input('redirect_to') === 'miProgreso') {
+                return redirect()->route('miProgreso')->with('success', "{$title} {$message} Puntos obtenidos: +{$points}.");
+            }
+            return redirect()->route('nivel.salud')->with('success', "{$title} {$message} Puntos obtenidos: +{$points}.");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('nivel.salud')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
+        }
+    }
 }
