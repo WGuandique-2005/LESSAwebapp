@@ -736,13 +736,13 @@
                     <p class="modal-progress-text">{{ $descripcion }}</p>
                     
                     @if ($hasPending && $porcentaje < 100)
-                        <p class="modal-progress-desc">Tienes **{{ $totalPending }}** actividades pendientes. ¡Es momento de practicarlas!</p>
+                        <p class="modal-progress-desc">Tienes {{ $totalPending }} actividades pendientes. ¡Es momento de practicarlas!</p>
                         <ul class="pending-list">
                             {{-- Muestra hasta 3 secciones pendientes --}}
                             @php $count = 0; @endphp
                             @foreach($pendingBySection as $sectionName => $pendingCount)
                                 @if ($pendingCount > 0 && $count < 3)
-                                    <li><i class="fas fa-exclamation-triangle"></i> **{{ $sectionName }}**: {{ $pendingCount }} pendiente(s)</li>
+                                    <li><i class="fas fa-exclamation-triangle"></i> {{ $sectionName }}: {{ $pendingCount }} pendiente(s)</li>
                                     @php $count++; @endphp
                                 @endif
                             @endforeach
@@ -751,7 +751,7 @@
                             @endif
                         </ul>
                     @elseif ($porcentaje == 0)
-                        <p class="modal-progress-desc">Comienza con la sección de **Abecedario** para dar tu primer paso en la LESSA.</p>
+                        <p class="modal-progress-desc">Comienza con la sección de Abecedario para dar tu primer paso en la LESSA.</p>
                     @elseif ($porcentaje == 100)
                         <p class="modal-progress-desc">Has completado todas las actividades. ¡Sigue revisando el contenido de Lecciones y Videos!</p>
                     @endif
