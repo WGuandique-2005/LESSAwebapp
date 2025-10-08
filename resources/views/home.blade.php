@@ -5,16 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LESSA - Plataforma de Aprendizaje</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
+
     <style>
+        /* [Se mantienen los estilos CSS proporcionados anteriormente] */
         /* --- 1. VARIABLES Y ESTILOS BASE --- */
         :root {
-            --primary-blue: #0b63ff; /* Azul principal */
+            --primary-blue: #0b63ff;
+            /* Azul principal */
             --primary-dark: #0056b3;
-            --accent-orange: #ff6b35; /* Naranja para contraste */
-            --success-color: #16a34a; 
+            --accent-orange: #ff6b35;
+            /* Naranja para contraste */
+            --success-color: #16a34a;
             --warning-color: #f59e0b;
             --background-light: #f5f8fb;
             --card-bg: #ffffff;
@@ -23,7 +27,7 @@
             --white: #ffffff;
             --shadow-soft: 0 12px 36px rgba(12, 24, 60, 0.08);
             --radius-md: 14px;
-            
+
             /* Variables originales del Hero */
             --spacing-md: 1rem;
             --spacing-xl: 2rem;
@@ -37,7 +41,7 @@
             color: var(--text-dark);
             min-height: 100vh;
         }
-        
+
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -51,8 +55,9 @@
             color: var(--white);
             position: relative;
             overflow: hidden;
-            border-radius: 0 0 25px 25px; /* Para que coincida con el borde del progreso */
+            border-radius: 0 0 25px 25px;
         }
+
         .hero-bg-img {
             position: absolute;
             top: 0;
@@ -60,9 +65,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.1; /* Reducir opacidad para mejorar legibilidad */
+            opacity: 0.1;
             z-index: 0;
         }
+
         .hero-content {
             display: flex;
             flex-direction: column;
@@ -71,24 +77,29 @@
             position: relative;
             z-index: 1;
         }
+
         .hero-logo {
             max-width: 80px;
             margin-bottom: var(--spacing-md);
             filter: brightness(0) invert(1);
         }
+
         .hero-text {
             max-width: 700px;
             margin-bottom: 20px;
         }
+
         .hero-text h2 {
             font-size: var(--font-size-xxl);
             font-weight: 700;
             margin-bottom: var(--spacing-md);
         }
+
         .hero-text p {
             font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.9);
         }
+
         .hero-button {
             display: inline-block;
             background-color: var(--accent-orange);
@@ -99,6 +110,7 @@
             font-weight: 600;
             transition: background-color 0.3s ease;
         }
+
         .hero-button:hover {
             background-color: #e55c2f;
         }
@@ -107,8 +119,8 @@
         /* --- 3. ESTILOS DE PROGRESO GLOBAL (NUEVOS) --- */
         .progress-summary-section {
             padding: 40px 0;
-            background: var(--white); /* Fondo blanco que contrasta con el Hero */
-            margin-top: -25px; /* Superponer ligeramente al Hero */
+            background: var(--white);
+            margin-top: -25px;
             border-radius: 25px 25px 0 0;
             box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.05);
             position: relative;
@@ -155,9 +167,9 @@
         .progress-circle {
             --size: 150px;
             --border-width: 12px;
-            --progress-color: var(--success-color); /* Usamos verde para el progreso */
+            --progress-color: var(--success-color);
             --track-color: var(--background-light);
-            
+
             width: var(--size);
             height: var(--size);
             border-radius: 50%;
@@ -169,21 +181,17 @@
             color: var(--primary-dark);
             position: relative;
             border: 1px solid rgba(0, 0, 0, 0.05);
-            
-            /* --- CORRECCIÓN CRÍTICA AQUÍ --- */
-            /* La variable --progress se establece en línea con el porcentaje de PHP */
-            background: conic-gradient(
-                var(--progress-color) calc(var(--progress) * 3.6deg), 
-                var(--track-color) 0deg
-            );
-            transition: background 1s ease-out; /* Animación de carga */
+
+            /* --- La variable --progress se establece en línea con el porcentaje de PHP --- */
+            background: conic-gradient(var(--progress-color) calc(var(--progress) * 3.6deg),
+                    var(--track-color) 0deg);
+            transition: background 1s ease-out;
         }
 
         .progress-circle::before {
             content: '';
             position: absolute;
-            /* Se resta 2px adicionales para asegurar que el borde verde se vea limpio */
-            width: calc(var(--size) - var(--border-width) * 2 - 2px); 
+            width: calc(var(--size) - var(--border-width) * 2 - 2px);
             height: calc(var(--size) - var(--border-width) * 2 - 2px);
             background: var(--card-bg);
             border-radius: 50%;
@@ -217,6 +225,7 @@
             justify-content: space-between;
             transition: background 0.3s;
         }
+
         .pending-item:hover {
             background: #e6eaf0;
         }
@@ -242,27 +251,32 @@
             margin-top: 5px;
             transition: color 0.2s;
         }
+
         .pending-link:hover {
             color: var(--primary-dark);
         }
+
         .pending-item .fa-check-circle {
             color: var(--success-color);
             margin-left: 5px;
         }
-        
+
         /* RESPONSIVIDAD DEL PROGRESO */
         @media (max-width: 768px) {
             .progress-circle-wrap {
                 flex-direction: column;
                 text-align: center;
             }
+
             .progress-details {
                 text-align: center;
             }
+
             .pending-item {
                 min-width: 45%;
             }
         }
+
         @media (max-width: 480px) {
             .pending-item {
                 min-width: 100%;
@@ -319,19 +333,23 @@
             margin-bottom: 15px;
             font-size: 1.8rem;
         }
+
         /* Colores específicos para cada sección */
         .card-icon-box.abecedario {
             background: rgba(11, 99, 255, 0.1);
             color: var(--primary-blue);
         }
+
         .card-icon-box.numeros {
             background: rgba(255, 107, 53, 0.1);
             color: var(--accent-orange);
         }
+
         .card-icon-box.saludos {
             background: rgba(22, 163, 74, 0.1);
             color: var(--success-color);
         }
+
         .card-icon-box.salud {
             background: rgba(220, 34, 56, 0.1);
             color: #dc2238;
@@ -355,7 +373,7 @@
             font-size: 0.95rem;
             color: var(--text-muted);
             margin-bottom: 15px;
-            flex-grow: 1; 
+            flex-grow: 1;
         }
 
         .card-footer {
@@ -380,7 +398,7 @@
             background-color: var(--success-color);
             color: var(--white);
         }
-        
+
         /* --- ESTILOS DEL MODAL DE PROGRESO (NUEVOS) --- */
         .progress-modal-overlay {
             position: fixed;
@@ -389,10 +407,10 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
-            display: none; /* Inicialmente oculto */
+            display: none;
             justify-content: center;
             align-items: center;
-            z-index: 1000; /* Asegura que esté por encima de todo */
+            z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -413,7 +431,7 @@
             transform: scale(0.95);
             transition: transform 0.3s ease;
         }
-        
+
         .progress-modal-overlay.active .progress-modal-content {
             transform: scale(1);
         }
@@ -425,7 +443,7 @@
             flex-direction: column;
             margin-bottom: 20px;
         }
-        
+
         .modal-header i {
             font-size: 2.5rem;
             color: var(--primary-blue);
@@ -458,12 +476,12 @@
             color: var(--text-muted);
             margin-top: 0;
         }
-        
+
         .modal-circle {
             --size: 100px;
             --border-width: 10px;
             --progress-color: var(--success-color);
-            --track-color: #e2e8f0; /* Color más claro para el track */
+            --track-color: #e2e8f0;
             width: var(--size);
             height: var(--size);
             border-radius: 50%;
@@ -475,16 +493,14 @@
             font-weight: 700;
             color: var(--primary-dark);
             position: relative;
-            background: conic-gradient(
-                var(--progress-color) calc(var(--progress) * 3.6deg), 
-                var(--track-color) 0deg
-            );
+            background: conic-gradient(var(--progress-color) calc(var(--progress) * 3.6deg),
+                    var(--track-color) 0deg);
         }
 
         .modal-circle::before {
             content: '';
             position: absolute;
-            width: calc(var(--size) - var(--border-width) * 2 - 2px); 
+            width: calc(var(--size) - var(--border-width) * 2 - 2px);
             height: calc(var(--size) - var(--border-width) * 2 - 2px);
             background: var(--card-bg);
             border-radius: 50%;
@@ -494,13 +510,14 @@
             position: relative;
             z-index: 2;
         }
-        
+
         .pending-list {
             text-align: left;
             margin: 0 0 20px 0;
             padding: 0;
             list-style: none;
         }
+
         .pending-list li {
             font-size: 0.95rem;
             color: var(--text-dark);
@@ -508,6 +525,7 @@
             display: flex;
             align-items: center;
         }
+
         .pending-list i {
             color: var(--accent-orange);
             margin-right: 10px;
@@ -526,16 +544,18 @@
             text-decoration: none;
             display: inline-block;
         }
+
         .modal-button:hover {
             background-color: var(--primary-dark);
         }
-        
+
         .modal-button.secondary {
             background: none;
             color: var(--primary-blue);
             border: 2px solid var(--primary-blue);
             margin-left: 10px;
         }
+
         .modal-button.secondary:hover {
             background-color: rgba(11, 99, 255, 0.1);
         }
@@ -545,15 +565,18 @@
             .progress-modal-content {
                 padding: 20px;
             }
+
             .modal-header h3 {
                 font-size: 1.3rem;
             }
+
             .modal-circle {
                 --size: 80px;
             }
+
             .modal-button {
                 width: 100%;
-                margin: 5px 0 0 0 !important; /* Ajustar márgenes para botones apilados */
+                margin: 5px 0 0 0 !important;
             }
         }
     </style>
@@ -565,52 +588,63 @@
 
     <main>
         @php
-            // Se asume que $progressData ya fue pasado desde el closure de la ruta en web.php
-            // Valores de prueba si no se reciben (por ejemplo, 75% completado)
-            $progressData = $progressData ?? [
-                'porcentajeGlobal' => 75, 
-                'pendingBySection' => ['Abecedario' => 1, 'Números' => 0, 'Saludos' => 2, 'Salud' => 0],
-                'descripcionProgreso' => '¡Estás en camino! Completa las lecciones pendientes para ser un experto.',
-            ];
-            $porcentaje = $progressData['porcentajeGlobal'];
-            $pendingBySection = $progressData['pendingBySection'];
-            $descripcion = $progressData['descripcionProgreso'];
+            use App\Models\PuntosUsuario;
+            $userId = Auth::id();
+            $totalNiveles = 4;
+            $completadoABC = PuntosUsuario::where('usuario_id', $userId)
+                ->where('completado', true)
+                ->where('nivel_id', 'like', 'ABC%')
+                ->count();
+            $pendientesABC = $totalNiveles - $completadoABC;
 
-            // Definición de las secciones con sus rutas e íconos
+            $completadoNUM = PuntosUsuario::where('usuario_id', $userId)
+                ->where('completado', true)
+                ->where('nivel_id', 'like', 'NUM%')
+                ->count();
+            $pendientesNUM = $totalNiveles - $completadoNUM;
+
+            $completadoSL = PuntosUsuario::where('usuario_id', $userId)
+                ->where('completado', true)
+                ->where('nivel_id', 'like', 'SL%')
+                ->count();
+            $pendientesSL = $totalNiveles - $completadoSL;
+
+            $completadoSALUD = PuntosUsuario::where('usuario_id', $userId)
+                ->where('completado', true)
+                ->where('nivel_id', 'like', 'SALUD%')
+                ->count();
+            $pendientesSALUD = $totalNiveles - $completadoSALUD;
+
+            $porcentaje = $progressData['porcentajeGlobal'] ?? 0;
+            $pendingBySection = ['Abecedario' => $pendientesABC, 'Números' => $pendientesNUM, 'Saludos' => $pendientesSL, 'Salud' => $pendientesSALUD];
+            $descripcion = $progressData['descripcionProgreso'] ?? '¡Bienvenido! Comienza para ver tu progreso global.';
+
+            // Definición de las secciones con sus rutas e íconos (MANTENIDO)
             $sections = [
                 'Abecedario' => [
-                    'icon' => 'fas fa-fingerprint', 
-                    'route' => route('nivel.abecedario'), // Asegúrate que esta ruta exista
+                    'icon' => 'fas fa-fingerprint',
+                    'route' => route('nivel.abecedario'),
                     'description' => 'Aprende y practica la dactilología completa de la LESSA.'
                 ],
                 'Números' => [
                     'icon' => 'fas fa-calculator',
-                    'route' => route('nivel.numeros'), // Asegúrate que esta ruta exista
+                    'route' => route('nivel.numeros'),
                     'description' => 'Domina las señas para contar del 0 al 100.'
                 ],
                 'Saludos' => [
                     'icon' => 'fas fa-handshake',
-                    'route' => route('nivel.saludos'), // Asegúrate que esta ruta exista
+                    'route' => route('nivel.saludos'),
                     'description' => 'Comienza conversaciones básicas y formales en LESSA.'
                 ],
                 'Salud' => [
                     'icon' => 'fas fa-heartbeat',
-                    'route' => route('nivel.salud'), // Asegúrate que esta ruta exista
+                    'route' => route('nivel.salud'),
                     'description' => 'Vocabulario esencial relacionado con el cuerpo y la salud.'
                 ],
             ];
-            
-            // Lógica para determinar si hay actividades pendientes
-            $totalPending = array_sum($pendingBySection);
-            $hasPending = $totalPending > 0;
-            $firstPendingRoute = '#'; // Ruta predeterminada
-            foreach ($pendingBySection as $sectionName => $count) {
-                if ($count > 0 && isset($sections[$sectionName])) {
-                    $firstPendingRoute = $sections[$sectionName]['route'];
-                    break;
-                }
-            }
-            
+
+            $totalPending = 16 - ($completadoABC + $completadoNUM + $completadoSL + $completadoSALUD);
+
         @endphp
 
         <section class="hero-section">
@@ -623,7 +657,8 @@
                         <p>Tu camino para dominar el lenguaje de señas salvadoreño comienza aquí. ¡Aprende, practica y
                             conéctate!</p>
                     </div>
-                    <a href="{{ route('miProgreso') }}" class="hero-button">Ver Mi Progreso <i class="fas fa-chart-line"></i></a>
+                    <a href="{{ route('miProgreso') }}" class="hero-button">Ver Mi Progreso <i
+                            class="fas fa-chart-line"></i></a>
                 </div>
             </div>
         </section>
@@ -640,26 +675,66 @@
                         <p class="progress-description">{{ $descripcion }}</p>
                     </div>
                 </div>
-                
-                {{-- Detalle de actividades pendientes por sección --}}
+
+                {{-- Detalle de actividades pendientes por sección (ESTÁTICO SIN PHP) --}}
                 <div class="pending-activities-grid">
-                    @foreach($pendingBySection as $sectionName => $pendingCount)
-                        @if (isset($sections[$sectionName]))
-                            <div class="pending-item">
-                                <span class="pending-count">{{ $pendingCount }}</span>
-                                <span class="pending-label">
-                                    {{ $pendingCount === 1 ? 'Actividad Pendiente' : 'Actividades Pendientes' }} en {{ $sectionName }}
-                                </span>
-                                <a href="{{ $sections[$sectionName]['route'] ?? '#' }}" class="pending-link">
-                                    @if ($pendingCount > 0)
-                                        ¡Empezar! <i class="fas fa-arrow-right"></i>
-                                    @else
-                                        Completado <i class="fas fa-check-circle"></i>
-                                    @endif
-                                </a>
-                            </div>
-                        @endif
-                    @endforeach
+
+                    <div class="pending-item">
+                        <span class="pending-count">{{ $pendientesABC }}</span>
+                        <span class="pending-label">
+                            Actividades Pendientes en Abecedario
+                        </span>
+                        <a href="{{ route('nivel.abecedario') }}" class="pending-link">
+                            @if ($pendientesABC > 0)
+                                ¡Continuar! <i class="fas fa-arrow-right"></i>
+                            @else
+                                Completado <i class="fas fa-check-circle"></i>
+                            @endif
+                        </a>
+                    </div>
+
+                    <div class="pending-item">
+                        <span class="pending-count">{{ $pendientesNUM }}</span>
+                        <span class="pending-label">
+                            Actividades Completadas en Números
+                        </span>
+                        <a href="{{ route('nivel.numeros') }}" class="pending-link">
+                            @if ($pendientesNUM > 0)
+                                ¡Continuar! <i class="fas fa-arrow-right"></i>
+                            @else
+                                Completado <i class="fas fa-check-circle"></i>
+                            @endif
+                        </a>
+                    </div>
+
+                    <div class="pending-item">
+                        <span class="pending-count">{{ $pendientesSL }}</span>
+                        <span class="pending-label">
+                            Actividades Pendientes en Saludos
+                        </span>
+                        <a href="{{ route('nivel.saludos') }}" class="pending-link">
+                            @if ($pendientesSL > 0)
+                                ¡Continuar! <i class="fas fa-arrow-right"></i>
+                            @else
+                                Completado <i class="fas fa-check-circle"></i>
+                            @endif
+                        </a>
+                    </div>
+
+                    <div class="pending-item">
+                        <span class="pending-count">{{ $pendientesSALUD }}</span>
+                        <span class="pending-label">
+                            Actividades Completadas en Salud
+                        </span>
+                        <a href="{{ route('nivel.salud') }}" class="pending-link">
+                            @if ($pendientesSALUD > 0)
+                                ¡Continuar! <i class="fas fa-arrow-right"></i>
+                            @else
+                                Completado <i class="fas fa-check-circle"></i>
+                            @endif
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -668,28 +743,75 @@
             <div class="container">
                 <h2 class="section-title-v2">Inicia o Continúa tu Práctica</h2>
                 <div class="cards-grid-v2">
-                    {{-- Recorre las 4 secciones principales --}}
-                    @foreach($sections as $sectionName => $data)
-                        {{-- Clase dinámica para los colores del icono --}}
-                        <a href="{{ $data['route'] }}" class="lesson-card" aria-label="Ir a sección de {{ $sectionName }}">
-                            <div class="card-icon-box {{ strtolower(str_replace('ó', 'o', $sectionName)) }}">
-                                <i class="{{ $data['icon'] }}"></i>
+
+                    <a href="{{ route('nivel.abecedario') }}" class="lesson-card" aria-label="Ir a sección de Abecedario">
+                        <div class="card-icon-box abecedario">
+                            <i class="fas fa-fingerprint"></i>
+                        </div>
+                        <div class="card-content-v2">
+                            <h3>Abecedario</h3>
+                            <p>Aprende y practica la dactilología completa de la LESSA.</p>
+                            <div class="card-footer">
+                                @if ($pendientesABC > 0)
+                                    <span class="badge badge-warning">{{ $pendientesABC }} pendiente(s)</span>
+                                @else
+                                    <span class="badge badge-success">Completado</span>
+                                @endif
                             </div>
-                            <div class="card-content-v2">
-                                <h3>{{ $sectionName }}</h3>
-                                <p>{{ $data['description'] }}</p>
-                                <div class="card-footer">
-                                    @if($pendingBySection[$sectionName] > 0)
-                                        <span class="badge badge-warning">{{ $pendingBySection[$sectionName] }} pendiente(s)</span>
-                                    @else
-                                        <span class="badge badge-success">Completado</span>
-                                    @endif
-                                </div>
+                        </div>
+                    </a>
+
+                    <a href="{{ route('nivel.numeros') }}" class="lesson-card" aria-label="Ir a sección de Números">
+                        <div class="card-icon-box numeros">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="card-content-v2">
+                            <h3>Números</h3>
+                            <p>Domina las señas para contar del 0 al 100.</p>
+                            <div class="card-footer">
+                                @if ($pendientesNUM > 0)
+                                    <span class="badge badge-warning">{{ $pendientesNUM }} pendiente(s)</span>
+                                @else
+                                    <span class="badge badge-success">Completado</span>
+                                @endif
                             </div>
-                        </a>
-                    @endforeach
-                    
-                    {{-- Tarjetas adicionales (Mantenidas para otros contenidos) --}}
+                        </div>
+                    </a>
+
+                    <a href="{{ route('nivel.saludos') }}" class="lesson-card" aria-label="Ir a sección de Saludos">
+                        <div class="card-icon-box saludos">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="card-content-v2">
+                            <h3>Saludos</h3>
+                            <p>Comienza conversaciones básicas y formales en LESSA.</p>
+                            <div class="card-footer">
+                                @if ($pendientesSL > 0)
+                                    <span class="badge badge-warning">{{ $pendientesSL }} pendiente(s)</span>
+                                @else
+                                    <span class="badge badge-success">Completado</span>
+                                @endif
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="{{ route('nivel.salud') }}" class="lesson-card" aria-label="Ir a sección de Salud">
+                        <div class="card-icon-box salud">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="card-content-v2">
+                            <h3>Salud</h3>
+                            <p>Vocabulario esencial relacionado con el cuerpo y la salud.</p>
+                            <div class="card-footer">
+                                @if ($pendientesSALUD > 0)
+                                    <span class="badge badge-warning">{{ $pendientesSALUD }} pendiente(s)</span>
+                                @else
+                                    <span class="badge badge-success">Completado</span>
+                                @endif
+                            </div>
+                        </div>
+                    </a>
+
                     <a href="#" class="lesson-card">
                         <div class="card-icon-box" style="background: rgba(108, 117, 125, 0.1); color: #6c757d;">
                             <i class="fas fa-book"></i>
@@ -705,23 +827,22 @@
                         </div>
                         <div class="card-content-v2">
                             <h3>Términos Comunes</h3>
-                            <p>Sumérgete en un diccionario de fácil recuperación que te ayudará a comunicarte fácilmente.</p>
+                            <p>Sumérgete en un diccionario de fácil recuperación que te ayudará a comunicarte
+                                fácilmente.</p>
                         </div>
                     </a>
                 </div>
             </div>
         </section>
-        
-        <div id="progressModal" class="progress-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+        <div id="progressModal" class="progress-modal-overlay" role="dialog" aria-modal="true"
+            aria-labelledby="modalTitle">
             <div class="progress-modal-content">
                 <div class="modal-header">
                     {{-- Icono dinámico basado en el progreso --}}
                     @if ($porcentaje == 100)
                         <i class="fas fa-trophy" style="color: var(--warning-color);"></i>
                         <h3 id="modalTitle">¡Progreso Completado! 🎉</h3>
-                    @elseif ($porcentaje == 0)
-                        <i class="fas fa-rocket"></i>
-                        <h3 id="modalTitle">¡Es hora de empezar! 🚀</h3>
                     @else
                         <i class="fas fa-chart-bar"></i>
                         <h3 id="modalTitle">¡Hola de nuevo, {{ Auth::user()->name }}!</h3>
@@ -732,17 +853,19 @@
                     <div class="modal-circle" style="--progress: {{ $porcentaje }};">
                         <span class="progress-value">{{ $porcentaje }}%</span>
                     </div>
-                    
+
                     <p class="modal-progress-text">{{ $descripcion }}</p>
-                    
-                    @if ($hasPending && $porcentaje < 100)
-                        <p class="modal-progress-desc">Tienes {{ $totalPending }} actividades pendientes. ¡Es momento de practicarlas!</p>
+
+                    @if ($totalPending > 0)
+                        <p class="modal-progress-desc">Tienes {{ $totalPending }} actividades pendientes. ¡Es momento de
+                            practicarlas!</p>
                         <ul class="pending-list">
                             {{-- Muestra hasta 3 secciones pendientes --}}
                             @php $count = 0; @endphp
                             @foreach($pendingBySection as $sectionName => $pendingCount)
                                 @if ($pendingCount > 0 && $count < 3)
-                                    <li><i class="fas fa-exclamation-triangle"></i> {{ $sectionName }}: {{ $pendingCount }} pendiente(s)</li>
+                                    <li><i class="fas fa-exclamation-triangle"></i> {{ $sectionName }}: {{ $pendingCount }}
+                                        pendiente(s)</li>
                                     @php $count++; @endphp
                                 @endif
                             @endforeach
@@ -750,74 +873,59 @@
                                 <li>... y más por explorar.</li>
                             @endif
                         </ul>
-                    @elseif ($porcentaje == 0)
-                        <p class="modal-progress-desc">Comienza con la sección de Abecedario para dar tu primer paso en la LESSA.</p>
                     @elseif ($porcentaje == 100)
-                        <p class="modal-progress-desc">Has completado todas las actividades. ¡Sigue revisando el contenido de Lecciones y Videos!</p>
+                        <p class="modal-progress-desc">Has completado todas las actividades disponibles. ¡Eres un maestro en
+                            LESSA! 🎉</p>
+                    @else
+                        {{-- Caso si $totalPending es 0 pero % < 100 (solo sucede si no hay más actividades en el curso)
+                            --}} <p class="modal-progress-desc">Actualmente no tienes actividades pendientes. ¡Revisa el
+                            vocabulario o los videos!</p>
                     @endif
                 </div>
 
                 <div class="modal-footer">
-                    @if ($hasPending && $porcentaje < 100)
-                        <a href="{{ $firstPendingRoute }}" class="modal-button">Continuar Práctica <i class="fas fa-arrow-right"></i></a>
-                        <button type="button" class="modal-button secondary" onclick="closeProgressModal()">Ver Home</button>
-                    @elseif ($porcentaje == 0)
-                        <a href="{{ route('nivel.abecedario') }}" class="modal-button">Empezar el Curso <i class="fas fa-sign-language"></i></a>
-                        <button type="button" class="modal-button secondary" onclick="closeProgressModal()">Ver Home</button>
+                    @if ($totalPending > 0)
+                        {{-- Muestra continuar si hay pendientes --}}
+                        <a href="{{ route('practicar') }}" class="modal-button">Continuar Práctica <i
+                                class="fas fa-arrow-right"></i></a>
+                        <button type="button" class="modal-button secondary" onclick="closeProgressModal()">Ver
+                            Home</button>
                     @else
-                        <a href="{{ route('lecciones.videos') }}" class="modal-button">Ver Videos Educativos <i class="fas fa-video"></i></a>
+                        {{-- Muestra videos si no hay pendientes (100% o al día) --}}
+                        <a href="{{ route('lecciones.videos') }}" class="modal-button">Ver Videos Educativos <i
+                                class="fas fa-video"></i></a>
                         <button type="button" class="modal-button secondary" onclick="closeProgressModal()">Cerrar</button>
                     @endif
                 </div>
             </div>
         </div>
-        
+
     </main>
 
     <footer>@include('partials.footer')</footer>
-    
+
     <script>
-
-
-        // Animación de carga del círculo (opcional)
-        window.addEventListener('load', () => {
-            const circle = document.querySelector('.progress-circle');
-            if (circle) {
-                // Forzar la aplicación del conic-gradient para activar la transición/animación
-                circle.style.background = circle.style.background; 
-            }
-            
-            // Lógica para mostrar el modal al cargar la página
-            const modal = document.getElementById('progressModal');
-            if (modal) {
-                // Pequeño timeout para asegurar que el contenido se ha cargado y el CSS está listo
-                setTimeout(() => {
-                    modal.classList.add('active');
-                }, 300); 
-            }
-        });
-        
         const MODAL_SHOWN_KEY = 'progressModalShown';
 
-        // 1. Función para cerrar el modal
+        // Función para cerrar el modal
         function closeProgressModal() {
             const modal = document.getElementById('progressModal');
             modal.classList.remove('active');
-            
-            // 💡 Acción clave: Guarda en sessionStorage que el modal ya se mostró
+
+            // Guarda en sessionStorage que el modal ya se mostró
             sessionStorage.setItem(MODAL_SHOWN_KEY, 'true');
         }
 
-        // 2. Lógica para mostrar el modal solo si NO se ha mostrado en esta sesión
+        // Lógica para mostrar el modal solo si NO se ha mostrado en esta sesión
         window.addEventListener('load', () => {
             const circle = document.querySelector('.progress-circle');
             if (circle) {
                 // Forzar la aplicación del conic-gradient para activar la transición/animación
-                circle.style.background = circle.style.background; 
+                circle.style.background = circle.style.background;
             }
-            
+
             const modal = document.getElementById('progressModal');
-            
+
             // Verifica si el modal ya se mostró en esta sesión
             const wasModalShown = sessionStorage.getItem(MODAL_SHOWN_KEY);
 
@@ -825,17 +933,13 @@
                 // Solo muestra el modal si NO ha sido mostrado
                 setTimeout(() => {
                     modal.classList.add('active');
-                    // NO guardamos 'true' aquí, solo cuando el usuario lo CIERRA explícitamente.
-                    // Esto permite que si el usuario refresca la página (F5), se mantenga visible 
-                    // hasta que navegue o lo cierre.
-                }, 300); 
+                }, 300);
             }
         });
-        
-        // 3. Cerrar modal al hacer clic fuera de él
-        document.getElementById('progressModal').addEventListener('click', function(event) {
+
+        // Cerrar modal al hacer clic fuera de él
+        document.getElementById('progressModal').addEventListener('click', function (event) {
             if (event.target === this) {
-                // Al cerrarlo fuera, también se registra como "visto"
                 closeProgressModal();
             }
         });

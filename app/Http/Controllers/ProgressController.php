@@ -190,30 +190,7 @@ class ProgressController extends Controller
             ? round(($nivelesCompletadosCount / $totalNiveles) * 100) 
             : 0;
 
-        // 4. Contar pendientes por sección
-        $pendingBySection = [
-            'Abecedario' => 0,
-            'Números' => 0,
-            'Saludos' => 0,
-            'Salud' => 0,
-        ];
 
-        foreach ($allNiveles as $nivel) {
-            if (!in_array($nivel->id, $nivelesCompletados)) {
-                // Clasificación basada en los prefijos: ABC, NUM, SL, SALUD
-                $prefix = substr($nivel->id, 0, min(4, strlen($nivel->id)));
-                
-                if (str_starts_with($prefix, 'ABC')) {
-                    $pendingBySection['Abecedario']++;
-                } elseif (str_starts_with($prefix, 'NUM')) {
-                    $pendingBySection['Números']++;
-                } elseif (str_starts_with($prefix, 'SL')) {
-                    $pendingBySection['Saludos']++;
-                } elseif (str_starts_with($prefix, 'SALU')) { 
-                    $pendingBySection['Salud']++;
-                }
-            }
-        }
         
         // 5. Generar la descripción del progreso
         $descripcion = '¡Excelente trabajo! Continúa para dominar la LESSA.';
@@ -232,7 +209,6 @@ class ProgressController extends Controller
 
         return [
             'porcentajeGlobal' => $porcentajeGlobal,
-            'pendingBySection' => $pendingBySection,
             'descripcionProgreso' => $descripcion,
             'totalNiveles' => $totalNiveles,
             'nivelesCompletadosCount' => $nivelesCompletadosCount,
