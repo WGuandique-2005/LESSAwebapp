@@ -18,6 +18,9 @@ use App\Http\Controllers\PuntosUsuarioController;
 Route::middleware('guest')->group(function (){
     // Landing page
     Route::get('/', [TaskController::class, 'index'])->name('/');
+    // Sección de ayuda
+    Route::get('/ayuda',[TaskController::class,'ayuda'])->name('ayuda');
+
     // Login
     Route::get('/login', [TaskController::class, 'loginForm'])->name('login');
     Route::post('/login', [UserController::class, 'login'])->name('login.submit');
@@ -54,7 +57,8 @@ Route::middleware('guest')->group(function (){
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
-        return view('home');
+        $progressData = ProgressController::getHomeProgressData();
+        return view('home', compact('progressData'));
     })->name('home');
 
     // Info
@@ -65,9 +69,6 @@ Route::middleware('auth')->group(function () {
 
     // Sección practicar
     Route::get('/practicar', [TaskController::class, 'practicar'])->name('practicar');
-
-    // Sección de ayuda
-    Route::get('/ayuda',[TaskController::class,'ayuda'])->name('ayuda');
 
     /*
     |----------------------------------|

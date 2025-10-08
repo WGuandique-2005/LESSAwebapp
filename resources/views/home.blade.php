@@ -5,66 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LESSA - Plataforma de Aprendizaje</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Importación de fuentes e íconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
     <style>
+        /* --- 1. VARIABLES Y ESTILOS BASE --- */
         :root {
-            --primary-blue: #007bff;
-            --primary-orange: #ff6b35;
-            --light-gray: #f8f9fa;
-            --medium-gray: #e9ecef;
-            --dark-gray: #343a40;
-            --text-color: #212529;
+            --primary-blue: #0b63ff; /* Azul principal */
+            --primary-dark: #0056b3;
+            --accent-orange: #ff6b35; /* Naranja para contraste */
+            --success-color: #16a34a; 
+            --warning-color: #f59e0b;
+            --background-light: #f5f8fb;
+            --card-bg: #ffffff;
+            --text-dark: #212529;
+            --text-muted: #6b7280;
             --white: #ffffff;
-            --border-color: #dee2e6;
-            --shadow-light: rgba(0, 0, 0, 0.08);
-            --shadow-medium: rgba(0, 0, 0, 0.15);
-            --text-secondary: #6c757d;
-            --error-color: #EF4444; /* Tailwind red-500 */
-            --success-color: #22C55E; /* Tailwind green-500 */
-
-            --spacing-xs: 0.25rem;
-            --spacing-sm: 0.5rem;
+            --shadow-soft: 0 12px 36px rgba(12, 24, 60, 0.08);
+            --radius-md: 14px;
+            
+            /* Variables originales del Hero */
             --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
             --spacing-xl: 2rem;
-            --spacing-xxl: 3rem;
-
-            --font-family-primary: 'Poppins', sans-serif;
-            --font-size-base: 1rem;
-            --font-size-sm: 0.875rem;
-            --font-size-lg: 1.25rem;
             --font-size-xl: 2rem;
             --font-size-xxl: 2.5rem;
-
-            --border-radius: 10px;
-            --transition-speed: 0.3s;
         }
 
         body {
-            font-family: var(--font-family-primary);
-            line-height: 1.6;
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            background-color: var(--light-gray);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            font-family: 'Poppins', sans-serif;
+            background: var(--background-light);
+            color: var(--text-dark);
+            min-height: 100vh;
         }
-
+        
         .container {
-            max-width: 1080px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 var(--spacing-md);
+            padding: 0 15px;
         }
 
+        /* --- 2. ESTILOS DEL HERO ORIGINAL (PRESERVADOS) --- */
         .hero-section {
             background-color: var(--primary-blue);
             padding: var(--spacing-xl) 0;
             color: var(--white);
             position: relative;
             overflow: hidden;
+            border-radius: 0 0 25px 25px; /* Para que coincida con el borde del progreso */
         }
-
         .hero-bg-img {
             position: absolute;
             top: 0;
@@ -72,10 +61,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.2;
+            opacity: 0.1; /* Reducir opacidad para mejorar legibilidad */
             z-index: 0;
         }
-
         .hero-content {
             display: flex;
             flex-direction: column;
@@ -84,458 +72,475 @@
             position: relative;
             z-index: 1;
         }
-
         .hero-logo {
             max-width: 80px;
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
             filter: brightness(0) invert(1);
-            /* Para que el logo se vea blanco */
         }
-
         .hero-text {
             max-width: 700px;
+            margin-bottom: 20px;
         }
-
         .hero-text h2 {
             font-size: var(--font-size-xxl);
             font-weight: 700;
             margin-bottom: var(--spacing-md);
         }
-
-        .hero-text h2 {
-            font-size: var(--font-size-xl);
-            font-weight: 600;
-            margin-bottom: var(--spacing-md);
-        }
-
-
         .hero-text p {
-            font-size: var(--font-size-sm);
-            margin-bottom: var(--spacing-xl);
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
         }
-
-        .features-section {
-            background-color: var(--white);
-            padding: var(--spacing-sm) var(--spacing-sm);
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 12px var(--shadow-light);
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            margin-top: var(--spacing-xl);
-            max-width: 500px;
-            margin-left: 5%;
-            margin-right: 5%;
-        }
-
-        .features-section h2 {
-            font-size: var(--font-size-md);
-            color: var(--dark-gray);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .feature-item {
-            text-align: center;
-        }
-
-        .feature-item img {
-            max-width: 240px;
-            height: auto;
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .feature-item p {
-            font-size: var(--font-size-sm);
-            color: var(--text-secondary);
-        }
-
-        .practice-sections {
-            padding: var(--spacing-md) 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--spacing-xl);
-        }
-
-        .section-header h2 {
-            font-size: var(--font-size-lg);
-            color: var(--dark-gray);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .section-header p {
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .practice-sections-layout {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--spacing-lg);
-        }
-
-        .main-practice-grid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: var(--spacing-lg);
-        }
-
-        .practice-card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 8px var(--shadow-light);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-        }
-
-        .practice-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px var(--shadow-medium);
-        }
-
-        .card-image-container {
-            width: 100%;
-            height: 180px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--medium-gray);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .card-lock-icon {
-            position: absolute;
-            top: var(--spacing-md);
-            right: var(--spacing-md);
-            background-color: rgba(0, 0, 0, 0.5);
+        .hero-button {
+            display: inline-block;
+            background-color: var(--accent-orange);
             color: var(--white);
-            border-radius: 50%;
-            padding: var(--spacing-sm);
-            font-size: var(--font-size-base);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .hero-button:hover {
+            background-color: #e55c2f;
         }
 
-        .card-content {
-            padding: var(--spacing-md);
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
 
-        .card-content h4 {
-            font-size: var(--font-size-lg);
-            color: var(--dark-gray);
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .card-content p {
-            font-size: var(--font-size-sm);
-            color: var(--text-secondary);
-            flex-grow: 1;
-        }
-
-        .progress-card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 8px var(--shadow-light);
-            padding: var(--spacing-lg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-            height: auto;
-        }
-
-        .progress-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px var(--shadow-medium);
-        }
-
-        .progress-circle {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: var(--medium-gray);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: var(--font-size-lg);
-            font-weight: 700;
-            color: var(--primary-orange);
+        /* --- 3. ESTILOS DE PROGRESO GLOBAL (NUEVOS) --- */
+        .progress-summary-section {
+            padding: 40px 0;
+            background: var(--white); /* Fondo blanco que contrasta con el Hero */
+            margin-top: -25px; /* Superponer ligeramente al Hero */
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.05);
             position: relative;
-            margin-bottom: var(--spacing-md);
-            box-shadow: inset 0 0 0 5px var(--medium-gray); /* Border effect for progress */
+            z-index: 5;
+        }
+
+        .progress-container-main {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .progress-circle-wrap {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-details {
+            max-width: 400px;
+            text-align: left;
+        }
+
+        .progress-title {
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .progress-description {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* ESTILO DEL PROGRESS CIRCLE (USANDO CONIC-GRADIENT) */
+        .progress-circle {
+            --size: 150px;
+            --border-width: 12px;
+            --progress-color: var(--success-color); /* Usamos verde para el progreso */
+            --track-color: var(--background-light);
+            
+            width: var(--size);
+            height: var(--size);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            
+            /* --- CORRECCIÓN CRÍTICA AQUÍ --- */
+            /* La variable --progress se establece en línea con el porcentaje de PHP */
+            background: conic-gradient(
+                var(--progress-color) calc(var(--progress) * 3.6deg), 
+                var(--track-color) 0deg
+            );
+            transition: background 1s ease-out; /* Animación de carga */
         }
 
         .progress-circle::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            /* Se resta 2px adicionales para asegurar que el borde verde se vea limpio */
+            width: calc(var(--size) - var(--border-width) * 2 - 2px); 
+            height: calc(var(--size) - var(--border-width) * 2 - 2px);
+            background: var(--card-bg);
             border-radius: 50%;
-            background: conic-gradient(var(--primary-orange) 180deg, var(--medium-gray) 0deg);
-            /* 50% progress */
-            z-index: 0;
         }
 
-        .progress-circle span {
+        .progress-value {
             position: relative;
-            z-index: 1;
-            background-color: var(--white);
-            padding: var(--spacing-sm);
-            border-radius: 50%;
+            z-index: 2;
         }
 
-
-        .progress-card h4 {
-            font-size: var(--font-size-lg);
-            color: var(--dark-gray);
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .progress-card p {
-            font-size: var(--font-size-sm);
-            color: var(--text-secondary);
-        }
-
-        .tip-card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 8px var(--shadow-light);
-            padding: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
+        /* Actividades Pendientes (Detalle) */
+        .pending-activities-grid {
             display: flex;
-            align-items: flex-start;
-            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            padding: 20px 0;
+            border-top: 1px solid var(--background-light);
         }
 
-        .tip-icon {
-            font-size: var(--font-size-lg);
-            color: var(--primary-orange);
-            min-width: 24px;
+        .pending-item {
+            background: var(--background-light);
+            border-radius: var(--radius-md);
+            padding: 15px 20px;
             text-align: center;
-        }
-
-        .tip-content {
+            min-width: 200px;
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: background 0.3s;
+        }
+        .pending-item:hover {
+            background: #e6eaf0;
         }
 
-        .tip-content h4 {
-            font-size: var(--font-size-base);
-            color: var(--dark-gray);
-            margin-bottom: var(--spacing-sm);
+        .pending-count {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--accent-orange);
         }
 
-        .tip-content p {
-            font-size: var(--font-size-sm);
-            color: var(--text-secondary);
+        .pending-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
         }
 
-        .feedback-message {
-            text-align: center;
-            margin-bottom: 16px;
-            padding: 10px;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            font-size: 0.95em;
-        }
-
-        .feedback-message.success {
-            color: var(--success-color);
-            background-color: rgba(34, 197, 94, 0.1); /* Light green background */
-            border: 1px solid var(--success-color);
-        }
-
-        .feedback-message.error {
-            color: var(--error-color);
-            background-color: rgba(239, 68, 68, 0.1)
-            border: 1px solid var(--error-color);
-        }
-
-        .error-message {
-            color: var(--error-color);
-            font-size: 0.85em;
-            margin-top: -10px;
-            margin-bottom: 6px;
+        .pending-link {
             display: block;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 5px;
+            transition: color 0.2s;
         }
-
-        /* Responsive Layouts */
-        @media (min-width: 768px) {
-            .hero-content {
-                flex-direction: row;
-                text-align: left;
-                justify-content: space-between;
-                align-items: flex-start;
-                padding-bottom: var(--spacing-xxl);
+        .pending-link:hover {
+            color: var(--primary-dark);
+        }
+        .pending-item .fa-check-circle {
+            color: var(--success-color);
+            margin-left: 5px;
+        }
+        
+        /* RESPONSIVIDAD DEL PROGRESO */
+        @media (max-width: 768px) {
+            .progress-circle-wrap {
+                flex-direction: column;
+                text-align: center;
             }
-
-            .hero-text {
-                max-width: 60%;
-                margin-bottom: 0;
+            .progress-details {
+                text-align: center;
             }
-
-            .features-section {
-                /* Apply negative margin for overlap only on larger screens */
-                margin-top: calc(var(--spacing-xxl) * -3);
-                margin-left: 0;
-                margin-right: 0;
-                width: calc(40% - var(--spacing-xl));
-                max-width: 400px;
-                align-self: flex-end;
+            .pending-item {
+                min-width: 45%;
             }
-
-            .practice-sections-layout {
-                grid-template-columns: 1fr 2fr;
-            }
-
-            .main-practice-grid {
-                grid-template-columns: repeat(2, 1fr);
+        }
+        @media (max-width: 480px) {
+            .pending-item {
+                min-width: 100%;
             }
         }
 
-        @media (min-width: 992px) {
-            .main-practice-grid {
-                grid-template-columns: repeat(2, 1fr); /* Ensure two columns even at larger sizes */
-            }
+
+        /* --- 4. ESTILOS DE CARDS MEJORADOS (NUEVOS) --- */
+        .practice-sections-v2 {
+            padding: 30px 0 60px;
+            position: relative;
+            z-index: 4;
+        }
+
+        .section-title-v2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .cards-grid-v2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .lesson-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-soft);
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 45px rgba(12, 24, 60, 0.15);
+        }
+
+        .card-icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        /* Colores específicos para cada sección */
+        .card-icon-box.abecedario {
+            background: rgba(11, 99, 255, 0.1);
+            color: var(--primary-blue);
+        }
+        .card-icon-box.numeros {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--accent-orange);
+        }
+        .card-icon-box.saludos {
+            background: rgba(22, 163, 74, 0.1);
+            color: var(--success-color);
+        }
+        .card-icon-box.salud {
+            background: rgba(220, 34, 56, 0.1);
+            color: #dc2238;
+        }
+
+
+        .card-content-v2 {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-content-v2 h3 {
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: var(--primary-dark);
+        }
+
+        .card-content-v2 p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            flex-grow: 1; 
+        }
+
+        .card-footer {
+            padding-top: 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-warning {
+            background-color: var(--warning-color);
+            color: var(--text-dark);
+        }
+
+        .badge-success {
+            background-color: var(--success-color);
+            color: var(--white);
         }
     </style>
 </head>
 
 <body>
-    <header>@include('partials.navbar')</header>
-    @if(session('status'))
-        <p class="feedback-message success">
-            {{ session('status') }}
-        </p>
-    @endif
-    @if(session('error'))
-        <p class="feedback-message error">
-            {{ session('error') }}
-        </p>
-    @endif
+    {{-- Asume la inclusión de tu navbar --}}
+    @include('partials.navbar')
+
     <main>
+        @php
+            // Se asume que $progressData ya fue pasado desde el closure de la ruta en web.php
+            // Valores de prueba si no se reciben (por ejemplo, 75% completado)
+            $progressData = $progressData ?? [
+                'porcentajeGlobal' => 75, 
+                'pendingBySection' => ['Abecedario' => 1, 'Números' => 0, 'Saludos' => 2, 'Salud' => 0],
+                'descripcionProgreso' => '¡Estás en camino! Completa las lecciones pendientes para ser un experto.',
+            ];
+            $porcentaje = $progressData['porcentajeGlobal'];
+            $pendingBySection = $progressData['pendingBySection'];
+            $descripcion = $progressData['descripcionProgreso'];
+
+            // Definición de las secciones con sus rutas e íconos
+            $sections = [
+                'Abecedario' => [
+                    'icon' => 'fas fa-fingerprint', 
+                    'route' => route('nivel.abecedario'), // Asegúrate que esta ruta exista
+                    'description' => 'Aprende y practica la dactilología completa de la LESSA.'
+                ],
+                'Números' => [
+                    'icon' => 'fas fa-calculator',
+                    'route' => route('nivel.numeros'), // Asegúrate que esta ruta exista
+                    'description' => 'Domina las señas para contar del 0 al 100.'
+                ],
+                'Saludos' => [
+                    'icon' => 'fas fa-handshake',
+                    'route' => route('nivel.saludos'), // Asegúrate que esta ruta exista
+                    'description' => 'Comienza conversaciones básicas y formales en LESSA.'
+                ],
+                'Salud' => [
+                    'icon' => 'fas fa-heartbeat',
+                    'route' => route('nivel.salud'), // Asegúrate que esta ruta exista
+                    'description' => 'Vocabulario esencial relacionado con el cuerpo y la salud.'
+                ],
+            ];
+        @endphp
+
+        <!-- 1. SECCIÓN HERO (ORIGINAL) -->
         <section class="hero-section">
-            <img src="{{ asset('img/sansalvador.png') }}" alt="Background image of San Salvador Monument"
-                class="hero-bg-img">
-            <div class="container hero-content">
-                <div class="hero-text">
+            <img src="{{ asset('img/sansalvador.png') }}" alt="LESSA Background" class="hero-bg-img">
+            <div class="container">
+                <div class="hero-content">
                     <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="hero-logo">
-                    <h2 style="color: white;">Bienvenido, {{ Auth::user()->name }}</h2>
-                    <h4>Aquí es donde transformas todo tu conocimiento teórico en habilidades de comunicación.</h4>
-                    <p>La sección de práctica de LESSA está diseñada para ayudarte a fortalecer tu confianza como
-                        profesional. ¡No más dudas, adquiere confianza en el uso del Lenguaje de Señas Salvadoreño!</p>
-                </div>
-                <div class="features-section">
-                    <h2>Recuerda</h2>
-                    <div class="feature-item">
-                        <img src="{{ asset('img/icon.png') }}" alt="Smartphone icon">
-                        <p style="color:black;">¡La práctica constante y la paciencia son la clave para dominar con
-                            fluidez y naturalidad!</p>
+                    <div class="hero-text">
+                        <h2>¡Bienvenido, <span style="font-style: italic;">{{ Auth::user()->name }}</span>!</h2>
+                        <p>Tu camino para dominar el lenguaje de señas salvadoreño comienza aquí. ¡Aprende, practica y
+                            conéctate!</p>
                     </div>
+                    <a href="{{ route('miProgreso') }}" class="hero-button">Ver Mi Progreso <i class="fas fa-chart-line"></i></a>
                 </div>
             </div>
         </section>
-        <section class="practice-sections">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Secciones de Práctica</h2>
-                    <p>A través de ejercicios graduales y organizados por niveles de dificultad, podrás practicar desde
-                        las señas más básicas hasta construir frases completas. Cada sección ofrece una experiencia
-                        interactiva, divertida y personalizada, adaptada a tu ritmo de aprendizaje.</p>
+
+        <!-- 2. SECCIÓN DE PROGRESO GLOBAL (NUEVA - CÍRCULO) -->
+        <section class="progress-summary-section">
+            <div class="container progress-container-main">
+                <div class="progress-circle-wrap">
+                    {{-- El estilo CSS utiliza la variable --progress para el cálculo --}}
+                    <div class="progress-circle" style="--progress: {{ $porcentaje }};">
+                        <span class="progress-value">{{ $porcentaje }}%</span>
+                    </div>
+                    <div class="progress-details">
+                        <h2 class="progress-title">Tu Progreso Global</h2>
+                        <p class="progress-description">{{ $descripcion }}</p>
+                    </div>
                 </div>
+                
+                {{-- Detalle de actividades pendientes por sección --}}
+                <div class="pending-activities-grid">
+                    @foreach($pendingBySection as $sectionName => $pendingCount)
+                        @if (isset($sections[$sectionName]))
+                            <div class="pending-item">
+                                <span class="pending-count">{{ $pendingCount }}</span>
+                                <span class="pending-label">
+                                    {{ $pendingCount === 1 ? 'Actividad Pendiente' : 'Actividades Pendientes' }} en {{ $sectionName }}
+                                </span>
+                                <a href="{{ $sections[$sectionName]['route'] ?? '#' }}" class="pending-link">
+                                    @if ($pendingCount > 0)
+                                        ¡Empezar! <i class="fas fa-arrow-right"></i>
+                                    @else
+                                        Completado <i class="fas fa-check-circle"></i>
+                                    @endif
+                                </a>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </section>
 
-                <div class="practice-sections-layout">
-                    <div class="sidebar-practice">
-                        <div class="tip-card">
-                            <div class="tip-content">
-                                <h4>Consejo</h4>
-                                <p>¡Recuerda practicar frente a un espejo para observar tu posición corporal y gestos
-                                    faciales! Esto te ayudará a asegurarte de que tu señas sean naturales. ¡La práctica
-                                    constante es la mejor manera de mejorar tu fluidez y confianza!</p>
+        <!-- 3. SECCIÓN DE PRÁCTICA (CARDS MEJORADOS) -->
+        <section class="practice-sections-v2">
+            <div class="container">
+                <h2 class="section-title-v2">Inicia o Continúa tu Práctica</h2>
+                <div class="cards-grid-v2">
+                    {{-- Recorre las 4 secciones principales --}}
+                    @foreach($sections as $sectionName => $data)
+                        {{-- Clase dinámica para los colores del icono --}}
+                        <a href="{{ $data['route'] }}" class="lesson-card" aria-label="Ir a sección de {{ $sectionName }}">
+                            <div class="card-icon-box {{ strtolower(str_replace('ó', 'o', $sectionName)) }}">
+                                <i class="{{ $data['icon'] }}"></i>
                             </div>
+                            <div class="card-content-v2">
+                                <h3>{{ $sectionName }}</h3>
+                                <p>{{ $data['description'] }}</p>
+                                <div class="card-footer">
+                                    @if($pendingBySection[$sectionName] > 0)
+                                        <span class="badge badge-warning">{{ $pendingBySection[$sectionName] }} pendiente(s)</span>
+                                    @else
+                                        <span class="badge badge-success">Completado</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                    
+                    {{-- Tarjetas adicionales (Mantenidas para otros contenidos) --}}
+                    <a href="#" class="lesson-card">
+                        <div class="card-icon-box" style="background: rgba(108, 117, 125, 0.1); color: #6c757d;">
+                            <i class="fas fa-book"></i>
                         </div>
-                        <div class="progress-card">
-                            <div class="progress-circle">
-                                <span>50%</span>
-                            </div>
-                            <h4>Abecedario</h4>
-                            <p>Nivel III</p>
-                            <p>¡Puedes avanzar al segundo nivel!</p>
+                        <div class="card-content-v2">
+                            <h3>Vocabulario Útil</h3>
+                            <p>Descubre un amplio conjunto de palabras que son esenciales en múltiples contextos.</p>
                         </div>
-                    </div>
-
-                    <div class="main-practice-grid">
-                        <div class="practice-card">
-                            <div class="card-image-container">
-                                <img src="{{ asset('img/letters.png') }}" alt="Abecedario" class="card-image">
-                            </div>
-                            <div class="card-content">
-                                <h4>Abecedario</h4>
-                                <p>Domínalo a la perfección; esta es una excelente forma de desarrollar coordinación
-                                    motriz y familiarizarte con la estructura de LESSA.</p>
-                            </div>
+                    </a>
+                    <a href="#" class="lesson-card">
+                        <div class="card-icon-box" style="background: rgba(108, 117, 125, 0.1); color: #6c757d;">
+                            <i class="fas fa-comments"></i>
                         </div>
-                        <div class="practice-card">
-                            <div class="card-image-container">
-                                <img src="{{ asset('img/phrases.png') }}" alt="Frases practice" class="card-image">
-                            </div>
-                            <div class="card-content">
-                                <h4>Frases</h4>
-                                <p>Explora estructuras poblacionales con temas, preguntas básicas, presentaciones y
-                                    frases habituales.</p>
-                            </div>
+                        <div class="card-content-v2">
+                            <h3>Términos Comunes</h3>
+                            <p>Sumérgete en un diccionario de fácil recuperación que te ayudará a comunicarte fácilmente.</p>
                         </div>
-
-                        <div class="practice-card">
-                            <div class="card-image-container">
-                                <img src="{{ asset('img/usefulVocabulary.png') }}" alt="Vocabulario practice"
-                                    class="card-image">
-                            </div>
-                            <div class="card-content">
-                                <h4>Vocabulario Útil</h4>
-                                <p>Descubre un amplio conjunto de palabras que son esenciales en múltiples contextos.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="practice-card">
-                            <div class="card-image-container">
-                                <img src="{{ asset('img/commonTerms.png') }}" alt="Términos Comunes practice"
-                                    class="card-image">
-                            </div>
-                            <div class="card-content">
-                                <h4>Términos Comunes</h4>
-                                <p>Sumérgete en un diccionario de fácil recuperación que te ayudará a comunicarte
-                                    fácilmente.</p>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
     </main>
+
     <footer>@include('partials.footer')</footer>
+    
+    <script>
+        // Animación de carga del círculo (opcional)
+        window.addEventListener('load', () => {
+            const circle = document.querySelector('.progress-circle');
+            if (circle) {
+                // Forzar la aplicación del conic-gradient para activar la transición/animación
+                circle.style.background = circle.style.background; 
+            }
+        });
+    </script>
 </body>
 
 </html>
