@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LESSA - Plataforma de Aprendizaje</title>
-    <!-- Importación de fuentes e íconos -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
@@ -381,6 +380,182 @@
             background-color: var(--success-color);
             color: var(--white);
         }
+        
+        /* --- ESTILOS DEL MODAL DE PROGRESO (NUEVOS) --- */
+        .progress-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none; /* Inicialmente oculto */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Asegura que esté por encima de todo */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .progress-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .progress-modal-content {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        
+        .progress-modal-overlay.active .progress-modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .modal-body-progress {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: var(--radius-md);
+            background: var(--background-light);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .modal-progress-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .modal-progress-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 0;
+        }
+        
+        .modal-circle {
+            --size: 100px;
+            --border-width: 10px;
+            --progress-color: var(--success-color);
+            --track-color: #e2e8f0; /* Color más claro para el track */
+            width: var(--size);
+            height: var(--size);
+            border-radius: 50%;
+            margin: 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            position: relative;
+            background: conic-gradient(
+                var(--progress-color) calc(var(--progress) * 3.6deg), 
+                var(--track-color) 0deg
+            );
+        }
+
+        .modal-circle::before {
+            content: '';
+            position: absolute;
+            width: calc(var(--size) - var(--border-width) * 2 - 2px); 
+            height: calc(var(--size) - var(--border-width) * 2 - 2px);
+            background: var(--card-bg);
+            border-radius: 50%;
+        }
+
+        .modal-circle .progress-value {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .pending-list {
+            text-align: left;
+            margin: 0 0 20px 0;
+            padding: 0;
+            list-style: none;
+        }
+        .pending-list li {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .pending-list i {
+            color: var(--accent-orange);
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .modal-button {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .modal-button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .modal-button.secondary {
+            background: none;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            margin-left: 10px;
+        }
+        .modal-button.secondary:hover {
+            background-color: rgba(11, 99, 255, 0.1);
+        }
+
+        /* Responsive Modal */
+        @media (max-width: 480px) {
+            .progress-modal-content {
+                padding: 20px;
+            }
+            .modal-header h3 {
+                font-size: 1.3rem;
+            }
+            .modal-circle {
+                --size: 80px;
+            }
+            .modal-button {
+                width: 100%;
+                margin: 5px 0 0 0 !important; /* Ajustar márgenes para botones apilados */
+            }
+        }
     </style>
 </head>
 
@@ -424,9 +599,20 @@
                     'description' => 'Vocabulario esencial relacionado con el cuerpo y la salud.'
                 ],
             ];
+            
+            // Lógica para determinar si hay actividades pendientes
+            $totalPending = array_sum($pendingBySection);
+            $hasPending = $totalPending > 0;
+            $firstPendingRoute = '#'; // Ruta predeterminada
+            foreach ($pendingBySection as $sectionName => $count) {
+                if ($count > 0 && isset($sections[$sectionName])) {
+                    $firstPendingRoute = $sections[$sectionName]['route'];
+                    break;
+                }
+            }
+            
         @endphp
 
-        <!-- 1. SECCIÓN HERO (ORIGINAL) -->
         <section class="hero-section">
             <img src="{{ asset('img/sansalvador.png') }}" alt="LESSA Background" class="hero-bg-img">
             <div class="container">
@@ -442,7 +628,6 @@
             </div>
         </section>
 
-        <!-- 2. SECCIÓN DE PROGRESO GLOBAL (NUEVA - CÍRCULO) -->
         <section class="progress-summary-section">
             <div class="container progress-container-main">
                 <div class="progress-circle-wrap">
@@ -451,7 +636,7 @@
                         <span class="progress-value">{{ $porcentaje }}%</span>
                     </div>
                     <div class="progress-details">
-                        <h2 class="progress-title">Tu Progreso Global</h2>
+                        <h2 class="progress-title">Tu Progreso</h2>
                         <p class="progress-description">{{ $descripcion }}</p>
                     </div>
                 </div>
@@ -479,7 +664,6 @@
             </div>
         </section>
 
-        <!-- 3. SECCIÓN DE PRÁCTICA (CARDS MEJORADOS) -->
         <section class="practice-sections-v2">
             <div class="container">
                 <h2 class="section-title-v2">Inicia o Continúa tu Práctica</h2>
@@ -527,17 +711,132 @@
                 </div>
             </div>
         </section>
+        
+        <div id="progressModal" class="progress-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="progress-modal-content">
+                <div class="modal-header">
+                    {{-- Icono dinámico basado en el progreso --}}
+                    @if ($porcentaje == 100)
+                        <i class="fas fa-trophy" style="color: var(--warning-color);"></i>
+                        <h3 id="modalTitle">¡Progreso Completado! 🎉</h3>
+                    @elseif ($porcentaje == 0)
+                        <i class="fas fa-rocket"></i>
+                        <h3 id="modalTitle">¡Es hora de empezar! 🚀</h3>
+                    @else
+                        <i class="fas fa-chart-bar"></i>
+                        <h3 id="modalTitle">¡Hola de nuevo, {{ Auth::user()->name }}!</h3>
+                    @endif
+                </div>
+
+                <div class="modal-body-progress">
+                    <div class="modal-circle" style="--progress: {{ $porcentaje }};">
+                        <span class="progress-value">{{ $porcentaje }}%</span>
+                    </div>
+                    
+                    <p class="modal-progress-text">{{ $descripcion }}</p>
+                    
+                    @if ($hasPending && $porcentaje < 100)
+                        <p class="modal-progress-desc">Tienes **{{ $totalPending }}** actividades pendientes. ¡Es momento de practicarlas!</p>
+                        <ul class="pending-list">
+                            {{-- Muestra hasta 3 secciones pendientes --}}
+                            @php $count = 0; @endphp
+                            @foreach($pendingBySection as $sectionName => $pendingCount)
+                                @if ($pendingCount > 0 && $count < 3)
+                                    <li><i class="fas fa-exclamation-triangle"></i> **{{ $sectionName }}**: {{ $pendingCount }} pendiente(s)</li>
+                                    @php $count++; @endphp
+                                @endif
+                            @endforeach
+                            @if ($totalPending > 3)
+                                <li>... y más por explorar.</li>
+                            @endif
+                        </ul>
+                    @elseif ($porcentaje == 0)
+                        <p class="modal-progress-desc">Comienza con la sección de **Abecedario** para dar tu primer paso en la LESSA.</p>
+                    @elseif ($porcentaje == 100)
+                        <p class="modal-progress-desc">Has completado todas las actividades. ¡Sigue revisando el contenido de Lecciones y Videos!</p>
+                    @endif
+                </div>
+
+                <div class="modal-footer">
+                    @if ($hasPending && $porcentaje < 100)
+                        <a href="{{ $firstPendingRoute }}" class="modal-button">Continuar Práctica <i class="fas fa-arrow-right"></i></a>
+                        <button type="button" class="modal-button secondary" onclick="closeProgressModal()">Ver Home</button>
+                    @elseif ($porcentaje == 0)
+                        <a href="{{ route('nivel.abecedario') }}" class="modal-button">Empezar el Curso <i class="fas fa-sign-language"></i></a>
+                        <button type="button" class="modal-button secondary" onclick="closeProgressModal()">Ver Home</button>
+                    @else
+                        <a href="{{ route('lecciones.videos') }}" class="modal-button">Ver Videos Educativos <i class="fas fa-video"></i></a>
+                        <button type="button" class="modal-button secondary" onclick="closeProgressModal()">Cerrar</button>
+                    @endif
+                </div>
+            </div>
+        </div>
+        
     </main>
 
     <footer>@include('partials.footer')</footer>
     
     <script>
+
+
         // Animación de carga del círculo (opcional)
         window.addEventListener('load', () => {
             const circle = document.querySelector('.progress-circle');
             if (circle) {
                 // Forzar la aplicación del conic-gradient para activar la transición/animación
                 circle.style.background = circle.style.background; 
+            }
+            
+            // Lógica para mostrar el modal al cargar la página
+            const modal = document.getElementById('progressModal');
+            if (modal) {
+                // Pequeño timeout para asegurar que el contenido se ha cargado y el CSS está listo
+                setTimeout(() => {
+                    modal.classList.add('active');
+                }, 300); 
+            }
+        });
+        
+        const MODAL_SHOWN_KEY = 'progressModalShown';
+
+        // 1. Función para cerrar el modal
+        function closeProgressModal() {
+            const modal = document.getElementById('progressModal');
+            modal.classList.remove('active');
+            
+            // 💡 Acción clave: Guarda en sessionStorage que el modal ya se mostró
+            sessionStorage.setItem(MODAL_SHOWN_KEY, 'true');
+        }
+
+        // 2. Lógica para mostrar el modal solo si NO se ha mostrado en esta sesión
+        window.addEventListener('load', () => {
+            const circle = document.querySelector('.progress-circle');
+            if (circle) {
+                // Forzar la aplicación del conic-gradient para activar la transición/animación
+                circle.style.background = circle.style.background; 
+            }
+            
+            const modal = document.getElementById('progressModal');
+            
+            // Verifica si el modal ya se mostró en esta sesión
+            const wasModalShown = sessionStorage.getItem(MODAL_SHOWN_KEY);
+
+            if (modal && wasModalShown !== 'true') {
+                // Solo muestra el modal si NO ha sido mostrado
+                setTimeout(() => {
+                    modal.classList.add('active');
+                    // NO guardamos 'true' aquí, solo cuando el usuario lo CIERRA explícitamente.
+                    // Esto permite que si el usuario refresca la página (F5), se mantenga visible 
+                    // hasta que navegue o lo cierre.
+                }, 300); 
+            }
+        });
+        
+        // 3. Cerrar modal al hacer clic fuera de él
+        document.getElementById('progressModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                // Al cerrarlo fuera, también se registra como "visto"
+                closeProgressModal();
             }
         });
     </script>
