@@ -91,7 +91,7 @@ class NivelesController extends Controller
 
     function salud_memorama(){
         $saludosData = $this->cargarDatos('saludos');
-        return view('practica_section.saludos.A2_memorama', compact('saludosData'));
+        return view('practica_section.salud.A2_memorama', compact('saludosData'));
     }
 
     function salud_conecta(){
