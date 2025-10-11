@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProgresoUsuario;
 use App\Models\PuntosUsuario;
+use App\Models\RecompensasUsuario;
+use App\Models\Recompensa;
 use App\Models\Nivel;
 use App\Models\Leccion;
 
@@ -32,7 +34,16 @@ class ProgressController extends Controller
                 'completado' => true,
                 'fecha_completada' => $fechaCompletado,
             ]);
-            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente, ¡Felicidades!, puedes pasar a la siguiente lección');
+
+            $recompensa = Recompensa::where('id', 1)->first(); // Asumiendo que la recompensa para la lección 1 tiene ID 1
+            $primero_pasos = RecompensasUsuario::create([
+                'usuario_id' => $userId,
+                'recompensa_id' => $recompensa->id,
+                'estado' => 'Desbloqueada',
+            ]);
+
+            
+            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente, ¡Felicidades!, puedes pasar a la siguiente lección, y has desbloqueado una recompensa, ve a verla en Tu Progreso');
         } catch (\Exception $e) {
             // Manejo de errores
             return redirect()->route('lecciones')->withErrors(['error' => 'Error al completar la lección']);

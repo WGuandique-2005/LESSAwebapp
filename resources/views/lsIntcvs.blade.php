@@ -9,6 +9,8 @@
         :root{
             --error-color: #EF4444; /* Tailwind red-500 */
             --success-color: #22C55E; /* Tailwind green-500 */
+            --primary-color: #070776ff; /* Color de progreso outer */
+            --secondary-color: #e6a717ff; /* Color de progreso */
         }
         body {
             font-family: Arial, sans-serif;
@@ -17,28 +19,133 @@
             background-color: #f0f2f5;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            min-height: 10vh;
         }
-        .feedback-message {
+
+        /* --- INICIO Estilos mejorados para el Modal de Feedback --- */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px); /* Efecto de desenfoque en el fondo */
+            display: none; /* Oculto por defecto */
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .custom-modal {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px; /* Borde más redondeado */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+            max-width: 450px; /* Ancho un poco mayor */
+            width: 90%;
             text-align: center;
-            margin-bottom: 16px;
-            padding: 10px;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            font-size: 0.95em;
+            animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación más elástica */
         }
 
-        .feedback-message.success {
+        .modal-header {
+            margin-bottom: 20px;
+        }
+        
+        /* Contenedor del Icono con fondo circular */
+        .modal-icon-container {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .modal-icon-container.success {
+            background-color: rgba(34, 197, 94, 0.15); /* Fondo verde claro */
+        }
+
+        .modal-icon-container.error {
+            background-color: rgba(239, 68, 68, 0.15); /* Fondo rojo claro */
+        }
+
+        .modal-icon {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1; /* Asegura que el símbolo esté bien centrado */
+        }
+
+        .modal-icon.success-icon {
             color: var(--success-color);
-            background-color: rgba(34, 197, 94, 0.1); /* Light green background */
-            border: 1px solid var(--success-color);
         }
 
-        .feedback-message.error {
+        .modal-icon.error-icon {
             color: var(--error-color);
-            background-color: rgba(239, 68, 68, 0.1)
-            border: 1px solid var(--error-color);
         }
+
+        .modal-body-content h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 24px; /* Título más grande */
+            color: #1a202c;
+        }
+
+        .modal-body-content p {
+            margin-bottom: 30px;
+            color: #4a5568;
+            line-height: 1.5;
+            font-size: 16px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: center; /* Centrar botones */
+            gap: 15px; /* Espacio entre botones */
+        }
+
+        .modal-actions .btn-modal-action {
+            padding: 12px 25px;
+            border: 2px solid transparent; /* Borde sutil */
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none; /* Si se usa 'a' como botón */
+        }
+
+        .modal-actions .btn-progress {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .modal-actions .btn-progress:hover {
+            background-color: #d19416;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(230, 167, 23, 0.3);
+        }
+
+        .modal-actions .btn-continue {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .modal-actions .btn-continue:hover {
+            background-color: #060662;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(7, 7, 118, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        /* --- FIN Estilos mejorados para el Modal de Feedback --- */
+
 
         .error-message {
             color: var(--error-color);
@@ -47,6 +154,7 @@
             margin-bottom: 6px;
             display: block;
         }
+        /* ... (el resto de tus estilos como .container, .floating-elements, .shape, .learning-section, .card, etc., permanecen sin cambios) ... */
         .container {
             display: flex;
             flex-grow: 1;
@@ -407,6 +515,9 @@
         $totalLecciones = 4;
         $completadas = ProgresoUsuario::where('usuario_id', $userId)->where('completado', true)->count();
         $progresoPorcentaje = $totalLecciones > 0 ? round(($completadas / $totalLecciones) * 100) : 0;
+        // Asignamos el mensaje de sesión a una variable PHP para usar en JS
+        $sessionStatus = session('status');
+        $sessionError = session('error');
     @endphp
     <!DOCTYPE html>
     <html lang="es">
@@ -444,16 +555,7 @@
             </aside>
 
             <section class="learning-section">
-                    @if(session('status'))
-                        <p class="feedback-message success">
-                            {{ session('status') }}
-                        </p>
-                    @endif
-                    @if(session('error'))
-                        <p class="feedback-message error">
-                            {{ session('error') }}
-                        </p>
-                    @endif
+                {{-- Se remueven los mensajes de feedback directo y se usa el modal --}}
                 <h1>Sección de Aprendizaje</h1>
                 <p class="subtitle">¡Bienvenido a tu zona de Aprendizaje!</p>
                 <p class="description">
@@ -469,7 +571,7 @@
                 <div class="progress-container goToProgress" style="cursor: pointer;">
                     <p>Progreso de Aprendizaje</p>
                     <div class="progress-bar-outer">
-                        <div class="progress-bar-inner" style="width: 20%;"></div>
+                        <div class="progress-bar-inner" style="width: {{ $progresoPorcentaje }}%;"></div>
                     </div>
                 </div>
 
@@ -531,6 +633,44 @@
                         </div>
                     </div>
             </section>
+
+            {{-- MODAL DE ÉXITO --}}
+            <div id="successModal" class="modal-backdrop">
+                <div class="custom-modal">
+                    <div class="modal-header">
+                         <div class="modal-icon-container success">
+                            <div class="modal-icon success-icon">&#10003;</div>
+                        </div>
+                    </div>
+                    <div class="modal-body-content">
+                        <h3 id="successModalTitle">¡Éxito!</h3>
+                        <p id="successModalMessage"></p>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn-modal-action btn-continue" onclick="closeModal('successModal')">Seguir en Lecciones</button>
+                        <button class="btn-modal-action btn-progress" onclick="window.location.href = '{{ route('miProgreso') }}'">Ver Mi Progreso</button>
+                    </div>
+                </div>
+            </div>
+
+            {{-- MODAL DE ERROR --}}
+            <div id="errorModal" class="modal-backdrop">
+                <div class="custom-modal">
+                    <div class="modal-header">
+                        <div class="modal-icon-container error">
+                            <div class="modal-icon error-icon">&#10006;</div>
+                        </div>
+                    </div>
+                    <div class="modal-body-content">
+                        <h3 id="errorModalTitle">Error</h3>
+                        <p id="errorModalMessage"></p>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn-modal-action btn-continue" onclick="closeModal('errorModal')">Seguir en Lecciones</button>
+                        <button class="btn-modal-action btn-progress" onclick="window.location.href = '{{ route('miProgreso') }}'">Ver Mi Progreso</button>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer>@include('partials.footer')</footer>
         <script>
@@ -540,6 +680,10 @@
                 const ls_saludos = document.querySelector('.saludos');
                 const ls_salud = document.querySelector('.salud');
                 const goToProgress = document.querySelector('.goToProgress');
+                const successModal = document.getElementById('successModal');
+                const errorModal = document.getElementById('errorModal');
+                const sessionStatus = @json($sessionStatus);
+                const sessionError = @json($sessionError);
 
                 goToProgress.addEventListener('click', () => {
                     window.location.href = "{{ route('miProgreso') }}";
@@ -577,6 +721,31 @@
                         console.log('Card clicked!');
                     });
                 });
+
+                // Lógica del Modal
+                window.closeModal = function(modalId) {
+                    const modal = document.getElementById(modalId);
+                    modal.style.display = 'none';
+                }
+
+                // Mostrar el modal si hay un mensaje de sesión
+                if (sessionStatus) {
+                    document.getElementById('successModalMessage').innerText = sessionStatus;
+                    successModal.style.display = 'flex';
+                } else if (sessionError) {
+                    document.getElementById('errorModalMessage').innerText = sessionError;
+                    errorModal.style.display = 'flex';
+                }
+
+                // Cierra el modal al hacer click fuera de él
+                window.onclick = function(event) {
+                    if (event.target == successModal) {
+                        successModal.style.display = 'none';
+                    }
+                    if (event.target == errorModal) {
+                        errorModal.style.display = 'none';
+                    }
+                }
             });
         </script>
     </body>

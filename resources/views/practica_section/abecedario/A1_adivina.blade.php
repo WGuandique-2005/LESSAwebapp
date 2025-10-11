@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adivina la letra</title>
+    {{-- Se agregó Font Awesome para los iconos de los botones del modal --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
     /* 1. Tipografía y Variables */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
@@ -19,6 +21,10 @@
         --medium-gray: #ced4da; /* Para la barra de progreso */
         --dark-gray: #212529;
         --body-bg: #e9ecef; /* Fondo suave */
+        
+        /* Variables para el Modal Mejorado */
+        --modal-bg-dark: #343a40; /* Gris oscuro para botones o fondos */
+        --radius-lg: 18px;
     }
 
     body {
@@ -186,15 +192,15 @@
         font-weight: 600;
     }
 
-    /* 6. Modal de fin de juego */
+    /* 6. Modal de fin de juego (ESTILOS MEJORADOS) */
     .end-modal {
-        /* ... (Mantiene estilos de posición y display) ... */
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.75); /* Fondo más oscuro */
+        background: rgba(0, 0, 0, 0.85); /* Fondo más oscuro */
+        backdrop-filter: blur(4px); /* Nuevo efecto de desenfoque */
         display: none;
         justify-content: center;
         align-items: center;
@@ -203,59 +209,112 @@
 
     .modal-content {
         background: white;
-        padding: 40px;
-        border-radius: 20px;
+        padding: 40px 30px;
+        border-radius: var(--radius-lg);
         text-align: center;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        max-width: 500px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); /* Sombra más dramática */
+        max-width: 480px;
         width: 90%;
-        transform: scale(0.8); /* Inicia más pequeño */
-        animation: scaleIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; /* Animación más juguetona */
+        transform: scale(0.8);
+        animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Animación elástica */
+        border-top: 8px solid var(--success-color); /* Borde superior de éxito */
+    }
+
+    @keyframes scaleIn {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
     }
 
     .modal-content h2 {
-        color: var(--primary-blue); /* Título del modal en azul */
-        font-size: 2.5rem;
+        color: var(--primary-blue);
+        font-size: 2.2rem;
         margin-bottom: 15px;
+        font-weight: 800;
     }
 
     .modal-content p {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         color: var(--dark-gray);
-        margin-bottom: 25px;
+        margin-bottom: 15px;
+        line-height: 1.4;
     }
 
     .modal-content .points {
-        font-size: 3.5rem; /* Puntos más grandes */
-        color: var(--success-color); /* Color de éxito para los puntos */
+        font-size: 3rem; /* Puntos más grandes */
+        color: var(--success-color);
         font-weight: 800;
-        margin-bottom: 30px;
-        display: block; /* Para centrar */
+        margin: 20px 0 30px;
+        display: block; 
+        background: #e6ffed;
+        padding: 10px 0;
+        border-radius: 10px;
+        border: 2px dashed var(--success-color);
+    }
+    
+    /* Contenedor de Acciones del Modal */
+    .modal-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 25px;
     }
 
-    .modal-content button {
-        background-color: var(--primary-blue);
-        color: white;
+    .btn-modal-action {
+        padding: 12px 25px;
         border: none;
-        padding: 15px 40px;
-        border-radius: 10px;
-        font-size: 1.1rem;
+        border-radius: 8px;
+        font-size: 1.05rem;
         font-weight: 600;
         cursor: pointer;
-        transition: background-color 0.3s, transform 0.2s;
-        box-shadow: 0 4px 0 var(--dark-gray); /* Botón con efecto 3D */
+        transition: all 0.2s ease-in-out;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .btn-modal-action .fas {
+        font-size: 1.1rem;
     }
 
-    .modal-content button:hover {
+    /* Estilo del botón Primario (Continuar) - AZUL */
+    .btn-primary {
+        background-color: var(--primary-blue);
+        color: white;
+        box-shadow: 0 4px 0 #1e59b2;
+    }
+
+    .btn-primary:hover {
         background-color: #1e59b2;
         transform: translateY(-2px);
+        box-shadow: 0 6px 0 #144081;
     }
     
-    .modal-content button:active {
+    .btn-primary:active {
         transform: translateY(2px);
-        box-shadow: 0 2px 0 var(--dark-gray);
+        box-shadow: 0 2px 0 #144081;
     }
-    
+
+    /* NUEVO Estilo del botón "Ver Mi Progreso" - NARANJA */
+    .btn-progress-redirect {
+        background-color: var(--secondary-orange);
+        color: white;
+        box-shadow: 0 4px 0 #d1562b; /* Tono más oscuro de orange */
+    }
+
+    .btn-progress-redirect:hover {
+        background-color: #d1562b;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 #9c3f1d;
+    }
+
+    .btn-progress-redirect:active {
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 #9c3f1d;
+    }
+
+
     /* MEDIA QUERIES para responsividad (Móviles) */
     @media (max-width: 768px) {
         .game-container {
@@ -289,6 +348,14 @@
         
         .feedback-message {
             font-size: 1.1rem;
+        }
+        
+        .modal-content {
+            padding: 30px 20px;
+        }
+        
+        .modal-content .points {
+            font-size: 2.5rem;
         }
     }
 </style>
@@ -326,13 +393,23 @@
         </div>
     </div>
 
+    {{-- MODAL DE FIN DE JUEGO (MEJORADO) --}}
     <div class="end-modal" id="end-modal">
         <div class="modal-content">
             <h2 id="modal-title">¡Juego Terminado!</h2>
             <p id="modal-message"></p>
             <p>Puntos ganados:</p>
             <p class="points" id="modal-points">+0</p>
-            <button onclick="document.getElementById('submit-button').click()">Continuar</button>
+            <div class="modal-actions">
+                {{-- Botón "Ver Mi Progreso" (DISPARA SUBMIT + REDIRECT) --}}
+                <button type="button" class="btn-modal-action btn-progress-redirect" onclick="submitAndRedirect('{{ route('miProgreso') }}')">
+                    <i class="fas fa-trophy"></i> Ver Mi Progreso
+                </button>
+                {{-- Botón "Continuar" (DISPARA SUBMIT y depende del backend) --}}
+                <button type="button" class="btn-modal-action btn-primary" onclick="document.getElementById('submit-button').click()">
+                    <i class="fas fa-arrow-right"></i> Continuar
+                </button>
+            </div>
         </div>
     </div>
     <footer>@include('partials.footer')</footer>
@@ -512,6 +589,22 @@
 
             // 3. Mostrar el modal
             endModal.style.display = 'flex';
+        }
+        
+        /**
+         * Lógica para enviar el formulario de puntuación y luego redirigir a una URL específica.
+         * Se usa para el botón "Ver Mi Progreso".
+         */
+        function submitAndRedirect(url) {
+            // 1. Asegurar que el formulario de puntuación se envíe primero
+            document.getElementById('submit-button').click(); 
+            
+            // 2. Redirigir la ventana después de un breve retraso
+            // Se usa un setTimeout para dar tiempo al navegador a empezar el proceso de POST.
+            // La redirección ocurrirá justo después, forzando la navegación a la vista de progreso.
+            setTimeout(() => {
+                window.location.href = url;
+            }, 100); 
         }
 
         // Inicialización del juego

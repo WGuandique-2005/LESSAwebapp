@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adivina el Salud</title>
+    <title>Adivina la Seña de Salud</title>
+    {{-- Se agregó Font Awesome para los iconos de los botones del modal --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
     /* 1. Tipografía y Variables */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
@@ -18,6 +21,10 @@
         --medium-gray: #ced4da; /* Para la barra de progreso */
         --dark-gray: #212529;
         --body-bg: #e9ecef; /* Fondo suave */
+        
+        /* Variables para el Modal Mejorado */
+        --modal-bg-dark: #343a40; /* Gris oscuro para botones o fondos */
+        --radius-lg: 18px;
     }
 
     body {
@@ -176,7 +183,7 @@
         height: 100%;
         width: 0%;
         background-color: var(--secondary-orange);
-        border-radius: 6px;
+        border-radius: 66px;
         transition: width 0.5s ease-in-out;
     }
     
@@ -185,15 +192,15 @@
         font-weight: 600;
     }
 
-    /* 6. Modal de fin de juego */
+    {{-- MODAL ESTILOS MEJORADOS --}}
     .end-modal {
-        /* ... (Mantiene estilos de posición y display) ... */
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.75); /* Fondo más oscuro */
+        background: rgba(0, 0, 0, 0.85); /* Fondo más oscuro */
+        backdrop-filter: blur(4px); /* Nuevo efecto de desenfoque */
         display: none;
         justify-content: center;
         align-items: center;
@@ -202,57 +209,109 @@
 
     .modal-content {
         background: white;
-        padding: 40px;
-        border-radius: 20px;
+        padding: 40px 30px;
+        border-radius: var(--radius-lg);
         text-align: center;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        max-width: 500px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); /* Sombra más dramática */
+        max-width: 480px;
         width: 90%;
-        transform: scale(0.8); /* Inicia más pequeño */
-        animation: scaleIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; /* Animación más juguetona */
+        transform: scale(0.8);
+        animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Animación elástica */
+        border-top: 8px solid var(--success-color); /* Borde superior de éxito */
+    }
+
+    @keyframes scaleIn {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
     }
 
     .modal-content h2 {
-        color: var(--primary-blue); /* Título del modal en azul */
-        font-size: 2.5rem;
+        color: var(--primary-blue);
+        font-size: 2.2rem;
         margin-bottom: 15px;
+        font-weight: 800;
     }
 
     .modal-content p {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         color: var(--dark-gray);
-        margin-bottom: 25px;
+        margin-bottom: 15px;
+        line-height: 1.4;
     }
 
     .modal-content .points {
-        font-size: 3.5rem; /* Puntos más grandes */
-        color: var(--success-color); /* Color de éxito para los puntos */
+        font-size: 3rem; /* Puntos más grandes */
+        color: var(--success-color);
         font-weight: 800;
-        margin-bottom: 30px;
-        display: block; /* Para centrar */
-    }
-
-    .modal-content button {
-        background-color: var(--primary-blue);
-        color: white;
-        border: none;
-        padding: 15px 40px;
+        margin: 20px 0 30px;
+        display: block; 
+        background: #e6ffed;
+        padding: 10px 0;
         border-radius: 10px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.2s;
-        box-shadow: 0 4px 0 var(--dark-gray); /* Botón con efecto 3D */
-    }
-
-    .modal-content button:hover {
-        background-color: #1e59b2;
-        transform: translateY(-2px);
+        border: 2px dashed var(--success-color);
     }
     
-    .modal-content button:active {
+    /* Contenedor de Acciones del Modal */
+    .modal-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 25px;
+    }
+
+    .btn-modal-action {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .btn-modal-action .fas {
+        font-size: 1.1rem;
+    }
+
+    /* Estilo del botón Primario (Continuar) - AZUL */
+    .btn-primary {
+        background-color: var(--primary-blue);
+        color: white;
+        box-shadow: 0 4px 0 #1e59b2;
+    }
+
+    .btn-primary:hover {
+        background-color: #1e59b2;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 #144081;
+    }
+    
+    .btn-primary:active {
         transform: translateY(2px);
-        box-shadow: 0 2px 0 var(--dark-gray);
+        box-shadow: 0 2px 0 #144081;
+    }
+
+    /* Estilo del botón "Ver Mi Progreso" - NARANJA */
+    .btn-progress-redirect {
+        background-color: var(--secondary-orange);
+        color: white;
+        box-shadow: 0 4px 0 #d1562b; /* Tono más oscuro de orange */
+    }
+
+    .btn-progress-redirect:hover {
+        background-color: #d1562b;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 #9c3f1d;
+    }
+
+    .btn-progress-redirect:active {
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 #9c3f1d;
     }
     
     /* MEDIA QUERIES para responsividad (Móviles) */
@@ -278,7 +337,7 @@
         }
         
         .question-card {
-             min-height: 300px;
+              min-height: 300px;
         }
 
         .sign-image {
@@ -289,48 +348,84 @@
         .feedback-message {
             font-size: 1.1rem;
         }
+
+        /* Actualización para móvil del modal */
+        .modal-content {
+            padding: 30px 20px;
+        }
+        
+        .modal-content .points {
+            font-size: 2.5rem;
+        }
     }
-</style></head>
+</style>
+</head>
+
 <body>
     <header>@include('partials.navbar')</header>
     <div class="container">
         <div class="game-container">
-            <h1>Mini-Juego: ¿Qué Seña Es?</h1>
-            <p class="text-secondary">Observa la seña y selecciona la opción correcta. Tienes un límite de <b>10 preguntas</b>.</p>
+            <h1>Mini-Juego: ¿Qué Significa esta Seña de Salud?</h1>
+            <p class="text-secondary">Observa la seña y selecciona el concepto de salud correcto. Tienes un límite de **10
+                preguntas**.</p>
+
             <div class="progress-bar">
                 <div class="progress-fill" id="progress-fill"></div>
             </div>
             <p class="text-muted mt-2"><span id="current-question">1</span> de <span id="total-questions">10</span></p>
+
             <div class="question-card">
                 <img id="sign-image" class="sign-image" src="" alt="Seña a adivinar">
                 <h2 id="question-text">¿Qué representa esta seña?</h2>
             </div>
-            <div class="options-grid" id="options-grid"></div>
+
+            <div class="options-grid" id="options-grid">
+            </div>
+
             <p class="feedback-message" id="feedback-message"></p>
-            <form id="score-form" action="{{ route('nivel.salud.adivina.complete') }}" method="POST" style="display: none;">
+
+            {{-- Formulario oculto para enviar la puntuación a Laravel --}}
+            <form id="score-form" action="{{ route('nivel.salud.adivina.complete') }}" method="POST"
+                style="display: none;">
                 @csrf
                 <input type="hidden" name="errors_count" id="errors-input">
                 <button type="submit" id="submit-button">Finalizar y Guardar Puntuación</button>
             </form>
         </div>
     </div>
+
+    {{-- MODAL DE FIN DE JUEGO (ACTUALIZADO) --}}
     <div class="end-modal" id="end-modal">
         <div class="modal-content">
             <h2 id="modal-title">¡Juego Terminado!</h2>
             <p id="modal-message"></p>
             <p>Puntos ganados:</p>
             <p class="points" id="modal-points">+0</p>
-            <button onclick="document.getElementById('submit-button').click()">Continuar</button>
+            <div class="modal-actions">
+                {{-- Botón "Ver Mi Progreso" (DISPARA SUBMIT + REDIRECT) --}}
+                <button type="button" class="btn-modal-action btn-progress-redirect" onclick="submitAndRedirect('{{ route('miProgreso') }}')">
+                    <i class="fas fa-trophy"></i> Ver Mi Progreso
+                </button>
+                {{-- Botón "Continuar" (DISPARA SUBMIT directo) --}}
+                <button type="button" class="btn-modal-action btn-primary" onclick="document.getElementById('submit-button').click()">
+                    <i class="fas fa-arrow-right"></i> Continuar
+                </button>
+            </div>
         </div>
     </div>
     <footer>@include('partials.footer')</footer>
     <script>
+        // 1. Datos de Salud (Pasados desde el Controller)
         const saludData = @json($saludData);
-        let questions = [];
+
+        // 2. Variables de Estado
+        let questions = []; 
         let currentQuestionIndex = 0;
         let errorsCount = 0;
         const TOTAL_QUESTIONS = 10;
-        const TOTAL_ITEMS = saludData.length;
+        const TOTAL_ITEMS = saludData.length; 
+
+        // 3. Elementos del DOM
         const signImage = document.getElementById('sign-image');
         const optionsGrid = document.getElementById('options-grid');
         const feedbackMessage = document.getElementById('feedback-message');
@@ -339,6 +434,10 @@
         const endModal = document.getElementById('end-modal');
         const errorsInput = document.getElementById('errors-input');
 
+
+        /**
+         * Mezcla un array (Algoritmo Fisher-Yates).
+         */
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -346,23 +445,35 @@
             }
         }
 
+        /**
+         * Genera la lista de 10 preguntas.
+         */
         function generateQuestions() {
-            const shuffledData = [...saludData];
+            // Baraja la data del json
+            const shuffledData = [...saludData]; 
             shuffleArray(shuffledData);
+
+            // Limita a 10 preguntas o al número total de items
             const maxQuestions = Math.min(TOTAL_QUESTIONS, shuffledData.length);
             const selectedItems = shuffledData.slice(0, maxQuestions);
 
             questions = selectedItems.map(correctItem => {
                 let options = new Set();
                 options.add(correctItem.id);
+
+                // Generar 3 opciones incorrectas únicas
                 while (options.size < 4) {
                     const randomItem = saludData[Math.floor(Math.random() * TOTAL_ITEMS)];
+                    // Asegúrate de que la opción incorrecta no sea la misma que la correcta
                     if (randomItem.id !== correctItem.id) {
                         options.add(randomItem.id);
                     }
                 }
+
+                // Convertir el Set a Array y barajar
                 let optionsArray = Array.from(options);
                 shuffleArray(optionsArray);
+
                 return {
                     id: correctItem.id,
                     ruta: correctItem.ruta,
@@ -370,65 +481,100 @@
                     correct: correctItem.id
                 };
             });
+
+            // Ajustar el contador total si es menor a 10
             document.getElementById('total-questions').textContent = questions.length;
         }
 
+        /**
+         * Renderiza la pregunta actual.
+         */
         function renderQuestion() {
             const q = questions[currentQuestionIndex];
+            
+            // Actualizar progreso
             currentQuestionSpan.textContent = currentQuestionIndex + 1;
             progressFill.style.width = ((currentQuestionIndex) / questions.length) * 100 + '%';
-            const assetBaseUrl = '{{ asset('') }}';
+
+            
+            // Obtiene la ruta base de los assets de Laravel
+            const assetBaseUrl = '{{ asset('') }}'; 
+            
             signImage.src = assetBaseUrl + q.ruta.replace(/^\/+/g, '');
             optionsGrid.innerHTML = '';
+            
             q.options.forEach(option => {
                 const button = document.createElement('button');
                 button.className = 'option-btn';
-                const obj = saludData.find(s => s.id === option);
-                button.textContent = obj ? obj.nombre : option;
+                // Buscar el objeto por id
+                const itemObj = saludData.find(s => s.id === option);
+                // Mostrar el texto del concepto (ajusta 'nombre' si tu campo es diferente, e.g., 'concepto')
+                button.textContent = itemObj ? itemObj.nombre : option;
                 button.dataset.value = option;
                 button.onclick = () => checkAnswer(option, q.correct, button);
                 optionsGrid.appendChild(button);
             });
+
+            // Limpiar el mensaje de retroalimentación
             feedbackMessage.textContent = '';
         }
 
+
+        /**
+         * Comprueba la respuesta del usuario.
+         */
         function checkAnswer(selected, correct, button) {
+            // Deshabilitar botones para evitar múltiples clics
             document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+
             if (selected === correct) {
                 button.classList.add('correct');
                 feedbackMessage.textContent = '¡Correcto! ✅';
             } else {
                 button.classList.add('wrong');
-                errorsCount++;
-                const obj = saludData.find(s => s.id === correct);
-                const nombre = obj ? obj.nombre : correct;
+                errorsCount++; // Contar el error
+                // Buscar el concepto por id para mostrar el nombre
+                const itemObj = saludData.find(s => s.id === correct);
+                const nombre = itemObj ? itemObj.nombre : correct;
                 feedbackMessage.textContent = `¡Incorrecto! La seña es "${nombre}". ❌`;
+                // Resaltar la respuesta correcta
                 document.querySelectorAll('.option-btn').forEach(btn => {
                     if (btn.dataset.value === correct) {
                         btn.classList.add('correct');
                     }
                 });
             }
+
+            // Pasar a la siguiente pregunta después de un retraso
             setTimeout(() => {
                 currentQuestionIndex++;
                 if (currentQuestionIndex < questions.length) {
+                    // Habilitar botones y renderizar la siguiente pregunta
                     document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = false);
                     renderQuestion();
                 } else {
+                    // Fin del juego
                     showEndModal();
                 }
-            }, 1500);
+            }, 1500); // 1.5 segundos de pausa para ver la respuesta
         }
 
+        /**
+         * Muestra el modal de fin de juego y prepara el envío.
+         */
         function showEndModal() {
+            // Actualizar la barra de progreso al 100%
             progressFill.style.width = '100%';
+
+            // 1. Determinar puntos y mensaje
             let points = 0;
             let message = '';
             let title = '';
+
             if (errorsCount === 0) {
                 points = 10;
                 title = '¡PERFECTO! 🤩';
-                message = 'No tuviste ningún error. ¡Dominas los saludos a la perfección! Has ganado el máximo de puntos.';
+                message = 'No tuviste ningún error. ¡Dominas las señas de Salud a la perfección! Has ganado el máximo de puntos.';
             } else if (errorsCount <= 4) {
                 points = 5;
                 title = '¡MUY BIEN! 👍';
@@ -438,21 +584,44 @@
                 title = '¡BUEN INTENTO! 💪';
                 message = `Tuviste ${errorsCount} errores. Necesitas un poco más de práctica. Repite la actividad para dominar las señas.`;
             }
+
+            // 2. Actualizar el input oculto y el modal
             errorsInput.value = errorsCount;
+
             document.getElementById('modal-title').textContent = title;
             document.getElementById('modal-message').textContent = message;
             document.getElementById('modal-points').textContent = `+${points}`;
+
+            // 3. Mostrar el modal
             endModal.style.display = 'flex';
         }
+        
+        /**
+         * Lógica para enviar el formulario de puntuación y luego redirigir a una URL específica.
+         * Se usa para el botón "Ver Mi Progreso" para asegurar que la puntuación se guarde.
+         */
+        function submitAndRedirect(url) {
+            // 1. Asegurar que el formulario de puntuación se envíe primero
+            document.getElementById('submit-button').click(); 
+            
+            // 2. Redirigir la ventana después de un breve retraso
+            setTimeout(() => {
+                window.location.href = url;
+            }, 100); 
+        }
 
+
+        // Inicialización del juego
         document.addEventListener('DOMContentLoaded', () => {
+            // Asegurarse de que los datos fueron cargados
             if (saludData.length > 0) {
                 generateQuestions();
                 renderQuestion();
             } else {
-                document.getElementById('question-text').textContent = 'Error: No se pudieron cargar los datos de salud.';
+                document.getElementById('question-text').textContent = 'Error: No se pudieron cargar los datos de Salud. Asegúrate de que $saludData se pasa correctamente desde el controlador.';
             }
         });
+
     </script>
 </body>
 </html>

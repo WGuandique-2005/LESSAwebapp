@@ -175,7 +175,7 @@
 </head>
 
 <body>
-   <header>@include('partials.navbar')</header> 
+    <header>@include('partials.navbar')</header> 
     <!-- Hero -->
     <div class="hero">
         <h1>🎯 Tu Progreso en LESSA</h1>
@@ -256,8 +256,26 @@
 
         <!-- Próximas Recompensas -->
         <div class="rewards">
-            <h3>🏆 Próximas Recompensas</h3>
-            <p>Muy pronto podrás desbloquear logros y recompensas por tu progreso en LESSA.</p>
+            @php
+            // Recorrer la bd y mostrar las recompensas de la bd
+            use App\Models\Recompensa;
+            $recompensas = Recompensa::all();
+            @endphp
+            @if ($recompensas->isEmpty())
+                <h3>🏆 Próximas Recompensas</h3>
+                <p>Muy pronto podrás desbloquear logros y recompensas por tu progreso en LESSA.</p>
+            @else
+                <h3>🏆 Tus Recompensas</h3>
+                <ul class="lessons-list">
+                    @foreach ($recompensas as $recompensa)
+                        <li class="lesson-item">
+                            <span class="lesson-name">{{ $recompensa->nombre }}</span>
+                            <span class="completion-date">{{ $recompensa->descripcion }}</span>
+                            <span class="completion-date">Requiere: {{ $recompensa->puntos_req }} puntos</span>
+                            <img src="{{ asset('' . $recompensa->url_imagen) }}" alt="{{ $recompensa->nombre }}" style="width: 50%; border-radius: 8px; margin-top: 10px;">
+                        </li>
+                    @endforeach
+            @endif
         </div>
     </div>
     <footer>@include('partials.footer')</footer>
