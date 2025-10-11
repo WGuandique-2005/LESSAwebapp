@@ -9,7 +9,8 @@ class RecompensasUsuario extends Model
     protected $fillable = [
         'usuario_id',
         'recompensa_id',
-        'estado'
+        'desbloqueada',
+        'fecha_desblq'
     ];
 
     public function usuario(){

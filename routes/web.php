@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\NivelesController;
 use App\Http\Controllers\PuntosUsuarioController;
+use App\Http\Controllers\RecompensasUsuarioController;
 
 /*
 |----------------------------------
@@ -131,7 +132,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/practicar/salud/extra', [NivelesController::class, 'salud_extra'])->name('nivel.salud.extra');
     Route::post('/practicar/salud/extra/complete', [PuntosUsuarioController::class, 'completeSaludExtra'])->name('lecciones.salud.extra.complete');
-
+    /*
+    |----------------------------------|
+    | Las recompensas                  |
+    |----------------------------------|
+    */
+    Route::get('/recompensas/desbloquear/{recompensaId}', [RecompensasUsuarioController::class, 'desbloquearRecompensa'])
+    ->middleware('auth') // Asumiendo que solo usuarios logueados pueden desbloquear
+    ->name('desbloquear.recompensa');
     /*
     |----------------------------------|
     | Las lecciones                    |

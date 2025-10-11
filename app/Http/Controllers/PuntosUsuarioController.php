@@ -201,7 +201,7 @@ class PuntosUsuarioController extends Controller
             DB::commit();
 
             // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.abecedario')->with('success', "La actividad extra del Abecedario se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en Mi Progreso, te esperan nuevas recompensas.");
+            return redirect()->route('nivel.abecedario')->with('success', "La actividad extra del Abecedario se ha completado y se te han otorgado +{$points} puntos.");
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -245,7 +245,7 @@ class PuntosUsuarioController extends Controller
             DB::commit();
 
             // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.numeros')->with('success', "La actividad extra de Números se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en Mi Progreso, te esperan nuevas recompensas.");
+            return redirect()->route('nivel.numeros')->with('success', "La actividad extra de Números se ha completado y se te han otorgado +{$points} puntos.");
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -289,7 +289,7 @@ class PuntosUsuarioController extends Controller
             DB::commit();
 
             // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.saludos')->with('success', "La actividad extra de Saludos se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en Mi Progreso, te esperan nuevas recompensas.");
+            return redirect()->route('nivel.saludos')->with('success', "La actividad extra de Saludos se ha completado y se te han otorgado +{$points} puntos.");
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -333,7 +333,7 @@ class PuntosUsuarioController extends Controller
             DB::commit();
 
             // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.salud')->with('success', "La actividad extra de Salud se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en Mi Progreso, te esperan nuevas recompensas.");
+            return redirect()->route('nivel.salud')->with('success', "La actividad extra de Salud se ha completado y se te han otorgado +{$points} puntos.");
 
         } catch (\Exception $e) {
             DB::rollBack();
