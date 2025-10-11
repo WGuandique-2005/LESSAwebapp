@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('recompensas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->text('descipcion')->nullable();
+            $table->text('descripcion')->nullable();
             $table->integer('puntos_req');
             // Ruta de la imagen de la recompensa, scr=''
             $table->string('url_imagen')->nullable();
@@ -25,37 +25,37 @@ return new class extends Migration
         DB::table('recompensas')->insert([
             [
                 'nombre' => 'Primeros Pasos',
-                'descipcion' => 'Has completado tu primer conjunto de ejercicios, continua así!, felicitaciones!',
+                'descripcion' => 'Has completado tu primer conjunto de ejercicios, continua así!, felicitaciones!',
                 'puntos_req' => 2,
                 'url_imagen' => 'img/recompensas/primeros_pasos.png'
             ],
             [
                 'nombre' => 'Maestria en Letras',
-                'descipcion' => 'Has completado con paso perfecto todos los ejercicios de la sección de Abecedario.',
+                'descripcion' => 'Has completado con paso perfecto todos los ejercicios de la sección de Abecedario.',
                 'puntos_req' => 40,
                 'url_imagen' => 'img/recompensas/ABC.png'
             ],
             [
                 'nombre' => 'Experto en Números',
-                'descipcion' => 'Has completado con paso perfecto todos los ejercicios de la sección de Números.',
+                'descripcion' => 'Has completado con paso perfecto todos los ejercicios de la sección de Números.',
                 'puntos_req' => 40,
                 'url_imagen' => 'img/recompensas/123.png'
             ],
             [
                 'nombre' => 'Elocuencia en Saludos',
-                'descipcion' => 'Has completado con paso perfecto todos los ejercicios de la sección de Saludos.',
+                'descripcion' => 'Has completado con paso perfecto todos los ejercicios de la sección de Saludos.',
                 'puntos_req' => 40,
                 'url_imagen' => 'img/recompensas/saludo.png'
             ],
             [
                 'nombre' => 'Genio de la Salud',
-                'descipcion' => 'Has completado con paso perfecto todos los ejercicios de la sección de Salud.',
+                'descripcion' => 'Has completado con paso perfecto todos los ejercicios de la sección de Salud.',
                 'puntos_req' => 40,
                 'url_imagen' => 'img/recompensas/salud.png'
             ],
             [
                 'nombre' => 'Maestria Total',
-                'descipcion' => 'Has completado con paso perfecto todos los ejercicios de todas las secciones, felicitaciones!',
+                'descripcion' => 'Has completado con paso perfecto todos los ejercicios de todas las secciones, felicitaciones!',
                 'puntos_req' => 160,
                 'url_imagen' => 'img/recompensas/maestria_total.png'
             ]
