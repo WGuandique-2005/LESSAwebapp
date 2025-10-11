@@ -113,7 +113,7 @@ class RecompensasUsuarioController extends Controller
                 return back()->with('reward_result', [
                     'status' => 'locked',
                     'title' => 'Recompensa Bloqueada',
-                    'message' => "Puntos escasos. Aún no cumples con los requisitos para desbloquear **{$recompensa->nombre}**.",
+                    'message' => "Puntos escasos. Aún no cumples con los requisitos para desbloquear {$recompensa->nombre}.",
                     'reward_name' => $recompensa->nombre,
                     'route' => $levelRouteName,
                     'puntos_req' => $recompensa->puntos_req,

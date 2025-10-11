@@ -5,224 +5,270 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Progreso - LESSA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /*
+        * ----------------------------------------------------
+        * 1. Variables y Reset Básico
+        * ----------------------------------------------------
+        */
         :root {
-            --bg-dark: #0A2463;
-            --bg-light-dark: #1D3557;
-            --progress-bg: rgba(255, 255, 255, 0.15); /* Más visible */
-            --progress-fill: #4CB944; /* Verde */
-            --progress-fill-gradient: linear-gradient(90deg, #38A3A5 0%, #4CB944 100%); /* Degradado moderno */
-            --accent-btn: #FFD166; /* Amarillo */
+            --bg-dark: #0A2463; /* Azul Oscuro Principal */
+            --bg-light-dark: #1D3557; /* Azul Oscuro Secundario (degradado) */
+            --progress-bg: rgba(255, 255, 255, 0.1); /* Fondo de barra de progreso más sutil */
+            --progress-fill: #4CB944; /* Verde de Progreso */
+            --progress-fill-gradient: linear-gradient(90deg, #38A3A5 0%, #4CB944 100%); /* Degradado Moderno */
+            --accent-btn: #FFD166; /* Amarillo de Acción/Acento */
             --primary-text: #fff;
-            --secondary-text: rgba(255, 255, 255, 0.7);
-            --card-hover: rgba(255, 255, 255, 0.15); /* Nuevo: Estado hover más suave */
-            --icon-color: #FFD166; /* Nuevo: Color de íconos */
+            --secondary-text: rgba(255, 255, 255, 0.65); /* Más contraste */
+            --card-bg: rgba(255, 255, 255, 0.05); /* Fondo de tarjeta base */
+            --card-hover: rgba(255, 255, 255, 0.15); /* Fondo de tarjeta en hover */
+            --card-border: rgba(255, 255, 255, 0.2); /* Borde sutil */
+            --icon-color: #FFD166; /* Color de Íconos */
+            /* Status Colors */
+            --status-success: var(--progress-fill);
+            --status-locked: #e74c3c;
+            --status-info: #3498db;
+            --status-error: #c0392b;
+            
+            /* Sombra sutil para el dark mode (Neumorfismo oscuro) */
+            --shadow-primary: 0 4px 10px rgba(0, 0, 0, 0.3);
+            --shadow-card: 0 8px 15px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 12px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            font-family: "Segoe UI", sans-serif;
+            /* Usar Inter como fuente principal */
+            font-family: 'Inter', "Segoe UI", sans-serif; 
             background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-light-dark) 100%);
             color: var(--primary-text);
             min-height: 100vh;
+            line-height: 1.6;
         }
 
+        /*
+        * ----------------------------------------------------
+        * 2. Hero y Estructura Principal
+        * ----------------------------------------------------
+        */
         .hero {
             text-align: center;
-            padding: 50px 20px 40px;
+            padding: 40px 20px 30px; /* Reducción de padding para ahorrar espacio en móvil */
             background: #011B40;
             border-bottom: 3px solid var(--accent-btn);
+            box-shadow: var(--shadow-primary);
         }
 
         .hero h1 {
-            font-size: 36px; /* Más grande */
-            margin-bottom: 10px;
-            font-weight: 800; /* Más audaz */
+            font-size: clamp(28px, 6vw, 40px); /* Título responsivo */
+            margin-bottom: 8px;
+            font-weight: 800;
         }
 
         .hero p {
-            font-size: 18px; /* Más legible */
+            font-size: clamp(16px, 4vw, 19px);
             color: var(--secondary-text);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .progress-container {
-            background: var(--bg-dark);
-            border-radius: 20px; /* Bordes ligeramente más suaves */
-            padding: 40px; /* Más padding */
-            max-width: 1000px; /* Ancho máximo aumentado */
-            margin: 40px auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            padding: 20px; /* Padding reducido para móvil */
+            max-width: 1200px; /* Ancho máximo aumentado para escritorio */
+            margin: 30px auto;
+        }
+        
+        @media (min-width: 768px) {
+            .progress-container {
+                padding: 40px;
+            }
         }
 
         .section-title {
-            font-size: 26px; /* Más énfasis */
+            font-size: clamp(22px, 5vw, 28px);
             font-weight: 800;
             margin-bottom: 30px;
-            text-align: left; /* Alineado a la izquierda */
+            text-align: left;
             border-left: 5px solid var(--accent-btn);
             padding-left: 15px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: var(--accent-btn); /* Color de acento para el título */
+        }
+        
+        .completed-lessons, .completed-levels, .rewards {
+             margin-top: 50px; 
         }
 
-        /* Progreso General */
+
+        /*
+        * ----------------------------------------------------
+        * 3. Progreso General y Barras
+        * ----------------------------------------------------
+        */
         .overall-progress {
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             padding: 20px;
             border-radius: 14px;
-            background: rgba(255, 255, 255, 0.05); /* Fondo sutil para el bloque de progreso */
+            background: var(--card-bg); 
+            box-shadow: var(--shadow-primary);
         }
 
         .overall-progress h3 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             margin-bottom: 15px;
-            color: var(--accent-btn);
+            color: var(--primary-text);
+            text-transform: uppercase;
         }
 
         .progress-bar-wrapper {
             background: var(--progress-bg);
-            height: 16px; /* Barra más gruesa */
-            border-radius: 8px;
+            height: 14px; 
+            border-radius: 7px;
             overflow: hidden;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4); /* Sombra interior para profundidad */
         }
 
         .progress-bar {
             height: 100%;
-            background: var(--progress-fill-gradient); /* Usar degradado */
+            background: var(--progress-fill-gradient); 
             transition: width 0.6s ease-in-out;
-            position: relative;
+            border-radius: 7px;
         }
         
-        /* Efecto de brillo sutil en la barra */
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-        }
-
         .progress-text {
-            font-size: 16px;
+            font-size: 15px;
             text-align: right;
-            margin-top: 10px;
+            margin-top: 8px;
             font-weight: 700;
             color: var(--progress-fill);
         }
 
-        /* Listas y Tarjetas */
+        /*
+        * ----------------------------------------------------
+        * 4. Listas y Tarjetas (Lecciones y Recompensas)
+        * ----------------------------------------------------
+        */
         .lessons-list {
             list-style: none;
             padding: 0;
             margin: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Más flexible */
-            gap: 20px; /* Más espacio */
+            /* Grid dinámico: 1 columna en móvil, 2 en tabletas, 3 en escritorio */
+            grid-template-columns: 1fr; 
+            gap: 15px;
+        }
+        
+        @media (min-width: 600px) {
+            .lessons-list {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
         }
 
         .lesson-item {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 20px;
-            border-radius: 16px;
+            background: var(--card-bg);
+            padding: 18px;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            transition: transform 0.2s ease, background 0.3s ease;
-            border: 1px solid transparent; /* Para un efecto de borde al hacer hover */
+            gap: 6px;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-card);
+            border-left: 5px solid var(--progress-fill); /* Indicador visual de progreso */
+        }
+        
+        /* Estilo para items de minijuegos */
+        .completed-levels .lesson-item {
+             border-left: 5px solid var(--accent-btn);
         }
 
         .lesson-item:hover {
-            transform: translateY(-5px); /* Efecto 3D sutil */
+            transform: translateY(-3px); 
             background: var(--card-hover);
-            border: 1px solid var(--accent-btn);
+            box-shadow: var(--shadow-hover);
         }
 
         .lesson-name {
-            font-weight: 700;
-            font-size: 18px; /* Título más prominente */
+            font-weight: 800;
+            font-size: 17px; 
             color: var(--primary-text);
+            margin-bottom: 5px;
         }
 
         .completion-date {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--secondary-text);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .completion-date > span {
+            font-size: 16px; /* Ajuste para los iconos */
         }
 
         .no-lessons {
             text-align: center;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             border-radius: 16px;
-            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border: 1px dashed var(--card-border);
+            box-shadow: var(--shadow-primary);
         }
-
-        .start-btn {
-            display: inline-block;
-            background: var(--accent-btn);
-            color: var(--bg-dark);
-            padding: 12px 25px; /* Más padding para el botón */
-            border-radius: 10px; /* Bordes más suaves */
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 16px;
-            margin-top: 20px;
-            transition: background 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(255, 209, 102, 0.4);
-        }
-
-        .start-btn:hover {
-            background: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Recompensa */
+        
+        /* Recompensa Card */
         .reward-item {
-            display: flex; /* Nuevo: usar flexbox para alinear contenido */
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
             align-items: center;
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 20px;
-            border-radius: 16px;
-            transition: transform 0.2s ease, background 0.3s ease;
+            gap: 15px;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            position: relative;
+            box-shadow: var(--shadow-card);
+            border-left: 5px solid var(--accent-btn); 
         }
 
         .reward-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             background: var(--card-hover);
-            border: 1px solid var(--accent-btn);
+            box-shadow: var(--shadow-hover);
+            border-left: 5px solid var(--progress-fill); /* Cambio de color en hover */
         }
         
         .reward-content {
-            flex-grow: 1; /* Nuevo: contenido flexible */
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 3px;
         }
 
         .reward-name {
             font-weight: 800;
-            font-size: 18px;
+            font-size: 17px;
             color: var(--primary-text);
         }
         
         .reward-status {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            padding: 5px 10px;
-            border-radius: 20px; /* Cápsula */
+            padding: 4px 8px;
+            border-radius: 16px;
             display: inline-block;
-            margin-top: 8px;
+            margin-top: 5px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            align-self: flex-start; /* Se alinea a la izquierda dentro del flex-column */
         }
 
         .status-unlocked {
@@ -231,17 +277,17 @@
         }
 
         .status-locked {
-            background: #e74c3c; /* Rojo */
+            background: var(--status-locked); 
             color: var(--primary-text);
         }
         
         .reward-image-wrapper {
-            width: 80px; /* Tamaño fijo para la imagen/ícono */
-            min-width: 80px;
-            height: 80px;
-            border-radius: 12px;
+            width: 60px; /* Tamaño reducido para mejor integración en móvil */
+            min-width: 60px;
+            height: 60px;
+            border-radius: 8px;
             overflow: hidden;
-            border: 3px solid var(--accent-btn); /* Borde de acento */
+            border: 2px solid var(--accent-btn);
         }
 
         .reward-image-wrapper img {
@@ -251,13 +297,53 @@
             display: block;
         }
         
-        /* Contenedor de Minijuegos y Lecciones con margen superior */
-        .completed-lessons, .completed-levels {
-            margin-top: 60px; 
+        @media (min-width: 600px) {
+            .reward-image-wrapper {
+                width: 70px; 
+                min-width: 70px;
+                height: 70px;
+            }
+        }
+        
+        /*
+        * ----------------------------------------------------
+        * 5. Botones (CTA)
+        * ----------------------------------------------------
+        */
+        .start-btn {
+            display: inline-block;
+            background: var(--accent-btn);
+            color: var(--bg-dark);
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            margin-top: 15px;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 209, 102, 0.4);
+            border: none;
         }
 
-
-        /* Modal Styles */
+        .start-btn:hover {
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5);
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: var(--shadow-primary);
+        }
+        
+        /*
+        * ----------------------------------------------------
+        * 6. Modales
+        * ----------------------------------------------------
+        */
         .modal {
             display: none;
             position: fixed;
@@ -267,100 +353,88 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.85); /* Fondo más oscuro */
-            backdrop-filter: blur(5px); /* Desenfoque de fondo para UX */
+            background-color: rgba(0, 0, 0, 0.88); 
+            backdrop-filter: blur(8px); /* Desenfoque más fuerte */
+            transition: background-color 0.3s ease;
         }
 
         .modal-content {
             background-color: var(--bg-dark);
-            margin: 10% auto; /* Subir un poco */
-            padding: 40px;
+            margin: 15% auto; /* Ajuste para el centrado vertical */
+            padding: 30px;
             border: 2px solid var(--accent-btn);
-            width: 90%;
-            max-width: 450px;
-            border-radius: 24px;
+            width: 95%;
+            max-width: 400px; /* Reducción de tamaño máximo para un modal más centrado */
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
             animation-name: animatetop;
-            animation-duration: 0.5s;
+            animation-duration: 0.4s;
+            position: relative;
         }
 
         @keyframes animatetop {
-            from {top: -100px; opacity: 0}
-            to {top: 10%; opacity: 1} /* La animación termina en 10% de margen superior */
+            from {top: -150px; opacity: 0}
+            to {top: 15%; opacity: 1} 
         }
-
+        
         .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
             color: var(--secondary-text);
-            float: right;
-            font-size: 32px;
+            font-size: 30px;
             font-weight: bold;
-            line-height: 1; /* Mejor alineación */
+            line-height: 1;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .close-btn:hover,
         .close-btn:focus {
             color: var(--primary-text);
-            text-decoration: none;
             cursor: pointer;
-            transform: rotate(90deg); /* Efecto visual al cerrar */
-            transition: transform 0.3s ease;
+            transform: rotate(90deg) scale(1.1); 
         }
 
         .modal-img {
-            width: 120px; /* Más grande */
-            height: 120px;
-            margin-bottom: 25px;
+            width: 100px; 
+            height: 100px;
+            margin-bottom: 20px;
             border-radius: 50%;
-            border: 4px solid var(--accent-btn);
+            border: 3px solid var(--accent-btn);
             object-fit: cover;
         }
 
         .modal-title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: var(--accent-btn);
         }
 
         .modal-desc {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--secondary-text);
-            margin-bottom: 25px;
-            line-height: 1.5;
+            margin-bottom: 20px;
+            line-height: 1.4;
         }
 
-        .modal-btn {
-            background: var(--accent-btn);
-            color: var(--bg-dark);
-            padding: 12px 25px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-
-        .modal-btn:hover:not(:disabled) {
-            background: #fff;
-            transform: translateY(-2px);
-        }
-        
-        .modal-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-            box-shadow: none;
-        }
-        
-        .completion-date-modal { /* Estilo específico para la fecha/puntos en el modal */
-             font-size: 15px;
+        .completion-date-modal { 
+             font-size: 14px;
              font-weight: 600;
              margin-top: -5px;
-             margin-bottom: 20px;
+             margin-bottom: 15px;
              color: var(--progress-fill);
         }
-
+        
+        .result-modal-title {
+            font-size: 26px;
+        }
+        
+        .result-modal-message {
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
     </style>
 </head>
 
@@ -384,13 +458,14 @@
 
         <div class="completed-lessons">
             <h3 class="section-title">📚 Lecciones Completadas</h3>
-            <div class="overall-progress" style="margin-bottom: 30px;">
+            <div class="overall-progress" style="margin-bottom: 30px; padding: 15px;">
                 <h3>Progreso de Lecciones</h3>
                 <div class="progress-bar-wrapper">
                     <div class="progress-bar" style="width: {{ $porcentajeLecciones }}%;"></div> 
                 </div>
                 <div class="progress-text">{{ $porcentajeLecciones }}% Completado</div>
             </div>
+            
             @if ($leccionesCompletadas->isEmpty())
                 <div class="no-lessons">
                     <p>Aún no has completado ninguna lección. ¡Comienza a aprender hoy mismo! ✨</p>
@@ -402,7 +477,7 @@
                         <li class="lesson-item">
                             <span class="lesson-name">{{ $progreso->leccion->titulo }}</span>
                             <span class="completion-date">
-                                <span style="color: var(--progress-fill);">✓</span> Completado el: {{ \Carbon\Carbon::parse($progreso->fecha_completada)->format('d/m/Y') }}
+                                <span style="color: var(--progress-fill);">✅</span> Completado el: {{ \Carbon\Carbon::parse($progreso->fecha_completada)->format('d/m/Y') }}
                             </span>
                         </li>
                     @endforeach
@@ -410,11 +485,10 @@
             @endif
         </div>
 
-
         <div class="completed-levels">
-            <h3 class="section-title">🎮 Minijuegos Completados (Niveles)</h3>
+            <h3 class="section-title">🎮 Minijuegos Completados</h3>
             
-            <div class="overall-progress" style="margin-bottom: 30px;">
+            <div class="overall-progress" style="margin-bottom: 30px; padding: 15px;">
                 <h3>Progreso de Minijuegos</h3>
                 <div class="progress-bar-wrapper">
                     <div class="progress-bar" style="width: {{ $porcentajeNiveles }}%;"></div> 
@@ -433,10 +507,10 @@
                         <li class="lesson-item">
                             <span class="lesson-name">{{ $nivel->nombre }}</span>
                             <span class="completion-date">
-                                <span style="color: var(--accent-btn);">🏆</span> Puntos obtenidos: {{ $nivel->puntos_obtenidos }}
+                                <span style="color: var(--accent-btn);">⭐</span> Puntos obtenidos: {{ $nivel->puntos_obtenidos }}
                             </span>
                             <span class="completion-date">
-                                Finalizado el: {{ \Carbon\Carbon::parse($nivel->fecha_finalizado)->format('d/m/Y') }}
+                                <span style="color: var(--progress-fill);">🗓️</span> Finalizado el: {{ \Carbon\Carbon::parse($nivel->fecha_finalizado)->format('d/m/Y') }}
                             </span>
                         </li>
                     @endforeach
@@ -466,7 +540,7 @@
                             $isUnlocked = in_array($recompensa->id, $recompensasDesbloqueadas);
                             $statusClass = $isUnlocked ? 'status-unlocked' : 'status-locked';
                             $statusText = $isUnlocked ? '¡Desbloqueada!' : 'Bloqueada';
-                            $actionUrl = route('desbloquear.recompensa', $recompensa->id);
+                            // La acción se maneja en JS
                         @endphp
                         <li class="reward-item"
                             data-id="{{ $recompensa->id }}"
@@ -484,7 +558,7 @@
                             <div class="reward-content">
                                 <span class="reward-name">{{ $recompensa->nombre }}</span>
                                 <span class="completion-date">{{ $recompensa->descripcion }}</span>
-                                <span class="completion-date">Requiere: {{ $recompensa->puntos_req }} puntos</span>
+                                <span class="completion-date">Puntos requeridos: {{ $recompensa->puntos_req }}</span>
                                 <span class="reward-status {{ $statusClass }}">{{ $statusText }}</span>
                             </div>
                         </li>
@@ -493,6 +567,7 @@
             @endif
         </div>
 
+        {{-- Modal de Detalle de Recompensa (EXISTENTE) --}}
         <div id="rewardModal" class="modal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeRewardModal()">&times;</span>
@@ -503,10 +578,29 @@
                 <button id="modal-btn" class="modal-btn" onclick="claimReward()"></button>
             </div>
         </div>
+        
+        {{-- Modal de Resultado de Desbloqueo (NUEVO) --}}
+        <div id="resultModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeResultModal()">&times;</span>
+                <h4 id="result-modal-title" class="result-modal-title"></h4>
+                <p id="result-modal-message" class="result-modal-message"></p>
+                <button id="result-modal-btn" class="modal-btn" onclick="handleResultAction()"></button>
+            </div>
+        </div>
     </div>
     <footer>@include('partials.footer')</footer>
+@php
+    // Recupera la sesión de forma segura y la valida
+    $rewardResult = session('reward_result');
+    
+    // Si la variable de sesión no es un array (incluyendo null o Closure), la forzamos a null
+    if (!is_array($rewardResult)) {
+        $rewardResult = null;
+    }
+@endphp
 <script>
-        const modal = document.getElementById('rewardModal');
+        const rewardModal = document.getElementById('rewardModal'); 
         const modalTitle = document.getElementById('modal-title');
         const modalDesc = document.getElementById('modal-desc');
         const modalPuntos = document.getElementById('modal-puntos');
@@ -514,13 +608,19 @@
         const modalBtn = document.getElementById('modal-btn');
         let currentRewardId = null;
 
+        // Nuevas referencias para el Modal de Resultado
+        const resultModal = document.getElementById('resultModal');
+        const resultModalTitle = document.getElementById('result-modal-title');
+        const resultModalMessage = document.getElementById('result-modal-message');
+        const resultModalBtn = document.getElementById('result-modal-btn');
+        let currentActionRoute = null; 
+
         function openRewardModal(element) {
             const id = element.getAttribute('data-id');
             const nombre = element.getAttribute('data-nombre');
             const descripcion = element.getAttribute('data-descripcion');
             const puntos = element.getAttribute('data-puntos');
             const url = element.getAttribute('data-url');
-            // Cambiado a '1' para mejor compatibilidad con booleanos en JS
             const unlocked = element.getAttribute('data-unlocked') === '1'; 
 
             currentRewardId = id;
@@ -530,42 +630,122 @@
             modalPuntos.textContent = 'Requiere: ' + puntos + ' puntos';
             modalImg.src = url;
 
-            // Lógica de botón más clara y con colores UX
+            // Resetear clases de botones
+            modalBtn.classList.remove('success', 'locked', 'info', 'error');
+
             if (unlocked) {
                 modalBtn.textContent = '¡Recompensa Desbloqueada!';
                 modalBtn.disabled = true;
-                modalBtn.style.backgroundColor = 'var(--progress-fill)'; // Verde
+                modalBtn.classList.add('success'); 
                 modalBtn.style.color = 'var(--bg-dark)';
             } else {
                 modalBtn.textContent = 'Intentar Desbloquear';
                 modalBtn.disabled = false;
-                modalBtn.style.backgroundColor = 'var(--accent-btn)'; // Amarillo
+                modalBtn.style.backgroundColor = 'var(--accent-btn)'; 
                 modalBtn.style.color = 'var(--bg-dark)';
             }
 
-            modal.style.display = 'block';
+            rewardModal.style.display = 'block';
         }
 
         function closeRewardModal() {
-            modal.style.display = 'none';
+            rewardModal.style.display = 'none';
             currentRewardId = null;
         }
 
         function claimReward() {
             if (currentRewardId) {
-                // Redirigir a la ruta de Laravel para intentar el desbloqueo
-                // Nota: se recomienda usar el helper route() de Blade para generar URLs
-                // Esto es solo un placeholder si no se puede usar el helper aquí.
-                window.location.href = `/recompensas/desbloquear/${currentRewardId}`;
+                // Se asume que esta ruta existe: /recompensas/desbloquear/{id}
+                window.location.href = `/recompensas/desbloquear/${currentRewardId}`; 
+            }
+        }
+        
+        function closeResultModal() {
+            resultModal.style.display = 'none';
+            currentActionRoute = null; 
+        }
+
+        function handleResultAction() {
+            if (currentActionRoute && currentActionRoute !== 'miProgreso') {
+                const routeMap = {
+                    'lecciones': '{{ route("lecciones") }}',
+                    'practicar': '{{ route("practicar") }}',
+                };
+                
+                // Mapeo de rutas (asumiendo que 'nivel.X' o 'lecciones' son las claves)
+                let finalUrl = currentActionRoute.includes('nivel.') 
+                    ? routeMap['practicar'] || '#'
+                    : routeMap[currentActionRoute] || '#';
+                    
+                window.location.href = finalUrl;
+            } else {
+                // Si la ruta es 'miProgreso' o nula, solo cierra el modal
+                closeResultModal();
             }
         }
 
         // Cierra el modal si el usuario hace clic fuera de él
         window.onclick = function(event) {
-            if (event.target == modal) {
+            if (event.target == rewardModal) {
                 closeRewardModal();
             }
+            if (event.target == resultModal) {
+                closeResultModal();
+            }
         }
+
+        // --- Lógica para mostrar el modal de resultado al cargar la página ---
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Usamos la variable PHP $rewardResult ya validada
+            @if (!empty($rewardResult))
+                const result = @json($rewardResult);
+                const status = result.status;
+                const title = result.title;
+                let message = result.message;
+                const route = result.route;
+                
+                currentActionRoute = route;
+
+                resultModalTitle.textContent = title;
+                resultModalMessage.innerHTML = message; 
+                resultModalBtn.classList.remove('success', 'locked', 'info', 'error');
+
+                switch(status) {
+                    case 'success':
+                        resultModalTitle.style.color = 'var(--status-success)';
+                        resultModalBtn.textContent = '¡Ver Recompensas!';
+                        resultModalBtn.classList.add('success');
+                        resultModalBtn.onclick = () => { closeResultModal(); }; // Al hacer click se queda en la página de progreso
+                        break;
+                    case 'locked':
+                        resultModalTitle.style.color = 'var(--status-locked)';
+                        resultModalBtn.textContent = 'Ir a Practicar';
+                        resultModalBtn.classList.add('locked');
+                        resultModalBtn.onclick = handleResultAction;
+                        if (result.puntos_req) {
+                            resultModalMessage.innerHTML += `<br><br><strong>Puntos Requeridos:</strong> ${result.puntos_req}`;
+                        }
+                        break;
+                    case 'info': 
+                        resultModalTitle.style.color = 'var(--status-info)';
+                        resultModalBtn.textContent = 'Entendido';
+                        resultModalBtn.classList.add('info');
+                        resultModalBtn.onclick = () => { closeResultModal(); }; 
+                        break;
+                    case 'error':
+                    default:
+                        resultModalTitle.style.color = 'var(--status-error)';
+                        resultModalBtn.textContent = 'Volver al Progreso';
+                        resultModalBtn.classList.add('error');
+                        resultModalBtn.onclick = handleResultAction;
+                        break;
+                }
+                
+                resultModal.style.display = 'block';
+            @endif
+        });
+        
     </script>
 </body>
 
