@@ -423,7 +423,7 @@
                     <h3>¡Pon a prueba y consolida lo que has aprendido en LESSA!</h3>
                     <p>Bienvenido a tu espacio de práctica. Con ejercicios, evaluaciones y herramientas interactivas, reforzarás tu memoria visual y fluidez en el Lenguaje de Señas Salvadoreño. ¡Lleva tu conocimiento al siguiente nivel!</p>
                 </div>
-                 <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="hero-logo">
+                <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="hero-logo">
             </div>
         </section>
         

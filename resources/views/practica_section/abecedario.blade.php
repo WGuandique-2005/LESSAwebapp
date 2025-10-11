@@ -300,11 +300,10 @@
                 $progresoPorcentaje = $totalNiveles > 0 ? round(($completado / $totalNiveles) * 100) : 0;
             @endphp
             <div class="progress-and-intro-container">
-                <div class="progress-circle-container">
+                <div class="progress-circle-container" data-progress="{{ $progresoPorcentaje }}">
                     <svg class="progress-circle" viewBox="0 0 80 80">
                         <circle class="progress-circle-bg" cx="40" cy="40" r="35"></circle>
-                        <circle class="progress-circle-bar" cx="40" cy="40" r="35"
-                            style="stroke-dasharray: 100; stroke-dashoffset: 75;"></circle>
+                        <circle class="progress-circle-bar" cx="40" cy="40" r="35"></circle>
                     </svg>
                     <span class="progress-text" id="progress-percent"></span>
                 </div>
@@ -350,24 +349,36 @@
         </div>
     </main>
     <footer>@include('partials.footer')</footer>
-    <script>
+<script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Configuración del Círculo de Progreso
+            const progressContainer = document.querySelector('.progress-circle-container');
             const progressCircleBar = document.querySelector('.progress-circle-bar');
             const progressText = document.getElementById('progress-percent');
             
-            const totalGames = 4;
-            const completedGames = {{ $completado }}; 
-            const currentProgress = Math.round((completedGames / totalGames) * 100); 
+            // Obtenemos el progreso calculado en el backend (75 en este caso)
+            const currentProgress = parseInt(progressContainer.getAttribute('data-progress'), 10);
             
-            const circumference = 100;
+            // Obtenemos el radio del SVG (r="35")
+            const radius = progressCircleBar.r.baseVal.value;
+            // Calculamos la circunferencia real: 2 * PI * r
+            const circumference = 2 * Math.PI * radius; 
+
+            // Aplicamos la circunferencia como el stroke-dasharray
+            progressCircleBar.style.strokeDasharray = circumference;
+
+            // Calculamos el offset: Circunferencia - (Porcentaje / 100) * Circunferencia
+            // Para 75% -> offset = circumference - (0.75 * circumference) = 0.25 * circumference
             const offset = circumference - (currentProgress / 100) * circumference;
 
+            // Establecemos el offset y el texto.
             progressCircleBar.style.strokeDashoffset = offset;
             progressText.textContent = currentProgress + '%';
 
+            // Opcional: El timeout que estaba para la transición de animación
             setTimeout(() => {
                 progressCircleBar.style.strokeDashoffset = offset;
-            }, 100); 
+            }, 500); 
         });
     </script>
 </body>
