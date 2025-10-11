@@ -9,7 +9,8 @@ class Recompensa extends Model
     protected $fillable = [
         'nombre',
         'descripcion',
-        'puntos_req'
+        'puntos_req',
+        'url_imagen'
     ];
 
     public function usuarios(){

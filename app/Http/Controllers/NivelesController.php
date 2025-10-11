@@ -61,6 +61,10 @@ class NivelesController extends Controller
         return view('practica_section.numeros.A3_conecta', compact('numerosData'));
     }
 
+    function numeros_extra(){
+        return view('practica_section.numeros.A4_extra');
+    }
+
     function saludos(){
         return view('practica_section.saludos');
     }
@@ -78,6 +82,10 @@ class NivelesController extends Controller
     function saludos_conecta(){
         $saludosData = $this->cargarDatos('saludos');
         return view('practica_section.saludos.A3_conecta', compact('saludosData'));
+    }
+
+    function saludos_extra(){
+        return view('practica_section.saludos.A4_extra');
     }
 
     function salud(){
@@ -98,4 +106,8 @@ class NivelesController extends Controller
         $saludData = $this->cargarDatos('salud');
         return view('practica_section.salud.A3_conecta', compact('saludData'));
     }
+
+    function salud_extra(){
+        return view('practica_section.salud.A4_extra');
+    }  
 }

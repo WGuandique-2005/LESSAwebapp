@@ -338,7 +338,7 @@
                             <p>Conecta la imagen de la seña y el número correspondiente. Fortalece tu memoria
                                 visual a largo plazo.</p>
                         </div>
-                        <div class="game-card game-4" onclick="window.location.href='/juegos/cifras/secuencia-señas'">
+                        <div class="game-card game-4" onclick="window.location.href='/practicar/numeros/extra'">
                             <span class="icon">➡️</span>
                             <h3>Sigue la Secuencia</h3>
                             <p>Se te dará un número de inicio y deberás hacer la seña de los siguientes tres números en orden

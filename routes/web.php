@@ -100,6 +100,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/practicar/numeros/conecta', [NivelesController::class, 'numeros_conecta'])->name('nivel.numeros.conecta');
     Route::post('/practicar/numeros/conecta/complete', [PuntosUsuarioController::class, 'completeNumerosConecta'])->name('lecciones.numeros.conecta.complete');
 
+    Route::get('/practicar/numeros/extra', [NivelesController::class, 'numeros_extra'])->name('nivel.numeros.extra');
+
     // Saludos
     Route::get('/practicar/saludos', [NivelesController::class, 'saludos'])->name('nivel.saludos');
     Route::get('/practicar/saludos/adivina', [NivelesController::class, 'saludos_adivina'])->name('nivel.saludos.adivina');
@@ -110,6 +112,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/practicar/saludos/conecta', [NivelesController::class, 'saludos_conecta'])->name('nivel.saludos.conecta');
     Route::post('/practicar/saludos/conecta/complete', [PuntosUsuarioController::class, 'completeSaludosConecta'])->name('lecciones.saludos.conecta.complete');
+
+    Route::get('/practicar/saludos/extra', [NivelesController::class, 'saludos_extra'])->name('nivel.saludos.extra');
     
     // Salud
     Route::get('/practicar/salud', [NivelesController::class, 'salud'])->name('nivel.salud');
@@ -121,6 +125,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/practicar/salud/conecta', [NivelesController::class, 'salud_conecta'])->name('nivel.salud.conecta');
     Route::post('/practicar/salud/conecta/complete', [PuntosUsuarioController::class, 'completeSaludConecta'])->name('lecciones.salud.conecta.complete');
+
+    Route::get('/practicar/salud/extra', [NivelesController::class, 'salud_extra'])->name('nivel.salud.extra');
 
     /*
     |----------------------------------|

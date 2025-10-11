@@ -337,7 +337,7 @@
                             <p>Conecta la imagen de la seña y la letra escrita. Fortalece tu memoria
                                 visual a largo plazo.</p>
                         </div>
-                        <div class="game-card game-4" onclick="window.location.href='/juegos/abecedario/practica-trazado'">
+                        <div class="game-card game-4" onclick="window.location.href='/practicar/abecedario/extra'">
                             <span class="icon">✍️</span>
                             <h3>Trazado de Señas</h3>
                             <p>Sigue el movimiento guiado de la seña en pantalla con tu mano (o simulación de gesto).

@@ -335,7 +335,7 @@
                             <p>Conecta la imagen de la seña y su significado correcto. Fortalece tu memoria
                                 visual a largo plazo.</p>
                         </div>
-                        <div class="game-card game-4" onclick="window.location.href='/juegos/salud/vocabulario-medico'">
+                        <div class="game-card game-4" onclick="window.location.href='/practicar/salud/extra'">
                             <span class="icon">💊</span>
                             <h3>Terminología Médica</h3>
                             <p>Empareja conceptos médicos clave (ej. Hospital, Farmacia, Cita) con su seña correcta.

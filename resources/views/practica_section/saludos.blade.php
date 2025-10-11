@@ -336,7 +336,7 @@
                             <p>Conecta la imagen de la seña y el saludo que se muestra. Fortalece tu memoria
                                 visual a largo plazo.</p>
                         </div>
-                        <div class="game-card game-4" onclick="window.location.href='/juegos/social/rol-play-presentacion'">
+                        <div class="game-card game-4" onclick="window.location.href='/practicar/saludos/extra'">
                             <span class="icon">🎭</span>
                             <h3>Práctica de Presentación</h3>
                             <p>Completa una simulación de vídeo o texto haciendo las señas para presentarte (Tu nombre y
