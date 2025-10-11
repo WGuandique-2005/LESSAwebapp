@@ -165,7 +165,8 @@ class PuntosUsuarioController extends Controller
             return redirect()->route($errorRoute)->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
         }
     }
-public function completeAbecedarioExtra(){
+    public function completeAbecedarioExtra()
+    {
         $user = auth()->user();
         if (!$user) {
             return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
@@ -200,7 +201,7 @@ public function completeAbecedarioExtra(){
             DB::commit();
 
             // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.abecedario')->with('success', "La actividad extra del Abecedario se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en 'Mi Progreso', te esperan nuevas recompensas.");
+            return redirect()->route('nivel.abecedario')->with('success', "La actividad extra del Abecedario se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en Mi Progreso, te esperan nuevas recompensas.");
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -208,7 +209,8 @@ public function completeAbecedarioExtra(){
         }
     }
 
-    public function completeNumerosExtra(){
+    public function completeNumerosExtra()
+    {
         $user = auth()->user();
         if (!$user) {
             return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
@@ -243,15 +245,16 @@ public function completeAbecedarioExtra(){
             DB::commit();
 
             // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.numeros')->with('success', "La actividad extra de Números se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en 'Mi Progreso', te esperan nuevas recompensas.");
+            return redirect()->route('nivel.numeros')->with('success', "La actividad extra de Números se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en Mi Progreso, te esperan nuevas recompensas.");
 
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('nivel.numeros')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
         }
-    }   
+    }
 
-    public function completeSaludosExtra(){
+    public function completeSaludosExtra()
+    {
         $user = auth()->user();
         if (!$user) {
             return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
@@ -286,15 +289,16 @@ public function completeAbecedarioExtra(){
             DB::commit();
 
             // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.saludos')->with('success', "La actividad extra de Saludos se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en 'Mi Progreso', te esperan nuevas recompensas.");
+            return redirect()->route('nivel.saludos')->with('success', "La actividad extra de Saludos se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en Mi Progreso, te esperan nuevas recompensas.");
 
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('nivel.saludos')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
         }
-    } 
-    
-    public function completeSaludExtra(){
+    }
+
+    public function completeSaludExtra()
+    {
         $user = auth()->user();
         if (!$user) {
             return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
@@ -329,11 +333,11 @@ public function completeAbecedarioExtra(){
             DB::commit();
 
             // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.salud')->with('success', "La actividad extra de Salud se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en 'Mi Progreso', te esperan nuevas recompensas.");
+            return redirect()->route('nivel.salud')->with('success', "La actividad extra de Salud se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en Mi Progreso, te esperan nuevas recompensas.");
 
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('nivel.salud')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
         }
-    }   
+    }
 }

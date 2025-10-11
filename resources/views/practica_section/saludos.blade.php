@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nivel Social: Mini-Juegos - LESSA</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         :root {
             /* Colores Base (sin cambios) */
@@ -242,6 +243,93 @@
         .game-card.game-3 .icon { color: #5bc0de; } /* Azul claro */
         .game-card.game-4 .icon { color: #d9534f; } /* Rojo */
 
+        
+        /* --- Modal Styles (para resultados) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); /* Fondo más oscuro para enfoque */
+            display: none; /* Oculto por defecto */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-xl);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            /* Usar el color principal del nivel (verde) como borde */
+            border-bottom: 5px solid var(--level-color-main);
+        }
+
+        .modal-icon {
+            font-size: var(--font-size-xxl);
+            margin-bottom: var(--spacing-md);
+            display: block;
+        }
+
+        .modal-content h3 {
+            font-size: var(--font-size-lg);
+            font-weight: 800;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .modal-content p {
+            font-size: var(--font-size-md);
+            margin-bottom: var(--spacing-lg);
+            color: var(--dark-gray);
+        }
+
+        .modal-footer button {
+            /* Usar el color principal del nivel (verde) */
+            background-color: var(--level-color-main);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: var(--font-size-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .modal-footer button:hover {
+            background-color: #1e7e34; /* Verde más oscuro */
+            transform: translateY(-1px);
+        }
+
+        /* Colores de estado del modal */
+        .modal-content.success .modal-icon {
+            color: var(--success-color); /* Verde */
+        }
+        .modal-content.info .modal-icon {
+            color: var(--secondary-yellow); /* Amarillo/Naranja para la info de "no mejoró" */
+        }
+        .modal-content.error .modal-icon {
+            color: var(--primary-orange); /* Naranja/Rojo para errores de servidor */
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px) scale(0.9); }
+            to { transform: translateY(0) scale(1); }
+        }
 
         /* Responsive adjustments (sin cambios) */
         @media (min-width: 768px) {
@@ -268,6 +356,21 @@
                 margin-bottom: 0;
             }
         }
+        /* Responsive para el modal */
+        @media (max-width: 480px) {
+            .modal-content {
+                padding: var(--spacing-lg);
+            }
+            .modal-content h3 {
+                font-size: var(--font-size-md);
+            }
+            .modal-content p {
+                font-size: var(--font-size-sm);
+            }
+            .modal-footer button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -291,7 +394,7 @@
                 use App\Models\PuntosUsuario;
                 $userId = Auth::id();
                 $totalNiveles = 4;
-                // Donde ID de la leccion comience con 'ABC'
+                // Donde ID de la leccion comience con 'SL' (saludos)
                 $completado = PuntosUsuario::where('usuario_id', $userId)
                     ->where('completado', true)
                     ->where('nivel_id', 'like', 'SL%')
@@ -347,6 +450,20 @@
             </section>
         </div>
     </main>
+    
+    <div id="result-modal" class="modal-overlay">
+        <div class="modal-content" id="modal-content-area">
+            <div class="modal-icon" id="modal-icon"></div>
+            <h3 id="modal-title-display"></h3>
+            <p id="modal-message-display"></p>
+            <div class="modal-footer">
+                <button onclick="window.location.href='{{ route('nivel.saludos') }}'">
+                    <i class="fas fa-arrow-left"></i> Volver a Mini-Juegos
+                </button>
+            </div>
+        </div>
+    </div>
+
     <footer>@include('partials.footer')</footer>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -378,6 +495,54 @@
             setTimeout(() => {
                 progressCircleBar.style.strokeDashoffset = offset;
             }, 500); 
+            
+            // --- LÓGICA DEL MODAL DE RESULTADOS (Añadido) ---
+            const resultModal = document.getElementById('result-modal');
+            const modalContentArea = document.getElementById('modal-content-area');
+            const modalTitle = document.getElementById('modal-title-display');
+            const modalMessage = document.getElementById('modal-message-display');
+            const modalIcon = document.getElementById('modal-icon');
+
+            // Función para mostrar el modal
+            function showResultModal(type, title, message) {
+                // Elimina clases de estado anteriores y añade la nueva
+                modalContentArea.className = 'modal-content ' + type;
+
+                // Actualiza el contenido del modal
+                modalTitle.textContent = title;
+                modalMessage.textContent = message;
+
+                // Define el icono basado en el tipo de mensaje (usando Emojis)
+                if (type === 'success') {
+                    modalIcon.innerHTML = '🏆'; // Éxito: Nueva mejor marca o igual
+                } else if (type === 'info') {
+                    modalIcon.innerHTML = '🧠'; // Info: Sacó menos puntaje que antes, debe practicar
+                } else if (type === 'error') {
+                    modalIcon.innerHTML = '❌'; // Error: Fallo al guardar en el servidor
+                }
+
+                // Muestra el modal
+                resultModal.style.display = 'flex';
+            }
+
+            // 1. Manejo de mensajes de éxito, info y error desde el controlador
+
+            // Obtener el mensaje completo que viene en el flash data
+            // Usamos un valor por defecto si no existe (|| '')
+            const successMessage = "{{ session('success') ?? '' }}";
+            const infoMessage = "{{ session('info') ?? '' }}";
+            const errorMessage = "{{ session('error') ?? '' }}";
+
+            if (successMessage) {
+                // Para éxito (nueva marca o igual): Usamos el mensaje completo del controlador
+                showResultModal('success', '¡Progreso Guardado!', successMessage);
+            } else if (infoMessage) {
+                // Para info (sacó menos puntaje): Usamos el mensaje completo del controlador
+                showResultModal('info', '¡Bien Hecho!', infoMessage);
+            } else if (errorMessage) {
+                // Para errores (fallo de servidor/DB): Usamos el mensaje completo del controlador
+                showResultModal('error', '¡Error al Guardar!', errorMessage);
+            }
         });
     </script>
 </body>
