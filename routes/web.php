@@ -88,6 +88,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/practicar/abecedario/conecta/complete', [PuntosUsuarioController::class, 'completeAbecedarioConecta'])->name('lecciones.abecedario.conecta.complete');
 
     Route::get('/practicar/abecedario/extra', [NivelesController::class, 'abecedario_extra'])->name('nivel.abecedario.extra');
+    Route::post('/practicar/abecedario/extra/complete', [PuntosUsuarioController::class, 'completeAbecedarioExtra'])->name('lecciones.abecedario.extra.complete');
 
     // Números
     Route::get('/practicar/numeros', [NivelesController::class, 'numeros'])->name('nivel.numeros');
@@ -101,6 +102,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/practicar/numeros/conecta/complete', [PuntosUsuarioController::class, 'completeNumerosConecta'])->name('lecciones.numeros.conecta.complete');
 
     Route::get('/practicar/numeros/extra', [NivelesController::class, 'numeros_extra'])->name('nivel.numeros.extra');
+    Route::post('/practicar/numeros/extra/complete', [PuntosUsuarioController::class, 'completeNumerosExtra'])->name('lecciones.numeros.extra.complete');
 
     // Saludos
     Route::get('/practicar/saludos', [NivelesController::class, 'saludos'])->name('nivel.saludos');
@@ -114,6 +116,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/practicar/saludos/conecta/complete', [PuntosUsuarioController::class, 'completeSaludosConecta'])->name('lecciones.saludos.conecta.complete');
 
     Route::get('/practicar/saludos/extra', [NivelesController::class, 'saludos_extra'])->name('nivel.saludos.extra');
+    Route::post('/practicar/saludos/extra/complete', [PuntosUsuarioController::class, 'completeSaludosExtra'])->name('lecciones.saludos.extra.complete');
     
     // Salud
     Route::get('/practicar/salud', [NivelesController::class, 'salud'])->name('nivel.salud');
@@ -127,6 +130,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/practicar/salud/conecta/complete', [PuntosUsuarioController::class, 'completeSaludConecta'])->name('lecciones.salud.conecta.complete');
 
     Route::get('/practicar/salud/extra', [NivelesController::class, 'salud_extra'])->name('nivel.salud.extra');
+    Route::post('/practicar/salud/extra/complete', [PuntosUsuarioController::class, 'completeSaludExtra'])->name('lecciones.salud.extra.complete');
 
     /*
     |----------------------------------|

@@ -690,4 +690,176 @@ class PuntosUsuarioController extends Controller
             return redirect()->route('nivel.salud')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
         }
     }
+
+    public function completeAbecedarioExtra(){
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
+        }
+
+        $userId = $user->id;
+        $activityId = 'ABC4'; // ID de 'Abecedario - Extra' según la migración
+        $points = 10; // Puntos fijos para esta actividad
+
+        try {
+            DB::beginTransaction();
+
+            // Buscar si ya existe registro para este usuario y actividad
+            $puntosUsuario = PuntosUsuario::where('usuario_id', $userId)
+                ->where('nivel_id', $activityId)
+                ->first();
+            if ($puntosUsuario) {
+                // Si existe, actualiza el puntaje
+                $puntosUsuario->puntos_obtenidos = $points;
+                $puntosUsuario->save();
+            } else {
+                // Si no existe, crea nuevo registro
+                PuntosUsuario::create([
+                    'usuario_id' => $userId,
+                    'nivel_id' => $activityId,
+                    'puntos_obtenidos' => $points,
+                    'completado' => true,
+                    'fecha_completado' => now(),
+                ]);
+            }
+
+            DB::commit();
+
+            // Redireccionar al usuario con mensaje
+            return redirect()->route('nivel.abecedario')->with('success', "La actividad extra del Abecedario se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en 'Mi Progreso', te esperan nuevas recompensas.");
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('nivel.abecedario')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
+        }
+    }
+
+    public function completeNumerosExtra(){
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
+        }
+
+        $userId = $user->id;
+        $activityId = 'NUM4'; // ID de 'Números - Extra' según la migración
+        $points = 10; // Puntos fijos para esta actividad
+
+        try {
+            DB::beginTransaction();
+
+            // Buscar si ya existe registro para este usuario y actividad
+            $puntosUsuario = PuntosUsuario::where('usuario_id', $userId)
+                ->where('nivel_id', $activityId)
+                ->first();
+            if ($puntosUsuario) {
+                // Si existe, actualiza el puntaje
+                $puntosUsuario->puntos_obtenidos = $points;
+                $puntosUsuario->save();
+            } else {
+                // Si no existe, crea nuevo registro
+                PuntosUsuario::create([
+                    'usuario_id' => $userId,
+                    'nivel_id' => $activityId,
+                    'puntos_obtenidos' => $points,
+                    'completado' => true,
+                    'fecha_completado' => now(),
+                ]);
+            }
+
+            DB::commit();
+
+            // Redireccionar al usuario con mensaje
+            return redirect()->route('nivel.numeros')->with('success', "La actividad extra de Números se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en 'Mi Progreso', te esperan nuevas recompensas.");
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('nivel.numeros')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
+        }
+    }   
+
+    public function completeSaludosExtra(){
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
+        }
+
+        $userId = $user->id;
+        $activityId = 'SL4'; // ID de 'Saludos - Extra' según la migración
+        $points = 10; // Puntos fijos para esta actividad
+
+        try {
+            DB::beginTransaction();
+
+            // Buscar si ya existe registro para este usuario y actividad
+            $puntosUsuario = PuntosUsuario::where('usuario_id', $userId)
+                ->where('nivel_id', $activityId)
+                ->first();
+            if ($puntosUsuario) {
+                // Si existe, actualiza el puntaje
+                $puntosUsuario->puntos_obtenidos = $points;
+                $puntosUsuario->save();
+            } else {
+                // Si no existe, crea nuevo registro
+                PuntosUsuario::create([
+                    'usuario_id' => $userId,
+                    'nivel_id' => $activityId,
+                    'puntos_obtenidos' => $points,
+                    'completado' => true,
+                    'fecha_completado' => now(),
+                ]);
+            }
+
+            DB::commit();
+
+            // Redireccionar al usuario con mensaje
+            return redirect()->route('nivel.saludos')->with('success', "La actividad extra de Saludos se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en 'Mi Progreso', te esperan nuevas recompensas.");
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('nivel.saludos')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
+        }
+    } 
+    
+    public function completeSaludExtra(){
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
+        }
+
+        $userId = $user->id;
+        $activityId = 'SALUD4'; // ID de 'Salud - Extra' según la migración
+        $points = 10; // Puntos fijos para esta actividad
+
+        try {
+            DB::beginTransaction();
+
+            // Buscar si ya existe registro para este usuario y actividad
+            $puntosUsuario = PuntosUsuario::where('usuario_id', $userId)
+                ->where('nivel_id', $activityId)
+                ->first();
+            if ($puntosUsuario) {
+                // Si existe, actualiza el puntaje
+                $puntosUsuario->puntos_obtenidos = $points;
+                $puntosUsuario->save();
+            } else {
+                // Si no existe, crea nuevo registro
+                PuntosUsuario::create([
+                    'usuario_id' => $userId,
+                    'nivel_id' => $activityId,
+                    'puntos_obtenidos' => $points,
+                    'completado' => true,
+                    'fecha_completado' => now(),
+                ]);
+            }
+
+            DB::commit();
+
+            // Redireccionar al usuario con mensaje
+            return redirect()->route('nivel.salud')->with('success', "La actividad extra de Salud se ha completado y se te han otorgado +{$points} puntos. Ve a ver tu progreso en 'Mi Progreso', te esperan nuevas recompensas.");
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('nivel.salud')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
+        }
+    }   
 }
