@@ -415,6 +415,7 @@
                     <h4>PROGRESO DEL NIVEL</h4>
                     <p><strong>Has completado {{ $completado }} de {{ $totalNiveles }} mini-juegos.</strong> Sigue practicando para seguir afinando tus habilidades en dactilología con
                         LESSA. ¡Cada juego cuenta!</p>
+                        <a href="{{ route('miProgreso') }}" style="color: #ff6b35; text-decoration: none; cursor: pointer;">Ve que recompensas puedes desbloquear</a>
                 </div>
             </div>
             <section class="learn-sections">
