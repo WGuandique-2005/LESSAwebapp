@@ -10,129 +10,89 @@ use App\Models\Recompensa;
 use App\Models\Nivel;
 use App\Models\Leccion;
 
-
 class ProgressController extends Controller
 {
+    // Función pública para completar la Lección 1 (Abecedario)
     public function ls1_complete(Request $request)
     {
-        try {
-            $userId = auth()->id();
-            $leccionId = 1; // ID de la lección de abecedario
-            $fechaCompletado = now();
-
-            $yaCompletada = ProgresoUsuario::where('usuario_id', $userId)
-                ->where('leccion_id', $leccionId)
-                ->where('completado', true)
-                ->exists();
-            if ($yaCompletada) {
-                return redirect()->route('lecciones')->with('status', 'Ya has completado esta lección.');
-            }
-
-            $progreso = ProgresoUsuario::create([
-                'usuario_id' => $userId,
-                'leccion_id' => $leccionId,
-                'completado' => true,
-                'fecha_completada' => $fechaCompletado,
-            ]);
-
-            $recompensa = Recompensa::where('id', 1)->first(); // Asumiendo que la recompensa para la lección 1 tiene ID 1
-            $primero_pasos = RecompensasUsuario::create([
-                'usuario_id' => $userId,
-                'recompensa_id' => $recompensa->id,
-                'estado' => 'Desbloqueada',
-            ]);
-
-            
-            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente, ¡Felicidades!, puedes pasar a la siguiente lección, y has desbloqueado una recompensa, ve a verla en Tu Progreso');
-        } catch (\Exception $e) {
-            // Manejo de errores
-            return redirect()->route('lecciones')->withErrors(['error' => 'Error al completar la lección']);
-        }
+        // Lección 1 es la única que otorga una recompensa fija (ID 1)
+        return $this->handleLessonCompletion($request, 1, 1);
     }
 
+    // Función pública para completar la Lección 2 (Números)
     public function ls2_complete(Request $request)
     {
-        try {
-            $userId = auth()->id();
-            $leccionId = 2; // ID de la lección de números
-            $fechaCompletado = now();
-
-            $yaCompletada = ProgresoUsuario::where('usuario_id', $userId)
-                ->where('leccion_id', $leccionId)
-                ->where('completado', true)
-                ->exists();
-            if ($yaCompletada) {
-                return redirect()->route('lecciones')->with('status', 'Ya has completado esta lección.');
-            }
-
-            $progreso = ProgresoUsuario::create([
-                'usuario_id' => $userId,
-                'leccion_id' => $leccionId,
-                'completado' => true,
-                'fecha_completada' => $fechaCompletado,
-            ]);
-            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente, ¡Felicidades!, puedes pasar a la siguiente lección');
-        } catch (\Exception $e) {
-            // Manejo de errores
-            return redirect()->route('lecciones')->withErrors(['error' => 'Error al completar la lección']);
-        }
+        return $this->handleLessonCompletion($request, 2);
     }
 
+    // Función pública para completar la Lección 3 (Saludos)
     public function ls3_complete(Request $request)
     {
-        try {
-            $userId = auth()->id();
-            $leccionId = 3; // ID de la lección de saludos
-            $fechaCompletado = now();
-
-            $yaCompletada = ProgresoUsuario::where('usuario_id', $userId)
-                ->where('leccion_id', $leccionId)
-                ->where('completado', true)
-                ->exists();
-            if ($yaCompletada) {
-                return redirect()->route('lecciones')->with('status', 'Ya has completado esta lección.');
-            }
-
-            $progreso = ProgresoUsuario::create([
-                'usuario_id' => $userId,
-                'leccion_id' => $leccionId,
-                'completado' => true,
-                'fecha_completada' => $fechaCompletado,
-            ]);
-            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente, ¡Felicidades!, puedes pasar a la siguiente lección');
-        } catch (\Exception $e) {
-            // Manejo de errores
-            return redirect()->route('lecciones')->withErrors(['error' => 'Error al completar la lección']);
-        }
+        return $this->handleLessonCompletion($request, 3);
     }
 
+    // Función pública para completar la Lección 4 (Salud)
     public function ls4_complete(Request $request)
+    {
+        return $this->handleLessonCompletion($request, 4);
+    }
+
+    /**
+     * Maneja la lógica común para completar una lección.
+     *
+     * @param Request $request
+     * @param int $leccionId El ID de la lección que se está completando.
+     * @param int|null $recompensaId ID de la recompensa a desbloquear (opcional).
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    private function handleLessonCompletion(Request $request, int $leccionId, ?int $recompensaId = null)
     {
         try {
             $userId = auth()->id();
-            $leccionId = 4; // ID de la lección salud
-            $fechaCompletado = now();
 
+            // 1. Verificar si la lección ya fue completada
             $yaCompletada = ProgresoUsuario::where('usuario_id', $userId)
                 ->where('leccion_id', $leccionId)
                 ->where('completado', true)
                 ->exists();
+
             if ($yaCompletada) {
                 return redirect()->route('lecciones')->with('status', 'Ya has completado esta lección.');
             }
 
-            $progreso = ProgresoUsuario::create([
+            // 2. Registrar el progreso de la lección
+            ProgresoUsuario::create([
                 'usuario_id' => $userId,
                 'leccion_id' => $leccionId,
                 'completado' => true,
-                'fecha_completada' => $fechaCompletado,
+                'fecha_completada' => now(),
             ]);
-            return redirect()->route('lecciones')->with('status', 'Lección completada exitosamente, ¡Felicidades!, puedes pasar a la siguiente lección');
+
+            $message = 'Lección completada exitosamente, ¡Felicidades!, puedes pasar a la siguiente lección';
+
+            // 3. Desbloquear recompensa si se proporciona un ID
+            if ($recompensaId) {
+                $recompensa = Recompensa::find($recompensaId);
+
+                // Comprobar que la recompensa exista y no esté ya desbloqueada
+                if ($recompensa && !RecompensasUsuario::where('usuario_id', $userId)->where('recompensa_id', $recompensaId)->exists()) {
+                    RecompensasUsuario::create([
+                        'usuario_id' => $userId,
+                        'recompensa_id' => $recompensa->id,
+                        'estado' => 'Desbloqueada',
+                    ]);
+                    $message .= ', y has desbloqueado una recompensa, ve a verla en Tu Progreso';
+                }
+            }
+
+            return redirect()->route('lecciones')->with('status', $message);
         } catch (\Exception $e) {
             // Manejo de errores
+            // Puedes usar logger aquí si es necesario: \Log::error("Error al completar la lección {$leccionId}: " . $e->getMessage());
             return redirect()->route('lecciones')->withErrors(['error' => 'Error al completar la lección']);
         }
     }
+
 
     public function miProgreso()
     {
@@ -176,7 +136,6 @@ class ProgressController extends Controller
         if (!auth()->check()) {
             return [
                 'porcentajeGlobal' => 0,
-                'pendingBySection' => ['Abecedario' => 0, 'Números' => 0, 'Saludos' => 0, 'Salud' => 0],
                 'descripcionProgreso' => 'Inicia sesión para ver tu progreso.',
                 'totalNiveles' => 0,
                 'nivelesCompletadosCount' => 0,
@@ -188,21 +147,21 @@ class ProgressController extends Controller
         // 1. Obtener todas las actividades (niveles) disponibles
         $allNiveles = Nivel::all(['id']);
         $totalNiveles = $allNiveles->count(); // Total de actividades, ej: 16
-        
+
         // 2. Obtener los niveles completados por el usuario
         $nivelesCompletados = PuntosUsuario::where('usuario_id', $userId)
-                                        ->pluck('nivel_id')
-                                        ->unique()
-                                        ->toArray();
+            ->pluck('nivel_id')
+            ->unique()
+            ->toArray();
         $nivelesCompletadosCount = count($nivelesCompletados);
-        
+
         // 3. Calcular el porcentaje global
-        $porcentajeGlobal = $totalNiveles > 0 
-            ? round(($nivelesCompletadosCount / $totalNiveles) * 100) 
+        $porcentajeGlobal = $totalNiveles > 0
+            ? round(($nivelesCompletadosCount / $totalNiveles) * 100)
             : 0;
 
 
-        
+
         // 5. Generar la descripción del progreso
         $descripcion = '¡Excelente trabajo! Continúa para dominar la LESSA.';
         if ($porcentajeGlobal == 0) {
