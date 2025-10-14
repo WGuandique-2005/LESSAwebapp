@@ -69,6 +69,26 @@ class PuntosUsuarioController extends Controller
         return $this->handleCompletion($request, 'SALUD2', 'nivel.salud', 'nivel.salud');
     }
 
+    public function completeAbecedarioExtra(Request $request)
+    {
+        return $this->handleCompletionExtra($request, 'ABC4', 'nivel.abecedario', 'nivel.abecedario', 10);
+    }
+
+    public function completeNumerosExtra(Request $request)
+    {
+        return $this->handleCompletionExtra($request, 'NUM4', 'nivel.numeros', 'nivel.numeros', 10);
+    }
+
+    public function completeSaludosExtra(Request $request)
+    {
+        return $this->handleCompletionExtra($request, 'SL4', 'nivel.saludos', 'nivel.saludos', 10);
+    }
+
+    public function completeSaludExtra(Request $request)
+    {
+        return $this->handleCompletionExtra($request, 'SALUD4', 'nivel.salud', 'nivel.salud', 10);
+    }
+
     /**
      * Maneja la lógica común de validación, cálculo de puntos,
      * inserción/actualización en PuntosUsuario y redirecciones.
@@ -162,10 +182,23 @@ class PuntosUsuarioController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+            // Para depuración:
+            // return redirect()->route($errorRoute)->with('error', 'Ocurrió un error al guardar tu puntuación. Detalle: ' . $e->getMessage());
             return redirect()->route($errorRoute)->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
         }
     }
-    public function completeAbecedarioExtra()
+
+    /**
+     * Maneja la lógica de guardado de puntos fijos para actividades "Extra"
+     * o aquellas que no dependen del conteo de errores.
+     *
+     * @param Request $request
+     * @param string  $activityId   // nivel_id en la tabla PuntosUsuario
+     * @param string  $successRoute // ruta para redireccionar en caso de éxito
+     * @param string  $errorRoute   // ruta para redireccionar en caso de error/exception
+     * @param int     $defaultPoints // Puntos fijos a asignar por defecto.
+     */
+    public function handleCompletionExtra(Request $request, string $activityId, string $successRoute, string $errorRoute, int $defaultPoints)
     {
         $user = auth()->user();
         if (!$user) {
@@ -173,9 +206,7 @@ class PuntosUsuarioController extends Controller
         }
 
         $userId = $user->id;
-        $activityId = 'ABC4'; // ID de 'Abecedario - Extra' según la migración
-        $points = 10; // Puntos fijos para esta actividad
-
+        
         try {
             DB::beginTransaction();
 
@@ -183,161 +214,48 @@ class PuntosUsuarioController extends Controller
             $puntosUsuario = PuntosUsuario::where('usuario_id', $userId)
                 ->where('nivel_id', $activityId)
                 ->first();
+
+            // Lógica: Solo actualizar si la puntuación extra es mayor (asumiendo que se está re-usando el ID)
+            $puntosAnteriores = $puntosUsuario ? (int) $puntosUsuario->puntos_obtenidos : 0;
+            $puntosAsignados = false;
+
             if ($puntosUsuario) {
-                // Si existe, actualiza el puntaje
-                $puntosUsuario->puntos_obtenidos = $points;
-                $puntosUsuario->save();
+                if ($defaultPoints > $puntosAnteriores) {
+                    $puntosUsuario->puntos_obtenidos = $defaultPoints;
+                    $puntosUsuario->completado = true;
+                    $puntosUsuario->fecha_completado = now();
+                    $puntosUsuario->save();
+                    $puntosAsignados = true;
+                }
             } else {
                 // Si no existe, crea nuevo registro
                 PuntosUsuario::create([
                     'usuario_id' => $userId,
                     'nivel_id' => $activityId,
-                    'puntos_obtenidos' => $points,
+                    'puntos_obtenidos' => $defaultPoints,
                     'completado' => true,
                     'fecha_completado' => now(),
                 ]);
+                $puntosAsignados = true;
             }
 
             DB::commit();
 
             // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.abecedario')->with('success', "La actividad extra del Abecedario se ha completado y se te han otorgado +{$points} puntos.");
+            $title = '¡Actividad Extra Completada!';
 
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->route('nivel.abecedario')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
-        }
-    }
-
-    public function completeNumerosExtra()
-    {
-        $user = auth()->user();
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
-        }
-
-        $userId = $user->id;
-        $activityId = 'NUM4'; // ID de 'Números - Extra' según la migración
-        $points = 10; // Puntos fijos para esta actividad
-
-        try {
-            DB::beginTransaction();
-
-            // Buscar si ya existe registro para este usuario y actividad
-            $puntosUsuario = PuntosUsuario::where('usuario_id', $userId)
-                ->where('nivel_id', $activityId)
-                ->first();
-            if ($puntosUsuario) {
-                // Si existe, actualiza el puntaje
-                $puntosUsuario->puntos_obtenidos = $points;
-                $puntosUsuario->save();
-            } else {
-                // Si no existe, crea nuevo registro
-                PuntosUsuario::create([
-                    'usuario_id' => $userId,
-                    'nivel_id' => $activityId,
-                    'puntos_obtenidos' => $points,
-                    'completado' => true,
-                    'fecha_completado' => now(),
-                ]);
+            if ($puntosAsignados) {
+                $text = "{$title} La actividad extra se ha completado. Has obtenido +{$defaultPoints} puntos.";
+                return redirect()->route($successRoute)->with('success', $text);
             }
 
-            DB::commit();
-
-            // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.numeros')->with('success', "La actividad extra de Números se ha completado y se te han otorgado +{$points} puntos.");
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->route('nivel.numeros')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
-        }
-    }
-
-    public function completeSaludosExtra()
-    {
-        $user = auth()->user();
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
-        }
-
-        $userId = $user->id;
-        $activityId = 'SL4'; // ID de 'Saludos - Extra' según la migración
-        $points = 10; // Puntos fijos para esta actividad
-
-        try {
-            DB::beginTransaction();
-
-            // Buscar si ya existe registro para este usuario y actividad
-            $puntosUsuario = PuntosUsuario::where('usuario_id', $userId)
-                ->where('nivel_id', $activityId)
-                ->first();
-            if ($puntosUsuario) {
-                // Si existe, actualiza el puntaje
-                $puntosUsuario->puntos_obtenidos = $points;
-                $puntosUsuario->save();
-            } else {
-                // Si no existe, crea nuevo registro
-                PuntosUsuario::create([
-                    'usuario_id' => $userId,
-                    'nivel_id' => $activityId,
-                    'puntos_obtenidos' => $points,
-                    'completado' => true,
-                    'fecha_completado' => now(),
-                ]);
-            }
-
-            DB::commit();
-
-            // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.saludos')->with('success', "La actividad extra de Saludos se ha completado y se te han otorgado +{$points} puntos.");
+            // Si no se asignaron puntos (la marca anterior ya era igual o superior)
+            $text = "{$title} La actividad extra se ha completado. Tu mejor puntuación se mantiene en {$puntosAnteriores} puntos.";
+            return redirect()->route($successRoute)->with('info', $text);
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('nivel.saludos')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
-        }
-    }
-
-    public function completeSaludExtra()
-    {
-        $user = auth()->user();
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión para guardar tu progreso.');
-        }
-
-        $userId = $user->id;
-        $activityId = 'SALUD4'; // ID de 'Salud - Extra' según la migración
-        $points = 10; // Puntos fijos para esta actividad
-
-        try {
-            DB::beginTransaction();
-
-            // Buscar si ya existe registro para este usuario y actividad
-            $puntosUsuario = PuntosUsuario::where('usuario_id', $userId)
-                ->where('nivel_id', $activityId)
-                ->first();
-            if ($puntosUsuario) {
-                // Si existe, actualiza el puntaje
-                $puntosUsuario->puntos_obtenidos = $points;
-                $puntosUsuario->save();
-            } else {
-                // Si no existe, crea nuevo registro
-                PuntosUsuario::create([
-                    'usuario_id' => $userId,
-                    'nivel_id' => $activityId,
-                    'puntos_obtenidos' => $points,
-                    'completado' => true,
-                    'fecha_completado' => now(),
-                ]);
-            }
-
-            DB::commit();
-
-            // Redireccionar al usuario con mensaje
-            return redirect()->route('nivel.salud')->with('success', "La actividad extra de Salud se ha completado y se te han otorgado +{$points} puntos.");
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->route('nivel.salud')->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
+            return redirect()->route($errorRoute)->with('error', 'Ocurrió un error al guardar tu puntuación. Intenta de nuevo.');
         }
     }
 }
