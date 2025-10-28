@@ -409,7 +409,7 @@
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 1200;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
