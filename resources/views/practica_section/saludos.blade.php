@@ -10,7 +10,7 @@
     <style>
         :root {
             /* Colores Base (sin cambios) */
-            --primary-blue: #2a6fdb;
+            --primary-blue: #28a745;
             --primary-orange: #ff6b35;
             --secondary-yellow: #ffc107;
             --light-gray: #f4f6f9;
@@ -401,6 +401,38 @@
                     ->count();
                 $progresoPorcentaje = $totalNiveles > 0 ? round(($completado / $totalNiveles) * 100) : 0;
             @endphp
+            <nav aria-label="breadcrumb" style="font-family: 'Poppins', sans-serif; width: 100%; margin: 20px 0;">
+                <ol
+                    style="display: flex; flex-wrap: wrap; list-style: none; margin: 0; padding: 12px 20px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); border: 1px solid #e9ecef;">
+
+                    <li style="display: flex; align-items: center; font-size: 0.95rem;">
+                        <a href="/"
+                            style="color: #28a745; text-decoration: none; font-weight: 600; display: flex; align-items: center;">
+                            <i class="fas fa-home" style="margin-right: 6px; color: #28a745;"></i>
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li style="display: flex; align-items: center; font-size: 0.95rem;">
+                        <span style="margin: 0 10px; color: #6b7280;">/</span>
+
+                        <a href="{{ route('practicar')}}"
+                            style="color: #28a745; text-decoration: none; font-weight: 600;">
+                            Practicar
+                        </a>
+                    </li>
+
+                    <li style="display: flex; align-items: center; font-size: 0.95rem; font-weight: 500;"
+                        aria-current="page">
+                        <span style="margin: 0 10px; color: #6b7280;">/</span>
+
+                        <span style="color: #212529;">
+                            Saludos
+                        </span>
+                    </li>
+
+                </ol>
+            </nav>
             <div class="progress-and-intro-container">
                 <div class="progress-circle-container" data-progress="{{ $progresoPorcentaje }}">
                     <svg class="progress-circle" viewBox="0 0 80 80">

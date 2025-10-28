@@ -18,10 +18,12 @@
             --dark-gray: #212529;
             --text-color: #212529;
             --white: #ffffff;
-            --success-color: #069c5e; /* Un verde más oscuro y sólido */
-            
+            --success-color: #069c5e;
+            /* Un verde más oscuro y sólido */
+
             /* Colores específicos del Nivel Cifras (temática de cálculo/contabilidad) */
-            --level-color-main: #6b4dff; /* Púrpura/Violeta para distinguir de azul (Abecedario) */
+            --level-color-main: #6b4dff;
+            /* Púrpura/Violeta para distinguir de azul (Abecedario) */
             --dark-overlay: rgba(107, 77, 255, 0.75);
 
             /* Espaciado, Tipografía y Componentes (Iguales a la versión anterior) */
@@ -61,7 +63,7 @@
 
         /* --- HERO SECTION: Nivel Cifras --- */
         .hero-section {
-            background-color: var(--level-color-main); 
+            background-color: var(--level-color-main);
             padding: var(--spacing-xl) 0;
             color: var(--white);
             position: relative;
@@ -80,7 +82,7 @@
             width: 100%;
             height: 100%;
             /* Utilizamos el overlay púrpura/violeta */
-            background-color: var(--dark-overlay); 
+            background-color: var(--dark-overlay);
             z-index: 1;
         }
 
@@ -89,15 +91,15 @@
         .hero-text {
             text-align: center;
             width: 100%;
-            position: relative; 
-            z-index: 2; 
+            position: relative;
+            z-index: 2;
         }
 
         .hero-text h2 {
             font-size: var(--font-size-xxl);
             font-weight: 800;
             /* Color amarillo para destacar */
-            color: var(--secondary-yellow); 
+            color: var(--secondary-yellow);
             margin-bottom: var(--spacing-sm);
         }
 
@@ -112,8 +114,9 @@
             max-width: 700px;
             margin: 0 auto var(--spacing-xl);
         }
+
         /* --- END HERO SECTION --- */
-        
+
         /* --- PROGRESS CIRCLE (Estilos sin cambios, solo se adapta el color de éxito) --- */
         .progress-and-intro-container {
             padding: var(--spacing-xl) 0;
@@ -165,7 +168,7 @@
         }
 
         .progress-circle-bar {
-            stroke: var(--success-color); 
+            stroke: var(--success-color);
             stroke-width: 10;
             stroke-linecap: round;
             fill: none;
@@ -240,11 +243,27 @@
         }
 
         /* Colores de Icono Específicos para NÚMEROS */
-        .game-card.game-1 .icon { color: #f94144; } /* Lógico */
-        .game-card.game-2 .icon { color: #2ecc71; } /* Cálculo */
-        .game-card.game-3 .icon { color: #f39c12; } /* Tiempo */
-        .game-card.game-4 .icon { color: #3498db; } /* Secuencia */
-        
+        .game-card.game-1 .icon {
+            color: #f94144;
+        }
+
+        /* Lógico */
+        .game-card.game-2 .icon {
+            color: #2ecc71;
+        }
+
+        /* Cálculo */
+        .game-card.game-3 .icon {
+            color: #f39c12;
+        }
+
+        /* Tiempo */
+        .game-card.game-4 .icon {
+            color: #3498db;
+        }
+
+        /* Secuencia */
+
         /* --- Modal Styles (para resultados) --- */
         .modal-overlay {
             position: fixed;
@@ -252,8 +271,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.85); /* Fondo más oscuro para enfoque */
-            display: none; /* Oculto por defecto */
+            background-color: rgba(0, 0, 0, 0.85);
+            /* Fondo más oscuro para enfoque */
+            display: none;
+            /* Oculto por defecto */
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -306,30 +327,46 @@
         }
 
         .modal-footer button:hover {
-            background-color: #553aac; /* Púrpura más oscuro */
+            background-color: #553aac;
+            /* Púrpura más oscuro */
             transform: translateY(-1px);
         }
 
         /* Colores de estado del modal */
         .modal-content.success .modal-icon {
-            color: var(--success-color); /* Verde */
+            color: var(--success-color);
+            /* Verde */
         }
+
         .modal-content.info .modal-icon {
-            color: var(--secondary-yellow); /* Amarillo/Naranja para la info de "no mejoró" */
+            color: var(--secondary-yellow);
+            /* Amarillo/Naranja para la info de "no mejoró" */
         }
+
         .modal-content.error .modal-icon {
-            color: var(--primary-orange); /* Naranja/Rojo para errores de servidor */
+            color: var(--primary-orange);
+            /* Naranja/Rojo para errores de servidor */
         }
 
         /* Animaciones */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes slideIn {
-            from { transform: translateY(-50px) scale(0.9); }
-            to { transform: translateY(0) scale(1); }
+            from {
+                transform: translateY(-50px) scale(0.9);
+            }
+
+            to {
+                transform: translateY(0) scale(1);
+            }
         }
 
 
@@ -338,6 +375,7 @@
             .hero-text {
                 text-align: left;
             }
+
             .progress-and-intro-container {
                 flex-direction: row;
                 text-align: left;
@@ -345,30 +383,37 @@
                 align-items: center;
                 padding-bottom: var(--spacing-xxl);
             }
+
             .main-game-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
             .progress-info {
                 max-width: 60%;
                 box-shadow: none;
                 background: transparent;
                 padding-left: var(--spacing-xl);
             }
+
             .progress-circle-container {
                 margin-bottom: 0;
             }
         }
+
         /* Responsive para el modal */
         @media (max-width: 480px) {
             .modal-content {
                 padding: var(--spacing-lg);
             }
+
             .modal-content h3 {
                 font-size: var(--font-size-md);
             }
+
             .modal-content p {
                 font-size: var(--font-size-sm);
             }
+
             .modal-footer button {
                 width: 100%;
             }
@@ -384,8 +429,10 @@
                 <div class="hero-text">
                     <h2>NIVEL 2: CIFRAS Y CONTEO</h2>
                     <h3>¡Domina la numeración en LESSA, desde el 0 hasta el 1,000!</h3>
-                    <p>La capacidad de contar y comunicar cantidades es crucial. Estos mini-juegos te desafiarán a reconocer,
-                        producir y ordenar números grandes y pequeños. ¡Completa el 100% de este nivel para avanzar a las Señas
+                    <p>La capacidad de contar y comunicar cantidades es crucial. Estos mini-juegos te desafiarán a
+                        reconocer,
+                        producir y ordenar números grandes y pequeños. ¡Completa el 100% de este nivel para avanzar a
+                        las Señas
                         Básicas!</p>
                 </div>
             </div>
@@ -403,6 +450,38 @@
                     ->count();
                 $progresoPorcentaje = $totalNiveles > 0 ? round(($completado / $totalNiveles) * 100) : 0;
             @endphp
+            <nav aria-label="breadcrumb" style="font-family: 'Poppins', sans-serif; width: 100%; margin: 20px 0;">
+                <ol
+                    style="display: flex; flex-wrap: wrap; list-style: none; margin: 0; padding: 12px 20px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); border: 1px solid #e9ecef;">
+
+                    <li style="display: flex; align-items: center; font-size: 0.95rem;">
+                        <a href="/"
+                            style="color: #6b4dff; text-decoration: none; font-weight: 600; display: flex; align-items: center;">
+                            <i class="fas fa-home" style="margin-right: 6px; color: #6b4dff;"></i>
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li style="display: flex; align-items: center; font-size: 0.95rem;">
+                        <span style="margin: 0 10px; color: #6b7280;">/</span>
+
+                        <a href="{{ route('practicar')}}"
+                            style="color: #6b4dff; text-decoration: none; font-weight: 600;">
+                            Practicar
+                        </a>
+                    </li>
+
+                    <li style="display: flex; align-items: center; font-size: 0.95rem; font-weight: 500;"
+                        aria-current="page">
+                        <span style="margin: 0 10px; color: #6b7280;">/</span>
+
+                        <span style="color: #212529;">
+                            Números
+                        </span>
+                    </li>
+
+                </ol>
+            </nav>
             <div class="progress-and-intro-container">
                 <div class="progress-circle-container" data-progress="{{ $progresoPorcentaje }}">
                     <svg class="progress-circle" viewBox="0 0 80 80">
@@ -413,9 +492,12 @@
                 </div>
                 <div class="progress-info">
                     <h4>PROGRESO DEL NIVEL</h4>
-                    <p><strong>Has completado {{ $completado }} de {{ $totalNiveles }} mini-juegos.</strong> Sigue practicando para seguir afinando tus habilidades en dactilología con
+                    <p><strong>Has completado {{ $completado }} de {{ $totalNiveles }} mini-juegos.</strong> Sigue
+                        practicando para seguir afinando tus habilidades en dactilología con
                         LESSA. ¡Cada juego cuenta!</p>
-                        <a href="{{ route('miProgreso') }}" style="color: #ff6b35; text-decoration: none; cursor: pointer;">Ve que recompensas puedes desbloquear</a>
+                    <a href="{{ route('miProgreso') }}"
+                        style="color: #ff6b35; text-decoration: none; cursor: pointer;">Ve que recompensas puedes
+                        desbloquear</a>
                 </div>
             </div>
             <section class="learn-sections">
@@ -427,13 +509,15 @@
                         <div class="game-card game-1" onclick="window.location.href='/practicar/numeros/adivina'">
                             <span class="icon">🔢</span>
                             <h3>¿Qué Número Es?</h3>
-                            <p>Se te mostrará la seña de un número y deberás escribir o seleccionar la cifra correspondiente.
+                            <p>Se te mostrará la seña de un número y deberás escribir o seleccionar la cifra
+                                correspondiente.
                                 Incluye números de tres y cuatro dígitos.</p>
                         </div>
                         <div class="game-card game-2" onclick="window.location.href='/practicar/numeros/memorama'">
                             <span class="icon">➕</span>
                             <h3>Memorama de señas</h3>
-                            <p>Encuentra pares de cartas: imagen de la seña y el gesto correspondiente. Fortalece tu capacidad
+                            <p>Encuentra pares de cartas: imagen de la seña y el gesto correspondiente. Fortalece tu
+                                capacidad
                                 de reconocimiento y memoria visual.</p>
                         </div>
                         <div class="game-card game-3" onclick="window.location.href='/practicar/numeros/conecta'">
@@ -445,7 +529,8 @@
                         <div class="game-card game-4" onclick="window.location.href='/practicar/numeros/extra'">
                             <span class="icon">➡️</span>
                             <h3>Sigue la Secuencia</h3>
-                            <p>Se te dará un número de inicio y deberás hacer la seña de los siguientes tres números en orden
+                            <p>Se te dará un número de inicio y deberás hacer la seña de los siguientes tres números en
+                                orden
                                 consecutivo. ¡Practica el conteo!</p>
                         </div>
                     </div>
@@ -453,7 +538,7 @@
             </section>
         </div>
     </main>
-    
+
     <div id="result-modal" class="modal-overlay">
         <div class="modal-content" id="modal-content-area">
             <div class="modal-icon" id="modal-icon"></div>
@@ -469,19 +554,19 @@
 
     <footer>@include('partials.footer')</footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Configuración del Círculo de Progreso
             const progressContainer = document.querySelector('.progress-circle-container');
             const progressCircleBar = document.querySelector('.progress-circle-bar');
             const progressText = document.getElementById('progress-percent');
-            
+
             // Obtenemos el progreso calculado en el backend (75 en este caso)
             const currentProgress = parseInt(progressContainer.getAttribute('data-progress'), 10);
-            
+
             // Obtenemos el radio del SVG (r="35")
             const radius = progressCircleBar.r.baseVal.value;
             // Calculamos la circunferencia real: 2 * PI * r
-            const circumference = 2 * Math.PI * radius; 
+            const circumference = 2 * Math.PI * radius;
 
             // Aplicamos la circunferencia como el stroke-dasharray
             progressCircleBar.style.strokeDasharray = circumference;
@@ -497,8 +582,8 @@
             // Opcional: El timeout que estaba para la transición de animación
             setTimeout(() => {
                 progressCircleBar.style.strokeDashoffset = offset;
-            }, 500); 
-            
+            }, 500);
+
             // --- LÓGICA DEL MODAL DE RESULTADOS (Añadido) ---
             const resultModal = document.getElementById('result-modal');
             const modalContentArea = document.getElementById('modal-content-area');
