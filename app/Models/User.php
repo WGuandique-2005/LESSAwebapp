@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     public function recompensas()
     {
-        return $this->hasMany(RecompensasUsuario::class);
+        return $this->hasMany(RecompensasUsuario::class, foreignKey: 'usuario_id');
     }
 
     /**

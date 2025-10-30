@@ -9,6 +9,7 @@ use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\NivelesController;
 use App\Http\Controllers\PuntosUsuarioController;
 use App\Http\Controllers\RecompensasUsuarioController;
+use App\Http\Controllers\RankingController;
 
 /*
 |----------------------------------
@@ -162,6 +163,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/lecciones/salud',[LeccionesController::class, 'ls4_salud'])->name('lecciones.salud');
     Route::get('/lecciones/salud/test', [LeccionesController::class, 'memorama_salud'])->name('ls4_salud_test');
     Route::post('/lecciones/salud/complete', [ProgressController::class, 'ls4_complete'])->name('lecciones.salud.complete');
+
+    // Ranking de usuarios
+
+    Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
 
     // Videos educativos
     Route::get('/lecciones/videos', [TaskController::class, 'videos'])->name('lecciones.videos');
