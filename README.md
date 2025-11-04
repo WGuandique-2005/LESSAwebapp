@@ -117,7 +117,7 @@ Sigue estos pasos para tener LESSA funcionando en tu entorno local:
 
 ##  🔑 Credenciales de Prueba (Administrador)
 Para un acceso rápido a la plataforma después de completar la instalación y las migraciones, hemos incluido un usuario administrador por defecto que puedes utilizar para explorar las funcionalidades:
-        ```bash
+        ```
         user:admin@example.com	passwd: admin
         ```
 
