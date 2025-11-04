@@ -114,6 +114,13 @@ Sigue estos pasos para tener LESSA funcionando en tu entorno local:
     ```
     Esto iniciará un servidor en `http://127.0.0.1:8000` (o un puerto similar). Abre esta URL en tu navegador y ¡explora LESSA!
 
+
+##  🔑 Credenciales de Prueba (Administrador)
+Para un acceso rápido a la plataforma después de completar la instalación y las migraciones, hemos incluido un usuario administrador por defecto que puedes utilizar para explorar las funcionalidades:
+        ```bash
+        admin@example.com	admin
+        ```
+
     ---
     **Alternativa: Configuración con Apache/Nginx (Recomendado para producción):**
     Para una configuración más robusta o permanente, deberás configurar tu servidor web (Apache o Nginx, que vienen con XAMPP) para que apunte al directorio `public` de este proyecto. Consulta la [documentación de Laravel sobre configuración de servidor](https://laravel.com/docs/11.x/deployment#server-requirements) para obtener guías detalladas.
