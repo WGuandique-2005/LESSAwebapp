@@ -118,14 +118,7 @@ Sigue estos pasos para tener LESSA funcionando en tu entorno local:
 ##  🔑 Credenciales de Prueba (Administrador)
 Para un acceso rápido a la plataforma después de completar la instalación y las migraciones, hemos incluido un usuario administrador por defecto que puedes utilizar para explorar las funcionalidades:
         ```bash
-        admin@example.com	admin
+        user:admin@example.com	passwd: admin
         ```
-
-    ---
-    **Alternativa: Configuración con Apache/Nginx (Recomendado para producción):**
-    Para una configuración más robusta o permanente, deberás configurar tu servidor web (Apache o Nginx, que vienen con XAMPP) para que apunte al directorio `public` de este proyecto. Consulta la [documentación de Laravel sobre configuración de servidor](https://laravel.com/docs/11.x/deployment#server-requirements) para obtener guías detalladas.
-
-
----
 
 **¡Esperamos que disfrutes aprendiendo LESSA!**
