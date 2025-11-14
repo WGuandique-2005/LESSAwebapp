@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Validation\ValidationException;
 use Exception;
+use Illuminate\Support\Facades\DB; // <-- added DB facade
 
 class UserController extends Controller
 {
@@ -31,6 +32,9 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try {
+            // Iniciar transacción
+            DB::beginTransaction();
+
             // 1) Validar datos de registro
             $data = $request->validate([
                 'name' => 'required|string|max:255',
@@ -50,8 +54,6 @@ class UserController extends Controller
                 'oauth_id' => null,
             ]);
 
-            // 
-
             // 3) Generar token de 6 caracteres y guardarlo
             $token = Str::upper(Str::random(6));
             VerificationToken::create([
@@ -65,13 +67,20 @@ class UserController extends Controller
             // 5) Guardar user_id en sesión para el siguiente paso
             session(['verify_user_id' => $user->id]);
 
+            // Todo OK: confirmar transacción
+            DB::commit();
+
             // 6) Redirigir al formulario de verificación
             return redirect()->route('verify.view')
                 ->with('status', '¡Registro exitoso! Te hemos enviado un código de verificación a tu correo electrónico.');
 
         } catch (ValidationException $e) {
+            // Asegurar rollback si algo falló después de iniciar la transacción
+            try { DB::rollBack(); } catch (Exception $_) {}
             return back()->withInput()->withErrors($e->errors());
         } catch (Exception $e) {
+            // Intentar rollback y retornar error genérico
+            try { DB::rollBack(); } catch (Exception $_) {}
             return back()->withInput()->with('error', 'Hubo un problema al intentar registrarte. Por favor, inténtalo de nuevo más tarde.');
         }
     }

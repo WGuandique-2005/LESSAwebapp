@@ -191,6 +191,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/change_password', [UserController::class, 'changePassword'])
         ->name('password.change');
 
+    // Ayuda
+    Route::get('/ayuda',[TaskController::class,'ayuda'])->name('ayuda');
+
     //logout
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
