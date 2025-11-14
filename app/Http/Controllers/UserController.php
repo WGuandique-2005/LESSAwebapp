@@ -67,7 +67,6 @@ class UserController extends Controller
             // 5) Guardar user_id en sesión para el siguiente paso
             session(['verify_user_id' => $user->id]);
 
-            // Todo OK: confirmar transacción
             DB::commit();
 
             // 6) Redirigir al formulario de verificación
