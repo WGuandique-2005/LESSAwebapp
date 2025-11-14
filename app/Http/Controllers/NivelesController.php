@@ -30,16 +30,16 @@ class NivelesController extends Controller
 
     public function abecedario_memorama(){
         $abecedarioData = $this->cargarDatos('abecedario');
-        return view('practica_section.abecedario.a2_memorama', compact('abecedarioData'));
+        return view('practica_section.abecedario.A2_memorama', compact('abecedarioData'));
     }
 
     public function abecedario_conecta(){
         $abecedarioData = $this->cargarDatos('abecedario');
-        return view('practica_section.abecedario.a3_conecta', compact('abecedarioData'));
+        return view('practica_section.abecedario.A3_conecta', compact('abecedarioData'));
     }
 
     public function abecedario_extra(){
-        return view('practica_section.abecedario.a4_extra');
+        return view('practica_section.abecedario.A4_extra');
     }
 
     public function numeros(){
