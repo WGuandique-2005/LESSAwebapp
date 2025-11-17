@@ -468,7 +468,7 @@
                 <a href="/">Inicio</a>
                 <a href="{{ route('aprender') }}">Aprender</a>
                 <a href="{{ route('practicar') }}">Practicar</a>
-                <a href="{{ route('info') }}">Info</a>
+                <a href="{{ route('info') }}">Información</a>
                 <a href="{{ route('miProgreso') }}">Mi progreso</a>
                 <a href="{{ route('ayuda') }}" style="text-decoration: none;" >Ayuda</a>
             @endguest
