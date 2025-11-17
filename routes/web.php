@@ -10,6 +10,7 @@ use App\Http\Controllers\NivelesController;
 use App\Http\Controllers\PuntosUsuarioController;
 use App\Http\Controllers\RecompensasUsuarioController;
 use App\Http\Controllers\RankingController;
+use App\Http\Controllers\CameraController;
 
 // Sección de ayuda (accesible para todos)
 Route::get('/ayuda',[TaskController::class,'ayuda'])->name('ayuda');
@@ -94,6 +95,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/practicar/abecedario/extra', [NivelesController::class, 'abecedario_extra'])->name('nivel.abecedario.extra');
     Route::post('/practicar/abecedario/extra/complete', [PuntosUsuarioController::class, 'completeAbecedarioExtra'])->name('lecciones.abecedario.extra.complete');
+
+    // Camara para abecedario (vocales)
+    Route::get('/practicar/abecedario/camara', [CameraController::class, 'index'])->name('nivel.abecedario.camara');
 
     // Números
     Route::get('/practicar/numeros', [NivelesController::class, 'numeros'])->name('nivel.numeros');
@@ -201,5 +205,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/delete_account', [UserController::class, 'destroy'])->name('delete.account');
 });
 
-// Fallback para rutas no encontradas -> muestra la vista 404 personalizada
+// Fallback para rutas no encontradas -> muestra la vista 404
 Route::fallback([TaskController::class, 'notFound']);
