@@ -200,3 +200,6 @@ Route::middleware('auth')->group(function () {
     // Eliminar cuenta
     Route::get('/delete_account', [UserController::class, 'destroy'])->name('delete.account');
 });
+
+// Fallback para rutas no encontradas -> muestra la vista 404 personalizada
+Route::fallback([TaskController::class, 'notFound']);

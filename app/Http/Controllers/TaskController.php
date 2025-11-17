@@ -41,4 +41,9 @@ class TaskController extends Controller
     public function ayuda(){
         return view('ayuda');
     }
+
+    public function notFound()
+    {
+        return response()->view('errors.404', [], 404);
+    }
 }
