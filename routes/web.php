@@ -11,6 +11,9 @@ use App\Http\Controllers\PuntosUsuarioController;
 use App\Http\Controllers\RecompensasUsuarioController;
 use App\Http\Controllers\RankingController;
 
+// Sección de ayuda (accesible para todos)
+Route::get('/ayuda',[TaskController::class,'ayuda'])->name('ayuda');
+
 /*
 |----------------------------------
 | Rutas públicas (landing y auth)
@@ -190,9 +193,6 @@ Route::middleware('auth')->group(function () {
     // Procesar el cambio de contraseña
     Route::post('/change_password', [UserController::class, 'changePassword'])
         ->name('password.change');
-
-    // Ayuda
-    Route::get('/ayuda',[TaskController::class,'ayuda'])->name('ayuda');
 
     //logout
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
