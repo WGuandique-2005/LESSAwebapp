@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,222 +8,192 @@
     <style>
         /* --- Estilos Generales --- */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(170deg, #f4f7f6 0%, #eef3f1 100%);
-            color: #333;
-            line-height: 1.6;
+            font-family: "Poppins", sans-serif;
+            background: #0a2463;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
         }
+
         .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.07), 0 4px 6px -2px rgba(0,0,0,0.05);
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(31, 61, 130, 0.54);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
         }
+
         h1 {
             text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            font-size: 2.4em;
-            font-weight: 700;
-            /* ✨ CAMBIO: Texto con gradiente llamativo */
-            background: linear-gradient(45deg, #3498db, #2c3e50);
+            font-size: 2.7em;
+            font-weight: 800;
+            margin-bottom: 25px;
+            background: #FFD166;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
         }
 
         /* --- Estilos de la Tabla de Ranking --- */
         .ranking-table {
             width: 100%;
             border-collapse: separate;
-            border-spacing: 0 8px;
-            margin-top: 20px;
+            border-spacing: 0 12px;
+            border-radius: 12px;
         }
-        .ranking-table th {
-            background-color: #f8f8f8;
-            font-weight: 600;
-            padding: 12px 15px;
-            text-align: left;
-            color: #555;
+
+        .ranking-table thead th {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: #22c71fff;
+            padding-bottom: 10px;
         }
-        .ranking-table td {
-            padding: 12px 15px;
-            text-align: left;
-            background-color: #fff;
-            border-bottom: 1px solid #eee;
-        }
-        .ranking-table tr > td:first-child { border-radius: 8px 0 0 8px; }
-        .ranking-table tr > td:last-child { border-radius: 0 8px 8px 0; }
-        
+
         .ranking-table tbody tr {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            transition: 0.25s ease;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-            position: relative;
         }
+
         .ranking-table tbody tr:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            z-index: 10;
-            background-color: #fff;
+            transform: translateY(-4px);
+            box-shadow: rgba(0, 0, 0, 0.35);
+            border-radius: 12px;
         }
-        .ranking-table td:first-child {
-            font-weight: bold;
-            color: #3498db;
-            width: 60px;
-            font-size: 1.1em;
+
+        .ranking-table td {
+            padding: 20px 20px;
         }
-        
-        .user-cell { display: flex; align-items: center; }
+
+        .rank-gold {
+            background: linear-gradient(135deg, #fef9c3, #fde047);
+            color: #854d0e !important;
+        }
+
+        .rank-silver {
+            background: linear-gradient(135deg, #f1f5f9, #cbd5e1);
+            color: #334155 !important;
+        }
+
+        .rank-bronze {
+            background: linear-gradient(135deg, #fef3c7, #fcd34d);
+            color: #92400e !important;
+        }
+
+        .rank-icon {
+            margin-left: 6px;
+        }
+
         .avatar-initial {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            margin-right: 12px;
+            font-size: 1.1em;
+            color: white;
+            text-transform: uppercase;
+            background: #FFD166;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.75);
+            display: none;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1.1em;
-            margin-right: 12px;
-            text-transform: uppercase;
-            /* ✨ CAMBIO: Sombra sutil en el avatar */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .avatar-initial[data-initial="A"] { background-color: #e74c3c; }
-        .avatar-initial[data-initial="B"] { background-color: #3498db; }
-        .avatar-initial[data-initial="C"] { background-color: #2ecc71; }
-        .avatar-initial[data-initial="D"] { background-color: #f1c40f; }
-        .avatar-initial[data-initial="E"] { background-color: #9b59b6; }
-        .avatar-initial[data-initial="F"] { background-color: #1abc9c; }
-        
-        
-        .rank-icon {
-            display: none;
-            font-size: 0.8em;
-            margin-left: 4px;
-        }
-
-        .rank-gold td {
-            background-color: #fffbeb;
-        }
-        .rank-gold td:first-child {
-            color: #d4af37;
-            font-size: 1.3em;
-            font-weight: 900;
-        }
-        .rank-gold .rank-icon::before { content: '🏆'; display: inline-block; }
-        
-        .rank-silver td {
-            background-color: #fafafa;
-        }
-        .rank-silver td:first-child {
-            color: #b0b0b0;
-            font-size: 1.2em;
-            font-weight: 800;
-        }
-        .rank-silver .rank-icon::before { content: '🥈'; display: inline-block; }
-        
-        .rank-bronze td {
-            background-color: #fdf8f4;
-        }
-        .rank-bronze td:first-child {
-            color: #cd7f32;
-            font-size: 1.15em;
-            font-weight: 700;
-        }
-        .rank-bronze .rank-icon::before { content: '🥉'; display: inline-block; }
-
-        .rank-gold .rank-icon, .rank-silver .rank-icon, .rank-bronze .rank-icon {
-            display: inline;
-        }
-        
-
-        /* --- Estilos del Modal (Ventana Emergente) --- */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: none; align-items: center; justify-content: center;
-            z-index: 1000;
+            backdrop-filter: blur(6px);
+            z-index: 999;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        .modal-overlay.active { display: flex; opacity: 1; }
-        
-        .modal-content {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-            transform: translateY(-20px) scale(0.95);
-            opacity: 0;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
-        }
-        .modal-overlay.active .modal-content {
-            transform: translateY(0) scale(1);
+
+        .modal-overlay.active {
+            display: flex;
             opacity: 1;
         }
-        .modal-close {
-            position: absolute; top: 15px; right: 15px;
-            font-size: 1.5em; font-weight: bold; color: #888;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-        .modal-close:hover { transform: scale(1.1) rotate(90deg); }
-        
-        .modal-content h3 {
-            margin-top: 0;
-            color: #2c3e50;
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 550px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+            animation: modalPop 0.35s ease forwards;
+            color: white;
         }
 
-        /* --- Estilos de las Recompensas (Grid) --- */
+        @keyframes modalPop {
+            from {
+                transform: scale(0.85);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            font-size: 1.8em;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2) rotate(90deg);
+            color: #f472b6;
+        }
+
+        /* ----RECOMPENSAS----- */
         .rewards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 18px;
             margin-top: 20px;
         }
+
         .reward-card {
-            border: 1px solid #eee;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.10);
+            border-radius: 15px;
+            padding: 12px;
             text-align: center;
-            padding: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            background: #f9f9f9;
-            /* ✨ CAMBIO: Transición para hover */
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .reward-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
-        }
-        .reward-card img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-bottom: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .reward-card h4 {
-            font-size: 0.9em;
-            margin: 5px 0;
-            font-weight: 600;
-        }
-        .reward-card p {
-            font-size: 0.8em;
-            color: #555;
-            margin: 0;
-            font-weight: bold;
+            transition: 0.25s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
         }
 
+        .reward-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .reward-card img {
+            width: 90px;
+            height: 90px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
+
 <body>
     <header>@include('partials.navbar')</header>
 
@@ -243,18 +214,21 @@
                     @foreach($ranking as $index => $row)
                         @php
                             $initial = strtoupper(substr($row->username, 0, 1));
-                            
+
                             $rank = $index + 1;
                             $rankClass = '';
-                            if ($rank == 1) $rankClass = 'rank-gold';
-                            if ($rank == 2) $rankClass = 'rank-silver';
-                            if ($rank == 3) $rankClass = 'rank-bronze';
+                            if ($rank == 1)
+                                $rankClass = 'rank-gold';
+                            if ($rank == 2)
+                                $rankClass = 'rank-silver';
+                            if ($rank == 3)
+                                $rankClass = 'rank-bronze';
                         @endphp
-                        
+
                         <tr class="clickable-row {{ $rankClass }}" data-modal-target="#user-modal-{{ $row->usuario_id }}">
-                            
+
                             <td>{{ $rank }} <span class="rank-icon"></span></td>
-                            
+
                             <td>
                                 <div class="user-cell">
                                     <div class="avatar-initial" data-initial="{{ $initial }}">{{ $initial }}</div>
@@ -262,7 +236,8 @@
                                 </div>
                             </td>
                             <td>{{ $row->total_points }}</td>
-                            <td>{{ $row->achieved_at ? \Carbon\Carbon::parse($row->achieved_at)->format('Y-m-d H:i') : '-' }}</td>
+                            <td>{{ $row->achieved_at ? \Carbon\Carbon::parse($row->achieved_at)->format('Y-m-d H:i') : '-' }}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -301,10 +276,10 @@
     <footer>@include('partials.footer')</footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Abrir modal
             document.querySelectorAll('.clickable-row').forEach(row => {
-                row.addEventListener('click', function() {
+                row.addEventListener('click', function () {
                     const modalId = this.getAttribute('data-modal-target');
                     const modal = document.querySelector(modalId);
                     if (modal) {
@@ -314,13 +289,13 @@
             });
 
             document.querySelectorAll('.modal-close').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     this.closest('.modal-overlay').classList.remove('active');
                 });
             });
 
             document.querySelectorAll('.modal-overlay').forEach(overlay => {
-                overlay.addEventListener('click', function(e) {
+                overlay.addEventListener('click', function (e) {
                     if (e.target === this) {
                         this.classList.remove('active');
                     }
@@ -330,4 +305,5 @@
     </script>
 
 </body>
+
 </html>
