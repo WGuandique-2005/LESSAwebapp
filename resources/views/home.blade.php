@@ -574,8 +574,12 @@
             }
 
             .modal-button {
-                width: 100%;
-                margin: 5px 0 0 0 !important;
+                width: 80%;
+                margin: 0 !important;
+            }
+
+            .modal-button.secondary {
+                margin-left: 0 !important;
             }
         }
     </style>

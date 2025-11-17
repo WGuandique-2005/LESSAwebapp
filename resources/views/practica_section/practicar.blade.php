@@ -9,11 +9,15 @@
     <style>
         /* Variables y Estilos Base */
         :root {
-            --primary-blue: #007bff; /* Principal: Azul */
-            --primary-orange: #ff6b35; /* Acento: Naranja */
-            --light-gray: #f4f6f9; /* Fondo muy claro */
+            --primary-blue: #007bff;
+            /* Principal: Azul */
+            --primary-orange: #ff6b35;
+            /* Acento: Naranja */
+            --light-gray: #f4f6f9;
+            /* Fondo muy claro */
             --medium-gray: #e9ecef;
-            --dark-gray: #2c3e50; /* Texto principal oscuro */
+            --dark-gray: #2c3e50;
+            /* Texto principal oscuro */
             --text-color: #34495e;
             --white: #ffffff;
             --border-color: #dcdcdc;
@@ -27,7 +31,8 @@
             --spacing-sm: 0.5rem;
             --spacing-md: 1rem;
             --spacing-lg: 1.5rem;
-            --spacing-xl: 2.5rem; /* Más grande para secciones */
+            --spacing-xl: 2.5rem;
+            /* Más grande para secciones */
             --spacing-xxl: 4rem;
 
             --font-family-primary: 'Poppins', sans-serif;
@@ -60,7 +65,7 @@
             margin: 0 auto;
             padding: 0 var(--spacing-md);
         }
-        
+
         /* HERO SECTION (UX/UI MEJORADA - CORRECCIÓN DE VISIBILIDAD) */
         .hero-section {
             /* Mantenemos el degradado de color principal */
@@ -69,7 +74,8 @@
             color: var(--white);
             position: relative;
             overflow: hidden;
-            min-height: 380px; /* Un poco más alto para impacto */
+            min-height: 380px;
+            /* Un poco más alto para impacto */
             display: flex;
             align-items: center;
         }
@@ -89,14 +95,16 @@
             background-repeat: no-repeat;
             /* Aplicamos una capa semitransparente sobre la imagen para alto contraste */
             background-blend-mode: multiply;
-            background-color: rgba(0, 123, 255, 0.4); /* Capa azul más fuerte */
-            opacity: 0.4; /* Opacidad sutil para que se vea el patrón pero sin opacar el texto */
+            background-color: rgba(0, 123, 255, 0.4);
+            /* Capa azul más fuerte */
+            opacity: 0.4;
+            /* Opacidad sutil para que se vea el patrón pero sin opacar el texto */
             z-index: 0;
         }
 
         /* Ocultamos la etiqueta img que estaba causando problemas y usamos la pseudo-clase ::before */
         .hero-bg-img {
-            display: none; 
+            display: none;
         }
 
         .hero-content {
@@ -105,7 +113,8 @@
             align-items: center;
             text-align: center;
             position: relative;
-            z-index: 1; /* Asegura que el contenido esté sobre el fondo */
+            z-index: 1;
+            /* Asegura que el contenido esté sobre el fondo */
             width: 100%;
         }
 
@@ -113,24 +122,27 @@
             font-size: var(--font-size-xxl);
             font-weight: 800;
             margin-bottom: var(--spacing-sm);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para resaltar aún más */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            /* Sombra para resaltar aún más */
         }
-        
+
         .hero-text h3 {
-             font-size: var(--font-size-lg);
-             font-weight: 600;
-             margin-bottom: var(--spacing-md);
-             color: var(--primary-orange); /* Color de acento para el subtítulo */
-             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-orange);
+            /* Color de acento para el subtítulo */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .hero-text p {
             font-size: var(--font-size-md);
             max-width: 700px;
             margin-bottom: var(--spacing-xl);
-            color: rgba(255, 255, 255, 0.95); /* Mayor opacidad para el párrafo */
+            color: rgba(255, 255, 255, 0.95);
+            /* Mayor opacidad para el párrafo */
         }
-        
+
         /* SECCIONES Y HEADERS */
         .learn-sections {
             padding: var(--spacing-xxl) 0;
@@ -150,7 +162,8 @@
             display: inline-block;
         }
 
-        .section-header h2::after { /* Separador visual bajo el título */
+        .section-header h2::after {
+            /* Separador visual bajo el título */
             content: '';
             position: absolute;
             bottom: -5px;
@@ -186,16 +199,17 @@
             background-color: var(--error-color);
             color: var(--white);
         }
-        
+
         /* PROGRESS BAR (Mejora visual) */
         .progress-container {
             margin: var(--spacing-xl) auto 0 auto;
             padding: var(--spacing-md) var(--spacing-lg);
             border-radius: var(--border-radius-lg);
-            background-color: var(--dark-gray); /* Fondo más oscuro y elegante */
+            background-color: var(--dark-gray);
+            /* Fondo más oscuro y elegante */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             max-width: 800px;
-            text-align: left; 
+            text-align: left;
         }
 
         .progress-container p {
@@ -205,7 +219,7 @@
             color: var(--white);
             font-size: var(--font-size-lg);
         }
-        
+
         .progress-container small {
             display: block;
             color: rgba(255, 255, 255, 0.7);
@@ -214,49 +228,97 @@
         }
 
         .progress-bar-outer {
-            background-color: #4a637d; 
+            background-color: #4a637d;
             border-radius: 5px;
-            height: 18px; 
+            height: 18px;
             overflow: hidden;
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .progress-bar-inner {
-            background-color: var(--primary-orange); 
+            background-color: var(--primary-orange);
             height: 100%;
             border-radius: 5px;
             width: 0%;
             transition: width 0.7s ease-in-out;
             position: relative;
         }
-        
+
+        /* ESTILOS PARA RANKING CONTAINER */
+        .ranking-container {
+            background: linear-gradient(135deg, var(--primary-orange) 0%, #ff8c42 100%);
+            margin-top: var(--spacing-xl);
+        }
+
+        .ranking-container p {
+            color: var(--white);
+        }
+
+        .ranking-position {
+            font-size: var(--font-size-lg);
+            font-weight: 800;
+            color: var(--white);
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius-sm);
+            display: inline-block;
+        }
+
+        .ranking-info {
+            margin-top: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .btn-view-ranking {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary-orange);
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: var(--font-size-base);
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-view-ranking:hover {
+            background-color: var(--light-gray);
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-view-ranking:active {
+            transform: scale(0.98);
+        }
 
         /* GRID DE ACTIVIDADES */
         .main-learn-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: var(--spacing-md); 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
             padding: var(--spacing-md) 0;
         }
 
         /* LEARN CARD (Rediseño UX/UI) */
         .learn-card {
             background-color: var(--white);
-            border-radius: var(--border-radius-lg); 
-            box-shadow: 0 6px 15px var(--shadow-medium); 
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 6px 15px var(--shadow-medium);
             overflow: hidden;
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            border: 1px solid var(--border-color); 
+            border: 1px solid var(--border-color);
         }
 
         .learn-card:hover {
-            transform: translateY(-10px) scale(1.02); 
+            transform: translateY(-10px) scale(1.02);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
-        
+
         .learn-card:active {
             transform: translateY(-5px);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
@@ -264,20 +326,20 @@
 
         .card-image-container {
             width: 100%;
-            height: 220px; 
+            height: 220px;
             overflow: hidden;
             background-color: var(--medium-gray);
             position: relative;
         }
-        
-        .card-image-container::after { 
+
+        .card-image-container::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 123, 255, 0.1); 
+            background: rgba(0, 123, 255, 0.1);
             mix-blend-mode: multiply;
         }
 
@@ -287,24 +349,24 @@
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-        
+
         .learn-card:hover .card-image {
-            transform: scale(1.05); 
+            transform: scale(1.05);
         }
 
         .card-content {
-            padding: var(--spacing-lg) var(--spacing-xl); 
+            padding: var(--spacing-lg) var(--spacing-xl);
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
-        
+
         .card-content h3 {
             font-size: var(--font-size-lg);
             color: var(--primary-blue);
             margin-bottom: var(--spacing-sm);
-            font-weight: 700; 
-            border-bottom: 2px solid var(--primary-orange); 
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary-orange);
             padding-bottom: 5px;
             display: inline-block;
         }
@@ -315,31 +377,31 @@
             flex-grow: 1;
             margin-top: var(--spacing-md);
         }
-        
+
         /* ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES (Responsividad Mejorada) */
         @media (max-width: 767px) {
             .hero-section {
                 padding: var(--spacing-xl) 0;
                 min-height: 300px;
             }
-            
+
             .hero-text h2 {
                 font-size: 2rem;
             }
-            
+
             .hero-text h3 {
                 font-size: 1.15rem;
             }
-            
+
             .progress-container {
                 margin: var(--spacing-lg) var(--spacing-md);
             }
 
             .main-learn-grid {
-                grid-template-columns: 1fr; 
+                grid-template-columns: 1fr;
                 padding: 0;
             }
-            
+
             .learn-card {
                 width: 100%;
                 margin: 0;
@@ -348,21 +410,22 @@
             .card-content {
                 padding: var(--spacing-md);
             }
-            
+
             .section-header h2 {
                 font-size: 1.8rem;
             }
-            
+
             .section-header {
                 margin-bottom: var(--spacing-lg);
             }
-            
+
             .learn-sections {
                 padding: var(--spacing-xl) 0;
             }
 
             .hero-logo {
-                display: none; /* Ocultar el logo en móvil para dar más espacio al texto */
+                display: none;
+                /* Ocultar el logo en móvil para dar más espacio al texto */
             }
         }
 
@@ -378,8 +441,9 @@
             .hero-logo {
                 max-width: 150px;
                 margin-right: var(--spacing-md);
-                order: 2; 
-                filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)); /* Sombra para resaltar el logo blanco */
+                order: 2;
+                filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+                /* Sombra para resaltar el logo blanco */
             }
 
             .hero-text {
@@ -390,12 +454,11 @@
             .hero-text h2 {
                 font-size: var(--font-size-xl);
             }
-            
+
             .progress-container {
                 text-align: center;
             }
         }
-
     </style>
 </head>
 
@@ -410,23 +473,24 @@
             {{ session('error') }}
         </p>
     @endif
-    
+
     <header>@include('partials.navbar')</header>
-    
+
     <main>
         <section class="hero-section">
-            <img src="{{ asset('img/aprender.png') }}" alt="Fondo de la sección de práctica"
-                class="hero-bg-img">
+            <img src="{{ asset('img/aprender.png') }}" alt="Fondo de la sección de práctica" class="hero-bg-img">
             <div class="container hero-content">
                 <div class="hero-text">
                     <h2>Sección de Práctica</h2>
                     <h3>¡Pon a prueba y consolida lo que has aprendido en LESSA!</h3>
-                    <p>Bienvenido a tu espacio de práctica. Con ejercicios, evaluaciones y herramientas interactivas, reforzarás tu memoria visual y fluidez en el Lenguaje de Señas Salvadoreño. ¡Lleva tu conocimiento al siguiente nivel!</p>
+                    <p>Bienvenido a tu espacio de práctica. Con ejercicios, evaluaciones y herramientas interactivas,
+                        reforzarás tu memoria visual y fluidez en el Lenguaje de Señas Salvadoreño. ¡Lleva tu
+                        conocimiento al siguiente nivel!</p>
                 </div>
                 <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="hero-logo">
             </div>
         </section>
-        
+
         <div class="container">
             @php
                 use App\Models\PuntosUsuario;
@@ -437,65 +501,109 @@
                 } else {
                     $completadas = 3; // Valor de ejemplo
                 }
-                
+
                 $totalNiveles = 16;
                 $progresoPorcentaje = $totalNiveles > 0 ? round(($completadas / $totalNiveles) * 100) : 0;
             @endphp
-            
+
             <div class="progress-container">
                 <p>Progreso Global de Práctica: {{ $progresoPorcentaje }}%</p>
                 <small>Has completado {{ $completadas }} de {{ $totalNiveles }} actividades disponibles.</small>
                 <div class="progress-bar-outer">
-                    <div class="progress-bar-inner" style="width: {{ $progresoPorcentaje }}%;">
-                </div>
+                    <div class="progress-bar-inner" style="width: {{ $progresoPorcentaje }}%;"></div>
                 </div>
             </div>
-            
+
+            @if(Auth::check())
+                @php
+                    $userRanking = DB::table('puntos_usuarios')
+                        ->select(
+                            'puntos_usuarios.usuario_id',
+                            'users.username',
+                            DB::raw('SUM(puntos_obtenidos) as total_points')
+                        )
+                        ->join('users', 'users.id', '=', 'puntos_usuarios.usuario_id')
+                        ->where('puntos_usuarios.completado', true)
+                        ->groupBy('puntos_usuarios.usuario_id', 'users.username')
+                        ->orderByDesc('total_points')
+                        ->get();
+
+                    $userPosition = $userRanking->search(function ($item) {
+                        return $item->usuario_id == Auth::id();
+                    });
+
+                    $userTotalPoints = PuntosUsuario::where('usuario_id', Auth::id())
+                        ->where('completado', true)
+                        ->sum('puntos_obtenidos');
+                @endphp
+
+                <div class="progress-container ranking-container">
+                    @if($userPosition !== false)
+                        <p>Tu Posición en el Ranking: <span class="ranking-position">#{{ $userPosition + 1 }}</span></p>
+                        <small>Has acumulado {{ $userTotalPoints }} puntos totales</small>
+                        <div class="ranking-info">
+                            <a href="{{ route('ranking') }}" class="btn-view-ranking">Ver Ranking Completo</a>
+                        </div>
+                    @else
+                        <p>¡Aún no estás en el Ranking!</p>
+                        <small>Completa minijuegos y obtén puntos para aparecer en el ranking global</small>
+                        <div class="ranking-info">
+                            <a href="{{ route('ranking') }}" class="btn-view-ranking">Ver Ranking y Comienza a Competir</a>
+                        </div>
+                    @endif
+                </div>
+            @endif
+
             <section class="learn-sections">
                 <div class="section-header">
                     <h2>Actividades de LESSA</h2>
-                    <p>Selecciona una lección para iniciar tu práctica y reforzar tus conocimientos con ejercicios interactivos.</p>
+                    <p>Selecciona una lección para iniciar tu práctica y reforzar tus conocimientos con ejercicios
+                        interactivos.</p>
                 </div>
                 <div class="learn-sections-layout">
                     <div class="main-learn-grid">
-                        
+
                         <div class="learn-card goToLevelAbecedario">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/abcd.png') }}" alt="Señal del abecedario" class="card-image">
                             </div>
                             <div class="card-content">
                                 <h3>Abecedario</h3>
-                                <p>Practica el deletreo manual para nombres propios, siglas y palabras desconocidas. ¡La base de la comunicación!</p>
+                                <p>Practica el deletreo manual para nombres propios, siglas y palabras desconocidas. ¡La
+                                    base de la comunicación!</p>
                             </div>
                         </div>
-                        
+
                         <div class="learn-card goToLevelNumeros">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/numbers.png') }}" alt="Señal de números" class="card-image">
                             </div>
                             <div class="card-content">
                                 <h3>Números y Cantidades</h3>
-                                <p>Domina los números del 1 al 100 y más allá, aprende a contar objetos y a formular preguntas sobre cantidades.</p>
+                                <p>Domina los números del 1 al 100 y más allá, aprende a contar objetos y a formular
+                                    preguntas sobre cantidades.</p>
                             </div>
                         </div>
-                        
+
                         <div class="learn-card goToLevelSaludos">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/saludos.png') }}" alt="Señal de saludo" class="card-image">
                             </div>
                             <div class="card-content">
                                 <h3>Saludos y Presentaciones</h3>
-                                <p>Refuerza las frases esenciales para iniciar una conversación: "Hola", "¿Cómo estás?" y presentarte formal e informalmente.</p>
+                                <p>Refuerza las frases esenciales para iniciar una conversación: "Hola", "¿Cómo estás?"
+                                    y presentarte formal e informalmente.</p>
                             </div>
                         </div>
-                        
+
                         <div class="learn-card goToLevelSalud">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/health.png') }}" alt="Señal de salud" class="card-image">
                             </div>
                             <div class="card-content">
                                 <h3>Salud y Emergencias</h3>
-                                <p>Practica cómo señalar síntomas básicos ("me duele", "fiebre") y cómo comunicar información médica crítica en situaciones de emergencia.</p>
+                                <p>Practica cómo señalar síntomas básicos ("me duele", "fiebre") y cómo comunicar
+                                    información médica crítica en situaciones de emergencia.</p>
                             </div>
                         </div>
 
@@ -504,21 +612,21 @@
             </section>
         </div>
     </main>
-    
+
     <footer>@include('partials.footer')</footer>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Función para manejar la navegación por click en las cards
             function setupCardNavigation(className, route) {
                 const card = document.querySelector('.' + className);
                 if (card) {
-                    card.addEventListener('click', function() {
+                    card.addEventListener('click', function () {
                         window.location.href = route;
                     });
                 }
             }
-            
+
             // Asignación de rutas a las tarjetas
             setupCardNavigation('goToLevelAbecedario', "{{ route('nivel.abecedario') }}");
             setupCardNavigation('goToLevelNumeros', "{{ route('nivel.numeros') }}");
