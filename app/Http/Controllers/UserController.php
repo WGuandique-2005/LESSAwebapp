@@ -9,7 +9,6 @@ use App\Mail\VerifyUser;
 use App\Mail\AccountActivated;
 use App\Mail\RestorePassword;
 use App\Models\ResetTokenPass;
-use App\Mail\UpdatePassword;
 use App\Mail\PasswordUpdatedSuccesful;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

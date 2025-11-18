@@ -40,7 +40,7 @@ class PasswordUpdatedSuccesful extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.PassActualizada',   // tu vista de bienvenida
+            view: 'Mail.PassActualizada',   // tu vista de bienvenida
             with: [
                 'user' => $this->user,
             ],

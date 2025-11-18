@@ -31,7 +31,7 @@ class RestorePassword extends Mailable
     }
     public function content(): Content{
         return new Content(
-            view: 'mail.restablecerPass',      // tu vista de verificación
+            view: 'Mail.restablecerPass',      // tu vista de verificación
             with: [
                 'user'  => $this->user,
                 'token' => $this->token,

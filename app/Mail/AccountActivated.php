@@ -39,7 +39,7 @@ class AccountActivated extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.cuentaActivada',   // tu vista de bienvenida
+            view: 'Mail.cuentaActivada',   // tu vista de bienvenida
             with: [
                 'user' => $this->user,
             ],

@@ -41,7 +41,7 @@ class VerifyUser extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.verificarUsuario',      // tu vista de verificación
+            view: 'Mail.verificarUsuario',      // tu vista de verificación
             with: [
                 'user'  => $this->user,
                 'token' => $this->token,
