@@ -300,7 +300,66 @@
             background-color: rgba(239, 68, 68, 0.1)
             border: 1px solid var(--error-color);
         }
+.modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.65); /* Fondo oscuro semitransparente */
+            display: none; /* Oculto por defecto */
+            align-items: center;
+            justify-content: center;
+            z-index: 1050; /* Encima de todo */
+            padding: var(--spacing-md); /* Para que no pegue a los bordes en móvil */
+        }
 
+        .modal-content {
+            background: var(--bg-color);
+            border-radius: var(--border-radius-md); /* Misma estética que las tarjetas */
+            box-shadow: var(--shadow-md); /* Misma sombra */
+            padding: var(--spacing-xl);
+            max-width: 500px; /* Ancho máximo */
+            width: 100%; /* Responsive */
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            font-size: var(--font-size-xl);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-md);
+            font-weight: 700;
+        }
+
+        .modal-content p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+        }
+        
+        /* Resaltar el texto de peligro */
+        .modal-content p strong {
+            color: var(--danger-color);
+            font-weight: 600;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+        }
+        
+        /* Botón secundario (Cancelar) */
+        .action-button.secondary {
+            background-color: var(--light-color);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .action-button.secondary:hover {
+            background-color: #e9ecef; /* Gris más oscuro al pasar el ratón */
+            transform: translateY(-2px);
+        }
         .error-message {
             color: var(--error-color);
             font-size: 0.85em;
@@ -308,7 +367,7 @@
             margin-bottom: 6px;
             display: block;
         }
-        @media (max-width: 767px) {
+        @media (max-width: 768px) {
             .profile-container {
                 margin: var(--spacing-lg) auto;
             }
@@ -323,8 +382,6 @@
                 height: 100px;
                 font-size: var(--font-size-xl);
             }
-
-
 
             .profile-info h1 {
                 font-size: var(--font-size-xxl);
@@ -358,6 +415,10 @@
 
             .action-button {
                 width: 100%;
+            }
+
+            .modal-actions {
+                flex-direction: column-reverse; /* Pone "Cancelar" abajo */
             }
         }
     </style>
@@ -416,6 +477,17 @@
         </div>
     </div>
 
+    <div id="deleteModal" class="modal-backdrop">
+        <div class="modal-content">
+            <h3>¿Estás realmente seguro?</h3>
+            <p>Esta acción es <strong>irreversible</strong> y eliminará permanentemente tu cuenta. No podrás recuperar tus datos.</p>
+            <div class="modal-actions">
+                <button id="cancelDelete" class="action-button secondary">Cancelar</button>
+                <button id="confirmDelete" class="action-button danger">Sí, eliminar mi cuenta</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         @include('partials.footer')
     </footer>
@@ -423,12 +495,46 @@
     <script>
         addEventListener('DOMContentLoaded', function() {
             const deleteButton = document.getElementById('deleteAccountButton');
-            deleteButton.addEventListener('click', function(event) {
-                event.preventDefault();
-                if (confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción es irreversible.')) {
-                    window.location.href = deleteButton.href;
-                }
-            });
+            const deleteModal = document.getElementById('deleteModal');
+            const confirmDeleteButton = document.getElementById('confirmDelete');
+            const cancelDeleteButton = document.getElementById('cancelDelete');
+
+            // 1. Abrir el modal
+            if (deleteButton) {
+                deleteButton.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevenimos que el enlace navegue
+                    deleteModal.style.display = 'flex'; // Mostramos el modal
+                });
+            }
+
+            // 2. Botón de Cancelar
+            if (cancelDeleteButton) {
+                cancelDeleteButton.addEventListener('click', function() {
+                    deleteModal.style.display = 'none'; // Ocultamos el modal
+                });
+            }
+
+            // 3. Botón de Confirmar Eliminación
+            if (confirmDeleteButton) {
+                confirmDeleteButton.addEventListener('click', function() {
+                    // Opcional: Mostramos que está cargando
+                    this.textContent = 'Eliminando...';
+                    this.disabled = true;
+                    
+                    // Redirigimos al enlace original del botón de eliminar
+                    window.location.href = deleteButton.href; 
+                });
+            }
+
+            // 4. Cerrar haciendo clic fuera del modal (en el fondo)
+            if (deleteModal) {
+                deleteModal.addEventListener('click', function(event) {
+                    // Si el objetivo del clic es el fondo mismo, y no un hijo
+                    if (event.target === deleteModal) {
+                        deleteModal.style.display = 'none';
+                    }
+                });
+            }
         });
     </script>
 </body>
