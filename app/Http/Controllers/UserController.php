@@ -329,8 +329,39 @@ class UserController extends Controller
     }
 
     /** Mostrar formulario para establecer nueva contraseña */
-    public function showNewPassForm()
+    public function showNewPassForm(Request $request)
     {
+        // Si se abre con uid+token desde el email -> validar y establecer reset_user_id en sesión
+        if ($request->has('uid') && $request->has('token')) {
+            $userId = $request->query('uid');
+            $token  = strtoupper($request->query('token'));
+
+            $record = ResetTokenPass::where('user_id', $userId)
+                ->where('token', $token)
+                ->first();
+
+            if (!$record) {
+                return redirect()->route('recuperar')->with('error', 'Enlace de recuperación inválido o ya usado. Por favor, solicita uno nuevo.');
+            }
+
+            // Verificar expiración (2 horas)
+            if (Carbon::parse($record->created_at)->addHours(2)->isPast()) {
+                $record->delete();
+                return redirect()->route('recuperar')->with('error', 'El enlace de recuperación ha expirado. Por favor, solicita uno nuevo.');
+            }
+
+            // Guardar el user_id en sesión para permitir establecer la nueva contraseña desde este navegador
+            session(['reset_user_id' => $userId]);
+
+            // Redirigir al formulario para ingresar la nueva contraseña
+            return redirect()->route('newPass_view')->with('status', 'Puedes establecer tu nueva contraseña.');
+        }
+
+        // Si no hay reset_user_id en sesión -> pedir que solicite el código primero
+        if (!session('reset_user_id')) {
+            return redirect()->route('recuperar')->with('error', 'Debes solicitar un código de recuperación primero.');
+        }
+
         return view('processNewPass');
     }
 

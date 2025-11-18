@@ -52,6 +52,9 @@ Route::middleware('guest')->group(function (){
     // Procesar nueva contraseña
     Route::post('/new_pass', [UserController::class, 'resetPassword'])->name('newPass');
 
+    // NUEVO: endpoint que las sesiones con el formulario abierto pueden pollear
+    Route::get('/recuperar_pass/status', [UserController::class, 'resetStatus'])->name('recuperar.status');
+
     //----------------------------------
     // Google OAuth authentication
     //----------------------------------
