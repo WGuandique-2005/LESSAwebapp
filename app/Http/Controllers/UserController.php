@@ -144,23 +144,31 @@ class UserController extends Controller
                 'token' => 'required|string|size:6',
             ]);
 
+            // Intentar obtener userId desde sesión
             $userId = session('verify_user_id');
 
+            // Si no hay userId en sesión, intentar localizar el token directamente en DB
             if (!$userId) {
-                return redirect()->route('signup')->with('error', 'Sesión de verificación expirada o inválida. Por favor, regístrate de nuevo.');
+                $record = VerificationToken::where('token', $request->token)->first();
+
+                if (!$record) {
+                    return redirect()->route('signup')->with('error', 'Sesión de verificación expirada o inválida. Por favor, regístrate de nuevo.');
+                }
+
+                $userId = $record->user_id;
+            } else {
+                // Si sí hay userId en sesión, buscar específicamente ese token para ese usuario
+                $record = VerificationToken::where('user_id', $userId)
+                    ->where('token', $request->token)
+                    ->first();
+
+                if (!$record) {
+                    throw ValidationException::withMessages(['token' => 'El código de verificación es inválido o ha expirado. Por favor, solicita uno nuevo.']);
+                }
             }
 
-            // 2) Recuperar el registro de token (si existe)
-            $record = VerificationToken::where('user_id', $userId)
-                ->where('token', $request->token)
-                ->first();
-
-            if (!$record) {
-                throw ValidationException::withMessages(['token' => 'El código de verificación es inválido o ha expirado. Por favor, solicita uno nuevo.3']);
-            }
-
-            // 3) Verificar expiración (>24h)
-            if (Carbon::parse($record->created_at)->addHours(2)->isPast()) {
+            // 3) Verificar expiración (5m)
+            if (Carbon::parse($record->created_at)->addMinutes(5)->isPast()) {
                 $record->delete();
                 throw ValidationException::withMessages(['token' => 'El código de verificación ha expirado. Por favor, solicita uno nuevo.']);
             }
@@ -176,7 +184,6 @@ class UserController extends Controller
             } catch (Exception $mailException) {
                 \Log::error('Error enviando codigo a tu email: ' . $mailException->getMessage());
             }
-
 
             // 6) Limpiar sesión, loguear y redirigir a home
             session()->forget('verify_user_id');
