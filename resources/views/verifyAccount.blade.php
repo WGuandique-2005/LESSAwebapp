@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verifica tu cuenta</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -227,5 +228,51 @@
             <button type="submit">Reenviar código</button>
         </form>
     </div>
+
+    @if(session('verify_user_id'))
+    <script>
+        (function(){
+            const statusUrl = "{{ route('verify.status') }}";
+            const remoteLoginUrl = "{{ route('verify.remoteLogin') }}";
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            // Poll cada 3s para comprobar si el usuario se activó en otro dispositivo
+            const pollInterval = 3000;
+            let poller = setInterval(async () => {
+                try {
+                    const res = await fetch(statusUrl, { credentials: 'same-origin' });
+                    if (!res.ok) return;
+                    const data = await res.json();
+                    if (data.activated) {
+                        clearInterval(poller);
+                        // Solicitar al servidor que haga login en esta sesión
+                        const r = await fetch(remoteLoginUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': csrfToken
+                            },
+                            credentials: 'same-origin',
+                            body: JSON.stringify({})
+                        });
+                        if (r.ok) {
+                            const jr = await r.json();
+                            if (jr.ok && jr.redirect) {
+                                window.location.href = jr.redirect;
+                            } else {
+                                // fallback: recargar
+                                window.location.reload();
+                            }
+                        } else {
+                            window.location.reload();
+                        }
+                    }
+                } catch (e) {
+                    // Silencioso: seguir intentando
+                }
+            }, pollInterval);
+        })();
+    </script>
+    @endif
 </body>
 </html>

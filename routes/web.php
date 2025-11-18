@@ -39,6 +39,10 @@ Route::middleware('guest')->group(function (){
     Route::post('/verify', [UserController::class,'verifyAccount'])->name('verify.submit');
     Route::post('/verify/resend',[UserController::class,'resendToken'])->name('verify.resend');
 
+    // Nuevo: endpoints para polling y remote-login desde la vista de verificación
+    Route::get('/verify/status', [UserController::class, 'verifyStatus'])->name('verify.status');
+    Route::post('/verify/remote-login', [UserController::class, 'remoteLogin'])->name('verify.remoteLogin');
+
     // Recuperar contraseña (view)
     Route::get('/recuperar_pass', [UserController::class, 'showRecuperarPassForm'])->name('recuperar');
     // Verificar correo (enviar token)

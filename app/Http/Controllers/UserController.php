@@ -86,33 +86,51 @@ class UserController extends Controller
     /** Mostrar formulario para ingresar el código */
     public function showVerifyForm(\Illuminate\Http\Request $request)
     {
-        // Si no hay verify_user_id en sesión, comprobar si vienen uid+token por query (link desde el email)
-        if (!session()->has('verify_user_id')) {
-            if ($request->has('uid') && $request->has('token')) {
-                $userId = $request->query('uid');
-                $token  = strtoupper($request->query('token'));
+        // Si vienen uid+token en query: validar y activar inmediatamente (uso único)
+        if ($request->has('uid') && $request->has('token')) {
+            $userId = $request->query('uid');
+            $token  = strtoupper($request->query('token'));
 
-                // Verificar que exista un token válido para ese usuario
-                $record = VerificationToken::where('user_id', $userId)
-                    ->where('token', $token)
-                    ->first();
+            $record = VerificationToken::where('user_id', $userId)
+                ->where('token', $token)
+                ->first();
 
-                if (!$record) {
-                    return redirect()->route('signup')->with('error', 'Enlace de verificación inválido o expirado. Por favor, solicita uno nuevo.');
-                }
-
-                // Comprobar expiración del token (2 horas) y eliminar si expiró
-                if (\Carbon\Carbon::parse($record->created_at)->addMinutes(5)->isPast()) {
-                    $record->delete();
-                    return redirect()->route('signup')->with('error', 'El enlace de verificación ha expirado. Por favor, solicita uno nuevo.');
-                }
-
-                // Guardar en sesión y redirigir a la misma ruta sin query params para mostrar la vista lista
-                session(['verify_user_id' => $userId]);
-                return redirect()->route('verify.view');
+            if (!$record) {
+                return redirect()->route('signup')->with('error', 'Enlace de verificación inválido o ya usado. Por favor, solicita uno nuevo.');
             }
 
-            // No hay sesión ni query params -> solicitar registro
+            // Verificar expiración del token (2 horas)
+            if (Carbon::parse($record->created_at)->addHours(2)->isPast()) {
+                $record->delete();
+                return redirect()->route('signup')->with('error', 'El enlace de verificación ha expirado. Por favor, solicita uno nuevo.');
+            }
+
+            // Activar usuario, borrar token y loguear en este navegador (único uso)
+            $user = User::find($userId);
+            if (!$user) {
+                $record->delete();
+                return redirect()->route('signup')->with('error', 'Usuario no encontrado. Por favor, regístrate de nuevo.');
+            }
+
+            $user->update(['is_active' => true]);
+            VerificationToken::where('user_id', $userId)->delete();
+
+            try {
+                Mail::to($user->email)->send(new AccountActivated($user));
+            } catch (Exception $mailException) {
+                \Log::error('Error enviando correo de activación: ' . $mailException->getMessage());
+            }
+
+            // Loguear en este navegador
+            Auth::login($user);
+            // limpiar posibles verify_user_id previas
+            session()->forget('verify_user_id');
+
+            return redirect()->route('home')->with('status', '¡Cuenta activada con éxito! Bienvenido/a.');
+        }
+
+        // Si no hay verify_user_id en sesión -> redirigir a signup
+        if (!session()->has('verify_user_id')) {
             return redirect()->route('signup')->with('error', 'Debes registrarte primero para verificar tu cuenta.');
         }
 
@@ -132,6 +150,7 @@ class UserController extends Controller
             session()->forget('verify_user_id');
             return redirect()->route('signup')->with('error', 'Tu registro expiró por inactividad. Por favor, regístrate de nuevo.');
         }
+
         return view('verifyAccount');
     }
 
@@ -526,5 +545,43 @@ class UserController extends Controller
         } catch (Exception $e) {
             return back()->with('error', 'Hubo un problema al eliminar tu cuenta. Por favor, inténtalo de nuevo más tarde.');
         }
+    }
+
+    /**
+     * Endpoint polled por la vista: devuelve si el usuario asociado en sesión ya está activo.
+     */
+    public function verifyStatus(Request $request)
+    {
+        $userId = session('verify_user_id');
+        if (!$userId) {
+            return response()->json(['activated' => false]);
+        }
+        $user = User::find($userId);
+        if (!$user) {
+            return response()->json(['activated' => false]);
+        }
+        return response()->json(['activated' => (bool) $user->is_active]);
+    }
+
+    /**
+     * Endpoint para que la sesión actual se loguee remotamente si el user asociado ya fue activado en otro dispositivo.
+     * Requiere CSRF token (POST).
+     */
+    public function remoteLogin(Request $request)
+    {
+        $userId = session('verify_user_id');
+        if (!$userId) {
+            return response()->json(['ok' => false, 'message' => 'No hay sesión de verificación.'], 400);
+        }
+        $user = User::find($userId);
+        if (!$user || !$user->is_active) {
+            return response()->json(['ok' => false, 'message' => 'Usuario no activo.'], 400);
+        }
+
+        // Loguear en esta sesión
+        Auth::login($user);
+        session()->forget('verify_user_id');
+
+        return response()->json(['ok' => true, 'redirect' => route('home')]);
     }
 }
