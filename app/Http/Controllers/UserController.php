@@ -83,29 +83,49 @@ class UserController extends Controller
         }
     }
 
-    /** Mostrar formulario para ingresar el código */
-    public function showVerifyForm()
+    /** Muestra el formulario para introducir el código de verificación */
+    public function showVerifyForm(Request $request)
     {
-        if (!session()->has('verify_user_id')) {
-            return redirect()->route('signup')->with('error', 'Debes registrarte primero para verificar tu cuenta.');
+        // 1. Prioridad: Obtener el user_id de la URL (si viene del correo)
+        $userId = $request->query('user_id');
+
+        // 2. Si no viene en la URL, se obtiene de la sesión (si viene del flujo de registro inmediato)
+        if (!$userId) {
+            $userId = session('verify_user_id');
         }
-        $userId = session('verify_user_id');
+
+        // 3. Si no hay ID en ningún lado, redirigir al registro.
+        if (!$userId) {
+            return redirect()->route('signup')->with('error', 'Debes registrarte primero o tu sesión de verificación ha expirado.');
+        }
+
+        // 4. Buscar el usuario
         $user = User::find($userId);
 
-        // Si el usuario no existe, limpiar sesión y redirigir
-        if (!$user) {
+        // Si el usuario no existe o ya está activo, limpiar sesión y redirigir
+        if (!$user || $user->is_active) {
             session()->forget('verify_user_id');
+            if ($user && $user->is_active) {
+                return redirect()->route('login')->with('status', 'Tu cuenta ya está activa. Inicia sesión.');
+            }
             return redirect()->route('signup')->with('error', 'Tu sesión de verificación ha expirado. Regístrate de nuevo.');
         }
 
+        // 5. Lógica de expiración (mantenida de tu código)
         // Si el usuario no está activo y han pasado más de 5 minutos, eliminarlo y limpiar sesión
+        // NOTA: Es importante que si el usuario hace clic en el enlace del correo, el contador de 5 minutos se resetee o se maneje con el token,
+        // pero mantendré tu lógica original de 5 minutos desde created_at.
         if (!$user->is_active && $user->created_at->addMinutes(5)->isPast()) {
             VerificationToken::where('user_id', $userId)->delete();
             $user->delete();
             session()->forget('verify_user_id');
             return redirect()->route('signup')->with('error', 'Tu registro expiró por inactividad. Por favor, regístrate de nuevo.');
         }
-        return view('verifyAccount');
+
+        // 6. Si todo está bien, guardamos (o re-guardamos) el ID en la sesión para el proceso de POST (submit)
+        session(['verify_user_id' => $user->id]);
+        
+        return view('verifyAccount', compact('user')); // Opcional: pasar el usuario a la vista si lo necesitas
     }
 
     /** Procesar verificación del código */
