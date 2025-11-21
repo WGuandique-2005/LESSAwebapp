@@ -446,7 +446,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(4px);
-            z-index: 1000;
+            z-index: 9999;
             display: none;
             align-items: center;
             justify-content: center;
@@ -789,6 +789,10 @@
             </div>
         </section>
     </main>
+
+    <footer>
+        @include('partials.footer')
+    </footer>
 
     <!-- Modal -->
     <div id="progressModal" class="modal-overlay">
