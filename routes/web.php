@@ -98,11 +98,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/practicar/abecedario/conecta', [NivelesController::class, 'abecedario_conecta'])->name('nivel.abecedario.conecta');
     Route::post('/practicar/abecedario/conecta/complete', [PuntosUsuarioController::class, 'completeAbecedarioConecta'])->name('lecciones.abecedario.conecta.complete');
 
-    Route::get('/practicar/abecedario/extra', [NivelesController::class, 'abecedario_extra'])->name('nivel.abecedario.extra');
+    Route::get('/practicar/abecedario/extra', [CameraController::class, 'index'])->name('nivel.abecedario.extra');
     Route::post('/practicar/abecedario/extra/complete', [PuntosUsuarioController::class, 'completeAbecedarioExtra'])->name('lecciones.abecedario.extra.complete');
-
-    // Camara para abecedario (vocales)
-    Route::get('/practicar/abecedario/camara', [CameraController::class, 'index'])->name('nivel.abecedario.camara');
 
     // Números
     Route::get('/practicar/numeros', [NivelesController::class, 'numeros'])->name('nivel.numeros');

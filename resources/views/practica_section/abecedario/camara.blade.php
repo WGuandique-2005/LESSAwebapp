@@ -1,62 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Detectar Señas - LESSA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+        :root {
+            --primary-blue: #2a6fdb;
+            --secondary-orange: #ff6b35;
+            --success-color: #069c5e;
+            --error-color: #dc3545;
+            --light-gray: #f4f6f9;
+            --dark-gray: #212529;
+            --body-bg: #e9ecef;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        html {
-            font-size: 16px;
-        }
-
         body {
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--body-bg);
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centra los elementos de la "tarjeta" */
-            gap: 0; /* Eliminamos el gap para unir la tarjeta */
-            background-color: #f8f9fa; /* Fondo gris claro */
-            color: #212529;
             min-height: 100vh;
         }
 
-        header,
-        footer {
+        header, footer {
             width: 100%;
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            /* Asegura que no se centren por el 'align-items' del body */
-            align-self: auto; 
         }
 
-        h2 {
-            align-self: center;
-            font-weight: 600;
-            color: #343a40;
-            margin-top: 2rem; /* Más espacio arriba */
-            margin-bottom: 1.5rem; /* Espacio antes de la tarjeta */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            padding: 24px 16px;
         }
 
-        /* --- Contenedor del Video/Canvas (Parte superior de la tarjeta) --- */
-        #wrapper {
-            position: relative;
-            align-self: center;
+        h1 {
+            color: var(--primary-blue);
+            font-weight: 800;
+            margin-bottom: 8px;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: var(--dark-gray);
+            font-size: 1rem;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        /* Contenedor principal de la tarjeta */
+        .game-card {
             width: 95%;
             max-width: 720px;
-            border-radius: 12px 12px 0 0; 
-            overflow: hidden; 
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08); /* Sombra suave */
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Video wrapper */
+        #wrapper {
+            position: relative;
+            width: 100%;
             background: #000;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
         }
 
         video {
             width: 100%;
-            display: block; 
+            height: 100%;
+            display: block;
             transform: scaleX(-1);
+            object-fit: cover;
         }
 
         canvas {
@@ -69,139 +99,330 @@
             transform: scaleX(-1);
         }
 
-        /* --- Panel de Estado--- */
-        #status {
-            align-self: center;
-            width: 95%;
-            max-width: 720px;
-            padding: 1.25rem;
-            background-color: #fff; /* Fondo blanco */
-            border-radius: 0; 
-            box-shadow: none; 
-            border-top: 1px solid #f0f0f0; 
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #495057;
+        /* Panel de instrucción y estado */
+        .game-panel {
+            padding: 24px;
+            background-color: var(--light-gray);
             text-align: center;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        #estado {
-            font-weight: 600; /* Hace el texto detectado más legible */
+        .letter-prompt {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 8px;
         }
 
-        /* --- Contenedor de Botones (Parte inferior de la tarjeta) --- */
-        body > div:nth-of-type(2) {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap; 
-            align-self: center;
-            width: 95%;
-            max-width: 720px;
-            background-color: #fff; 
-            border-radius: 0 0 12px 12px; 
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); 
-            border-top: 1px solid #f0f0f0;
-            padding: 1.5rem; /* Espacio interno generoso */
-            margin-bottom: 2rem; /* Espacio después de la tarjeta */
+        .letter-display {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin: 16px 0;
+            letter-spacing: 8px;
         }
 
-        /* --- Estilo de Botones (Base) --- */
-        .btn { /* Mantenemos .btn por si se usa en otro lado, pero apuntamos a IDs */
-             padding: 8px 12px;
-             border-radius: 6px;
-             border: 1px solid #ccc;
-             cursor: pointer;
-             background: #f5f5f5;
-        }
-
-        /* --- Botones (Diseño llamativo) --- */
-        #startBtn,
-        #stopBtn {
-            font-size: 1.05rem; /* Ligeramente más grande */
+        .status-message {
+            font-size: 1.1rem;
             font-weight: 600;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
+            min-height: 30px;
+            margin-top: 12px;
+            color: var(--dark-gray);
+        }
+
+        .status-message.detecting {
+            color: var(--secondary-orange);
+        }
+
+        .status-message.correct {
+            color: var(--success-color);
+        }
+
+        .status-message.incorrect {
+            color: var(--error-color);
+        }
+
+        /* Progreso */
+        .progress-section {
+            padding: 16px 24px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-text {
+            font-size: 0.95rem;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 10px;
+            background-color: #d1d5db;
+            border-radius: 6px;
+            margin: 0 16px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--secondary-orange);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* Controles */
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            padding: 24px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 1.05rem;
+            font-weight: 600;
             border: none;
+            border-radius: 8px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #34d399, #28a745);
             color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f87171, #dc3545);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-danger:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Modal de fin */
+        .end-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 16px;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 18px;
             text-align: center;
-            flex-grow: 1;
-            flex-basis: 0;
-            transition: all 0.2s ease-in-out; 
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra base */
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            max-width: 480px;
+            width: 100%;
+            transform: scale(0.8);
+            animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            border-top: 8px solid var(--success-color);
         }
 
-        #startBtn {
-            background-image: linear-gradient(135deg, #34d399, #28a745);
+        @keyframes scaleIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        #stopBtn {
-            background-image: linear-gradient(135deg, #f87171, #dc3545);
+        .modal-content h2 {
+            color: var(--primary-blue);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 800;
         }
 
-        #startBtn:hover,
-        #stopBtn:hover {
-            transform: translateY(-3px) scale(1.02); /* Se eleva y crece */
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra más grande */
+        .modal-content p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
 
-        #startBtn:active,
-        #stopBtn:active {
-            transform: scale(0.99); /* Ligero hundimiento */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        .modal-content .points {
+            font-size: 3rem;
+            color: var(--success-color);
+            font-weight: 800;
+            margin: 20px 0 30px;
+            display: block;
+            background: #e6ffed;
+            padding: 10px 0;
+            border-radius: 10px;
+            border: 2px dashed var(--success-color);
         }
 
+        .modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
 
-        /* --- Responsividad para Móviles Pequeños --- */
-        @media (max-width: 480px) {
-            body {
-                gap: 0; /* Mantenemos el gap en 0 */
-            }
+        .btn-modal-action {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
 
-            h2 {
+        .btn-primary-modal {
+            background-color: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 0 #1e59b2;
+        }
+
+        .btn-primary-modal:hover {
+            background-color: #1e59b2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #144081;
+        }
+
+        .btn-progress-redirect {
+            background-color: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 0 #d1562b;
+        }
+
+        .btn-progress-redirect:hover {
+            background-color: #d1562b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #9c3f1d;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
                 font-size: 1.5rem;
-                margin-top: 1rem;
-                margin-bottom: 1rem;
             }
 
-            #status {
-                font-size: 1rem;
-                padding: 1rem;
+            .letter-display {
+                font-size: 3rem;
             }
 
-            /* Contenedor de botones en móvil */
-            body > div:nth-of-type(2) {
-                flex-direction: column; /* Apila los botones */
-                align-items: stretch; /* Estira los botones */
-                gap: 0.75rem;
-                padding: 1rem; /* Padding reducido */
-                margin-bottom: 1.5rem;
+            .game-panel {
+                padding: 18px;
             }
 
-            /* Botones en móvil (flex-grow ya no es necesario) */
-            #startBtn,
-            #stopBtn {
-                flex-grow: 0;
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                flex: 1;
+            }
+
+            .progress-section {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .progress-bar {
+                margin: 0;
+                width: 100%;
             }
         }
     </style>
 </head>
-
 <body>
     <header>@include('partials.navbar')</header>
-    <h2>Detector de señas</h2>
-    <div id="wrapper">
-        <video id="video" autoplay playsinline></video>
-        <canvas id="canvas"></canvas>
+
+    <div class="main-content">
+        <h1>🎮 Detecta la Letra</h1>
+        <p class="subtitle">Muestra la letra que se te solicita con tus manos. ¡Tienes 5 vocales para detectar!</p>
+
+        <div class="game-card">
+            <div id="wrapper">
+                <video id="video" autoplay playsinline></video>
+                <canvas id="canvas"></canvas>
+            </div>
+
+            <div class="game-panel">
+                <div class="letter-prompt">Muestra esta letra:</div>
+                <div class="letter-display" id="letter-display">A</div>
+                <div class="status-message" id="status-message">Inactivo</div>
+            </div>
+
+            <div class="progress-section">
+                <span class="progress-text"><span id="current-letter">1</span> / <span id="total-letters">5</span></span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="startBtn" class="btn btn-primary">
+                <i class="fas fa-camera"></i> Iniciar Cámara
+            </button>
+            <button id="stopBtn" class="btn btn-danger">
+                <i class="fas fa-stop"></i> Detener Cámara
+            </button>
+        </div>
     </div>
 
-    <div id="status"><span id="estado">Inactivo</span></div>
-    <div>
-        <button id="startBtn" class="btn">Iniciar cámara</button>
-        <button id="stopBtn" class="btn">Detener cámara</button>
+    <!-- Modal de fin -->
+    <div class="end-modal" id="end-modal">
+        <div class="modal-content">
+            <h2 id="modal-title">¡JUEGO TERMINADO!</h2>
+            <p id="modal-message"></p>
+            <p>Puntos ganados:</p>
+            <p class="points" id="modal-points">+0</p>
+            <div class="modal-actions">
+                <button type="button" class="btn-modal-action btn-progress-redirect" onclick="submitAndRedirect('{{ route('miProgreso') }}')">
+                    <i class="fas fa-trophy"></i> Ver Mi Progreso
+                </button>
+                <button type="button" class="btn-modal-action btn-primary-modal" onclick="document.getElementById('submit-button').click()">
+                    <i class="fas fa-arrow-right"></i> Continuar
+                </button>
+            </div>
+        </div>
     </div>
+
+    <!-- Formulario oculto para enviar puntuación -->
+    <form id="score-form" action="{{ route('lecciones.abecedario.extra.complete') }}" method="POST" style="display: none;">
+        @csrf
+        <input type="hidden" name="errors_count" id="errors-input">
+        <button type="submit" id="submit-button">Finalizar</button>
+    </form>
+
     <footer>@include('partials.footer')</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
@@ -209,38 +430,53 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
 
     <script>
+        // Letras a detectar (5 vocales)
+        const LETTERS_TO_DETECT = ['A', 'E', 'I', 'O', 'U'];
+        const TOTAL_LETTERS = LETTERS_TO_DETECT.length;
+
+        // Estado del juego
+        let currentLetterIndex = 0;
+        let detectedLetters = [];
+        let camera = null;
+        let gameRunning = false;
+        let lastDetectedLetter = null;
+        let detectionConfidence = 0;
+
         // Elementos DOM
         const videoElement = document.getElementById('video');
         const canvasElement = document.getElementById('canvas');
         const canvasCtx = canvasElement.getContext('2d');
-        const estado = document.getElementById('estado');
+        const letterDisplay = document.getElementById('letter-display');
+        const statusMessage = document.getElementById('status-message');
         const startBtn = document.getElementById('startBtn');
         const stopBtn = document.getElementById('stopBtn');
+        const progressFill = document.getElementById('progress-fill');
+        const currentLetterSpan = document.getElementById('current-letter');
+        const endModal = document.getElementById('end-modal');
+        const errorsInput = document.getElementById('errors-input');
 
-        let camera = null;
-
-        // Ajusta tamaño del canvas al video
+        // Ajusta el canvas al tamaño del video
         function fitCanvas() {
             canvasElement.width = videoElement.videoWidth || videoElement.clientWidth;
             canvasElement.height = videoElement.videoHeight || videoElement.clientHeight;
         }
 
-        // Callback cuando MediaPipe produce resultados
+        // Callback cuando MediaPipe detecta manos
         function onResults(results) {
             fitCanvas();
             canvasCtx.save();
             canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-            if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-
-                // 👉 Solo procesar UNA mano (la primera)
+            if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0 && gameRunning) {
                 const landmarks = results.multiHandLandmarks[0];
+                window.drawConnectors(canvasCtx, landmarks, window.HAND_CONNECTIONS, { lineWidth: 2, color: '#00ff00' });
+                window.drawLandmarks(canvasCtx, landmarks, { lineWidth: 1, radius: 2, color: '#ff0000' });
 
-                window.drawConnectors(canvasCtx, landmarks, window.HAND_CONNECTIONS, { lineWidth: 2 });
-                window.drawLandmarks(canvasCtx, landmarks, { lineWidth: 1, radius: 2 });
-
-                const letra = evaluarLetra(landmarks);
-                if (letra) estado.textContent = "Letra detectada: " + letra;
+                const detectedLetter = evaluarLetra(landmarks);
+                if (detectedLetter) {
+                    lastDetectedLetter = detectedLetter;
+                    checkLetterDetection(detectedLetter);
+                }
             }
 
             canvasCtx.restore();
@@ -262,15 +498,18 @@
 
         hands.onResults(onResults);
 
-        // Inicia la cámara usando Camera helper (MediaPipe)
+        // Inicia la cámara
         async function startCamera() {
-            estado.textContent = 'Iniciando cámara...';
             if (camera) {
-                estado.textContent = 'La cámara ya está iniciada';
+                statusMessage.textContent = '📹 La cámara ya está activa';
+                statusMessage.className = 'status-message';
                 return;
             }
 
             try {
+                statusMessage.textContent = '🔄 Iniciando cámara...';
+                statusMessage.className = 'status-message detecting';
+
                 camera = new Camera(videoElement, {
                     onFrame: async () => {
                         await hands.send({ image: videoElement });
@@ -278,52 +517,122 @@
                     width: 1280,
                     height: 720
                 });
+
                 camera.start();
-                estado.textContent = 'Cámara activa';
+                gameRunning = true;
+                statusMessage.textContent = '📹 Cámara activa. ¡Muestra la letra!';
+                statusMessage.className = 'status-message';
+                updateDisplay();
             } catch (e) {
                 console.error(e);
-                estado.textContent = 'Error accediendo a la cámara: ' + e.message;
+                statusMessage.textContent = '❌ Error: ' + e.message;
+                statusMessage.className = 'status-message incorrect';
             }
         }
 
+        // Detiene la cámara
         function stopCamera() {
             if (camera) {
-                try {
-                    camera.stop();
-                } catch (e) { /* ignore */ }
+                camera.stop();
                 camera = null;
-                estado.textContent = 'Cámara detenida';
+                gameRunning = false;
+                statusMessage.textContent = '⏹️ Cámara detenida';
+                statusMessage.className = 'status-message';
                 canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
             } else {
-                estado.textContent = 'La cámara no estaba activa';
+                statusMessage.textContent = '⚠️ La cámara no estaba activa';
+                statusMessage.className = 'status-message';
             }
         }
 
-        // Enviar landmarks al backend (ejemplo)
-        async function sendLandmarksToServer(landmarks) {
-            try {
-                const resp = await fetch('/api/detect', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({ landmarks })
-                });
-                const data = await resp.json();
-                // console.log('Servidor respondió', data);
-            } catch (e) {
-                console.error('Error enviando landmarks:', e);
+        // Verifica si la letra detectada es la correcta
+        function checkLetterDetection(detectedLetter) {
+            const expectedLetter = LETTERS_TO_DETECT[currentLetterIndex];
+
+            if (detectedLetter === expectedLetter) {
+                detectionConfidence++;
+
+                if (detectionConfidence >= 8) { // Requiere 8 detecciones consecutivas
+                    advanceToNextLetter();
+                }
+
+                statusMessage.textContent = `✅ ${detectedLetter} detectada (${detectionConfidence}/8)`;
+                statusMessage.className = 'status-message correct';
+            } else {
+                detectionConfidence = 0;
+                statusMessage.textContent = `❌ Mostrada: ${detectedLetter} | Se espera: ${expectedLetter}`;
+                statusMessage.className = 'status-message incorrect';
             }
         }
 
-        // Botones
+        // Avanza a la siguiente letra
+        function advanceToNextLetter() {
+            detectedLetters.push(LETTERS_TO_DETECT[currentLetterIndex]);
+            detectionConfidence = 0;
+            currentLetterIndex++;
+
+            if (currentLetterIndex < TOTAL_LETTERS) {
+                updateDisplay();
+                statusMessage.textContent = `✨ ¡Excelente! Siguiente letra...`;
+                statusMessage.className = 'status-message correct';
+
+                setTimeout(() => {
+                    updateDisplay();
+                }, 800);
+            } else {
+                finishGame();
+            }
+        }
+
+        // Actualiza la pantalla con la letra actual
+        function updateDisplay() {
+            if (currentLetterIndex < TOTAL_LETTERS) {
+                const currentLetter = LETTERS_TO_DETECT[currentLetterIndex];
+                letterDisplay.textContent = currentLetter;
+                currentLetterSpan.textContent = currentLetterIndex + 1;
+                progressFill.style.width = ((currentLetterIndex) / TOTAL_LETTERS) * 100 + '%';
+            }
+        }
+
+        // Finaliza el juego
+        function finishGame() {
+            gameRunning = false;
+            stopCamera();
+            progressFill.style.width = '100%';
+
+            const errorsCount = TOTAL_LETTERS - detectedLetters.length;
+            errorsInput.value = errorsCount;
+
+            let points = 0;
+            let title = '';
+            let message = '';
+
+            if (errorsCount === 0) {
+                points = 10;
+                title = '¡PERFECTO! 🤩';
+                message = 'Detectaste todas las vocales sin errores. ¡Eres un maestro de la LSM!';
+            } else if (errorsCount <= 1) {
+                points = 5;
+                title = '¡MUY BIEN! 👍';
+                message = `Detectaste ${detectedLetters.length}/5 vocales correctamente. ¡Excelente trabajo!`;
+            } else {
+                points = 2;
+                title = '¡BUEN INTENTO! 💪';
+                message = `Detectaste ${detectedLetters.length}/5 vocales. Sigue practicando para mejorar.`;
+            }
+
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-message').textContent = message;
+            document.getElementById('modal-points').textContent = `+${points}`;
+
+            endModal.style.display = 'flex';
+        }
+
+        // Botones de control
         startBtn.addEventListener('click', startCamera);
         stopBtn.addEventListener('click', stopCamera);
 
-        // Inicia automáticamente (opcional). Si prefieres que inicie solo al presionar botón, comenta la línea:
-        // startCamera();
-
-        // -----------------------------
-        // DETECTOR DE LETRAS
-        // -----------------------------
+        // Detector de letras (evaluarLetra) - Solo vocales
         function evaluarLetra(landmarks) {
             const pts = landmarks.map(p => [p.x, p.y, p.z]);
 
@@ -335,109 +644,59 @@
                 );
 
             const isExtended = (tip, pip) => dist(0, tip) > dist(0, pip);
-            const isSemiExtended = (tip, pip) => dist(0, tip) < dist(0, pip);
             const isFolded = (tip, pip) => dist(0, tip) < dist(0, pip);
 
-            // -----------------------------
-            // Estados por dedo
-            // -----------------------------
             const pulgarIndiceDist = dist(4, 8);
-
             const indiceExtendido = isExtended(8, 6);
             const medioExtendido = isExtended(12, 10);
             const anularExtendido = isExtended(16, 14);
             const meniqueExtendido = isExtended(20, 18);
-
-            const indiceSemi = isSemiExtended(8, 6);
-            const medioSemi = isSemiExtended(12, 10);
-            const anularSemi = isSemiExtended(16, 14);
-            const meniqueSemi = isSemiExtended(20, 18);
-
             const indiceDoblado = isFolded(8, 6);
             const medioDoblado = isFolded(12, 10);
             const anularDoblado = isFolded(16, 14);
             const meniqueDoblado = isFolded(20, 18);
 
-            // -----------------------------
             // LETRA A
-            // -----------------------------
-            if (
-                pulgarIndiceDist >= 0.09 &&
-                indiceDoblado && medioDoblado &&
-                anularDoblado && meniqueDoblado
-            ) return "A";
-
-            // -----------------------------
-            // LETRA E
-            // -----------------------------
-            {
-                const d812 = dist(8, 12); // índice-medio
-
-                if (
-                    indiceSemi && medioSemi && anularSemi && meniqueSemi &&
-
-                    // pulgar NO tan cerca del índice (para no confundirse con O)
-                    pulgarIndiceDist > 0.045 &&
-
-                    // índice y medio juntos, pero no exagerado
-                    d812 < 0.06 &&
-
-                    // índice doblado hacia adentro (pero no demasiado)
-                    pts[8][1] > pts[6][1]
-                ) {
-                    return "E";
-                }
+            if (pulgarIndiceDist >= 0.09 && indiceDoblado && medioDoblado && anularDoblado && meniqueDoblado) {
+                return "A";
             }
-            // -----------------------------
-            // LETRA I
-            // -----------------------------
-            if (
-                !indiceExtendido && !medioExtendido &&
-                !anularExtendido && meniqueExtendido
-            ) return "I";
 
-            // -----------------------------
-            // LETRA O
-            // -----------------------------
-            // -----------------------------
-            // 1. distancia pulgar - índice
-            const d48 = dist(4, 8);
-
-            // 2. índice y medio juntos
+            // LETRA E
             const d812 = dist(8, 12);
+            if (indiceDoblado && medioDoblado && anularDoblado && meniqueDoblado && pulgarIndiceDist > 0.045 && d812 < 0.06) {
+                return "E";
+            }
 
-            // 3. índice doblado hacia adentro
-            const indexCurved = pts[8][1] > pts[6][1];
+            // LETRA I
+            if (!indiceExtendido && !medioExtendido && !anularExtendido && meniqueExtendido) {
+                return "I";
+            }
 
-            // 4. medio doblado hacia adentro
-            const middleCurved = pts[12][1] > pts[10][1];
-
-            // 5. anular y meñique doblados
-            const ringCurved = pts[16][1] > pts[14][1];
-            const pinkyCurved = pts[20][1] > pts[18][1];
-
-            // CONDICIÓN FINAL
-            if (
-                d48 < 0.14 &&          // pulgar cerca del índice
-                d812 < 0.08 &&         // índice-medio juntos
-                indexCurved &&         // índice doblado
-                middleCurved
-            ) {
+            // LETRA O
+            const d48 = dist(4, 8);
+            if (d48 < 0.14 && d812 < 0.08 && indiceDoblado && medioDoblado) {
                 return "O";
             }
 
-            // -----------------------------
             // LETRA U
-            // -----------------------------
-            if (
-                indiceExtendido && medioExtendido &&
-                !anularExtendido && !meniqueExtendido &&
-                dist(8, 12) < 0.06
-            ) return "U";
+            if (indiceExtendido && medioExtendido && !anularExtendido && !meniqueExtendido && d812 < 0.06) {
+                return "U";
+            }
 
             return null;
         }
+
+        function submitAndRedirect(url) {
+            document.getElementById('submit-button').click();
+            setTimeout(() => {
+                window.location.href = url;
+            }, 100);
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDisplay();
+        });
     </script>
 </body>
-
 </html>
