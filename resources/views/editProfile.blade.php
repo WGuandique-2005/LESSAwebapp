@@ -128,11 +128,15 @@
         background-color: var(--primary-hover-color);
     }
 
+    /* Reemplazado: mejora visual y centrado consistente */
     .btn-link {
-        display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
         width: 100%;
-        text-align: center;
-        padding: 12px;
+        padding: 10px 14px;
+        height: 44px; /* altura fija para alineación consistente con el botón principal */
         border-radius: var(--border-radius);
         border: 1px solid var(--primary-color);
         background-color: transparent;
@@ -140,12 +144,20 @@
         text-decoration: none;
         font-weight: 700;
         margin-top: 10px;
-        transition: 0.2s ease-in-out;
+        transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        -webkit-appearance: none;
+        -moz-appearance: none;
     }
 
     .btn-link:hover {
         background-color: var(--primary-color);
         color: #fff;
+        border-color: var(--primary-hover-color);
+    }
+
+    .btn-link:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
     }
 
     p {

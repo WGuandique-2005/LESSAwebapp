@@ -277,7 +277,7 @@
         /* ---- RECOMPENSAS----- */
         .rewards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
@@ -289,6 +289,14 @@
             text-align: center;
             transition: 0.2s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            min-height: 120px;
+            /* evita compresión vertical excesiva */
+            padding-top: 12px;
+            padding-bottom: 12px;
         }
 
         .reward-card:hover {
@@ -297,26 +305,31 @@
         }
 
         .reward-card img {
-            width: 80px;
-            height: 80px;
+            width: 100%;
+            max-width: 84px;
+            /* controla el tamaño máximo manteniendo responsividad */
+            height: auto;
             border-radius: 10px;
-            object-fit: cover;
-            margin-bottom: 8px;
+            object-fit: contain;
+            margin-bottom: 0;
             border: 2px solid var(--accent-gold);
             box-shadow: 0 0 10px rgba(255, 209, 102, 0.5);
         }
 
         .reward-card h4 {
-            font-size: 0.9em;
+            font-size: 0.95em;
             font-weight: 600;
-            margin: 0 0 5px 0;
+            margin: 6px 0 0 0;
+            white-space: normal;
+            word-break: break-word;
         }
 
         .reward-card p {
-            font-size: 0.8em;
+            font-size: 0.85em;
             color: var(--accent-gold);
             font-weight: 700;
             margin: 0;
+            white-space: nowrap;
         }
 
 
@@ -448,7 +461,7 @@
             }
 
             .rewards-grid {
-                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
             }
 
             .modal-content {
@@ -459,6 +472,7 @@
             @media (max-width: 400px) {
                 .rewards-grid {
                     grid-template-columns: repeat(2, 1fr);
+                    gap: 12px;
                 }
 
                 .ranking-table tbody tr td:first-child {

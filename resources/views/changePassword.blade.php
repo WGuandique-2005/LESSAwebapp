@@ -21,6 +21,11 @@
             --focus-ring-color: rgba(74, 144, 226, 0.2);
         }
 
+        /* Evitar overflow por padding/anchos en pantallas pequeñas */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--background-color);
@@ -35,10 +40,10 @@
 
         .container {
             background-color: var(--card-background);
-            padding: 32px;
+            padding: 24px; /* reducido para móviles */
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            width: 100%;
+            width: 92%; /* ancho relativo para evitar desbordes */
             max-width: 440px;
             margin: 20px auto;
             text-align: left;
@@ -63,8 +68,9 @@
             color: var(--text-color);
         }
 
+        /* Usar 100% (box-sizing asegura que no haga overflow) */
         input[type="password"] {
-            width: calc(100% - 20px);
+            width: 100%;
             padding: 10px;
             margin-bottom: 18px;
             border: 1px solid var(--border-color);
@@ -167,6 +173,29 @@
         .strength-weak .strength-bar { background-color: var(--error-color); width: 33%; }
         .strength-medium .strength-bar { background-color: orange; width: 66%; }
         .strength-strong .strength-bar { background-color: var(--success-color); width: 100%; }
+
+        /* Tweak responsivo para pantallas muy delgadas */
+        @media (max-width: 480px) {
+            .container {
+                padding: 12px;
+                margin: 12px auto;
+            }
+
+            h2 {
+                font-size: 1.15rem;
+                margin-bottom: 18px;
+            }
+
+            input[type="password"] {
+                font-size: 0.95rem;
+                padding: 9px;
+            }
+
+            button {
+                padding: 10px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
