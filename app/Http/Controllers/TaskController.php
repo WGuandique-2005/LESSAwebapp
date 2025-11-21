@@ -42,6 +42,18 @@ class TaskController extends Controller
         return view('ayuda');
     }
 
+    public function diccionario(){
+        // Leer los JSON desde storage/app y pasar como arrays a la vista
+        $base = storage_path('app');
+
+        $abecedario = json_decode(file_get_contents($base . '/abecedario.json'), true) ?? [];
+        $numeros     = json_decode(file_get_contents($base . '/numeros.json'), true) ?? [];
+        $salud       = json_decode(file_get_contents($base . '/salud.json'), true) ?? [];
+        $saludos     = json_decode(file_get_contents($base . '/saludos.json'), true) ?? [];
+
+        return view('lessons.diccionario', compact('abecedario','numeros','salud','saludos'));
+    }
+
     public function notFound()
     {
         return response()->view('errors.404', [], 404);

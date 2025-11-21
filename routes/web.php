@@ -177,11 +177,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/lecciones/salud/complete', [ProgressController::class, 'ls4_complete'])->name('lecciones.salud.complete');
 
     // Ranking de usuarios
-
     Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
 
     // Videos educativos
     Route::get('/lecciones/videos', [TaskController::class, 'videos'])->name('lecciones.videos');
+
+    // Diccionario interactivo
+    Route::get('/lecciones/diccionario', [TaskController::class, 'diccionario'])->name('lecciones.diccionario');
 
     // Ver perfil
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');

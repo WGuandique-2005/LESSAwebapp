@@ -320,7 +320,7 @@
 
                 <div class="learn-sections-layout">
                     <div class="main-learn-grid">
-                        <div class="learn-card">
+                        <div class="learn-card goToDicc" style="cursor: pointer;">
                             <div class="card-image-container">
                                 <img src="{{ asset('img/diccionario.png') }}" alt="Ilustración de un diccionario de señas" class="card-image">
                             </div>
@@ -364,6 +364,11 @@
             const goToLessons = document.querySelector('.goToLessons');
             goToLessons.addEventListener('click', function(){
                 window,location.href = "{{  route('lecciones') }}"
+            })
+
+            const goToDicc = document.querySelector('.goToDicc');
+            goToDicc.addEventListener('click', function(){
+                window,location.href = "{{  route('lecciones.diccionario') }}"
             })
 
             const goToVideos = document.querySelector('.goToVideos')

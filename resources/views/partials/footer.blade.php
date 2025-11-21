@@ -185,7 +185,7 @@
                                 d="M23.5 6.2s-.2-1.64-.82-2.36C21.78 3 20.9 3 20.4 3H3.6c-.5 0-1.38 0-2.28.84C.7 4.56.5 6.2.5 6.2S.2 8.1.2 9.98v2.04C.2 14.86.5 16.8.5 16.8s.2 1.64.82 2.36C2.22 19.9 3.1 19.9 3.6 19.9h16.8c.5 0 1.38 0 2.28-.84.62-.72.82-2.36.82-2.36s.3-1.9.3-3.78V9.98c0-1.88-.3-3.78-.3-3.78zM9.8 14.5V7.5l6.6 3.5-6.6 3.5z" />
                         </svg>
                     </a>
-                    <a href="#" aria-label="LessA en Facebook">
+                    <a href="https://www.facebook.com/LESSAVirtual" aria-label="LessA en Facebook">
                         <!-- facebook svg -->
                         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
                             <path
@@ -208,7 +208,7 @@
             <div class="animate-on-scroll" aria-hidden="false">
                 <h3 class="footer-heading">Recursos</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Diccionario LESSA</a></li>
+                    <li><a href="{{ route('lecciones.diccionario') }}">Diccionario LESSA</a></li>
                     <li><a href="#">Guía de uso</a></li>
                     <li><a href="{{ route('ayuda') }}">Preguntas frecuentes</a></li>
                 </ul>
