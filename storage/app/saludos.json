@@ -15,7 +15,7 @@
         "id": "2",
         "nombre": "Mucho gusto!",
         "descripcion": "Con ambas manos a la altura del pecho realizamos un apretón y luego hacemos un movimiento breve hacia adelante, mientras en nuestro rostro mantenemos una expresión alegre.",
-        "ruta": "/img/Saludos/Mucho gusto!.png"
+        "ruta": "/img/Saludos/Mucho Gusto!.png"
     },
     {
         "id": "3",
@@ -33,7 +33,7 @@
         "id": "5",
         "nombre": "Por favor!",
         "descripcion": "Con nuestra mano dominante formamos un círculo con nuestro dedo pulgar e índice, el resto de nuestros dedos los mantenemos extendidos luego hacemos un movimiento hacia arriba y hacia abajo.",
-        "ruta": "/img/Saludos/Por favor!.png"
+        "ruta": "/img/Saludos/Por Favor!.png"
     },
     {
         "id": "6",
@@ -57,7 +57,7 @@
         "id": "9",
         "nombre": "Nos vemos!",
         "descripcion": "Llevaremos nuestra mano con los dedos extendidos y con la palma viendo arriba hacia nuestro pecho para seguidamente con nuestro dedo indice colocarlo debajo de nuestro ojo y luego alejarlo. ",
-        "ruta": "/img/Saludos/Nos vemos!.png"
+        "ruta": "/img/Saludos/Nos Vemos!.png"
     },
     {
         "id": "10",
@@ -135,7 +135,7 @@
         "id": "22",
         "nombre": "Dios bendiga!",
         "descripcion": "Con nuestro índice apuntamos hacia arriba después con ambas manos a la altura de nuestro rostro formamos círculos abiertos viendo hacia el frente, seguidamente mientras bajamos nuestras manos abrimos nuestras palmas mostrando una expresión alegre.",
-        "ruta": "/img/Saludos/Dios bendiga!.png"
+        "ruta": "/img/Saludos/Dios Bendiga!.png"
     },
     {
         "id": "23",
@@ -147,13 +147,13 @@
         "id": "24",
         "nombre": "Feliz cumpleaños!",
         "descripcion": "Realizamos un moviendo ambas manos abiertas desde la boca hacia las mejillas para feliz, y luego con las manos en forma de puño con el indice y el pulgar formando una media luna se hacen movimientos de derecha a izquierda como si fuera una cuna.",
-        "ruta": "/img/Saludos/Feliz cumpleaños!.png"
+        "ruta": "/img/Saludos/Feliz Cumpleaños!.png"
     },
     {
         "id": "25",
         "nombre": "Feliz navidad",
         "descripcion": "Movemos primero ambas manos abiertas desde la boca hacia las mejillas con sonrisa para feliz, luego realizamos con nuestras manos abriendo y cerrando nuestras palmas.",
-        "ruta": "/img/Saludos/Feliz navidad.png"
+        "ruta": "/img/Saludos/Feliz Navidad.png"
     },
     {
         "id": "26",
