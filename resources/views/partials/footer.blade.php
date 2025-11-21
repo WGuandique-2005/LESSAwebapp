@@ -201,7 +201,7 @@
                     <li><a href="{{ route('/') ?? '#' }}">Inicio</a></li>
                     <li><a href="{{ route('lecciones') ?? '#' }}">Lecciones</a></li>
                     <li><a href="{{ route('aprender') ?? '#' }}">Recursos</a></li>
-                    <li><a href="#">Ayuda</a></li>
+                    <li><a href="{{ route('ayuda') }}">Ayuda</a></li>
                 </ul>
             </div>
 

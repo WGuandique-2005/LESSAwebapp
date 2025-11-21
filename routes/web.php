@@ -24,8 +24,6 @@ Route::get('/ayuda',[TaskController::class,'ayuda'])->name('ayuda');
 Route::middleware('guest')->group(function (){
     // Landing page
     Route::get('/', [TaskController::class, 'index'])->name('/');
-    // Sección de ayuda
-    Route::get('/ayuda',[TaskController::class,'ayuda'])->name('ayuda');
 
     // Login
     Route::get('/login', [TaskController::class, 'loginForm'])->name('login');
