@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #3b82f6; /* Azul moderno */
+            --primary: #3b82f6;
             --primary-dark: #2563eb;
             --bg: #f8fafc;
             --card-bg: #ffffff;
@@ -19,8 +19,7 @@
             --radius: 16px;
             --radius-sm: 12px;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -41,7 +40,7 @@
             min-height: 80vh;
         }
 
-        /* --- Header & Controls --- */
+        /* --- Header --- */
         .header {
             display: flex;
             flex-direction: column;
@@ -67,7 +66,7 @@
         }
         .title p { margin: 4px 0 0; color: var(--text-muted); font-size: 0.95rem; }
 
-        /* Search Bar Styled */
+        /* --- Search --- */
         .search-wrapper {
             position: relative;
             width: 100%;
@@ -98,12 +97,11 @@
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
         }
 
-        /* --- Tabs (Scrollable on mobile) --- */
+        /* --- Tabs --- */
         .tabs-container {
             position: relative;
             margin-bottom: 28px;
         }
-        /* Gradiente para indicar scroll */
         .tabs-container::after {
             content: '';
             position: absolute;
@@ -117,26 +115,22 @@
             display: flex;
             gap: 10px;
             overflow-x: auto;
-            padding-bottom: 8px; /* Espacio para scrollbar invisible */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none;  /* IE 10+ */
+            padding-bottom: 8px;
+            scrollbar-width: none;
         }
-        .sections::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+        .sections::-webkit-scrollbar { display: none; }
 
         .tab-btn {
             background: var(--card-bg);
             border: 1px solid var(--border);
             padding: 10px 20px;
-            border-radius: 100px; /* Pill shape */
+            border-radius: 100px;
             font-weight: 500;
             font-size: 0.95rem;
             color: var(--text-muted);
             cursor: pointer;
             white-space: nowrap;
             transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
         .tab-btn:hover { background: #f1f5f9; color: var(--text-main); }
         
@@ -148,7 +142,7 @@
             transform: translateY(-1px);
         }
 
-        /* --- Grid System --- */
+        /* --- Grid & Cards --- */
         .grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -157,7 +151,6 @@
         @media(min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
         @media(min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
 
-        /* --- Cards --- */
         .card {
             background: var(--card-bg);
             border-radius: var(--radius);
@@ -168,7 +161,6 @@
             gap: 16px;
             cursor: pointer;
             transition: var(--transition);
-            text-align: left;
             position: relative;
             overflow: hidden;
         }
@@ -177,8 +169,7 @@
             box-shadow: var(--shadow-lg);
             border-color: #bfdbfe;
         }
-        .card:active { transform: scale(0.98); }
-
+        
         .card-thumb {
             flex-shrink: 0;
             width: 88px;
@@ -198,7 +189,7 @@
         }
         .card:hover .card-thumb img { transform: scale(1.08); }
 
-        .card-meta { flex: 1; min-width: 0; } /* min-width 0 evita que flex rompa el truncate */
+        .card-meta { flex: 1; min-width: 0; }
         
         .card-name {
             font-size: 1.05rem;
@@ -209,7 +200,6 @@
             justify-content: space-between;
             align-items: center;
         }
-        /* Icono flecha sutil */
         .card-name::after {
             content: '→';
             font-size: 1.2rem;
@@ -224,13 +214,12 @@
             font-size: 0.875rem;
             color: var(--text-muted);
             display: -webkit-box;
-            -webkit-line-clamp: 2; /* Limita a 2 lineas */
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             line-height: 1.4;
         }
 
-        /* --- Empty State --- */
         .empty {
             text-align: center;
             padding: 60px 20px;
@@ -239,11 +228,9 @@
             display: none;
             animation: fadeIn 0.3s ease;
         }
-        .empty svg {
-            width: 64px; height: 64px; margin-bottom: 16px; opacity: 0.5;
-        }
+        .empty svg { width: 64px; height: 64px; margin-bottom: 16px; opacity: 0.5; }
 
-        /* --- Modal (Bottom Sheet on Mobile, Dialog on Desktop) --- */
+        /* --- Modal --- */
         .modal-backdrop {
             position: fixed;
             inset: 0;
@@ -254,7 +241,7 @@
             visibility: hidden;
             transition: opacity 0.3s ease;
             display: flex;
-            align-items: center; /* Centrado desktop */
+            align-items: center;
             justify-content: center;
         }
         .modal-backdrop.show { opacity: 1; visibility: visible; }
@@ -270,7 +257,7 @@
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Desktop Layout */
+        /* Desktop Modal */
         @media (min-width: 768px) {
             .modal-content {
                 border-radius: 20px;
@@ -283,42 +270,25 @@
             
             .modal-img-col { width: 45%; height: 100%; background: #f8fafc; border-right: 1px solid var(--border); position: relative;}
             .modal-img-col img { width: 100%; height: 100%; object-fit: contain; padding: 20px; }
-            
             .modal-body-col { width: 55%; padding: 40px; overflow-y: auto; position: relative; }
         }
 
-        /* Mobile Layout (Bottom Sheet) */
+        /* Mobile Modal (Bottom Sheet) */
         @media (max-width: 767px) {
-            .modal-backdrop {
-                align-items: flex-end; /* Pegado abajo */
-            }
+            .modal-backdrop { align-items: flex-end; }
             .modal-content {
                 border-top-left-radius: 24px;
                 border-top-right-radius: 24px;
                 max-height: 85vh;
-                transform: translateY(100%); /* Empieza escondido abajo */
+                transform: translateY(100%);
             }
             .modal-backdrop.show .modal-content { transform: translateY(0); }
 
-            /* Indicador de arrastre (Drag Handle) */
             .modal-content::before {
-                content: '';
-                position: absolute;
-                top: 12px; left: 50%;
-                transform: translateX(-50%);
-                width: 40px; height: 4px;
-                background: #cbd5e1;
-                border-radius: 4px;
-                z-index: 2;
+                content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+                width: 40px; height: 4px; background: #cbd5e1; border-radius: 4px; z-index: 2;
             }
-
-            .modal-img-col {
-                height: 240px;
-                background: #f1f5f9;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+            .modal-img-col { height: 240px; background: #f1f5f9; display: flex; justify-content: center; align-items: center; }
             .modal-img-col img { max-height: 100%; max-width: 100%; padding: 20px; }
             .modal-body-col { padding: 24px; overflow-y: auto; }
         }
@@ -338,12 +308,43 @@
             color: var(--text-main);
             box-shadow: var(--shadow-sm);
         }
-        .modal-close-btn:hover { background: white; color: var(--error); }
+        .modal-close-btn:hover { background: white; color: var(--primary); }
 
-        .modal-title { font-size: 1.5rem; font-weight: 700; margin: 0 0 12px 0; color: var(--text-main); }
+        /* Modal Header & Audio Button */
+        .modal-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+        .modal-title { font-size: 1.5rem; font-weight: 700; margin: 0; color: var(--text-main); flex: 1; }
         .modal-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.6; }
 
-        /* Animaciones */
+        .btn-speak {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        .btn-speak:hover { background: var(--primary); color: white; transform: scale(1.05); }
+        
+        /* Animación cuando está hablando */
+        .btn-speak.speaking {
+            background: var(--primary-dark);
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
@@ -372,8 +373,7 @@
         </div>
 
         <div class="content-area">
-            <div id="items" class="grid" aria-live="polite">
-                </div>
+            <div id="items" class="grid" aria-live="polite"></div>
             
             <div id="empty" class="empty">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -389,7 +389,14 @@
                 <img id="modal-img" src="" alt="">
             </div>
             <div class="modal-body-col">
-                <h3 id="modal-title" class="modal-title"></h3>
+                <div class="modal-header-row">
+                    <h3 id="modal-title" class="modal-title"></h3>
+                    <button id="btn-speak" class="btn-speak" aria-label="Escuchar descripción">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+                        </svg>
+                    </button>
+                </div>
                 <div id="modal-desc" class="modal-desc"></div>
             </div>
         </div>
@@ -398,7 +405,6 @@
     @include('partials.footer')
 
     <script>
-        // Datos (Blade Injection)
         const sectionsData = {
             abecedario: @json($abecedario),
             numeros: @json($numeros),
@@ -407,37 +413,40 @@
         };
 
         let activeSection = 'abecedario';
+        
+        // Elementos del DOM
         const itemsEl = document.getElementById('items');
         const emptyEl = document.getElementById('empty');
         const searchEl = document.getElementById('search');
         const modal = document.getElementById('modal');
+        const mImg = document.getElementById('modal-img');
+        const mTitle = document.getElementById('modal-title');
+        const mDesc = document.getElementById('modal-desc');
+        const btnSpeak = document.getElementById('btn-speak');
+        
+        // API de Voz
+        const synth = window.speechSynthesis;
+        let currentUtterance = null;
 
-        // 1. Inicialización de Tabs
+        // --- Lógica de Tabs ---
         document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                // UI Update
+            btn.addEventListener('click', () => {
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 
-                // Logic Update
                 activeSection = btn.getAttribute('data-section');
-                searchEl.value = ''; // Limpiar búsqueda al cambiar
-                
-                // Scroll suave al tab si está fuera de vista en móvil
+                searchEl.value = '';
                 btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                
                 render();
             });
         });
 
-        // 2. Búsqueda en tiempo real
+        // --- Lógica de Búsqueda y Renderizado ---
         searchEl.addEventListener('input', () => render());
 
-        // 3. Renderizado
         function render() {
             const list = sectionsData[activeSection] || [];
             const query = searchEl.value.trim().toLowerCase();
-
             const filtered = list.filter(item => {
                 const name = (item.nombre || '').toLowerCase();
                 const desc = (item.descripcion || '').toLowerCase();
@@ -445,15 +454,11 @@
             });
 
             itemsEl.innerHTML = '';
-
             if (filtered.length === 0) {
                 emptyEl.style.display = 'block';
             } else {
                 emptyEl.style.display = 'none';
-                filtered.forEach(item => {
-                    const card = createCard(item);
-                    itemsEl.appendChild(card);
-                });
+                filtered.forEach(item => itemsEl.appendChild(createCard(item)));
             }
         }
 
@@ -463,14 +468,12 @@
             el.setAttribute('role', 'button');
             el.tabIndex = 0;
             
-            // Helper para escapar HTML básico
             const safeName = escapeHtml(item.nombre);
             const safeDesc = escapeHtml(truncate(item.descripcion, 90));
-            const safeImg = escapeAttr(item.ruta);
-
+            
             el.innerHTML = `
                 <div class="card-thumb">
-                    <img src="${safeImg}" alt="Seña para ${safeName}" loading="lazy">
+                    <img src="${escapeAttr(item.ruta)}" alt="Seña para ${safeName}" loading="lazy">
                 </div>
                 <div class="card-meta">
                     <div class="card-name">${safeName}</div>
@@ -479,47 +482,71 @@
             `;
 
             el.addEventListener('click', () => openModal(item));
-            // Accesibilidad: Enter para abrir
             el.addEventListener('keydown', (e) => {
-                if(e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    openModal(item);
-                }
+                if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(item); }
             });
-            
             return el;
         }
 
-        // 4. Lógica del Modal
-        const mImg = document.getElementById('modal-img');
-        const mTitle = document.getElementById('modal-title');
-        const mDesc = document.getElementById('modal-desc');
-
+        // --- Lógica de Modal y Voz ---
         function openModal(item) {
+            stopSpeech(); // Detener audio anterior si existe
+
             mImg.src = item.ruta || '';
             mImg.alt = item.nombre || 'Imagen detalle';
             mTitle.textContent = item.nombre || 'Detalle';
-            mDesc.textContent = item.descripcion || 'No hay descripción detallada para esta seña.';
+            
+            const descText = (item.descripcion && item.descripcion.trim() !== "") 
+                ? item.descripcion 
+                : 'No hay descripción detallada disponible para esta seña.';
+            mDesc.textContent = descText;
             
             modal.classList.add('show');
             modal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden'; // Prevenir scroll fondo
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
+            stopSpeech(); // Importante: Detener voz al cerrar
             modal.classList.remove('show');
             modal.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = ''; // Restaurar scroll
+            document.body.style.overflow = '';
         }
 
-        // Cerrar eventos
+        function toggleSpeech() {
+            if (synth.speaking) {
+                stopSpeech();
+                return;
+            }
+            const textToRead = mDesc.textContent;
+            if (!textToRead) return;
+
+            const utterance = new SpeechSynthesisUtterance(textToRead);
+            utterance.lang = 'es-ES';
+            
+            utterance.onstart = () => btnSpeak.classList.add('speaking');
+            utterance.onend = () => btnSpeak.classList.remove('speaking');
+            utterance.onerror = () => btnSpeak.classList.remove('speaking');
+
+            currentUtterance = utterance;
+            synth.speak(utterance);
+        }
+
+        function stopSpeech() {
+            if (synth.speaking) synth.cancel();
+            btnSpeak.classList.remove('speaking');
+        }
+
+        // Event Listeners de Modal y Voz
+        btnSpeak.addEventListener('click', toggleSpeech);
         document.getElementById('modal-close').addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+        window.addEventListener('beforeunload', stopSpeech);
 
         // Helpers
-        function escapeHtml(str) { return String(str || '').replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[s]); }
-        function escapeAttr(s) { return (s || '').replace(/"/g, '&quot;'); }
+        function escapeHtml(str) { return String(str||'').replace(/[&<>"']/g, s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[s]); }
+        function escapeAttr(s) { return (s||'').replace(/"/g, '&quot;'); }
         function truncate(str, n) { return (str && str.length > n) ? str.slice(0, n - 1) + '...' : str; }
 
         // Inicio
