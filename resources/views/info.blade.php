@@ -4,479 +4,476 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LESSA - Info</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
-            --primary-blue: #0056b3;
-            --primary-orange: #e65100;
-            --light-gray: #f0f2f5;
-            --medium-gray: #ced4da;
-            --dark-gray: #212529;
-            --text-color: #343a40;
+            --primary-color: #007bff;
+            --primary-dark: #0056b3;
+            --accent-color: #ff6b35;
+            --bg-color: #f8f9fa;
+            --text-main: #2c3e50;
+            --text-light: #6c757d;
             --white: #ffffff;
-            --border-color: #dee2e6;
-            --shadow-light: rgba(0, 0, 0, 0.05);
-            --shadow-medium: rgba(0, 0, 0, 0.1);
-            --text-secondary: #6c757d;
-            --error-color: #dc3545;
-            --success-color: #28a745;
-
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 1.5rem;
-            --spacing-lg: 2rem;
-            --spacing-xl: 3rem;
-            --spacing-xxl: 4rem;
-
-            --font-family-primary: 'Poppins', sans-serif;
-            --font-size-base: 1rem;
-            --font-size-sm: 0.875rem;
-            --font-size-md: 1.125rem;
-            --font-size-lg: 1.5rem;
-            --font-size-xl: 2.25rem;
-            --font-size-xxl: 3rem;
-
-            --border-radius: 12px;
-            --transition-speed: 0.4s;
+            --border-radius: 16px;
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         body {
-            font-family: var(--font-family-primary);
-            line-height: 1.7;
-            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
-            background-color: var(--light-gray);
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
-            max-width: 1140px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--spacing-md);
+            padding: 0 24px;
         }
 
+        /* Hero Section */
         .hero-section {
-            background-color: var(--primary-blue);
-            padding: var(--spacing-xl) 0 var(--spacing-xxl);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            padding: 80px 0;
             color: var(--white);
             position: relative;
             overflow: hidden;
+            min-height: 450px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            min-height: 450px;
-            text-align: center;
         }
 
-        .hero-bg-img {
+        .hero-section::before {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("{{ asset('img/iglesia.png') }}");
+            background-size: cover;
+            background-position: center;
             opacity: 0.15;
+            mix-blend-mode: overlay;
             z-index: 0;
         }
 
         .hero-content {
+            position: relative;
+            z-index: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            gap: var(--spacing-xl);
+            gap: 40px;
+            width: 100%;
         }
 
         .hero-text {
             max-width: 700px;
-            padding: var(--spacing-sm);
+            text-align: center;
         }
 
         .hero-text h1 {
-            font-size: var(--font-size-xl);
-            font-weight: 700;
-            margin-bottom: var(--spacing-sm);
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0 0 16px 0;
             line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .hero-text h3 {
-            font-size: var(--font-size-md);
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: var(--spacing-md);
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--accent-color);
+            margin: 0 0 24px 0;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
 
         .hero-text p {
-            font-size: var(--font-size-sm);
-            margin-bottom: var(--spacing-lg);
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            opacity: 0.95;
+            line-height: 1.8;
+            margin: 0;
         }
 
-        .features-section {
-            background-color: var(--white);
-            padding: var(--spacing-sm);
+        /* Features Card in Hero */
+        .hero-card {
+            background: var(--white);
+            padding: 30px;
             border-radius: var(--border-radius);
-            box-shadow: 0 8px 20px var(--shadow-medium);
+            box-shadow: var(--shadow-hover);
+            max-width: 400px;
+            width: 100%;
             text-align: center;
             position: relative;
             z-index: 2;
-            margin-top: var(--spacing-md);
-            width: 100%;
-
-            max-width: 380px;
         }
 
-        .features-section h3 {
-            font-size: var(--font-size-md);
-            color: var(--success-color);
-            margin-bottom: var(--spacing-md);
+        .hero-card h3 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
             font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .feature-item {
-            padding: var(--spacing-sm);
-        }
-
-        .feature-item img {
-            max-width: 200px;
+        .hero-card img {
+            width: 80px;
             height: auto;
-            margin-bottom: var(--spacing-sm);
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+            margin-bottom: 16px;
         }
 
-        .feature-item p {
-            font-size: var(--font-size-sm);
-            color: var(--dark-gray);
+        .hero-card p {
+            color: var(--text-main);
             font-weight: 500;
+            font-size: 1rem;
+            margin: 0;
         }
 
+        /* Info Sections */
         .info-section {
             display: flex;
-            background-color: var(--white);
-            margin-top: var(--spacing-sm);
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 15px var(--shadow-light);
-            overflow: hidden;
             flex-direction: column;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            margin: 60px auto;
+            transition: var(--transition);
         }
 
-        .info-left {
+        .info-section:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .info-image {
             position: relative;
-            min-height: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-grow: 1;
+            min-height: 300px;
             overflow: hidden;
         }
 
-        .info-left::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
-            z-index: 1;
-        }
-
-        .info-left-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .info-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 0;
-            transition: transform var(--transition-speed) ease-in-out;
+            transition: transform 0.5s ease;
+            position: absolute;
+            top: 0; left: 0;
         }
 
-        .info-left:hover .info-left-bg {
+        .info-section:hover .info-image img {
             transform: scale(1.05);
         }
 
-        .info-logo-overlay {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: var(--spacing-sm);
+        .info-image-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
         }
 
-        .info-logo-overlay img {
-            max-width: 160px;
+        .info-image-overlay img {
+            position: relative;
+            width: 140px;
             height: auto;
             filter: brightness(0) invert(1);
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: 16px;
+            transform: none !important;
         }
 
-        .info-logo-overlay p {
-            color: var(--white);
-            font-size: var(--font-size-sm);
-            font-weight: 600;
-            background-color: var(--primary-orange);
-            padding: var(--spacing-xs) var(--spacing-md);
-            border-radius: var(--border-radius);
-            display: inline-block;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .info-right {
-            padding: var(--spacing-xl);
-            flex-grow: 1;
+        .info-content {
+            padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background-color: var(--white);
-            max-width: fit-content
         }
 
-        .info-right h3 {
-            font-size: var(--font-size-md);
-            color: var(--success-color);
-            margin-bottom: var(--spacing-md);
+        .info-content h3 {
+            font-size: 1.8rem;
             font-weight: 700;
-            line-height: 1.3;
+            color: var(--text-main);
+            margin: 0 0 16px 0;
+            position: relative;
+            padding-bottom: 16px;
         }
 
-        .info-right p {
-            font-size: var(--font-size-sm);
-            color: var(--text-color);
-            margin-bottom: var(--spacing-lg);
+        .info-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
         }
 
-        .info-item {
+        .info-content > p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .feature-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: var(--spacing-md);
-            gap: var(--spacing-md);
+            gap: 16px;
         }
 
-        .info-item .icon {
-            font-size: 36px;
-            color: var(--primary-blue);
-            min-width: 36px;
-            text-align: center;
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 123, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
-        .info-item p {
+        .feature-text h4 {
+            margin: 0 0 4px 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .feature-text p {
             margin: 0;
-            font-size: var(--font-size-sm);
-            color: var(--text-color);
+            font-size: 0.9rem;
+            color: var(--text-light);
         }
 
-        .info-item p b {
-            font-size: var(--font-size-sm);
-            color: var(--dark-gray);
-        }
-
-        .btn-info {
-            margin-top: var(--spacing-lg);
-            text-align: center;
-            background-color: var(--primary-blue);
-            padding: var(--spacing-sm) var(--spacing-sm);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        .btn-action {
             display: inline-block;
-            align-self: flex-start;
-        }
-
-        .btn-info:hover {
-            background-color: var(--primary-orange);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .btn-info a {
+            background: var(--primary-color);
             color: var(--white);
+            padding: 12px 28px;
+            border-radius: 50px;
             text-decoration: none;
-            font-size: var(--font-size-sm);
-            display: block;
+            font-weight: 600;
+            margin-top: 32px;
+            align-self: flex-start;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
         }
 
-        @media (min-width: 768px) {
+        .btn-action:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Responsive */
+        @media (min-width: 992px) {
             .hero-content {
                 flex-direction: row;
-                text-align: left;
                 justify-content: space-between;
-                align-items: flex-start;
-                padding-bottom: var(--spacing-xxl);
+                text-align: left;
             }
 
             .hero-text {
-                max-width: 60%;
-                margin-bottom: 0;
-            }
-
-            .features-section {
-                margin-top: calc(var(--spacing-xxl) * -3);
-                margin-left: 0;
-                margin-right: 0;
-                width: auto;
-                max-width: 400px;
-                align-self: flex-end;
+                max-width: 55%;
+                text-align: left;
             }
 
             .info-section {
                 flex-direction: row;
-                margin-top: var(--spacing-xxl);
-            }
-
-            .info-left, .info-right {
-                flex: 1;
-            }
-
-            .info-left {
-                min-height: 400px;
+                min-height: 450px;
             }
 
             .info-section:nth-of-type(even) {
                 flex-direction: row-reverse;
             }
 
+            .info-image {
+                flex: 1;
+                min-height: auto;
+            }
+
+            .info-content {
+                flex: 1;
+                padding: 60px;
+            }
         }
 
-        @media (min-width: 992px) {
-            .container {
-                padding: 0;
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 0;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .info-content {
+                padding: 30px;
+            }
+
+            .info-content h3 {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <header>@include('partials.navbar')</header>
+    
     <main>
         <section class="hero-section">
-            <img src="{{ asset('img/iglesia.png') }}" alt="Background image of San Salvador Monument"
-                class="hero-bg-img">
             <div class="container hero-content">
                 <div class="hero-text">
-                    <h1 style="color: white;">Bienvenid@ a LESSA</h1>
+                    <h1>Bienvenid@ a LESSA</h1>
                     <h3>¡Nos alegra tenerte aquí una vez más!</h3>
                     <p>Tu dedicación a aprender el Lenguaje de Señas Salvadoreño nos inspira. Desde esta sección puedes acceder rápidamente
                         a tus lecciones, ver tu progreso, desbloquear nuevos niveles y continuar tu camino hacia una comunicación más
-                        inclusiva y significativa.</p>
+                        inclusiva.</p>
                 </div>
-                <div class="features-section">
+                <div class="hero-card">
                     <h3>Recuerda</h3>
-                    <div class="feature-item">
-                        <img src="{{ asset('img/icon.png') }}" alt="Smartphone icon">
-                        <p style="color:black;">¡Nunca es un mal monento para comenzar a aprender algo, tu puedes!</p>
-                    </div>
+                    <img src="{{ asset('img/icon.png') }}" alt="Smartphone icon">
+                    <p>¡Nunca es un mal momento para comenzar a aprender algo, tú puedes!</p>
                 </div>
             </div>
         </section>
 
-        <section class="container info-section">
-            <div class="info-left">
-                <img src="{{ asset('img/centroHistorico.png') }}" alt="Person signing" class="info-left-bg">
-                <div class="info-logo-overlay">
-                    <img src="{{ asset('img/logo2.png') }}" alt="ESSA Logo">
-                    <p>Lenguaje de Señas Salvadoreño</p>
-                </div>
-            </div>
-            <div class="info-right">
-                <h3>¡Retos que desafiarán tus conocimientos!</h3>
-                <p>La motivación es clave en cualquier proceso de aprendizaje. Por eso, hemos incorporado una sección dinámica con desafíos, pruebas rápidas, juegos visuales y recompensas.</p>
-                <div class="info-item">
-                    <i class="fas fa-play-circle icon"></i>
-                    <div>
-                        <p><b>Zona de Práctica</b></p>
-                        <p>Diversidad de actividades</p>
+        <div class="container">
+            <!-- Section 1: Retos -->
+            <section class="info-section">
+                <div class="info-image">
+                    <img src="{{ asset('img/centroHistorico.png') }}" alt="Centro Histórico">
+                    <div class="info-image-overlay">
+                        <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo">
                     </div>
                 </div>
-                <div class="info-item">
-                    <i class="fas fa-trophy icon"></i>
-                    <div>
-                        <p><b>Recompensas</b></p>
-                        <p>Se recompensan tus esfuerzos</p>
+                <div class="info-content">
+                    <h3>¡Retos que desafiarán tus conocimientos!</h3>
+                    <p>La motivación es clave en cualquier proceso de aprendizaje. Por eso, hemos incorporado una sección dinámica con desafíos, pruebas rápidas y juegos visuales.</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-play-circle"></i></div>
+                            <div class="feature-text">
+                                <h4>Zona de Práctica</h4>
+                                <p>Diversidad de actividades para reforzar tu aprendizaje.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+                            <div class="feature-text">
+                                <h4>Recompensas</h4>
+                                <p>Se reconocen y celebran tus esfuerzos.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="feature-text">
+                                <h4>Variedad de contenido</h4>
+                                <p>Diferentes tipos de recursos educativos.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="info-item">
-                    <i class="fas fa-book-open icon"></i>
-                    <div>
-                        <p><b>Variedad de contenido</b></p>
-                        <p>Diferente tipo de contenido de LESSA</p>
+            </section>
+
+            <!-- Section 2: Lecciones Interactivas -->
+            <section class="info-section">
+                <div class="info-image">
+                    <img src="{{ asset('img/interactiveLessons.png') }}" alt="Lecciones Interactivas">
+                    <div class="info-image-overlay">
+                        <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo">
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="container info-section">
-            <div class="info-left">
-                <img src="{{ asset('img/interactiveLessons.png') }}" alt="Person signing" class="info-left-bg">
-                <div class="info-logo-overlay">
-                    <img src="{{ asset('img/logo2.png') }}" alt="ESSA Logo">
+                <div class="info-content">
+                    <h3>Contamos con lecciones interactivas</h3>
+                    <p>Nuestro núcleo educativo está compuesto por lecciones organizadas por niveles de dificultad, diseñadas para adaptarse a tu propio ritmo.</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-play-circle"></i></div>
+                            <div class="feature-text">
+                                <h4>Lecciones dinámicas</h4>
+                                <p>Aprende haciendo con ejercicios prácticos.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+                            <div class="feature-text">
+                                <h4>Registro de progreso</h4>
+                                <p>Mantén un seguimiento de tus avances.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-video"></i></div>
+                            <div class="feature-text">
+                                <h4>Videos educativos</h4>
+                                <p>Material audiovisual de apoyo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="{{ route('lecciones') }}" class="btn-action">Ver Lecciones <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
                 </div>
-            </div>
-            <div class="info-right">
-                <h3>Contamos con lecciones interactivas</h3>
-                <p>Nuestro núcleo educativo está compuesto por lecciones organizadas por niveles de dificultad. Estas lecciones están diseñadas para adaptarse a tu ritmo de aprendizaj.</p>
-                <div class="info-item">
-                    <i class="fas fa-play-circle icon"></i>
-                    <div>
-                        <p>Lecciones interactivas</p>
+            </section>
+
+            <!-- Section 3: Progreso -->
+            <section class="info-section">
+                <div class="info-image">
+                    <img src="{{ asset('img/progress.png') }}" alt="Progreso">
+                    <div class="info-image-overlay">
+                        <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo">
                     </div>
                 </div>
-                <div class="info-item">
-                    <i class="fas fa-trophy icon"></i>
-                    <div>
-                        <p>Registro de tu progreso</p>
+                <div class="info-content">
+                    <h3>Sigue Aprendiendo</h3>
+                    <p>Accede a tu progreso para mantener la motivación. Cada avance refleja tu esfuerzo y dedicación para construir una comunicación más inclusiva.</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                            <div class="feature-text">
+                                <h4>Tu tiempo</h4>
+                                <p>Observa el tiempo invertido en tu aprendizaje.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="feature-text">
+                                <h4>Estadísticas detalladas</h4>
+                                <p>Visualiza tu crecimiento paso a paso.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-star"></i></div>
+                            <div class="feature-text">
+                                <h4>Logros</h4>
+                                <p>Premiamos tu constancia y dedicación.</p>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <a href="{{ route('miProgreso') }}" class="btn-action">Ver Mi Progreso <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
                 </div>
-                <div class="info-item">
-                    <i class="fas fa-book-open icon"></i>
-                    <div>
-                        <p>Videos educativos</p>
-                    </div>
-                </div>
-                <div class="btn-info" style="cursor: pointer;">
-                    <a href="{{ route('lecciones') }}" class="btn btn-primary">Ver sección -></a>
-                </div>
-            </div>
-        </section>
-        <section class="container info-section">
-            <div class="info-left">
-                <img src="{{ asset('img/progress.png') }}" alt="Person signing" class="info-left-bg">
-                <div class="info-logo-overlay">
-                    <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo">
-                </div>
-            </div>
-            <div class="info-right">
-                <h3>Sigue Aprendiendo</h3>
-                <p>Accede a tu progreso aquí para seguir motivándote en tu aprendizaje de LESSA. Cada avance refleja tu esfuerzo y dedicación para construir una comunicación más inclusiva. Sigue adelante y celebra cada logro en tu camino!</p>
-                <div class="info-item">
-                    <i class="fas fa-play-circle icon"></i>
-                    <div>
-                        <p><b>Tu tiempo</b></p>
-                        <p>Podrás observar el tiempo que inviertes en tu proceso de aprendizaje</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-trophy icon"></i>
-                    <div>
-                        <p><b>Seguimiento de Progreso</b></p>
-                        <p>Visualiza estadísticas detalladas</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-book-open icon"></i>
-                    <div>
-                        <p><b>Recompensas</b></p>
-                        <p>Crea un ambiente positivo premiando el esfuerzo y los logros</p>
-                    </div>
-                </div>
-                <div class="btn-info">
-                    <a href="{{ route('miProgreso') }}" class="btn btn-primary">Ver sección -></a>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
-    <footer style="margin-top: 20px;">@include('partials.footer')</footer>
+
+    <footer style="margin-top: 40px;">@include('partials.footer')</footer>
 </body>
 </html>
