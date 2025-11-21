@@ -9,7 +9,7 @@
         "id": 1,
         "nombre": "Sintomas",
         "descripcion": "Con una expresion de molestia o afliccion, con una mano con palma hacia el pecho y con todos los dedos extendidos excepto el medio haremos movimientos hacia arriba y abajo.",
-        "ruta": "/img/Salud/Sintomas.png"
+        "ruta": "/img/Salud/sintomas.png"
     },
     {
         "id": 2,
