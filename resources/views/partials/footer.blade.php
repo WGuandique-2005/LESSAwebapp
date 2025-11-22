@@ -212,7 +212,7 @@
                     <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24">
                                 <path
                                     d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2l-8 5L4 6h16z" />
-                            </svg></span><span>app4mails@gmail.com</span></li>
+                            </svg></span><span><a href="mailto:wguandique2006@gmail.com" style="text-decoration: none; color: #fff">wguandique2006</a></span></li>
                     <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24">
                                 <path
                                     d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.36 11.36 0 003.55.57 1 1 0 011 1v3.8a1 1 0 01-1 1A18 18 0 014 5a1 1 0 011-1h3.79a1 1 0 011 1 11.36 11.36 0 00.57 3.55 1 1 0 01-.21 1.11l-2.53 2.13z" />
