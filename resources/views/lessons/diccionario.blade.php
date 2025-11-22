@@ -475,7 +475,37 @@
     </section>
 
     <div class="main-container" role="main">
+            <nav aria-label="breadcrumb" style="font-family: 'Poppins', sans-serif; width: 100%; margin: 20px 0;">
+                <ol
+                    style="display: flex; flex-wrap: wrap; list-style: none; margin: 0; padding: 12px 20px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); border: 1px solid #e9ecef;">
 
+                    <li style="display: flex; align-items: center; font-size: 0.95rem;">
+                        <a href="/"
+                            style="color: #2a6fdb; text-decoration: none; font-weight: 600; display: flex; align-items: center;">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li style="display: flex; align-items: center; font-size: 0.95rem;">
+                        <span style="margin: 0 10px; color: #6b7280;">/</span>
+
+                        <a href="{{ route('practicar')}}"
+                            style="color: #2a6fdb; text-decoration: none; font-weight: 600;">
+                            Practicar
+                        </a>
+                    </li>
+
+                    <li style="display: flex; align-items: center; font-size: 0.95rem; font-weight: 500;"
+                        aria-current="page">
+                        <span style="margin: 0 10px; color: #6b7280;">/</span>
+
+                        <span style="color: #212529;">
+                            Diccionario
+                        </span>
+                    </li>
+
+                </ol>
+            </nav>
         <!-- Controls Card -->
         <div class="controls-card">
             <div class="search-wrapper">
