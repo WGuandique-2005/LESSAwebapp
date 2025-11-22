@@ -34,6 +34,8 @@
             height: 100%;
             margin: 0;
             padding: 0;
+            overflow: hidden;
+            /* Prevent body scroll */
         }
 
         body {
@@ -41,16 +43,26 @@
             background: var(--background-light);
             color: var(--text-dark);
             line-height: 1.6;
-            overflow-x: hidden;
-            /* Evita scroll horizontal */
+            display: flex;
+            flex-direction: column;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Navbar wrapper */
+        header {
+            flex: 0 0 auto;
+            z-index: 1002;
+            position: relative;
+            width: 100%;
+        }
+
         .lesson-layout {
             display: flex;
-            min-height: 100vh;
+            flex: 1;
+            overflow: hidden;
             background-color: var(--background-light);
+            position: relative;
         }
 
         /* Sidebar - Navegación de la Lección */
@@ -58,16 +70,16 @@
             background: var(--sidebar-bg);
             color: var(--text-light);
             width: 250px;
-            min-width: 200px;
+            min-width: 250px;
             padding: 40px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             position: relative;
-            z-index: 100;
-            transition: width 0.3s ease;
-            /* Smooth transition for width change */
+            z-index: 1000;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
         }
 
         .sidebar h2 {
@@ -124,27 +136,29 @@
         /* Burger Menu for Mobile */
         .hamburger {
             display: none;
-            /* Hidden by default, shown on mobile */
             font-size: 2em;
-            color: var(--text-light);
+            color: var(--primary-color);
             cursor: pointer;
             position: absolute;
-            right: 20px;
-            z-index: 101;
-            /* Add padding for easier tapping */
+            top: 15px;
+            left: 20px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         /* Main Content Area */
         .main-content {
             flex: 1;
-            height: 100vh;
+            height: 100%;
             overflow-y: auto;
             /* allow scrolling */
             -webkit-overflow-scrolling: touch;
             /* smooth scrolling on iOS */
             touch-action: pan-y;
             /* allow vertical pan gestures */
-            scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
             padding: 0;
             background: var(--background-light);
@@ -163,7 +177,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            scroll-snap-align: start;
+            /* scroll-snap-align: start; */
             box-sizing: border-box;
             max-width: 100%;
         }
@@ -276,12 +290,12 @@
         /* Mobile backdrop used when menu opens */
         .mobile-backdrop {
             position: fixed;
-            top: 60px;
+            top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.35);
-            z-index: 99;
+            z-index: 999;
             display: none;
             -webkit-tap-highlight-color: transparent;
         }
@@ -322,37 +336,47 @@
         /* Para tabletas y móviles (máximo 768px de ancho) */
         @media (max-width: 768px) {
             .lesson-layout {
-                flex-direction: column;
-                min-height: auto;
+                /* flex-direction: column; */ /* No need for column, sidebar is absolute */
             }
 
-            .sidebar,
-            .hamburger,
-            .mobile-backdrop {
-                display: none !important;
+            .sidebar {
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                transform: translateX(-100%);
+                width: 260px;
+                min-width: unset;
+                box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .hamburger {
+                display: block;
             }
 
             .main-content {
-                margin-top: 0;
-                height: auto;
-                min-height: calc(100vh - 60px);
                 scroll-snap-type: none;
                 padding: 0;
-                overflow-y: auto;
             }
 
             .progress-bar-container {
-                display: none;
+                width: 85%;
+                margin-left: auto;
+                margin-right: auto;
+                top: 10px;
             }
 
             section {
                 min-height: auto;
-                height: auto;
-                padding: 30px 5vw;
+                padding: 80px 5vw 40px; /* More top padding for hamburger */
                 box-shadow: none;
                 border-bottom: 1px solid #e0e4ea;
             }
-
+            
             section:last-of-type {
                 border-bottom: none;
             }
@@ -415,8 +439,8 @@
 <body>
     <header>@include('partials.navbar')</header>
     <div class="lesson-layout">
-        <nav class="sidebar" role="navigation" aria-label="Menú de lección">
-            <span class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">&#9776;</span>
+        <span class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">&#9776;</span>
+        <nav class="sidebar" id="sidebar" role="navigation" aria-label="Menú de lección">
             <h2>Saludos</h2>
             <ul id="sidebarMenu" aria-hidden="false">
                 <li class="active" data-section="intro" role="button" tabindex="0">Introducción</li>
@@ -571,11 +595,8 @@
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetSectionId = link.dataset.section;
-                    if (sidebarMenu.classList.contains('open')) {
-                        sidebarMenu.classList.remove('open');
-                        hamburger.setAttribute('aria-expanded', 'false');
-                        mobileBackdrop.classList.remove('open');
-                        mobileBackdrop.setAttribute('aria-hidden', 'true');
+                    if (sidebar.classList.contains('open')) {
+                        closeMobileMenu();
                     }
                     setTimeout(() => scrollToSection(targetSectionId), 60);
                 });
@@ -590,21 +611,23 @@
             });
 
             // --- Funcionalidad del Menú Hamburguesa (Móvil) ---
+            const sidebar = document.getElementById('sidebar'); // Get the sidebar element
+
             const openMobileMenu = () => {
-                sidebarMenu.classList.add('open');
+                sidebar.classList.add('open'); // Toggle class on sidebar
                 hamburger.setAttribute('aria-expanded', 'true');
                 mobileBackdrop.classList.add('open');
                 mobileBackdrop.setAttribute('aria-hidden', 'false');
             };
             const closeMobileMenu = () => {
-                sidebarMenu.classList.remove('open');
+                sidebar.classList.remove('open'); // Toggle class on sidebar
                 hamburger.setAttribute('aria-expanded', 'false');
                 mobileBackdrop.classList.remove('open');
                 mobileBackdrop.setAttribute('aria-hidden', 'true');
             };
 
             hamburger.addEventListener('click', () => {
-                if (sidebarMenu.classList.contains('open')) {
+                if (sidebar.classList.contains('open')) {
                     closeMobileMenu();
                 } else {
                     openMobileMenu();
