@@ -5,602 +5,562 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Progreso - LESSA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-        /*
-        * ----------------------------------------------------
-        * 1. Variables y Reset Básico
-        * ----------------------------------------------------
-        */
+        /* --- 1. VARIABLES Y ESTILOS BASE (Coincide con home.blade.php) --- */
         :root {
-            --bg-dark: #0A2463; /* Azul Oscuro Principal */
-            --bg-light-dark: #1D3557; /* Azul Oscuro Secundario (degradado) */
-            --progress-bg: rgba(255, 255, 255, 0.1); /* Fondo de barra de progreso más sutil */
-            --progress-fill: #4CB944; /* Verde de Progreso */
-            --progress-fill-gradient: linear-gradient(90deg, #38A3A5 0%, #4CB944 100%); /* Degradado Moderno */
-            --accent-btn: #FFD166; /* Amarillo de Acción/Acento */
-            --primary-text: #fff;
-            --secondary-text: rgba(255, 255, 255, 0.65); /* Más contraste */
-            --card-bg: rgba(255, 255, 255, 0.05); /* Fondo de tarjeta base */
-            --card-hover: rgba(255, 255, 255, 0.15); /* Fondo de tarjeta en hover */
-            --card-border: rgba(255, 255, 255, 0.2); /* Borde sutil */
-            --icon-color: #FFD166; /* Color de Íconos */
-            /* Status Colors */
-            --status-success: var(--progress-fill);
-            --status-locked: #e74c3c;
-            --status-info: #3498db;
-            --status-error: #c0392b;
-            
-            /* Sombra sutil para el dark mode (Neumorfismo oscuro) */
-            --shadow-primary: 0 4px 10px rgba(0, 0, 0, 0.3);
-            --shadow-card: 0 8px 15px rgba(0, 0, 0, 0.4);
-            --shadow-hover: 0 12px 20px rgba(0, 0, 0, 0.5);
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --primary-light: #eff6ff;
+            --accent-color: #f97316;
+            --accent-hover: #ea580c;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-main: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-full: 9999px;
+            --transition-base: all 0.3s ease;
         }
 
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            margin: 0;
-            /* Usar Inter como fuente principal */
-            font-family: 'Inter', "Segoe UI", sans-serif; 
-            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-light-dark) 100%);
-            color: var(--primary-text);
-            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /*
-        * ----------------------------------------------------
-        * 2. Hero y Estructura Principal
-        * ----------------------------------------------------
-        */
-        .hero {
-            text-align: center;
-            padding: 40px 20px 30px; /* Reducción de padding para ahorrar espacio en móvil */
-            background: #011B40;
-            border-bottom: 3px solid var(--accent-btn);
-            box-shadow: var(--shadow-primary);
-        }
-
-        .hero h1 {
-            font-size: clamp(28px, 6vw, 40px); /* Título responsivo */
-            margin-bottom: 8px;
-            font-weight: 800;
-        }
-
-        .hero p {
-            font-size: clamp(16px, 4vw, 19px);
-            color: var(--secondary-text);
-            margin-bottom: 25px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .progress-container {
-            padding: 20px; /* Padding reducido para móvil */
-            max-width: 1200px; /* Ancho máximo aumentado para escritorio */
-            margin: 30px auto;
-        }
-        
-        @media (min-width: 768px) {
-            .progress-container {
-                padding: 40px;
-            }
-        }
-
-        .section-title {
-            font-size: clamp(22px, 5vw, 28px);
-            font-weight: 800;
-            margin-bottom: 30px;
-            text-align: left;
-            border-left: 5px solid var(--accent-btn);
-            padding-left: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-btn); /* Color de acento para el título */
-        }
-        
-        .completed-lessons, .completed-levels, .rewards {
-             margin-top: 50px; 
-        }
-
-
-        /*
-        * ----------------------------------------------------
-        * 3. Progreso General y Barras
-        * ----------------------------------------------------
-        */
-        .overall-progress {
-            margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 14px;
-            background: var(--card-bg); 
-            box-shadow: var(--shadow-primary);
-        }
-
-        .overall-progress h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--primary-text);
-            text-transform: uppercase;
-        }
-
-        .progress-bar-wrapper {
-            background: var(--progress-bg);
-            height: 14px; 
-            border-radius: 7px;
+        /* --- HERO SECTION --- */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: #ffffff;
+            padding: 3rem 0 5rem;
+            position: relative;
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
             overflow: hidden;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4); /* Sombra interior para profundidad */
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: var(--progress-fill-gradient); 
-            transition: width 0.6s ease-in-out;
-            border-radius: 7px;
-        }
-        
-        .progress-text {
-            font-size: 15px;
-            text-align: right;
-            margin-top: 8px;
-            font-weight: 700;
-            color: var(--progress-fill);
-        }
-
-        /*
-        * ----------------------------------------------------
-        * 4. Listas y Tarjetas (Lecciones y Recompensas)
-        * ----------------------------------------------------
-        */
-        .lessons-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            /* Grid dinámico: 1 columna en móvil, 2 en tabletas, 3 en escritorio */
-            grid-template-columns: 1fr; 
-            gap: 15px;
-        }
-        
-        @media (min-width: 600px) {
-            .lessons-list {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 20px;
-            }
-        }
-
-        .lesson-item {
-            background: var(--card-bg);
-            padding: 18px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: var(--shadow-card);
-            border-left: 5px solid var(--progress-fill); /* Indicador visual de progreso */
-        }
-        
-        /* Estilo para items de minijuegos */
-        .completed-levels .lesson-item {
-             border-left: 5px solid var(--accent-btn);
-        }
-
-        .lesson-item:hover {
-            transform: translateY(-3px); 
-            background: var(--card-hover);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .lesson-name {
-            font-weight: 800;
-            font-size: 17px; 
-            color: var(--primary-text);
-            margin-bottom: 5px;
-        }
-
-        .completion-date {
-            font-size: 13px;
-            color: var(--secondary-text);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .completion-date > span {
-            font-size: 16px; /* Ajuste para los iconos */
-        }
-
-        .no-lessons {
             text-align: center;
-            padding: 30px;
-            background: var(--card-bg);
-            border-radius: 16px;
-            border: 1px dashed var(--card-border);
-            box-shadow: var(--shadow-primary);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
         }
-        
-        /* Recompensa Card */
-        .reward-item {
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 12px;
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            font-weight: 300;
+            padding: 0 1rem;
+        }
+
+        .btn-hero {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--bg-card);
+            color: var(--primary-color);
+            padding: 0.75rem 2rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition-base);
+            box-shadow: var(--shadow-md);
+            margin-top: 1.5rem;
+            text-decoration: none;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: -4rem auto 0;
+            padding: 0 1.5rem 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- PROGRESS CARD --- */
+        .progress-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 3rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-bg {
+            background-color: #e5e7eb;
+            border-radius: var(--radius-full);
+            height: 16px;
+            overflow: hidden;
+            width: 100%;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(90deg, var(--success-color), #34d399);
+            height: 100%;
+            border-radius: var(--radius-full);
+            width: 0%;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .progress-text {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--success-color);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* --- SECTIONS --- */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 15px;
-            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            box-shadow: var(--shadow-card);
-            border-left: 5px solid var(--accent-btn); 
+            gap: 0.75rem;
         }
 
-        .reward-item:hover {
-            transform: translateY(-3px);
-            background: var(--card-hover);
-            box-shadow: var(--shadow-hover);
-            border-left: 5px solid var(--progress-fill); /* Cambio de color en hover */
+        .section-title i {
+            color: var(--accent-color);
         }
-        
-        .reward-content {
-            flex-grow: 1;
+
+        .grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* --- ITEM CARDS --- */
+        .item-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 0.5rem;
+            transition: var(--transition-base);
+            border-left: 4px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
         }
 
-        .reward-name {
-            font-weight: 800;
-            font-size: 17px;
-            color: var(--primary-text);
+        .item-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
         }
-        
+
+        .item-card.completed {
+            border-left-color: var(--success-color);
+        }
+
+        .item-card.reward {
+            border-left-color: var(--accent-color);
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .item-meta {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reward-img {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-lg);
+            object-fit: cover;
+            background: #f1f5f9;
+        }
+
         .reward-status {
-            font-size: 11px;
+            font-size: 0.75rem;
             font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 16px;
-            display: inline-block;
-            margin-top: 5px;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            align-self: flex-start; /* Se alinea a la izquierda dentro del flex-column */
+            display: inline-block;
         }
 
         .status-unlocked {
-            background: var(--progress-fill);
-            color: var(--bg-dark);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
         }
 
         .status-locked {
-            background: var(--status-locked); 
-            color: var(--primary-text);
-        }
-        
-        .reward-image-wrapper {
-            width: 60px; /* Tamaño reducido para mejor integración en móvil */
-            min-width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid var(--accent-btn);
+            background: #f3f4f6;
+            color: var(--text-secondary);
         }
 
-        .reward-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        
-        @media (min-width: 600px) {
-            .reward-image-wrapper {
-                width: 70px; 
-                min-width: 70px;
-                height: 70px;
-            }
-        }
-        
-        /*
-        * ----------------------------------------------------
-        * 5. Botones (CTA)
-        * ----------------------------------------------------
-        */
-        .start-btn {
-            display: inline-block;
-            background: var(--accent-btn);
-            color: var(--bg-dark);
-            padding: 10px 20px; 
-            border-radius: 8px; 
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            margin-top: 15px;
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 10px rgba(255, 209, 102, 0.4);
-            border: none;
-        }
-
-        .start-btn:hover {
-            background: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5);
-        }
-        
-        .modal-btn {
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 15px;
-            box-shadow: var(--shadow-primary);
-        }
-        
-        /*
-        * ----------------------------------------------------
-        * 6. Modales
-        * ----------------------------------------------------
-        */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.88); 
-            backdrop-filter: blur(8px); /* Desenfoque más fuerte */
-            transition: background-color 0.3s ease;
-        }
-
-        .modal-content {
-            background-color: var(--bg-dark);
-            margin: 15% auto; /* Ajuste para el centrado vertical */
-            padding: 30px;
-            border: 2px solid var(--accent-btn);
-            width: 95%;
-            max-width: 400px; /* Reducción de tamaño máximo para un modal más centrado */
-            border-radius: 20px;
+        .empty-state {
+            grid-column: 1 / -1;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-            animation-name: animatetop;
-            animation-duration: 0.4s;
+            box-shadow: var(--shadow-sm);
+            border: 2px dashed #e5e7eb;
+        }
+
+        .empty-state p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* --- MODALS --- */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-backdrop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .custom-modal {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 450px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: 2rem;
+            text-align: center;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
         }
 
-        @keyframes animatetop {
-            from {top: -150px; opacity: 0}
-            to {top: 15%; opacity: 1} 
+        .modal-backdrop.show .custom-modal {
+            transform: scale(1);
         }
-        
-        .close-btn {
+
+        .modal-close-btn {
             position: absolute;
-            top: 10px;
-            right: 20px;
-            color: var(--secondary-text);
-            font-size: 30px;
-            font-weight: bold;
-            line-height: 1;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .close-btn:hover,
-        .close-btn:focus {
-            color: var(--primary-text);
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
             cursor: pointer;
-            transform: rotate(90deg) scale(1.1); 
+            transition: color 0.2s;
         }
 
-        .modal-img {
-            width: 100px; 
-            height: 100px;
-            margin-bottom: 20px;
+        .modal-close-btn:hover {
+            color: var(--danger-color);
+        }
+
+        .modal-img-large {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 3px solid var(--accent-btn);
             object-fit: cover;
+            margin: 0 auto 1.5rem;
+            border: 4px solid var(--bg-body);
+            box-shadow: var(--shadow-md);
         }
 
         .modal-title {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            color: var(--accent-btn);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
         }
 
         .modal-desc {
-            font-size: 15px;
-            color: var(--secondary-text);
-            margin-bottom: 20px;
-            line-height: 1.4;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
         }
 
-        .completion-date-modal { 
-             font-size: 14px;
-             font-weight: 600;
-             margin-top: -5px;
-             margin-bottom: 15px;
-             color: var(--progress-fill);
+        .modal-meta {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
         }
-        
-        .result-modal-title {
-            font-size: 26px;
+
+        .btn-modal {
+            display: inline-block;
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-base);
+            text-decoration: none;
+            font-size: 1rem;
         }
-        
-        .result-modal-message {
-            font-size: 16px;
-            margin-bottom: 25px;
+
+        .btn-modal.primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-modal.primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-modal.secondary {
+            background: var(--bg-body);
+            color: var(--text-main);
+        }
+
+        .btn-modal.secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-modal.success {
+            background: var(--success-color);
+            color: white;
+            cursor: default;
+        }
+
+        .btn-modal.locked {
+            background: var(--text-secondary);
+            color: white;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem 0 5rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .progress-card {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header>@include('partials.navbar')</header> 
-    <div class="hero">
-        <h1>🎯 Tu Progreso en LESSA</h1>
-        <p>Mide tu aprendizaje, repasa tus logros y prepárate para ganar recompensas. ✨</p>
-        <a href="{{ route('lecciones') }}" class="start-btn">Seguir Aprendiendo →</a>
-    </div>
+    <header>@include('partials.navbar')</header>
 
-    <div class="progress-container">
-        
-        <div class="overall-progress">
-            <h3>Progreso General de la Plataforma</h3>
-            <div class="progress-bar-wrapper">
-                <div class="progress-bar" style="width: {{ $porcentaje }}%;"></div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <h1 class="hero-title">Tu Progreso en LESSA</h1>
+            <p class="hero-subtitle">Mide tu aprendizaje, repasa tus logros y prepárate para ganar recompensas.</p>
+            <a href="{{ route('lecciones') }}" class="btn-hero">
+                Seguir Aprendiendo <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <main class="main-container">
+
+        <!-- Global Progress -->
+        <div class="progress-card">
+            <div class="progress-header">
+                <span>Progreso General</span>
+                <span>{{ $porcentaje }}%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" style="width: {{ $porcentaje }}%;"></div>
             </div>
             <div class="progress-text">{{ $porcentaje }}% Completado</div>
         </div>
 
-        <div class="completed-lessons">
-            <h3 class="section-title">📚 Lecciones Completadas</h3>
-            <div class="overall-progress" style="margin-bottom: 30px; padding: 15px;">
-                <h3>Progreso de Lecciones</h3>
-                <div class="progress-bar-wrapper">
-                    <div class="progress-bar" style="width: {{ $porcentajeLecciones }}%;"></div> 
-                </div>
-                <div class="progress-text">{{ $porcentajeLecciones }}% Completado</div>
-            </div>
-            
+        <!-- Completed Lessons -->
+        <h3 class="section-title"><i class="fas fa-book-open"></i> Lecciones Completadas</h3>
+        <div class="grid-list">
             @if ($leccionesCompletadas->isEmpty())
-                <div class="no-lessons">
-                    <p>Aún no has completado ninguna lección. ¡Comienza a aprender hoy mismo! ✨</p>
-                    <a href="{{ route('lecciones') }}" class="start-btn">Explorar Lecciones →</a>
+                <div class="empty-state">
+                    <p>Aún no has completado ninguna lección. ¡Comienza hoy mismo!</p>
+                    <a href="{{ route('lecciones') }}" class="btn-modal primary" style="width: auto; padding: 0.75rem 2rem;">Explorar Lecciones</a>
                 </div>
             @else
-                <ul class="lessons-list">
-                    @foreach ($leccionesCompletadas as $progreso)
-                        <li class="lesson-item">
-                            <span class="lesson-name">{{ $progreso->leccion->titulo }}</span>
-                            <span class="completion-date">
-                                <span style="color: var(--progress-fill);">✅</span> Completado el: {{ \Carbon\Carbon::parse($progreso->fecha_completada)->format('d/m/Y') }}
-                            </span>
-                        </li>
-                    @endforeach
-                </ul>
+                @foreach ($leccionesCompletadas as $progreso)
+                    <div class="item-card completed">
+                        <div class="item-name">{{ $progreso->leccion->titulo }}</div>
+                        <div class="item-meta">
+                            <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                            Completado: {{ \Carbon\Carbon::parse($progreso->fecha_completada)->format('d/m/Y') }}
+                        </div>
+                    </div>
+                @endforeach
             @endif
         </div>
 
-        <div class="completed-levels">
-            <h3 class="section-title">🎮 Minijuegos Completados</h3>
-            
-            <div class="overall-progress" style="margin-bottom: 30px; padding: 15px;">
-                <h3>Progreso de Minijuegos</h3>
-                <div class="progress-bar-wrapper">
-                    <div class="progress-bar" style="width: {{ $porcentajeNiveles }}%;"></div> 
-                </div>
-                <div class="progress-text">{{ $porcentajeNiveles }}% Completado</div>
-            </div>
-
+        <!-- Completed Levels (Minigames) -->
+        <h3 class="section-title"><i class="fas fa-gamepad"></i> Minijuegos Completados</h3>
+        <div class="grid-list">
             @if ($nivelesCompletados->isEmpty())
-                <div class="no-lessons">
-                    <p>Aún no has completado ningún minijuego. ¡Demuestra tu dominio! 💪</p>
-                    <a href="{{ route('practicar') }}" class="start-btn">Explorar Minijuegos →</a>
+                <div class="empty-state">
+                    <p>Aún no has completado ningún minijuego. ¡Demuestra tu destreza!</p>
+                    <a href="{{ route('practicar') }}" class="btn-modal primary" style="width: auto; padding: 0.75rem 2rem;">Ir a Practicar</a>
                 </div>
             @else
-                <ul class="lessons-list">
-                    @foreach ($nivelesCompletados as $nivel)
-                        <li class="lesson-item">
-                            <span class="lesson-name">{{ $nivel->nombre }}</span>
-                            <span class="completion-date">
-                                <span style="color: var(--accent-btn);">⭐</span> Puntos obtenidos: {{ $nivel->puntos_obtenidos }}
-                            </span>
-                            <span class="completion-date">
-                                <span style="color: var(--progress-fill);">🗓️</span> Finalizado el: {{ \Carbon\Carbon::parse($nivel->fecha_finalizado)->format('d/m/Y') }}
-                            </span>
-                        </li>
-                    @endforeach
-                </ul>
+                @foreach ($nivelesCompletados as $nivel)
+                    <div class="item-card completed">
+                        <div class="item-name">{{ $nivel->nombre }}</div>
+                        <div class="item-meta">
+                            <i class="fas fa-star" style="color: var(--warning-color);"></i>
+                            Puntos: {{ $nivel->puntos_obtenidos }}
+                        </div>
+                        <div class="item-meta">
+                            <i class="fas fa-calendar-alt"></i>
+                            {{ \Carbon\Carbon::parse($nivel->fecha_finalizado)->format('d/m/Y') }}
+                        </div>
+                    </div>
+                @endforeach
             @endif
         </div>
 
-        <div class="rewards">
-            <h3 class="section-title">🏅 Tus Recompensas</h3>
-            @php
-                use App\Models\Recompensa;
-                use App\Models\RecompensasUsuario;
-                $recompensas = Recompensa::all();
-                $recompensasDesbloqueadas = auth()->user() 
-                    ? RecompensasUsuario::where('usuario_id', auth()->user()->id)->pluck('recompensa_id')->toArray() 
-                    : [];
-            @endphp
-            
+        <!-- Rewards -->
+        <h3 class="section-title"><i class="fas fa-medal"></i> Tus Recompensas</h3>
+        @php
+            use App\Models\Recompensa;
+            use App\Models\RecompensasUsuario;
+            $recompensas = Recompensa::all();
+            $recompensasDesbloqueadas = auth()->user() 
+                ? RecompensasUsuario::where('usuario_id', auth()->user()->id)->pluck('recompensa_id')->toArray() 
+                : [];
+        @endphp
+
+        <div class="grid-list">
             @if ($recompensas->isEmpty())
-                <div class="no-lessons">
-                    <p>Muy pronto podrás desbloquear logros y recompensas por tu progreso en LESSA.</p>
+                <div class="empty-state">
+                    <p>Pronto habrá recompensas disponibles.</p>
                 </div>
             @else
-                <ul class="lessons-list">
-                    @foreach ($recompensas as $recompensa)
-                        @php
-                            $isUnlocked = in_array($recompensa->id, $recompensasDesbloqueadas);
-                            $statusClass = $isUnlocked ? 'status-unlocked' : 'status-locked';
-                            $statusText = $isUnlocked ? '¡Desbloqueada!' : 'Bloqueada';
-                            // La acción se maneja en JS
-                        @endphp
-                        <li class="reward-item"
-                            data-id="{{ $recompensa->id }}"
-                            data-nombre="{{ $recompensa->nombre }}"
-                            data-descripcion="{{ $recompensa->descripcion }}"
-                            data-puntos="{{ $recompensa->puntos_req }}"
-                            data-url="{{ asset($recompensa->url_imagen) }}"
-                            data-unlocked="{{ $isUnlocked ? 1 : 0 }}"
-                            onclick="openRewardModal(this)">
-                            
-                            <div class="reward-image-wrapper">
-                                <img src="{{ asset('' . $recompensa->url_imagen) }}" alt="{{ $recompensa->nombre }}">
-                            </div>
-
-                            <div class="reward-content">
-                                <span class="reward-name">{{ $recompensa->nombre }}</span>
-                                <span class="completion-date">{{ $recompensa->descripcion }}</span>
-                                <span class="completion-date">Puntos requeridos: {{ $recompensa->puntos_req }}</span>
-                                <span class="reward-status {{ $statusClass }}">{{ $statusText }}</span>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+                @foreach ($recompensas as $recompensa)
+                    @php
+                        $isUnlocked = in_array($recompensa->id, $recompensasDesbloqueadas);
+                        $statusClass = $isUnlocked ? 'status-unlocked' : 'status-locked';
+                        $statusText = $isUnlocked ? 'Desbloqueada' : 'Bloqueada';
+                    @endphp
+                    <div class="item-card reward"
+                        data-id="{{ $recompensa->id }}"
+                        data-nombre="{{ $recompensa->nombre }}"
+                        data-descripcion="{{ $recompensa->descripcion }}"
+                        data-puntos="{{ $recompensa->puntos_req }}"
+                        data-url="{{ asset($recompensa->url_imagen) }}"
+                        data-unlocked="{{ $isUnlocked ? 1 : 0 }}"
+                        onclick="openRewardModal(this)">
+                        
+                        <img src="{{ asset($recompensa->url_imagen) }}" alt="{{ $recompensa->nombre }}" class="reward-img">
+                        
+                        <div style="flex: 1;">
+                            <div class="item-name">{{ $recompensa->nombre }}</div>
+                            <div class="item-meta" style="margin-bottom: 0.5rem;">{{ $recompensa->puntos_req }} Puntos</div>
+                            <span class="reward-status {{ $statusClass }}">{{ $statusText }}</span>
+                        </div>
+                    </div>
+                @endforeach
             @endif
         </div>
 
-        {{-- Modal de Detalle de Recompensa (EXISTENTE) --}}
-        <div id="rewardModal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeRewardModal()">&times;</span>
-                <img id="modal-img" class="modal-img" src="" alt="Recompensa">
-                <h4 id="modal-title" class="modal-title"></h4>
-                <p id="modal-desc" class="modal-desc"></p>
-                <p id="modal-puntos" class="completion-date-modal"></p> 
-                <button id="modal-btn" class="modal-btn" onclick="claimReward()"></button>
-            </div>
-        </div>
-        
-        {{-- Modal de Resultado de Desbloqueo (NUEVO) --}}
-        <div id="resultModal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeResultModal()">&times;</span>
-                <h4 id="result-modal-title" class="result-modal-title"></h4>
-                <p id="result-modal-message" class="result-modal-message"></p>
-                <button id="result-modal-btn" class="modal-btn" onclick="handleResultAction()"></button>
-            </div>
+    </main>
+
+    <!-- Reward Modal -->
+    <div id="rewardModal" class="modal-backdrop">
+        <div class="custom-modal">
+            <button class="modal-close-btn" onclick="closeRewardModal()">&times;</button>
+            <img id="modal-img" src="" alt="" class="modal-img-large">
+            <h3 id="modal-title" class="modal-title"></h3>
+            <p id="modal-desc" class="modal-desc"></p>
+            <div id="modal-puntos" class="modal-meta"></div>
+            <button id="modal-btn" class="btn-modal" onclick="claimReward()"></button>
         </div>
     </div>
+
+    <!-- Result Modal -->
+    <div id="resultModal" class="modal-backdrop">
+        <div class="custom-modal">
+            <button class="modal-close-btn" onclick="closeResultModal()">&times;</button>
+            <h3 id="result-modal-title" class="modal-title"></h3>
+            <p id="result-modal-message" class="modal-desc"></p>
+            <button id="result-modal-btn" class="btn-modal" onclick="handleResultAction()"></button>
+        </div>
+    </div>
+
     <footer>@include('partials.footer')</footer>
-@php
-    // Recupera la sesión de forma segura y la valida
-    $rewardResult = session('reward_result');
-    
-    // Si la variable de sesión no es un array (incluyendo null o Closure), la forzamos a null
-    if (!is_array($rewardResult)) {
-        $rewardResult = null;
-    }
-@endphp
-<script>
-        const rewardModal = document.getElementById('rewardModal'); 
+
+    @php
+        $rewardResult = session('reward_result');
+        if (!is_array($rewardResult)) {
+            $rewardResult = null;
+        }
+    @endphp
+
+    <script>
+        const rewardModal = document.getElementById('rewardModal');
         const modalTitle = document.getElementById('modal-title');
         const modalDesc = document.getElementById('modal-desc');
         const modalPuntos = document.getElementById('modal-puntos');
@@ -608,12 +568,11 @@
         const modalBtn = document.getElementById('modal-btn');
         let currentRewardId = null;
 
-        // Nuevas referencias para el Modal de Resultado
         const resultModal = document.getElementById('resultModal');
         const resultModalTitle = document.getElementById('result-modal-title');
         const resultModalMessage = document.getElementById('result-modal-message');
         const resultModalBtn = document.getElementById('result-modal-btn');
-        let currentActionRoute = null; 
+        let currentActionRoute = null;
 
         function openRewardModal(element) {
             const id = element.getAttribute('data-id');
@@ -621,7 +580,7 @@
             const descripcion = element.getAttribute('data-descripcion');
             const puntos = element.getAttribute('data-puntos');
             const url = element.getAttribute('data-url');
-            const unlocked = element.getAttribute('data-unlocked') === '1'; 
+            const unlocked = element.getAttribute('data-unlocked') === '1';
 
             currentRewardId = id;
 
@@ -630,39 +589,35 @@
             modalPuntos.textContent = 'Requiere: ' + puntos + ' puntos';
             modalImg.src = url;
 
-            // Resetear clases de botones
-            modalBtn.classList.remove('success', 'locked', 'info', 'error');
+            modalBtn.className = 'btn-modal'; // Reset classes
 
             if (unlocked) {
                 modalBtn.textContent = '¡Recompensa Desbloqueada!';
                 modalBtn.disabled = true;
-                modalBtn.classList.add('success'); 
-                modalBtn.style.color = 'var(--bg-dark)';
+                modalBtn.classList.add('success');
             } else {
                 modalBtn.textContent = 'Intentar Desbloquear';
                 modalBtn.disabled = false;
-                modalBtn.style.backgroundColor = 'var(--accent-btn)'; 
-                modalBtn.style.color = 'var(--bg-dark)';
+                modalBtn.classList.add('primary');
             }
 
-            rewardModal.style.display = 'block';
+            openModal(rewardModal);
         }
 
         function closeRewardModal() {
-            rewardModal.style.display = 'none';
+            closeModal(rewardModal);
             currentRewardId = null;
         }
 
         function claimReward() {
             if (currentRewardId) {
-                // Se asume que esta ruta existe: /recompensas/desbloquear/{id}
-                window.location.href = `/recompensas/desbloquear/${currentRewardId}`; 
+                window.location.href = `/recompensas/desbloquear/${currentRewardId}`;
             }
         }
-        
+
         function closeResultModal() {
-            resultModal.style.display = 'none';
-            currentActionRoute = null; 
+            closeModal(resultModal);
+            currentActionRoute = null;
         }
 
         function handleResultAction() {
@@ -672,80 +627,81 @@
                     'practicar': '{{ route("practicar") }}',
                 };
                 
-                // Mapeo de rutas (asumiendo que 'nivel.X' o 'lecciones' son las claves)
                 let finalUrl = currentActionRoute.includes('nivel.') 
                     ? routeMap['practicar'] || '#'
                     : routeMap[currentActionRoute] || '#';
                     
                 window.location.href = finalUrl;
             } else {
-                // Si la ruta es 'miProgreso' o nula, solo cierra el modal
                 closeResultModal();
             }
         }
 
-        // Cierra el modal si el usuario hace clic fuera de él
+        function openModal(modal) {
+            modal.style.visibility = 'visible';
+            void modal.offsetWidth; // Force reflow
+            modal.classList.add('show');
+        }
+
+        function closeModal(modal) {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.visibility = 'hidden';
+            }, 300);
+        }
+
+        // Close modals on outside click
         window.onclick = function(event) {
-            if (event.target == rewardModal) {
-                closeRewardModal();
-            }
-            if (event.target == resultModal) {
-                closeResultModal();
-            }
+            if (event.target == rewardModal) closeRewardModal();
+            if (event.target == resultModal) closeResultModal();
         }
 
-        // --- Lógica para mostrar el modal de resultado al cargar la página ---
+        // Show result modal on load if session data exists
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // Usamos la variable PHP $rewardResult ya validada
             @if (!empty($rewardResult))
                 const result = @json($rewardResult);
                 const status = result.status;
-                const title = result.title;
-                let message = result.message;
-                const route = result.route;
                 
-                currentActionRoute = route;
-
-                resultModalTitle.textContent = title;
-                resultModalMessage.innerHTML = message; 
-                resultModalBtn.classList.remove('success', 'locked', 'info', 'error');
+                currentActionRoute = result.route;
+                resultModalTitle.textContent = result.title;
+                resultModalMessage.innerHTML = result.message;
+                
+                resultModalBtn.className = 'btn-modal'; // Reset
 
                 switch(status) {
                     case 'success':
-                        resultModalTitle.style.color = 'var(--status-success)';
+                        resultModalTitle.style.color = 'var(--success-color)';
                         resultModalBtn.textContent = '¡Ver Recompensas!';
                         resultModalBtn.classList.add('success');
-                        resultModalBtn.onclick = () => { closeResultModal(); }; // Al hacer click se queda en la página de progreso
+                        resultModalBtn.onclick = () => closeResultModal();
                         break;
                     case 'locked':
-                        resultModalTitle.style.color = 'var(--status-locked)';
+                        resultModalTitle.style.color = 'var(--text-secondary)';
                         resultModalBtn.textContent = 'Ir a Practicar';
-                        resultModalBtn.classList.add('locked');
+                        resultModalBtn.classList.add('primary');
                         resultModalBtn.onclick = handleResultAction;
                         if (result.puntos_req) {
                             resultModalMessage.innerHTML += `<br><br><strong>Puntos Requeridos:</strong> ${result.puntos_req}`;
                         }
                         break;
-                    case 'info': 
-                        resultModalTitle.style.color = 'var(--status-info)';
+                    case 'info':
+                        resultModalTitle.style.color = 'var(--primary-color)';
                         resultModalBtn.textContent = 'Entendido';
-                        resultModalBtn.classList.add('info');
-                        resultModalBtn.onclick = () => { closeResultModal(); }; 
+                        resultModalBtn.classList.add('primary');
+                        resultModalBtn.onclick = () => closeResultModal();
                         break;
                     case 'error':
                     default:
-                        resultModalTitle.style.color = 'var(--status-error)';
-                        resultModalBtn.textContent = 'Volver al Progreso';
-                        resultModalBtn.classList.add('error');
+                        resultModalTitle.style.color = 'var(--danger-color)';
+                        resultModalBtn.textContent = 'Volver';
+                        resultModalBtn.classList.add('secondary');
                         resultModalBtn.onclick = handleResultAction;
                         break;
                 }
                 
-                resultModal.style.display = 'block';
+                openModal(resultModal);
             @endif
         });
-        
     </script>
 </body>
 
