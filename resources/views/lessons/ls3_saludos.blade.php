@@ -140,8 +140,8 @@
             color: var(--primary-color);
             cursor: pointer;
             position: absolute;
-            top: 15px;
-            left: 20px;
+            bottom: 20px;
+            right: 20px;
             z-index: 1001;
             background: rgba(255, 255, 255, 0.9);
             padding: 5px 12px;
