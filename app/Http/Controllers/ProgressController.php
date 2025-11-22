@@ -15,8 +15,7 @@ class ProgressController extends Controller
     // Función pública para completar la Lección 1 (Abecedario)
     public function ls1_complete(Request $request)
     {
-        // Lección 1 es la única que otorga una recompensa fija (ID 1)
-        return $this->handleLessonCompletion($request, 1, 1);
+        return $this->handleLessonCompletion($request, 1);
     }
 
     // Función pública para completar la Lección 2 (Números)
@@ -42,10 +41,9 @@ class ProgressController extends Controller
      *
      * @param Request $request
      * @param int $leccionId El ID de la lección que se está completando.
-     * @param int|null $recompensaId ID de la recompensa a desbloquear (opcional).
      * @return \Illuminate\Http\RedirectResponse
      */
-    private function handleLessonCompletion(Request $request, int $leccionId, ?int $recompensaId = null)
+    private function handleLessonCompletion(Request $request, int $leccionId)
     {
         try {
             $userId = auth()->id();
@@ -70,25 +68,9 @@ class ProgressController extends Controller
 
             $message = 'Lección completada exitosamente, ¡Felicidades!, puedes pasar a la siguiente lección';
 
-            // 3. Desbloquear recompensa si se proporciona un ID
-            if ($recompensaId) {
-                $recompensa = Recompensa::find($recompensaId);
-
-                // Comprobar que la recompensa exista y no esté ya desbloqueada
-                if ($recompensa && !RecompensasUsuario::where('usuario_id', $userId)->where('recompensa_id', $recompensaId)->exists()) {
-                    RecompensasUsuario::create([
-                        'usuario_id' => $userId,
-                        'recompensa_id' => $recompensa->id,
-                        'estado' => 'Desbloqueada',
-                    ]);
-                    $message .= ', y has desbloqueado una recompensa, ve a verla en Tu Progreso';
-                }
-            }
-
             return redirect()->route('lecciones')->with('status', $message);
         } catch (\Exception $e) {
             // Manejo de errores
-            // Puedes usar logger aquí si es necesario: \Log::error("Error al completar la lección {$leccionId}: " . $e->getMessage());
             return redirect()->route('lecciones')->withErrors(['error' => 'Error al completar la lección']);
         }
     }

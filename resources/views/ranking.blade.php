@@ -487,7 +487,7 @@
     <header>@include('partials.navbar')</header>
 
     <div class="container">
-        <h1>Ranking Global de Jugadores</h1>
+        <h1>Ranking de Jugadores</h1>
 
         <p class="ranking-intro">
             ¡Compite y escala posiciones! Haz clic en una fila para ver las recompensas desbloqueadas del jugador.
@@ -550,7 +550,6 @@
         @endif
     </div>
 
-    {{-- MODALES (sin cambiar la lógica de Blade) --}}
     @if(isset($ranking) && $ranking->count())
         @foreach($ranking as $row)
             <div id="user-modal-{{ $row->usuario_id }}" class="modal-overlay">
