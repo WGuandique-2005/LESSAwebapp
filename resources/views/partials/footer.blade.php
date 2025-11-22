@@ -171,13 +171,6 @@
                 <p class="footer-description">Plataforma de aprendizaje de Lengua de Señas Salvadoreña diseñada para
                     promover la inclusión y la comunicación.</p>
                 <div class="social-links" aria-label="Redes sociales">
-                    <a href="#" aria-label="LessA en Twitter">
-                        <!-- twitter svg -->
-                        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                            <path
-                                d="M22 5.92c-.66.3-1.36.5-2.1.6.76-.46 1.34-1.18 1.6-2.04-.72.43-1.52.75-2.37.92C18.4 4.4 17.26 4 16 4c-1.97 0-3.56 1.6-3.56 3.57 0 .28.03.55.09.81C9.1 8.24 5.62 6.38 3.3 3.5c-.31.54-.49 1.16-.49 1.82 0 1.25.63 2.36 1.6 3.01-.58-.02-1.12-.18-1.6-.44v.04c0 1.75 1.25 3.21 2.9 3.54-.3.08-.62.12-.95.12-.23 0-.45-.02-.66-.06.45 1.4 1.76 2.42 3.31 2.45-1.21.95-2.73 1.52-4.38 1.52-.29 0-.58-.02-.86-.05C6.84 19.16 8.6 20 10.56 20c6.72 0 10.4-5.6 10.4-10.46v-.48c.72-.53 1.3-1.2 1.78-1.96-.66.3-1.37.5-2.1.6z" />
-                        </svg>
-                    </a>
                     <a href="https://www.youtube.com/@lessavirtual" aria-label="LessA en YouTube">
                         <!-- youtube svg -->
                         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
@@ -219,7 +212,7 @@
                     <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24">
                                 <path
                                     d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2l-8 5L4 6h16z" />
-                            </svg></span><span>wguandique2006@gmail.com</span></li>
+                            </svg></span><span>app4mails@gmail.com</span></li>
                     <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24">
                                 <path
                                     d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.36 11.36 0 003.55.57 1 1 0 011 1v3.8a1 1 0 01-1 1A18 18 0 014 5a1 1 0 011-1h3.79a1 1 0 011 1 11.36 11.36 0 00.57 3.55 1 1 0 01-.21 1.11l-2.53 2.13z" />

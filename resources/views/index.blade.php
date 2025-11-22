@@ -198,7 +198,7 @@
 
         /* Features */
         .features {
-            padding: 6rem 2.5rem;
+            padding: 6rem 1rem;
             background-color: white;
             border-radius: var(--radius);
             position: relative;
@@ -553,6 +553,10 @@
             .hero-buttons {
                 justify-content: center;
             }
+
+            .btn-accent, .btn-outline {
+                max-width: 85%;
+            }
         }
 
         @media (max-width: 768px) {
@@ -786,7 +790,7 @@
 
             <!-- CTA Section -->
             <section class="cta-section animate-on-scroll">
-                <h2>¡Comienza tu journey de aprendizaje hoy!</h2>
+                <h2>¡Comienza tu aprendizaje hoy!</h2>
                 <p>Únete a nuestra comunidad y forma parte del cambio hacia una sociedad más inclusiva y comunicativa.
                 </p>
                 <div class="cta-buttons">
