@@ -5,387 +5,532 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nivel Vital: Mini-Juegos - LESSA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
+        /* --- 1. VARIABLES Y ESTILOS BASE (Adaptado de Home) --- */
         :root {
-            /* Colores Base (sin cambios) */
-            --primary-blue: #dc3545;
-            --primary-orange: #ff6b35;
-            --secondary-yellow: #ffc107;
-            --light-gray: #f4f6f9;
-            --medium-gray: #e9ecef;
-            --dark-gray: #212529;
-            --text-color: #212529;
-            --white: #ffffff;
-            --success-color: #069c5e; 
-            
-            /* Colores específicos del Nivel Vital (temática de salud/emergencia) */
-            --level-color-main: #dc3545; /* Rojo de emergencia */
-            --dark-overlay: rgba(220, 53, 69, 0.75);
+            /* Paleta de Colores - TEMA ROJO (SALUD) */
+            --primary-color: #ef4444;
+            /* Rojo Principal */
+            --primary-dark: #b91c1c;
+            /* Rojo Oscuro */
+            --primary-light: #fef2f2;
+            /* Rojo Claro */
+            --accent-color: #f97316;
+            --accent-hover: #ea580c;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-main: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-full: 9999px;
+            --transition-base: all 0.3s ease;
 
-            /* Espaciado, Tipografía y Componentes (sin cambios) */
-            --spacing-xs: 0.25rem;
-            --spacing-sm: 0.5rem;
-            --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --spacing-xxl: 3rem;
+            /* Colores específicos de los juegos */
+            --game1-color: #17a2b8;
+            --game2-color: #ffc107;
+            --game3-color: #dc3545;
+            --game4-color: #28a745;
+        }
 
-            --font-family-primary: 'Poppins', sans-serif;
-            --font-size-base: 1rem;
-            --font-size-sm: 0.9rem;
-            --font-size-md: 1.125rem;
-            --font-size-lg: 1.35rem;
-            --font-size-xl: 2.5rem;
-            --font-size-xxl: 3rem;
-
-            --border-radius: 12px;
-            --transition-speed: 0.3s;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: var(--font-family-primary);
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             line-height: 1.6;
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            background-color: var(--light-gray);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
         }
 
         .container {
-            max-width: 1080px;
+            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--spacing-md);
+            padding: 0 1.5rem;
         }
 
-        /* --- HERO SECTION: Nivel Vital --- */
+        /* --- 2. HERO SECTION --- */
         .hero-section {
-            background-color: var(--level-color-main); 
-            padding: var(--spacing-xl) 0;
-            color: var(--white);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: #ffffff;
+            padding: 4rem 0 6rem;
             position: relative;
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            min-height: 300px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            box-shadow: var(--shadow-md);
         }
 
-        .hero-section::before {
-            content: '';
+        .hero-bg-img {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* Utilizamos el overlay rojo */
-            background-color: var(--dark-overlay); 
-            z-index: 1;
+            object-fit: cover;
+            opacity: 0.15;
+            mix-blend-mode: overlay;
+            pointer-events: none;
         }
 
-        .hero-text {
-            text-align: center;
-            width: 100%;
-            position: relative; 
-            z-index: 2; 
-        }
-
-        .hero-text h2 {
-            font-size: var(--font-size-xxl);
-            font-weight: 800;
-            /* Color amarillo para destacar */
-            color: var(--secondary-yellow); 
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .hero-text h3 {
-            font-size: var(--font-size-lg);
-            font-weight: 600;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .hero-text p {
-            font-size: var(--font-size-md);
-            max-width: 700px;
-            margin: 0 auto var(--spacing-xl);
-        }
-        /* --- END HERO SECTION --- */
-        
-        /* --- PROGRESS CIRCLE (Se adapta el color del nivel en la info) --- */
-        .progress-and-intro-container {
-            padding: var(--spacing-xl) 0;
+        .hero-content {
+            position: relative;
+            z-index: 10;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
+            gap: 1rem;
         }
 
-        .progress-info {
-            margin-top: var(--spacing-lg);
-            padding: var(--spacing-lg);
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-info h4 {
-            font-size: var(--font-size-md);
-            /* Usamos el color del nivel */
-            color: var(--level-color-main);
-            margin-bottom: var(--spacing-sm);
+        .hero-title {
+            font-size: 2.5rem;
             font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
         }
 
-        .progress-info p {
-            font-size: var(--font-size-sm);
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-desc {
+            font-size: 1.125rem;
+            max-width: 700px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* --- 3. BREADCRUMB --- */
+        .breadcrumb-nav {
+            margin-top: -3rem;
+            position: relative;
+            z-index: 20;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 1rem 1.5rem;
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
             color: var(--text-secondary);
-            margin: 0;
+        }
+
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-base);
+        }
+
+        .breadcrumb-item a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            margin: 0 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .breadcrumb-item.active {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* --- 4. PROGRESS SECTION --- */
+        .progress-section {
+            margin-bottom: 3rem;
+        }
+
+        .progress-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+
+        .progress-content {
+            flex: 1;
+        }
+
+        .progress-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-content p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-link {
+            color: var(--accent-color);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-base);
+        }
+
+        .progress-link:hover {
+            color: var(--accent-hover);
+            transform: translateX(5px);
         }
 
         .progress-circle-container {
             position: relative;
-            width: 150px;
-            height: 150px;
-            margin-bottom: var(--spacing-md);
+            width: 140px;
+            height: 140px;
+            flex-shrink: 0;
         }
 
         .progress-circle {
             width: 100%;
             height: 100%;
-            transform: rotate(-90deg);
+            border-radius: 50%;
+            background: conic-gradient(var(--success-color) calc(var(--progress) * 3.6deg), var(--bg-body) 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
 
-        .progress-circle-bg {
-            stroke: var(--medium-gray);
-            stroke-width: 10;
-            fill: none;
-        }
-
-        .progress-circle-bar {
-            stroke: var(--success-color); 
-            stroke-width: 10;
-            stroke-linecap: round;
-            fill: none;
-            transition: stroke-dashoffset 1s ease-out;
-        }
-
-        .progress-text {
+        .progress-circle::before {
+            content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: var(--font-size-md);
+            width: 86%;
+            height: 86%;
+            background: var(--bg-card);
+            border-radius: 50%;
+        }
+
+        .progress-value {
+            position: relative;
+            font-size: 2rem;
             font-weight: 800;
-            color: var(--success-color);
+            color: var(--text-main);
+            z-index: 2;
+        }
+
+        /* --- 5. GAMES GRID --- */
+        .games-section {
+            padding-bottom: 5rem;
         }
 
         .section-header {
-            margin-bottom: var(--spacing-lg);
             text-align: center;
+            margin-bottom: 3rem;
         }
 
         .section-header h2 {
-            color: var(--primary-orange);
-            font-size: var(--font-size-xl);
-            text-transform: uppercase;
-        }
-
-        /* --- CARDS: Mini-Game Cards --- */
-        .main-game-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--spacing-lg);
-            padding-bottom: var(--spacing-xl);
-        }
-
-        .game-card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-            cursor: pointer;
-            /* Usamos el color del nivel como borde de destaque */
-            border-top: 5px solid var(--level-color-main);
-            text-align: center;
-            padding: var(--spacing-lg);
-        }
-
-        .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border-top-color: var(--primary-orange);
-        }
-
-        .game-card .icon {
-            font-size: 3rem;
-            margin-bottom: var(--spacing-sm);
-            display: block;
-        }
-
-        .game-card h3 {
-            font-size: var(--font-size-lg);
-            color: var(--dark-gray);
+            font-size: 2.25rem;
             font-weight: 700;
-            margin-bottom: var(--spacing-sm);
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
         }
 
-        .game-card p {
-            font-size: var(--font-size-sm);
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .lesson-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-base);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .lesson-card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Game Specific Icons */
+        .icon-game1 {
+            background-color: rgba(23, 162, 184, 0.1);
+            color: var(--game1-color);
+        }
+
+        .icon-game2 {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--game2-color);
+        }
+
+        .icon-game3 {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--game3-color);
+        }
+
+        .icon-game4 {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--game4-color);
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+
+        .card-content p {
             color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
         }
 
-        /* Colores de Icono Específicos para SALUD */
-        .game-card.game-1 .icon { color: #17a2b8; } /* CIAN (cuerpo) */
-        .game-card.game-2 .icon { color: #ffc107; } /* AMARILLO (síntomas) */
-        .game-card.game-3 .icon { color: #dc3545; } /* ROJO (emergencia) */
-        .game-card.game-4 .icon { color: #28a745; } /* VERDE (medicina) */
+        .card-footer {
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--bg-body);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
 
+        .card-arrow {
+            transition: var(--transition-base);
+        }
 
-        /* --- Modal Styles (para resultados) --- */
+        .lesson-card:hover .card-arrow {
+            transform: translateX(5px);
+        }
+
+        /* --- 6. MODAL (Results) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.85); /* Fondo más oscuro para enfoque */
-            display: none; /* Oculto por defecto */
-            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            display: none;
             align-items: center;
-            z-index: 1000;
-            animation: fadeIn 0.3s ease-out;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .modal-content {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-xl);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            max-width: 450px;
+            background: var(--bg-card);
             width: 90%;
-            text-align: center;
+            max-width: 450px;
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
             position: relative;
-            animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            /* Usar el color principal del nivel (rojo) como borde */
-            border-bottom: 5px solid var(--level-color-main);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .modal-overlay[style*="display: flex"] {
+            opacity: 1;
+        }
+
+        .modal-overlay[style*="display: flex"] .modal-content {
+            transform: translateY(0);
         }
 
         .modal-icon {
-            font-size: var(--font-size-xxl);
-            margin-bottom: var(--spacing-md);
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
             display: block;
         }
 
         .modal-content h3 {
-            font-size: var(--font-size-lg);
-            font-weight: 800;
-            margin-bottom: var(--spacing-sm);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1rem;
         }
 
         .modal-content p {
-            font-size: var(--font-size-md);
-            margin-bottom: var(--spacing-lg);
-            color: var(--dark-gray);
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
         }
 
-        .modal-footer button {
-            /* Usar el color principal del nivel (rojo) */
-            background-color: var(--level-color-main);
-            color: var(--white);
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: var(--font-size-md);
+        .modal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 1rem;
+            border-radius: var(--radius-full);
+            background: var(--primary-color);
+            color: white;
             font-weight: 600;
+            border: none;
             cursor: pointer;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            transition: background 0.3s;
+            text-decoration: none;
+            font-size: 1rem;
         }
 
-        .modal-footer button:hover {
-            background-color: #b02a37; /* Rojo más oscuro */
-            transform: translateY(-1px);
+        .modal-btn:hover {
+            background: var(--primary-dark);
         }
 
-        /* Colores de estado del modal */
+        /* Modal States */
         .modal-content.success .modal-icon {
-            color: var(--success-color); /* Verde */
+            color: var(--success-color);
         }
+
         .modal-content.info .modal-icon {
-            color: var(--secondary-yellow); /* Amarillo/Naranja para la info de "no mejoró" */
+            color: var(--warning-color);
         }
+
         .modal-content.error .modal-icon {
-            color: var(--primary-orange); /* Naranja/Rojo para errores de servidor */
+            color: var(--danger-color);
         }
 
-        /* Animaciones */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px) scale(0.9); }
-            to { transform: translateY(0) scale(1); }
-        }
-
-
-        /* Responsive adjustments (sin cambios) */
-        @media (min-width: 768px) {
-            .hero-text {
-                text-align: left;
+        /* --- RESPONSIVENESS --- */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2rem;
             }
-            .progress-and-intro-container {
-                flex-direction: row;
-                text-align: left;
-                justify-content: space-between;
+
+            .progress-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .progress-content {
+                display: flex;
+                flex-direction: column;
                 align-items: center;
-                padding-bottom: var(--spacing-xxl);
-            }
-            .main-game-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .progress-info {
-                max-width: 60%;
-                box-shadow: none;
-                background: transparent;
-                padding-left: var(--spacing-xl);
-            }
-            .progress-circle-container {
-                margin-bottom: 0;
             }
         }
-        /* Responsive para el modal */
-        @media (max-width: 480px) {
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem 0 5rem;
+            }
+
+            .breadcrumb-nav {
+                margin-top: -2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+
             .modal-content {
-                padding: var(--spacing-lg);
-            }
-            .modal-content h3 {
-                font-size: var(--font-size-md);
-            }
-            .modal-content p {
-                font-size: var(--font-size-sm);
-            }
-            .modal-footer button {
-                width: 100%;
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <header>@include('partials.navbar')</header>
+    <header>
+        @include('partials.navbar')
+    </header>
+
     <main>
+        <!-- Hero Section -->
         <section class="hero-section">
             <div class="container hero-content">
-                <div class="hero-text">
-                    <h2>NIVEL 4: VOCABULARIO VITAL</h2>
-                    <h3>¡Aprende a describir síntomas, citas y partes del cuerpo en LESSA! 🩹</h3>
-                    <p>Comunicarse efectivamente sobre la salud puede ser una emergencia. Estos mini-juegos se centran en
-                        el vocabulario médico esencial para describir cómo te sientes, pedir ayuda o interactuar con
-                        personal sanitario. ¡Domina este nivel para manejar cualquier situación vital!</p>
-                </div>
+                <h1 class="hero-title">Nivel 4: Vocabulario Vital</h1>
+                <h2 class="hero-subtitle">¡Aprende a describir síntomas, citas y partes del cuerpo en LESSA! 🩹</h2>
+                <p class="hero-desc">
+                    Comunicarse efectivamente sobre la salud puede ser una emergencia. Estos mini-juegos se centran en
+                    el vocabulario médico esencial para describir cómo te sientes.
+                </p>
             </div>
         </section>
 
@@ -394,142 +539,147 @@
                 use App\Models\PuntosUsuario;
                 $userId = Auth::id();
                 $totalNiveles = 4;
-                // Donde ID de la leccion comience con 'ABC'
+                // Donde ID de la leccion comience con 'SALUD'
                 $completado = PuntosUsuario::where('usuario_id', $userId)
                     ->where('completado', true)
                     ->where('nivel_id', 'like', 'SALUD%')
                     ->count();
                 $progresoPorcentaje = $totalNiveles > 0 ? round(($completado / $totalNiveles) * 100) : 0;
             @endphp
-            <nav aria-label="breadcrumb" style="font-family: 'Poppins', sans-serif; width: 100%; margin: 20px 0;">
-                <ol
-                    style="display: flex; flex-wrap: wrap; list-style: none; margin: 0; padding: 12px 20px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); border: 1px solid #e9ecef;">
 
-                    <li style="display: flex; align-items: center; font-size: 0.95rem;">
-                        <a href="/"
-                            style="color: #dc3545; text-decoration: none; font-weight: 600; display: flex; align-items: center;">
-                            <i class="fas fa-home" style="margin-right: 6px; color: #dc3545;"></i>
-                            Inicio
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <i class="fas fa-home"></i> Inicio
                         </a>
                     </li>
-
-                    <li style="display: flex; align-items: center; font-size: 0.95rem;">
-                        <span style="margin: 0 10px; color: #6b7280;">/</span>
-
-                        <a href="{{ route('practicar')}}"
-                            style="color: #dc3545; text-decoration: none; font-weight: 600;">
+                    <li class="breadcrumb-separator">/</li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('practicar') }}">
                             Practicar
                         </a>
                     </li>
-
-                    <li style="display: flex; align-items: center; font-size: 0.95rem; font-weight: 500;"
-                        aria-current="page">
-                        <span style="margin: 0 10px; color: #6b7280;">/</span>
-
-                        <span style="color: #212529;">
-                            Salud
-                        </span>
+                    <li class="breadcrumb-separator">/</li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Salud
                     </li>
-
                 </ol>
             </nav>
-            <div class="progress-and-intro-container">
-                <div class="progress-circle-container" data-progress="{{ $progresoPorcentaje }}">
-                    <svg class="progress-circle" viewBox="0 0 80 80">
-                        <circle class="progress-circle-bg" cx="40" cy="40" r="35"></circle>
-                        <circle class="progress-circle-bar" cx="40" cy="40" r="35"></circle>
-                    </svg>
-                    <span class="progress-text" id="progress-percent"></span>
+
+            <!-- Progress Section -->
+            <section class="progress-section">
+                <div class="progress-card">
+                    <div class="progress-content">
+                        <h2>Progreso del Nivel</h2>
+                        <p>
+                            Has completado <strong>{{ $completado }}</strong> de <strong>{{ $totalNiveles }}</strong>
+                            mini-juegos.
+                            Sigue practicando para afinar tus habilidades en dactilología.
+                        </p>
+                        <a href="{{ route('miProgreso') }}" class="progress-link">
+                            Ver recompensas desbloqueables <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="progress-circle-container">
+                        <div class="progress-circle" style="--progress: {{ $progresoPorcentaje }};">
+                            <span class="progress-value">{{ $progresoPorcentaje }}%</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="progress-info">
-                    <h4>PROGRESO DEL NIVEL</h4>
-                    <p><strong>Has completado {{ $completado }} de {{ $totalNiveles }} mini-juegos.</strong> Sigue practicando para seguir afinando tus habilidades en dactilología con
-                        LESSA. ¡Cada juego cuenta!</p>
-                        <a href="{{ route('miProgreso') }}" style="color: #ff6b35; text-decoration: none; cursor: pointer;">Ve que recompensas puedes desbloquear</a>
-                </div>
-            </div>
-            <section class="learn-sections">
+            </section>
+
+            <!-- Games Grid -->
+            <section class="games-section">
                 <div class="section-header">
                     <h2>Mini-Juegos de Emergencia y Salud</h2>
                 </div>
-                <div class="learn-sections-layout">
-                    <div class="main-game-grid">
-                        <div class="game-card game-1" onclick="window.location.href='/practicar/salud/adivina'">
-                            <span class="icon">🦴</span>
+                <div class="cards-grid">
+                    <!-- Game 1 -->
+                    <div class="lesson-card" onclick="window.location.href='/practicar/salud/adivina'">
+                        <div class="card-icon icon-game1">
+                            <i class="fas fa-bone"></i>
+                        </div>
+                        <div class="card-content">
                             <h3>Señas del Cuerpo</h3>
-                            <p>Identifica las señas correspondientes a diferente vocabulario aprendido durantes las lecciones, se te mostrará una seña y deberás identificar la correcta entre múltiples opciones.
-                                ¡Rapidez y precisión!</p>
+                            <p>Identifica las señas correspondientes a diferente vocabulario aprendido durante las
+                                lecciones.</p>
                         </div>
-                        <div class="game-card game-2" onclick="window.location.href='/practicar/salud/memorama'">
-                            <span class="icon">🤒</span>
-                            <h3>Memorama de señas</h3>
-                            <p>Encuentra pares de cartas: imagen de la seña y el gesto correspondiente. Fortalece tu capacidad
-                                de reconocimiento y memoria visual.</p>
+                        <div class="card-footer">
+                            <span>Jugar Ahora</span>
+                            <i class="fas fa-play card-arrow"></i>
                         </div>
-                        <div class="game-card game-3" onclick="window.location.href='/practicar/salud/conecta'">
-                            <span class="icon">🚨</span>
+                    </div>
+
+                    <!-- Game 2 -->
+                    <div class="lesson-card" onclick="window.location.href='/practicar/salud/memorama'">
+                        <div class="card-icon icon-game2">
+                            <i class="fas fa-head-side-virus"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Memorama de Señas</h3>
+                            <p>Encuentra pares de cartas: imagen de la seña y el gesto correspondiente.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span>Jugar Ahora</span>
+                            <i class="fas fa-play card-arrow"></i>
+                        </div>
+                    </div>
+
+                    <!-- Game 3 -->
+                    <div class="lesson-card" onclick="window.location.href='/practicar/salud/conecta'">
+                        <div class="card-icon icon-game3">
+                            <i class="fas fa-ambulance"></i>
+                        </div>
+                        <div class="card-content">
                             <h3>Conecta</h3>
-                            <p>Conecta la imagen de la seña y su significado correcto. Fortalece tu memoria
-                                visual a largo plazo.</p>
+                            <p>Conecta la imagen de la seña y su significado correcto. Fortalece tu memoria visual.</p>
                         </div>
-                        <div class="game-card game-4" onclick="window.location.href='/practicar/salud/extra'">
-                            <span class="icon">💊</span>
+                        <div class="card-footer">
+                            <span>Jugar Ahora</span>
+                            <i class="fas fa-play card-arrow"></i>
+                        </div>
+                    </div>
+
+                    <!-- Game 4 -->
+                    <div class="lesson-card" onclick="window.location.href='/practicar/salud/extra'">
+                        <div class="card-icon icon-game4">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="card-content">
                             <h3>Terminología Médica</h3>
-                            <p>Empareja conceptos médicos clave (ej. Hospital, Farmacia, Cita) con su seña correcta.
-                                Fortalece tu vocabulario profesional.</p>
+                            <p>Empareja conceptos médicos clave (ej. Hospital, Farmacia, Cita) con su seña correcta.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span>Jugar Ahora</span>
+                            <i class="fas fa-play card-arrow"></i>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
     </main>
-    
+
+    <footer>
+        @include('partials.footer')
+    </footer>
+
+    <!-- Result Modal -->
     <div id="result-modal" class="modal-overlay">
         <div class="modal-content" id="modal-content-area">
             <div class="modal-icon" id="modal-icon"></div>
             <h3 id="modal-title-display"></h3>
             <p id="modal-message-display"></p>
-            <div class="modal-footer">
-                <button onclick="window.location.href='{{ route('nivel.salud') }}'">
-                    <i class="fas fa-arrow-left"></i> Volver a Mini-Juegos
-                </button>
-            </div>
+            <button class="modal-btn" onclick="window.location.href='{{ route('nivel.salud') }}'">
+                <i class="fas fa-arrow-left"></i> Volver a Mini-Juegos
+            </button>
         </div>
     </div>
 
-    <footer>@include('partials.footer')</footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Configuración del Círculo de Progreso
-            const progressContainer = document.querySelector('.progress-circle-container');
-            const progressCircleBar = document.querySelector('.progress-circle-bar');
-            const progressText = document.getElementById('progress-percent');
-            
-            // Obtenemos el progreso calculado en el backend (75 en este caso)
-            const currentProgress = parseInt(progressContainer.getAttribute('data-progress'), 10);
-            
-            // Obtenemos el radio del SVG (r="35")
-            const radius = progressCircleBar.r.baseVal.value;
-            // Calculamos la circunferencia real: 2 * PI * r
-            const circumference = 2 * Math.PI * radius; 
-
-            // Aplicamos la circunferencia como el stroke-dasharray
-            progressCircleBar.style.strokeDasharray = circumference;
-
-            // Calculamos el offset: Circunferencia - (Porcentaje / 100) * Circunferencia
-            // Para 75% -> offset = circumference - (0.75 * circumference) = 0.25 * circumference
-            const offset = circumference - (currentProgress / 100) * circumference;
-
-            // Establecemos el offset y el texto.
-            progressCircleBar.style.strokeDashoffset = offset;
-            progressText.textContent = currentProgress + '%';
-
-            // Opcional: El timeout que estaba para la transición de animación
-            setTimeout(() => {
-                progressCircleBar.style.strokeDashoffset = offset;
-            }, 500); 
-            
-            // --- LÓGICA DEL MODAL DE RESULTADOS (Añadido) ---
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- LÓGICA DEL MODAL DE RESULTADOS ---
             const resultModal = document.getElementById('result-modal');
             const modalContentArea = document.getElementById('modal-content-area');
             const modalTitle = document.getElementById('modal-title-display');
@@ -545,35 +695,29 @@
                 modalTitle.textContent = title;
                 modalMessage.textContent = message;
 
-                // Define el icono basado en el tipo de mensaje (usando Emojis)
+                // Define el icono basado en el tipo de mensaje (usando Emojis o Iconos FontAwesome)
                 if (type === 'success') {
-                    modalIcon.innerHTML = '🏆'; // Éxito: Nueva mejor marca o igual
+                    modalIcon.innerHTML = '<i class="fas fa-trophy"></i>';
                 } else if (type === 'info') {
-                    modalIcon.innerHTML = '🧠'; // Info: Sacó menos puntaje que antes, debe practicar
+                    modalIcon.innerHTML = '<i class="fas fa-lightbulb"></i>';
                 } else if (type === 'error') {
-                    modalIcon.innerHTML = '❌'; // Error: Fallo al guardar en el servidor
+                    modalIcon.innerHTML = '<i class="fas fa-times-circle"></i>';
                 }
 
                 // Muestra el modal
                 resultModal.style.display = 'flex';
             }
 
-            // 1. Manejo de mensajes de éxito, info y error desde el controlador
-
             // Obtener el mensaje completo que viene en el flash data
-            // Usamos un valor por defecto si no existe (|| '')
             const successMessage = "{{ session('success') ?? '' }}";
             const infoMessage = "{{ session('info') ?? '' }}";
             const errorMessage = "{{ session('error') ?? '' }}";
 
             if (successMessage) {
-                // Para éxito (nueva marca o igual): Usamos el mensaje completo del controlador
                 showResultModal('success', '¡Progreso Guardado!', successMessage);
             } else if (infoMessage) {
-                // Para info (sacó menos puntaje): Usamos el mensaje completo del controlador
                 showResultModal('info', '¡Bien Hecho!', infoMessage);
             } else if (errorMessage) {
-                // Para errores (fallo de servidor/DB): Usamos el mensaje completo del controlador
                 showResultModal('error', '¡Error al Guardar!', errorMessage);
             }
         });
