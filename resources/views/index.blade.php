@@ -198,7 +198,7 @@
 
         /* Features */
         .features {
-            padding: 6rem 0;
+            padding: 6rem 2.5rem;
             background-color: white;
             border-radius: var(--radius);
             position: relative;
@@ -238,31 +238,20 @@
         /* CARDS */
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
         .card {
             background: white;
             border-radius: var(--radius);
-            padding: 2.5rem 2rem;
-            text-align: center;
             box-shadow: var(--shadow);
             transition: var(--transition);
             border: 1px solid rgba(0, 0, 0, 0.05);
             position: relative;
             overflow: hidden;
-        }
-
-        .card:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
@@ -270,20 +259,44 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .card:hover:after {
-            width: 8px;
+        .card-image-container {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background-color: #f0f0f0;
+        }
+
+        .card-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-image-container img {
+            transform: scale(1.1);
+        }
+
+        .card-body {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .card-icon {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(10, 36, 99, 0.05);
             border-radius: 50%;
-            margin: 0 auto 1.5rem;
-            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
             color: var(--primary);
             transition: var(--transition);
         }
@@ -301,6 +314,7 @@
 
         .card p {
             color: #666;
+            margin-bottom: 0;
         }
 
         /* Testimonials */
@@ -312,7 +326,7 @@
         .testimonial-card {
             background: white;
             border-radius: var(--radius);
-            padding: 2rem;
+            padding: 2.5rem;
             box-shadow: var(--shadow);
             margin: 1rem;
             position: relative;
@@ -555,8 +569,8 @@
                 font-size: 1.8rem;
             }
 
-            .card {
-                padding: 2rem 1.5rem;
+            .card-body {
+                padding: 1.5rem;
             }
 
             .cta-buttons {
@@ -630,28 +644,34 @@
 
                 <div class="cards">
                     <div class="card animate-on-scroll">
-                        <div class="card-icon">
-                            <i class="fas fa-clock"></i>
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>Aprendizaje a tu ritmo</h3>
+                            <p>Avanza según tu disponibilidad de tiempo y refuerza los conceptos las veces que necesites.
+                            </p>
                         </div>
-                        <h3>Aprendizaje a tu ritmo</h3>
-                        <p>Avanza según tu disponibilidad de tiempo y refuerza los conceptos las veces que necesites.
-                        </p>
                     </div>
 
                     <div class="card animate-on-scroll">
-                        <div class="card-icon">
-                            <i class="fas fa-gamepad"></i>
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h3>Lecciones interactivas</h3>
+                            <p>Aprende mediante juegos, ejercicios prácticos y retroalimentación inmediata.</p>
                         </div>
-                        <h3>Lecciones interactivas</h3>
-                        <p>Aprende mediante juegos, ejercicios prácticos y retroalimentación inmediata.</p>
                     </div>
 
                     <div class="card animate-on-scroll">
-                        <div class="card-icon">
-                            <i class="fas fa-mobile-alt"></i>
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>Acceso desde cualquier dispositivo</h3>
+                            <p>Continúa tu aprendizaje en computadora, tableta o smartphone sin interrupciones.</p>
                         </div>
-                        <h3>Acceso desde cualquier dispositivo</h3>
-                        <p>Continúa tu aprendizaje en computadora, tableta o smartphone sin interrupciones.</p>
                     </div>
                 </div>
             </section>
@@ -666,17 +686,25 @@
 
                 <div class="cards">
                     <div class="card animate-on-scroll">
-                        <img src="{{ asset('img/salvadorMundo.png') }}" alt="Misión" width="100">
-                        <h3>Misión</h3>
-                        <p>Enseñar LESSA de manera accesible y práctica, fortaleciendo la comunicación inclusiva entre
-                            personas sordas y oyentes.</p>
+                        <div class="card-image-container">
+                            <img src="{{ asset('img/salvadorMundo.png') }}" alt="Misión">
+                        </div>
+                        <div class="card-body">
+                            <h3>Misión</h3>
+                            <p>Enseñar LESSA de manera accesible y práctica, fortaleciendo la comunicación inclusiva entre
+                                personas sordas y oyentes.</p>
+                        </div>
                     </div>
 
                     <div class="card animate-on-scroll">
-                        <img src="{{ asset('img/farolitos.png') }}" alt="Visión" width="100">
-                        <h3>Visión</h3>
-                        <p>Ser la plataforma líder en El Salvador para aprender lengua de señas, fomentando integración
-                            social, cultural y laboral.</p>
+                        <div class="card-image-container">
+                            <img src="{{ asset('img/farolitos.png') }}" alt="Visión">
+                        </div>
+                        <div class="card-body">
+                            <h3>Visión</h3>
+                            <p>Ser la plataforma líder en El Salvador para aprender lengua de señas, fomentando integración
+                                social, cultural y laboral.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -691,17 +719,25 @@
 
                 <div class="cards">
                     <div class="card animate-on-scroll">
-                        <img src="{{ asset('img/who.png')}}" alt="Quiénes somos" width="100">
-                        <h3>¿Quiénes somos?</h3>
-                        <p>Un equipo de jóvenes desarrolladores comprometidos con la accesibilidad y la educación
-                            inclusiva.</p>
+                        <div class="card-image-container">
+                            <img src="{{ asset('img/who.png')}}" alt="Quiénes somos">
+                        </div>
+                        <div class="card-body">
+                            <h3>¿Quiénes somos?</h3>
+                            <p>Un equipo de jóvenes desarrolladores comprometidos con la accesibilidad y la educación
+                                inclusiva.</p>
+                        </div>
                     </div>
 
                     <div class="card animate-on-scroll">
-                        <img src="{{ asset('img/hands.png')}}" alt="Manos" width="100">
-                        <h3>Educación para todos</h3>
-                        <p>Ofrecemos una app intuitiva que se adapta a tu ritmo de aprendizaje, incluso en comunidades
-                            con recursos limitados.</p>
+                        <div class="card-image-container">
+                            <img src="{{ asset('img/hands.png')}}" alt="Manos">
+                        </div>
+                        <div class="card-body">
+                            <h3>Educación para todos</h3>
+                            <p>Ofrecemos una app intuitiva que se adapta a tu ritmo de aprendizaje, incluso en comunidades
+                                con recursos limitados.</p>
+                        </div>
                     </div>
                 </div>
             </section>
