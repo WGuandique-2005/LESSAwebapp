@@ -489,9 +489,9 @@
                     <li style="display: flex; align-items: center; font-size: 0.95rem;">
                         <span style="margin: 0 10px; color: #6b7280;">/</span>
 
-                        <a href="{{ route('practicar')}}"
+                        <a href="{{ route('aprender')}}"
                             style="color: #2a6fdb; text-decoration: none; font-weight: 600;">
-                            Practicar
+                            Aprender
                         </a>
                     </li>
 
