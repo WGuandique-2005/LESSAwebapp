@@ -14,229 +14,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LESSA - Sección de Aprendizaje</title>
+    <title>Sección de Aprendizaje - LESSA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
+        /* --- 1. VARIABLES Y ESTILOS BASE (Coincide con home.blade.php) --- */
         :root {
-            --primary-color: #070776;
-            --primary-hover: #050558;
-            --secondary-color: #e6a717;
-            --secondary-hover: #d19416;
-            --success-color: #22C55E;
-            --error-color: #EF4444;
-            --text-color: #1f2937;
-            --text-light: #6b7280;
-            --bg-color: #f3f4f6;
-            --card-bg: #ffffff;
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --primary-light: #eff6ff;
+            --accent-color: #f97316;
+            --accent-hover: #ea580c;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-main: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --radius-md: 0.5rem;
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-full: 9999px;
+            --transition-base: all 0.3s ease;
         }
 
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Layout */
-        header {
-            z-index: 50;
-        }
-
-        main.container {
-            flex: 1;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-            position: relative;
             box-sizing: border-box;
         }
 
-        footer {
-            margin-top: auto;
-            z-index: 50;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Background Shapes */
-        .floating-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.4;
-            filter: blur(40px);
-            animation: float 20s infinite linear;
-        }
-
-        .shape:nth-child(odd) {
-            background: rgba(7, 7, 118, 0.1);
-        }
-
-        .shape:nth-child(even) {
-            background: rgba(230, 167, 23, 0.15);
-        }
-
-        /* Simplified shapes for cleaner look */
-        .shape-1 { top: -10%; left: -10%; width: 400px; height: 400px; animation-duration: 25s; }
-        .shape-2 { top: 40%; right: -5%; width: 300px; height: 300px; animation-duration: 30s; animation-delay: -5s; }
-        .shape-3 { bottom: -10%; left: 20%; width: 350px; height: 350px; animation-duration: 28s; animation-delay: -10s; }
-        
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, 50px) rotate(10deg); }
-            66% { transform: translate(-20px, 20px) rotate(-5deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
-        }
-
-        /* Learning Section */
-        .learning-section {
+        /* --- HERO SECTION --- */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: #ffffff;
+            padding: 3rem 0 5rem;
             position: relative;
-            z-index: 1;
-            background-color: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 2.5rem;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+            overflow: hidden;
+            text-align: center;
+            box-shadow: var(--shadow-md);
             margin-bottom: 2rem;
         }
 
-        .learning-section h1 {
-            color: var(--primary-color);
-            margin-top: 0;
+        .hero-title {
             font-size: 2.5rem;
-            font-weight: 800;
-            text-align: center;
+            font-weight: 700;
+            line-height: 1.2;
             margin-bottom: 0.5rem;
         }
 
-        .learning-section .subtitle {
-            color: var(--text-light);
-            font-size: 1.25rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .learning-section .description {
-            color: var(--text-color);
-            line-height: 1.8;
-            font-size: 1.1rem;
+        .hero-subtitle {
+            font-size: 1.125rem;
             max-width: 800px;
-            margin: 0 auto 1.5rem auto;
-            text-align: center;
+            margin: 0 auto;
+            opacity: 0.9;
+            font-weight: 300;
+            padding: 0 1rem;
         }
 
-        .learning-section .reminder {
-            color: var(--primary-color);
-            font-weight: 600;
-            text-align: center;
-            font-style: italic;
-            margin-bottom: 3rem;
+        .hero-description {
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 1rem auto 0;
+            opacity: 0.8;
+            font-weight: 300;
+            line-height: 1.6;
         }
 
-        /* Progress Bar */
-        .progress-container {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-            padding: 1.5rem;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md);
-            color: white;
-            margin-bottom: 3rem;
-            transition: transform 0.2s;
+        /* --- MAIN CONTAINER --- */
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: -4rem auto 0;
+            padding: 0 1.5rem 4rem;
+            position: relative;
+            z-index: 10;
         }
 
-        .progress-container:hover {
+        /* --- PROGRESS BAR --- */
+        .progress-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            cursor: pointer;
+            transition: var(--transition-base);
+        }
+
+        .progress-card:hover {
             transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
         }
 
-        .progress-container p {
-            margin: 0 0 10px 0;
-            font-weight: 700;
-            font-size: 1.1rem;
+        .progress-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 1.1rem;
         }
 
-        .progress-bar-outer {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 9999px;
+        .progress-bar-bg {
+            background-color: #e5e7eb;
+            border-radius: var(--radius-full);
             height: 12px;
             overflow: hidden;
+            width: 100%;
         }
 
-        .progress-bar-inner {
-            background-color: var(--secondary-color);
+        .progress-bar-fill {
+            background: linear-gradient(90deg, var(--success-color), #34d399);
             height: 100%;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             width: 0%;
             transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 10px rgba(230, 167, 23, 0.5);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
         }
 
-        /* Cards Grid */
-        .cards-container {
+        .reminder-text {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-style: italic;
+            margin-top: -0.5rem;
+        }
+
+        /* --- CARDS GRID --- */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
         }
 
-        .card {
-            background-color: var(--card-bg);
+        .lesson-card {
+            background: var(--bg-card);
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
             overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
-            height: 100%;
+            transition: var(--transition-base);
             cursor: pointer;
-            position: relative;
+            border: 1px solid transparent;
+            height: 100%;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(7, 7, 118, 0.1);
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(37, 99, 235, 0.1);
         }
 
         .card-image {
             width: 100%;
-            height: 200px;
+            height: 180px;
             overflow: hidden;
-            background-color: #f9fafb;
+            background-color: #f1f5f9;
+            position: relative;
         }
 
         .card-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
             transition: transform 0.5s ease;
         }
 
-        .card:hover .card-image img {
-            transform: scale(1.05);
+        .lesson-card:hover .card-image img {
+            transform: scale(1.1);
         }
 
         .card-content {
@@ -246,76 +212,94 @@
             flex-direction: column;
         }
 
-        .card-content h3 {
-            margin: 0 0 0.75rem 0;
-            color: var(--primary-color);
+        .card-title {
             font-size: 1.25rem;
             font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
         }
 
-        .card-content p {
-            color: var(--text-light);
+        .card-desc {
+            color: var(--text-secondary);
             font-size: 0.95rem;
-            line-height: 1.6;
-            margin: 0;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
             flex-grow: 1;
         }
 
-        .card-status {
-            padding: 1rem 1.5rem;
-            background-color: #f9fafb;
-            border-top: 1px solid #e5e7eb;
+        .card-footer {
+            padding-top: 1rem;
+            border-top: 1px solid #f3f4f6;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .card-status .circle {
-            width: 24px;
-            height: 24px;
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .status-circle {
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            border: 2px solid #d1d5db;
-            background-color: white;
+            background-color: #d1d5db;
             transition: all 0.3s;
         }
 
-        .card-status .circle.completed {
+        .status-circle.completed {
             background-color: var(--success-color);
-            border-color: var(--success-color);
-            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
         }
 
-        /* Modals */
+        .card-arrow {
+            color: var(--primary-color);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: var(--transition-base);
+        }
+
+        .lesson-card:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- MODALS --- */
         .modal-backdrop {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(4px);
-            display: none;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            padding: 1rem;
         }
 
         .modal-backdrop.show {
             opacity: 1;
+            visibility: visible;
         }
 
         .custom-modal {
-            background-color: white;
-            padding: 2rem;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            background: var(--bg-card);
+            width: 100%;
             max-width: 450px;
-            width: 90%;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: 2rem;
             text-align: center;
             transform: scale(0.95);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .modal-backdrop.show .custom-modal {
@@ -323,42 +307,44 @@
         }
 
         .modal-icon-container {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
+            font-size: 2rem;
         }
 
-        .modal-icon-container.success { background-color: rgba(34, 197, 94, 0.1); }
-        .modal-icon-container.error { background-color: rgba(239, 68, 68, 0.1); }
-
-        .modal-icon {
-            font-size: 40px;
-            line-height: 1;
+        .modal-icon-container.success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
         }
 
-        .modal-icon.success-icon { color: var(--success-color); }
-        .modal-icon.error-icon { color: var(--error-color); }
+        .modal-icon-container.error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
 
-        .modal-body-content h3 {
-            margin: 0 0 0.5rem;
+        .modal-title {
             font-size: 1.5rem;
-            color: var(--text-color);
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
         }
 
-        .modal-body-content p {
+        .modal-message {
+            color: var(--text-secondary);
+            font-size: 1rem;
             margin-bottom: 2rem;
-            color: var(--text-light);
             line-height: 1.5;
         }
 
         .modal-actions {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         @media (min-width: 640px) {
@@ -368,54 +354,51 @@
             }
         }
 
-        .btn-modal-action {
+        .btn-modal {
             padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: var(--radius-md);
-            cursor: pointer;
+            border-radius: var(--radius-full);
             font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.2s;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition-base);
+            border: none;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .btn-progress {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .btn-progress:hover {
-            background-color: var(--secondary-hover);
-            transform: translateY(-1px);
-        }
-
-        .btn-continue {
+        .btn-primary {
             background-color: var(--primary-color);
             color: white;
         }
 
-        .btn-continue:hover {
-            background-color: var(--primary-hover);
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
             transform: translateY(-1px);
         }
 
-        /* Responsive adjustments */
+        .btn-secondary {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e5e7eb;
+        }
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .learning-section {
-                padding: 1.5rem;
+            .hero-section {
+                padding: 3rem 0 5rem;
             }
-            
-            .learning-section h1 {
+
+            .hero-title {
                 font-size: 2rem;
-            }
-            
-            .cards-container {
-                grid-template-columns: 1fr;
             }
 
             .card-image {
-                height: 180px;
+                height: 160px;
             }
         }
     </style>
@@ -423,187 +406,188 @@
 
 <body>
     <header>@include('partials.navbar')</header>
-    
-    <main class="container">
-        <aside class="floating-elements">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-        </aside>
 
-        <section class="learning-section">
-            <h1>Sección de Aprendizaje</h1>
-            <p class="subtitle">¡Bienvenido a tu zona de Aprendizaje!</p>
-            <p class="description">
-                Aquí es donde obtendrás todo el conocimiento teórico en habilidades reales de comunicación. La
-                sección de Aprendizaje de LESSA está diseñada para ayudarte a desarrollar tus habilidades iniciales
-                en este lenguaje, perfeccionar tus movimientos y obtener contexto de su uso o significados.
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <h1 class="hero-title">Sección de Aprendizaje</h1>
+            <p class="hero-subtitle">¡Bienvenido a tu zona de Aprendizaje!</p>
+            <p class="hero-description">
+                Aquí es donde obtendrás todo el conocimiento teórico en habilidades reales de comunicación.
+                Perfecciona tus movimientos y obtén contexto de su uso.
             </p>
-            <p class="reminder">
-                Recuerda: Si nunca lo intentas, ¡nunca sabrás el resultado! ¡Tú puedes!
-            </p>
+        </div>
+    </section>
 
-            <div class="progress-container goToProgress" style="cursor: pointer;">
-                <p>
-                    <span>Progreso de Aprendizaje</span>
-                    <span>{{ $progresoPorcentaje }}%</span>
-                </p>
-                <div class="progress-bar-outer">
-                    <div class="progress-bar-inner" style="width: {{ $progresoPorcentaje }}%;"></div>
+    <main class="main-container">
+
+        <!-- Progress Bar -->
+        <div class="progress-card goToProgress" onclick="window.location.href='{{ route('miProgreso') }}'">
+            <div class="progress-header">
+                <span>Tu Progreso Global</span>
+                <span>{{ $progresoPorcentaje }}%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" style="width: {{ $progresoPorcentaje }}%;"></div>
+            </div>
+            <p class="reminder-text">
+                "Si nunca lo intentas, ¡nunca sabrás el resultado! ¡Tú puedes!"
+            </p>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+            <!-- Abecedario -->
+            <div class="lesson-card abecedario" onclick="window.location.href='{{ route('lecciones.abecedario') }}'">
+                <div class="card-image">
+                    <img src="{{ asset('img/abcd.png') }}" alt="Abecedario">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Abecedario</h3>
+                    <p class="card-desc">Aprenderás las letras del abecedario para poder deletrear tu nombre, siglas u otros usos.</p>
+                    <div class="card-footer">
+                        <div class="status-indicator">
+                            <div class="status-circle"></div>
+                            <span>Estado</span>
+                        </div>
+                        <i class="fas fa-arrow-right card-arrow"></i>
+                    </div>
                 </div>
             </div>
 
-            <div class="cards-container">
-                <div class="card abecedario">
-                    <div class="card-image">
-                        <img src="{{ asset('img/abcd.png') }}" alt="Abecedario">
-                    </div>
-                    <div class="card-content">
-                        <h3>Abecedario</h3>
-                        <p>Aprenderás las letras del abecedario para poder deletrear tu nombre, siglas u otros usos que descubrirás.</p>
-                    </div>
-                    <div class="card-status">
-                        <div class="circle"></div>
-                    </div>
+            <!-- Números -->
+            <div class="lesson-card numeros" onclick="window.location.href='{{ route('lecciones.numeros') }}'">
+                <div class="card-image">
+                    <img src="{{ asset('img/numbers.png') }}" alt="Números">
                 </div>
-
-                <div class="card numeros">
-                    <div class="card-image">
-                        <img src="{{ asset('img/numbers.png') }}" alt="Números">
-                    </div>
-                    <div class="card-content">
-                        <h3>Números</h3>
-                        <p>Aprenderás los números del 1 al 100, cantidades más grandes, así como a contar objetos y hacer preguntas simples.</p>
-                    </div>
-                    <div class="card-status">
-                        <div class="circle"></div>
-                    </div>
-                </div>
-
-                <div class="card saludos">
-                    <div class="card-image">
-                        <img src="{{ asset('img/saludos.png') }}" alt="Saludos">
-                    </div>
-                    <div class="card-content">
-                        <h3>Saludos y Presentaciones</h3>
-                        <p>Aprenderás a comunicar saludos como "Hola", "Buenos días", así como frases para presentarte.</p>
-                    </div>
-                    <div class="card-status">
-                        <div class="circle"></div>
-                    </div>
-                </div>
-
-                <div class="card salud">
-                    <div class="card-image">
-                        <img src="{{ asset('img/health.png') }}" alt="Salud">
-                    </div>
-                    <div class="card-content">
-                        <h3>Salud y Emergencias</h3>
-                        <p>Aprenderás a señalar síntomas básicos, expresar alergias y reconocer lugares de atención médica.</p>
-                    </div>
-                    <div class="card-status">
-                        <div class="circle"></div>
+                <div class="card-content">
+                    <h3 class="card-title">Números</h3>
+                    <p class="card-desc">Aprenderás los números del 1 al 100, cantidades más grandes y a contar objetos.</p>
+                    <div class="card-footer">
+                        <div class="status-indicator">
+                            <div class="status-circle"></div>
+                            <span>Estado</span>
+                        </div>
+                        <i class="fas fa-arrow-right card-arrow"></i>
                     </div>
                 </div>
             </div>
-        </section>
 
-        {{-- MODAL DE ÉXITO --}}
+            <!-- Saludos -->
+            <div class="lesson-card saludos" onclick="window.location.href='{{ route('lecciones.saludos') }}'">
+                <div class="card-image">
+                    <img src="{{ asset('img/saludos.png') }}" alt="Saludos">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Saludos y Presentaciones</h3>
+                    <p class="card-desc">Aprenderás a comunicar saludos como "Hola", "Buenos días" y frases para presentarte.</p>
+                    <div class="card-footer">
+                        <div class="status-indicator">
+                            <div class="status-circle"></div>
+                            <span>Estado</span>
+                        </div>
+                        <i class="fas fa-arrow-right card-arrow"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Salud -->
+            <div class="lesson-card salud" onclick="window.location.href='{{ route('lecciones.salud') }}'">
+                <div class="card-image">
+                    <img src="{{ asset('img/health.png') }}" alt="Salud">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Salud y Emergencias</h3>
+                    <p class="card-desc">Aprenderás a señalar síntomas básicos, expresar alergias y reconocer lugares médicos.</p>
+                    <div class="card-footer">
+                        <div class="status-indicator">
+                            <div class="status-circle"></div>
+                            <span>Estado</span>
+                        </div>
+                        <i class="fas fa-arrow-right card-arrow"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
         <div id="successModal" class="modal-backdrop">
             <div class="custom-modal">
-                <div class="modal-header">
-                     <div class="modal-icon-container success">
-                        <div class="modal-icon success-icon">&#10003;</div>
-                    </div>
+                <div class="modal-icon-container success">
+                    <i class="fas fa-check"></i>
                 </div>
-                <div class="modal-body-content">
-                    <h3 id="successModalTitle">¡Éxito!</h3>
-                    <p id="successModalMessage"></p>
-                </div>
+                <h3 class="modal-title">¡Excelente Trabajo!</h3>
+                <p id="successModalMessage" class="modal-message"></p>
                 <div class="modal-actions">
-                    <button class="btn-modal-action btn-continue" onclick="closeModal('successModal')">Seguir en Lecciones</button>
-                    <button class="btn-modal-action btn-progress" onclick="window.location.href = '{{ route('miProgreso') }}'">Ver Mi Progreso</button>
+                    <button class="btn-modal btn-primary" onclick="closeModal('successModal')">Continuar Aprendiendo</button>
+                    <button class="btn-modal btn-secondary" onclick="window.location.href = '{{ route('miProgreso') }}'">Ver Progreso</button>
                 </div>
             </div>
         </div>
 
-        {{-- MODAL DE ERROR --}}
+        <!-- Error Modal -->
         <div id="errorModal" class="modal-backdrop">
             <div class="custom-modal">
-                <div class="modal-header">
-                    <div class="modal-icon-container error">
-                        <div class="modal-icon error-icon">&#10006;</div>
-                    </div>
+                <div class="modal-icon-container error">
+                    <i class="fas fa-times"></i>
                 </div>
-                <div class="modal-body-content">
-                    <h3 id="errorModalTitle">Error</h3>
-                    <p id="errorModalMessage"></p>
-                </div>
+                <h3 class="modal-title">Ups, algo pasó</h3>
+                <p id="errorModalMessage" class="modal-message"></p>
                 <div class="modal-actions">
-                    <button class="btn-modal-action btn-continue" onclick="closeModal('errorModal')">Seguir en Lecciones</button>
-                    <button class="btn-modal-action btn-progress" onclick="window.location.href = '{{ route('miProgreso') }}'">Ver Mi Progreso</button>
+                    <button class="btn-modal btn-primary" onclick="closeModal('errorModal')">Intentar de Nuevo</button>
+                    <button class="btn-modal btn-secondary" onclick="window.location.href = '{{ route('miProgreso') }}'">Ver Progreso</button>
                 </div>
             </div>
         </div>
+
     </main>
 
     <footer>@include('partials.footer')</footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const ls_abcd = document.querySelector('.abecedario');
-            const ls_numeros = document.querySelector('.numeros');
-            const ls_saludos = document.querySelector('.saludos');
-            const ls_salud = document.querySelector('.salud');
-            const goToProgress = document.querySelector('.goToProgress');
-            const successModal = document.getElementById('successModal');
-            const errorModal = document.getElementById('errorModal');
             const sessionStatus = @json($sessionStatus);
             const sessionError = @json($sessionError);
+            const successModal = document.getElementById('successModal');
+            const errorModal = document.getElementById('errorModal');
 
-            goToProgress.addEventListener('click', () => {
-                window.location.href = "{{ route('miProgreso') }}";
-            });
-
-            // Direccionar a la ruta de la lección
-            if(ls_abcd) ls_abcd.addEventListener('click', () => window.location.href = "{{ route('lecciones.abecedario') }}");
-            if(ls_numeros) ls_numeros.addEventListener('click', () => window.location.href = "{{ route('lecciones.numeros') }}");
-            if(ls_saludos) ls_saludos.addEventListener('click', () => window.location.href = "{{ route('lecciones.saludos') }}");
-            if(ls_salud) ls_salud.addEventListener('click', () => window.location.href = "{{ route('lecciones.salud') }}");
-
-            const progressBarInner = document.querySelector('.progress-bar-inner');
-            // Animation for progress bar
+            // Animate Progress Bar
             setTimeout(() => {
-                if(progressBarInner) progressBarInner.style.width = `{{ $progresoPorcentaje }}%`;
-            }, 100);
+                const bar = document.querySelector('.progress-bar-fill');
+                if(bar) bar.style.width = `{{ $progresoPorcentaje }}%`;
+            }, 300);
 
-            const cards = document.querySelectorAll('.card');
+            // Mark completed cards
+            const cards = document.querySelectorAll('.lesson-card');
+            const completadas = {{ $completadas }};
+            
             cards.forEach((card, index) => {
-                if (index < {{ $completadas }}) {
-                    const statusCircle = card.querySelector('.card-status .circle');
-                    if(statusCircle) statusCircle.classList.add('completed');
+                if (index < completadas) {
+                    const circle = card.querySelector('.status-circle');
+                    if(circle) circle.classList.add('completed');
                 }
             });
 
-            // Lógica del Modal
+            // Modal Logic
             window.closeModal = function(modalId) {
                 const modal = document.getElementById(modalId);
                 if(modal) {
                     modal.classList.remove('show');
                     setTimeout(() => {
-                        modal.style.display = 'none';
-                    }, 300); // Wait for transition
+                        modal.style.visibility = 'hidden';
+                    }, 300);
                 }
             }
 
             function openModal(modal) {
-                modal.style.display = 'flex';
+                modal.style.visibility = 'visible';
                 // Force reflow
                 void modal.offsetWidth;
                 modal.classList.add('show');
             }
 
-            // Mostrar el modal si hay un mensaje de sesión
+            // Show session messages
             if (sessionStatus) {
                 const msgEl = document.getElementById('successModalMessage');
                 if(msgEl) msgEl.innerText = sessionStatus;
@@ -614,14 +598,10 @@
                 if(errorModal) openModal(errorModal);
             }
 
-            // Cierra el modal al hacer click fuera de él
+            // Close on click outside
             window.onclick = function(event) {
-                if (event.target == successModal) {
-                    closeModal('successModal');
-                }
-                if (event.target == errorModal) {
-                    closeModal('errorModal');
-                }
+                if (event.target == successModal) closeModal('successModal');
+                if (event.target == errorModal) closeModal('errorModal');
             }
         });
     </script>
