@@ -1,184 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aprender - LESSA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
+        /* --- VARIABLES (Existing Colors + New Structure) --- */
         :root {
             --primary-color: #007bff;
             --primary-dark: #0056b3;
             --accent-color: #ff6b35;
-            --bg-color: #f8f9fa;
+            --accent-hover: #e85d2a;
+            --bg-body: #f8f9fa;
+            --bg-card: #ffffff;
             --text-main: #2c3e50;
             --text-light: #6c757d;
-            --white: #ffffff;
-            --border-radius: 16px;
-            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
-            --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-full: 9999px;
+            --transition-base: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--bg-body);
             color: var(--text-main);
-            margin: 0;
-            padding: 0;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Hero Section */
+        /* --- HERO SECTION --- */
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: 80px 0;
-            color: var(--white);
+            color: #ffffff;
+            padding: 4rem 0 6rem;
             position: relative;
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
             overflow: hidden;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
         }
 
-        .hero-section::before {
-            content: '';
+        .hero-bg-img {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("{{ asset('img/aprender.png') }}");
-            background-size: cover;
-            background-position: center;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             opacity: 0.1;
             mix-blend-mode: overlay;
-            z-index: 0;
+            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 40px;
-            width: 100%;
-        }
-
-        .hero-text {
             max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
-        .hero-text h2 {
+        .hero-title {
             font-size: 2.5rem;
             font-weight: 800;
-            margin: 0 0 10px 0;
+            margin-bottom: 0.5rem;
             line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .hero-text h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--accent-color);
-            margin: 0 0 20px 0;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .hero-text p {
+        .hero-desc {
             font-size: 1.1rem;
             opacity: 0.95;
-            line-height: 1.8;
-            margin: 0;
+            margin-bottom: 2rem;
         }
 
-        .hero-logo {
-            width: 180px;
-            height: auto;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
-            transition: transform 0.3s ease;
+        /* --- MAIN CONTAINER --- */
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: -4rem auto 0;
+            padding: 0 1.5rem 4rem;
+            position: relative;
+            z-index: 10;
         }
 
-        .hero-logo:hover {
-            transform: scale(1.05) rotate(-2deg);
-        }
-
-        /* Main Content */
-        .learn-sections {
-            padding: 80px 0;
-        }
-
+        /* --- SECTION HEADER --- */
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 3rem;
         }
 
-        .section-header h2 {
-            font-size: 2.2rem;
+        .section-title {
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--text-main);
-            position: relative;
+            margin-bottom: 0.5rem;
             display: inline-block;
-            margin-bottom: 20px;
+            position: relative;
         }
 
-        .section-header h2::after {
+        .section-title::after {
             content: '';
             display: block;
-            width: 80px;
+            width: 60px;
             height: 4px;
             background: var(--accent-color);
-            margin: 12px auto 0;
-            border-radius: 2px;
+            margin: 0.5rem auto 0;
+            border-radius: var(--radius-full);
         }
 
-        .section-header p {
+        .section-desc {
             color: var(--text-light);
-            font-size: 1.1rem;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        /* Cards Grid */
+        /* --- CARDS GRID --- */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            padding: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
         .learn-card {
-            background: var(--white);
-            border-radius: var(--border-radius);
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
-            transition: var(--transition);
+            transition: var(--transition-base);
             cursor: pointer;
-            border: 1px solid rgba(0, 0, 0, 0.03);
             display: flex;
             flex-direction: column;
             height: 100%;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .learn-card:hover {
-            transform: translateY(-12px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(0, 123, 255, 0.2);
         }
 
-        .card-image-container {
-            height: 240px;
-            background: #f1f3f5;
+        .card-img-wrapper {
+            height: 200px;
+            background: #f1f5f9;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -186,57 +176,68 @@
             justify-content: center;
         }
 
-        .card-image-container::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 100%);
-        }
-
-        .card-image {
+        .card-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
 
-        .learn-card:hover .card-image {
-            transform: scale(1.08);
+        .learn-card:hover .card-img {
+            transform: scale(1.05);
         }
 
         .card-content {
-            padding: 32px;
+            padding: 2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
 
-        .card-content h3 {
-            font-size: 1.4rem;
+        .card-title {
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin: 0 0 16px 0;
+            margin-bottom: 0.75rem;
         }
 
-        .card-content p {
+        .card-text {
             color: var(--text-light);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin: 0;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
         }
 
-        /* Feedback Messages */
+        .card-footer {
+            display: flex;
+            align-items: center;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .card-footer i {
+            margin-left: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .learn-card:hover .card-footer i {
+            transform: translateX(4px);
+        }
+
+        /* --- FEEDBACK MESSAGES --- */
         .feedback-message {
             max-width: 800px;
-            margin: 20px auto;
-            padding: 16px 24px;
-            border-radius: 12px;
+            margin: 1rem auto;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-lg);
             font-weight: 500;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-sm);
         }
 
         .feedback-message.success {
@@ -251,155 +252,106 @@
             border: 1px solid #fecaca;
         }
 
-        /* Responsive Design */
-        @media (min-width: 992px) {
-            .hero-content {
-                flex-direction: row;
-                text-align: left;
-                justify-content: space-between;
-            }
-
-            .hero-text {
-                flex: 1;
-                order: 1;
-                padding-right: 60px;
-            }
-
-            .hero-logo {
-                order: 2;
-                width: 220px;
-            }
-
-            .hero-text h2 {
-                font-size: 3rem;
-            }
-        }
-
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero-section {
-                padding: 60px 0;
+                padding: 3rem 0 5rem;
             }
 
-            .hero-text h2 {
+            .hero-title {
                 font-size: 2rem;
             }
 
-            .section-header h2 {
-                font-size: 1.8rem;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            .main-container {
+                margin-top: -3rem;
             }
         }
     </style>
 </head>
 
 <body>
+    <header>@include('partials.navbar')</header>
+
     @if(session('status'))
-        <div class="container">
-            <p class="feedback-message success">
-                {{ session('status') }}
-            </p>
+        <div class="container" style="padding: 0 1.5rem;">
+            <div class="feedback-message success">
+                <i class="fas fa-check-circle"></i> {{ session('status') }}
+            </div>
         </div>
     @endif
     @if(session('error'))
-        <div class="container">
-            <p class="feedback-message error">
-                {{ session('error') }}
-            </p>
+        <div class="container" style="padding: 0 1.5rem;">
+            <div class="feedback-message error">
+                <i class="fas fa-exclamation-circle"></i> {{ session('error') }}
+            </div>
         </div>
     @endif
 
-    <header>@include('partials.navbar')</header>
+    <section class="hero-section">
+        <div class="hero-bg-img" style="background-image: url('{{ asset('img/aprender.png') }}');"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Sección de Aprendizaje</h1>
+            <h2 class="hero-subtitle">¡Comienza tu viaje con LESSA!</h2>
+            <p class="hero-desc">
+                Bienvenido a tu espacio de aprendizaje. Aquí encontrarás todos los recursos organizados para que desarrolles tus habilidades en el Lenguaje de Señas Salvadoreño paso a paso.
+            </p>
+        </div>
+    </section>
 
-    <main>
-        <section class="hero-section">
-            <!-- Background image handled by CSS ::before -->
-            <div class="container hero-content">
-                <div class="hero-text">
-                    <h2>Sección de Aprendizaje</h2>
-                    <h3>¡Comienza tu viaje con LESSA!</h3>
-                    <p>Bienvenido a tu espacio de aprendizaje en la plataforma LESSA. Aquí encontrarás todos los
-                        recursos organizados para que desarrolles tus habilidades en el Lenguaje de Señas Salvadoreño
-                        paso a paso, a tu ritmo, y con herramientas dinámicas.</p>
+    <main class="main-container">
+        <br>
+        <br>
+        <div class="section-header">
+            <h3 class="section-title">Descubre el Lenguaje de Señas</h3>
+            <p class="section-desc">Desde principiante hasta avanzado: cursos organizados, herramientas interactivas y apoyo constante.</p>
+        </div>
+
+        <div class="cards-grid">
+            <!-- Diccionario Card -->
+            <div class="learn-card" onclick="window.location.href='{{ route('lecciones.diccionario') }}'">
+                <div class="card-img-wrapper">
+                    <img src="{{ asset('img/diccionario.png') }}" alt="Diccionario" class="card-img">
                 </div>
-                <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="hero-logo">
-            </div>
-        </section>
-
-        <section class="learn-sections">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Descubre el Lenguaje de Señas Salvadoreño</h2>
-                    <p>Desde principiante hasta avanzado: cursos organizados, herramientas interactivas y apoyo constante. ¡Rompe barreras y comunica con tus manos!</p>
-                </div>
-
-                <div class="cards-grid">
-                    <!-- Diccionario Card -->
-                    <div class="learn-card goToDicc">
-                        <div class="card-image-container">
-                            <img src="{{ asset('img/diccionario.png') }}" alt="Diccionario de señas" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <h3>Diccionario LESSA</h3>
-                            <p>Consulta nuestro diccionario con más de 350 palabras. Incluye GIFs, definiciones y contexto de uso para cada seña.</p>
-                        </div>
-                    </div>
-
-                    <!-- Lecciones Card -->
-                    <div class="learn-card goToLessons">
-                        <div class="card-image-container">
-                            <img src="{{ asset('img/lecciones.png') }}" alt="Lecciones interactivas" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <h3>Lecciones Interactivas</h3>
-                            <p>Módulos organizados por niveles. Teoría, práctica visual y contenido interactivo para asegurar tu aprendizaje.</p>
-                        </div>
-                    </div>
-
-                    <!-- Videos Card -->
-                    <div class="learn-card goToVideos">
-                        <div class="card-image-container">
-                            <img src="{{ asset('img/videos.png') }}" alt="Videos educativos" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <h3>Videos Educativos</h3>
-                            <p>Aprende visualmente con nuestra biblioteca de videos. Expertos te enseñan la correcta ejecución de las señas.</p>
-                        </div>
+                <div class="card-content">
+                    <h3 class="card-title">Diccionario LESSA</h3>
+                    <p class="card-text">Consulta nuestro diccionario con más de 350 palabras. Incluye GIFs, definiciones y contexto de uso para cada seña.</p>
+                    <div class="card-footer">
+                        Explorar Diccionario <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
             </div>
-        </section>
+
+            <!-- Lecciones Card -->
+            <div class="learn-card" onclick="window.location.href='{{ route('lecciones') }}'">
+                <div class="card-img-wrapper">
+                    <img src="{{ asset('img/lecciones.png') }}" alt="Lecciones" class="card-img">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Lecciones Interactivas</h3>
+                    <p class="card-text">Módulos organizados por niveles. Teoría, práctica visual y contenido interactivo para asegurar tu aprendizaje.</p>
+                    <div class="card-footer">
+                        Ir a Lecciones <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Videos Card -->
+            <div class="learn-card" onclick="window.location.href='{{ route('lecciones.videos') }}'">
+                <div class="card-img-wrapper">
+                    <img src="{{ asset('img/videos.png') }}" alt="Videos" class="card-img">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Videos Educativos</h3>
+                    <p class="card-text">Aprende visualmente con nuestra biblioteca de videos. Expertos te enseñan la correcta ejecución de las señas.</p>
+                    <div class="card-footer">
+                        Ver Videos <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>@include('partials.footer')</footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function(){
-            const goToLessons = document.querySelector('.goToLessons');
-            if(goToLessons) {
-                goToLessons.addEventListener('click', function(){
-                    window.location.href = "{{ route('lecciones') }}"
-                });
-            }
-
-            const goToDicc = document.querySelector('.goToDicc');
-            if(goToDicc) {
-                goToDicc.addEventListener('click', function(){
-                    window.location.href = "{{ route('lecciones.diccionario') }}"
-                });
-            }
-
-            const goToVideos = document.querySelector('.goToVideos');
-            if(goToVideos) {
-                goToVideos.addEventListener('click', function(){
-                    window.location.href = "{{ route('lecciones.videos') }}"
-                });
-            }
-        });
-    </script>
 </body>
 
 </html>
