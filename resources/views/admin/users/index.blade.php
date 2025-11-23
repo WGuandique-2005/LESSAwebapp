@@ -8,38 +8,43 @@
         </a>
     </div>
 
-    <div class="card">
+    <div class="card" style="padding: 0; overflow: hidden;">
         <div class="table-container">
-            <table>
-                <thead>
+            <table style="width: 100%; border-collapse: separate; border-spacing: 0;">
+                <thead style="background-color: #f9fafb;">
                     <tr>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Usuario</th>
-                        <th>Acciones</th>
+                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb;">Nombre</th>
+                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb;">Email</th>
+                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb;">Usuario</th>
+                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb; text-align: right;">Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="background-color: white;">
                     @foreach($users as $user)
-                    <tr>
-                        <td>
-                            <div style="font-weight: 500; color: var(--text-main);">{{ $user->name }}</div>
+                    <tr style="transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#f9fafb'" onmouseout="this.style.backgroundColor='white'">
+                        <td style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6;">
+                            <div style="display: flex; align-items: center;">
+                                <div style="width: 2.5rem; height: 2.5rem; background-color: #e0e7ff; color: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-right: 1rem; font-size: 0.9rem;">
+                                    {{ strtoupper(substr($user->name, 0, 2)) }}
+                                </div>
+                                <div style="font-weight: 500; color: var(--text-main);">{{ $user->name }}</div>
+                            </div>
                         </td>
-                        <td>{{ $user->email }}</td>
-                        <td>
-                            <span style="background: #f3f4f6; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.85rem; color: var(--text-secondary);">
+                        <td style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; color: var(--text-secondary);">{{ $user->email }}</td>
+                        <td style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6;">
+                            <span style="background: #eff6ff; color: var(--primary-color); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 500;">
                                 {{ $user->username }}
                             </span>
                         </td>
-                        <td>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <button onclick="openEmailModal('{{ $user->id }}', '{{ $user->email }}')" class="btn btn-primary" style="padding: 0.4rem 0.6rem;" title="Enviar Correo">
+                        <td style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; text-align: right;">
+                            <div style="display: inline-flex; gap: 0.5rem;">
+                                <button onclick="openEmailModal('{{ $user->id }}', '{{ $user->email }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Enviar Correo" onmouseover="this.style.borderColor='var(--primary-color)'; this.style.color='var(--primary-color)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
                                     <i class="fas fa-envelope"></i>
                                 </button>
-                                <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-success" style="padding: 0.4rem 0.6rem;" title="Editar">
+                                <a href="{{ route('admin.users.edit', $user) }}" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Editar" onmouseover="this.style.borderColor='#10b981'; this.style.color='#10b981'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button onclick="openDeleteModal('{{ $user->id }}', '{{ $user->name }}')" class="btn btn-danger" style="padding: 0.4rem 0.6rem;" title="Eliminar">
+                                <button onclick="openDeleteModal('{{ $user->id }}', '{{ $user->name }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Eliminar" onmouseover="this.style.borderColor='#ef4444'; this.style.color='#ef4444'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -50,7 +55,7 @@
             </table>
         </div>
 
-        <div style="margin-top: 1.5rem;">
+        <div style="padding: 1rem 1.5rem; border-top: 1px solid #e5e7eb; background-color: #f9fafb;">
             {{ $users->links() }}
         </div>
     </div>
