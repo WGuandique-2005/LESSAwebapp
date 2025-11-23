@@ -797,7 +797,7 @@
                     <button class="btn btn-accent" onclick="window.location.href='/signup'">
                         <i class="fas fa-user-plus"></i> Crear cuenta gratuita
                     </button>
-                    <button class="btn btn-outline"
+                    <button class="btn btn-outline" onclick="window.location.href='/ayuda/manual'"
                         style="background: rgba(255,255,255,0.1); color: white; border-color: white;">
                         <i class="fas fa-info-circle"></i> Más información
                     </button>
