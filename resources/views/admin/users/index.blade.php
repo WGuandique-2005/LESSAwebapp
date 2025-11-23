@@ -10,19 +10,61 @@
 
     <!-- Search Bar -->
     <div class="card" style="margin-bottom: 2rem; padding: 1rem;">
-        <form action="{{ route('admin.users') }}" method="GET" style="display: flex; gap: 1rem; align-items: center;">
-            <div style="flex: 1; position: relative;">
+        <form action="{{ route('admin.users') }}" method="GET" class="search-form">
+            <div class="search-input-container">
                 <i class="fas fa-search" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"></i>
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Buscar por nombre, email o usuario..." style="width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; border: 1px solid #e5e7eb; border-radius: 0.5rem; font-family: inherit;">
             </div>
-            <button type="submit" class="btn btn-primary">Buscar</button>
-            @if(request('search'))
-                <a href="{{ route('admin.users') }}" class="btn btn-secondary" title="Limpiar búsqueda">
-                    <i class="fas fa-times"></i>
-                </a>
-            @endif
+            <div class="search-actions">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                @if(request('search'))
+                    <a href="{{ route('admin.users') }}" class="btn btn-secondary" title="Limpiar búsqueda">
+                        <i class="fas fa-times"></i>
+                    </a>
+                @endif
+            </div>
         </form>
     </div>
+
+    <style>
+        .search-form {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            width: 100%;
+        }
+        .search-input-container {
+            flex: 1;
+            position: relative;
+        }
+        .search-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .search-form {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+            }
+            .search-input-container {
+                width: 100%;
+            }
+            .search-actions {
+                width: 100%;
+                display: flex;
+                gap: 0.5rem;
+            }
+            .search-actions .btn {
+                flex: 1;
+                justify-content: center;
+                padding: 0.75rem;
+            }
+        }
+    </style>
 
     <div class="card" style="padding: 0; overflow: hidden;">
         <div class="table-container">
