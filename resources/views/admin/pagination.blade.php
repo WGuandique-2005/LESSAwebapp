@@ -135,10 +135,22 @@
         @media (max-width: 640px) {
             .pagination-container {
                 flex-direction: column;
-                align-items: center;
+                gap: 1rem;
+            }
+            .pagination-content {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .pagination-numbers {
+                display: none; /* Hide page numbers on mobile for cleaner look */
             }
             .pagination-info {
-                order: -1;
+                text-align: center;
+                font-size: 0.8rem;
+            }
+            .pagination-btn {
+                flex: 1; /* Make buttons bigger/full width on mobile */
+                max-width: 120px;
             }
         }
     </style>

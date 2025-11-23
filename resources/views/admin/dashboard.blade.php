@@ -16,8 +16,6 @@
                 <h3 style="color: var(--primary-color); font-size: 2rem; margin-bottom: 0.5rem;">{{ $totalUsers ?? 0 }}</h3>
                 <p style="color: var(--text-secondary);">Usuarios Registrados</p>
             </div>
-            
-            <!-- Placeholder for other stats -->
         </div>
     </div>
 @endsection

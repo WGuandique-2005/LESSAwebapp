@@ -106,7 +106,8 @@
             flex: 1;
             padding: 2rem;
             transition: margin-left 0.3s ease;
-            width: 100%;
+            /* width: 100%; Removed to fix overflow */
+            min-width: 0; /* Ensures flex child doesn't overflow */
         }
 
         .header {

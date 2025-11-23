@@ -26,7 +26,65 @@
         </form>
     </div>
 
+
+
+    <div class="card" style="padding: 0; overflow: hidden;">
+        <div class="table-container">
+            <table class="responsive-table">
+                <thead style="background-color: #f9fafb;">
+                    <tr>
+                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb;">Nombre</th>
+                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb;">Email</th>
+                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb;">Usuario</th>
+                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb; text-align: right;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: white;">
+                    @foreach($users as $user)
+                    <tr style="transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#f9fafb'" onmouseout="this.style.backgroundColor='white'">
+                        <td data-label="Nombre" style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6;">
+                            <div style="display: flex; align-items: center;">
+                                <div style="width: 2.5rem; height: 2.5rem; background-color: #e0e7ff; color: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-right: 1rem; font-size: 0.9rem;">
+                                    {{ strtoupper(substr($user->name, 0, 2)) }}
+                                </div>
+                                <div style="font-weight: 500; color: var(--text-main);">{{ $user->name }}</div>
+                            </div>
+                        </td>
+                        <td data-label="Email" style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; color: var(--text-secondary);">{{ $user->email }}</td>
+                        <td data-label="Usuario" style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6;">
+                            <span style="background: #eff6ff; color: var(--primary-color); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 500;">
+                                {{ $user->username }}
+                            </span>
+                        </td>
+                        <td data-label="Acciones" style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; text-align: right;">
+                            <div style="display: inline-flex; gap: 0.5rem;">
+                                <button onclick="openEmailModal('{{ $user->id }}', '{{ $user->email }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Enviar Correo" onmouseover="this.style.borderColor='var(--primary-color)'; this.style.color='var(--primary-color)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
+                                    <i class="fas fa-envelope"></i>
+                                </button>
+                                <a href="{{ route('admin.users.edit', $user) }}" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Editar" onmouseover="this.style.borderColor='#10b981'; this.style.color='#10b981'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button onclick="openResetModal('{{ $user->id }}', '{{ $user->name }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Reiniciar Progreso" onmouseover="this.style.borderColor='#f59e0b'; this.style.color='#f59e0b'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
+                                    <i class="fas fa-history"></i>
+                                </button>
+                                <button onclick="openDeleteModal('{{ $user->id }}', '{{ $user->name }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Eliminar" onmouseover="this.style.borderColor='#ef4444'; this.style.color='#ef4444'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <div style="padding: 1rem 1.5rem; border-top: 1px solid #e5e7eb; background-color: #f9fafb;">
+            {{ $users->links('admin.pagination') }}
+        </div>
+    </div>
+
     <style>
+        /* Existing search styles */
         .search-form {
             display: flex;
             gap: 1rem;
@@ -63,63 +121,64 @@
                 justify-content: center;
                 padding: 0.75rem;
             }
+
+            /* Stacked Table Styles */
+            .responsive-table, 
+            .responsive-table tbody, 
+            .responsive-table tr, 
+            .responsive-table td {
+                display: block;
+                width: 100%;
+            }
+
+            .responsive-table thead {
+                display: none; /* Hide headers */
+            }
+
+            .responsive-table tr {
+                margin-bottom: 1rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 0.5rem;
+                background: white;
+                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            }
+
+            .responsive-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.75rem 1rem !important;
+                border-bottom: 1px solid #f3f4f6;
+                text-align: right !important;
+            }
+
+            .responsive-table td:last-child {
+                border-bottom: none;
+                justify-content: center; /* Center actions */
+                padding: 1rem !important;
+            }
+
+            .responsive-table td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: var(--text-secondary);
+                text-transform: uppercase;
+                font-size: 0.75rem;
+                margin-right: 1rem;
+                text-align: left;
+            }
+
+            /* Adjustments for specific cells */
+            .responsive-table td[data-label="Acciones"]::before {
+                display: none; /* Hide label for actions */
+            }
+            
+            .responsive-table td[data-label="Nombre"] {
+                background-color: #f9fafb;
+                border-bottom: 1px solid #e5e7eb;
+            }
         }
     </style>
-
-    <div class="card" style="padding: 0; overflow: hidden;">
-        <div class="table-container">
-            <table style="width: 100%; border-collapse: separate; border-spacing: 0;">
-                <thead style="background-color: #f9fafb;">
-                    <tr>
-                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb;">Nombre</th>
-                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb;">Email</th>
-                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb;">Usuario</th>
-                        <th style="padding: 1rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #e5e7eb; text-align: right;">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody style="background-color: white;">
-                    @foreach($users as $user)
-                    <tr style="transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#f9fafb'" onmouseout="this.style.backgroundColor='white'">
-                        <td style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6;">
-                            <div style="display: flex; align-items: center;">
-                                <div style="width: 2.5rem; height: 2.5rem; background-color: #e0e7ff; color: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-right: 1rem; font-size: 0.9rem;">
-                                    {{ strtoupper(substr($user->name, 0, 2)) }}
-                                </div>
-                                <div style="font-weight: 500; color: var(--text-main);">{{ $user->name }}</div>
-                            </div>
-                        </td>
-                        <td style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; color: var(--text-secondary);">{{ $user->email }}</td>
-                        <td style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6;">
-                            <span style="background: #eff6ff; color: var(--primary-color); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 500;">
-                                {{ $user->username }}
-                            </span>
-                        </td>
-                        <td style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; text-align: right;">
-                            <div style="display: inline-flex; gap: 0.5rem;">
-                                <button onclick="openEmailModal('{{ $user->id }}', '{{ $user->email }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Enviar Correo" onmouseover="this.style.borderColor='var(--primary-color)'; this.style.color='var(--primary-color)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
-                                    <i class="fas fa-envelope"></i>
-                                </button>
-                                <a href="{{ route('admin.users.edit', $user) }}" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Editar" onmouseover="this.style.borderColor='#10b981'; this.style.color='#10b981'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <button onclick="openResetModal('{{ $user->id }}', '{{ $user->name }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Reiniciar Progreso" onmouseover="this.style.borderColor='#f59e0b'; this.style.color='#f59e0b'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
-                                    <i class="fas fa-history"></i>
-                                </button>
-                                <button onclick="openDeleteModal('{{ $user->id }}', '{{ $user->name }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Eliminar" onmouseover="this.style.borderColor='#ef4444'; this.style.color='#ef4444'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <div style="padding: 1rem 1.5rem; border-top: 1px solid #e5e7eb; background-color: #f9fafb;">
-            {{ $users->links('admin.pagination') }}
-        </div>
-    </div>
 
     <!-- Email Modal -->
     <div id="emailModal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center; padding: 1rem;">
