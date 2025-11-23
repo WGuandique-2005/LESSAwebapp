@@ -60,11 +60,21 @@
         margin-top: 12px;
     }
     .foot {
-        padding: 16px 20px;
-        font-size: 12px;
-        color: #9ca3af;
+        background-color: #f9fafb;
+        padding: 20px 30px;
         text-align: center;
-        background: #fafafa;
+        border-top: 1px solid #e5e7eb;
+        font-size: 14px;
+        color: #6b7280;
+    }
+    .contact-email {
+        color: #2563eb;
+        font-weight: 600;
+        text-decoration: none;
+    }
+    .team-signature {
+        font-weight: 600;
+        color: #374151;
     }
     @media screen and (max-width:480px){
         .token-box { font-size: 22px; letter-spacing:4px; padding:10px 16px; }
@@ -94,12 +104,15 @@
             </div>
 
             <p class="small">El enlace y el código expiran en 2 horas. Si no solicitaste este cambio, puedes ignorar este correo.</p>
-
-            <!-- Se ha eliminado el enlace en texto plano para que no aparezca en el correo -->
         </div>
 
         <div class="foot">
-            Este es un correo automático. Si necesitas ayuda, responde a este mensaje o visita nuestra plataforma.
+            <p style="margin-bottom: 15px;">Atentamente,<br><span class="team-signature">El equipo de LESSA</span></p>
+            <p style="margin-bottom: 5px;">¿Tienes alguna duda? Contáctanos:</p>
+            <a href="mailto:wguandique2006@gmail.com" class="contact-email">wguandique2006@gmail.com</a>
+            <p style="margin-top: 20px; font-size: 12px; color: #9ca3af;">
+                &copy; {{ date('Y') }} LESSA. Todos los derechos reservados.
+            </p>
         </div>
     </div>
 </body>

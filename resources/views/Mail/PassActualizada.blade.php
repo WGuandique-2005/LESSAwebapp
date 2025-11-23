@@ -40,11 +40,22 @@
             font-weight: bold;
         }
         .footer {
-            margin-top: 30px;
-            padding: 10px;
-            font-size: 12px;
-            color: #777777;
+            background-color: #f9fafb;
+            padding: 20px 30px;
             text-align: center;
+            border-top: 1px solid #e5e7eb;
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 30px;
+        }
+        .contact-email {
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .team-signature {
+            font-weight: 600;
+            color: #374151;
         }
     </style>
 </head>
@@ -58,8 +69,12 @@
             <p>Tu contraseña fue actualizada con exito.</p>
         </div>
         <div class="footer">
-            <p>Si no fuiste tú quien activó esta cuenta, por favor contáctanos de inmediato.</p>
-            <p>&copy; {{ date('Y') }} LESSA. Todos los derechos reservados.</p>
+            <p style="margin-bottom: 15px;">Atentamente,<br><span class="team-signature">El equipo de LESSA</span></p>
+            <p style="margin-bottom: 5px;">¿Tienes alguna duda? Contáctanos:</p>
+            <a href="mailto:wguandique2006@gmail.com" class="contact-email">wguandique2006@gmail.com</a>
+            <p style="margin-top: 20px; font-size: 12px; color: #9ca3af;">
+                &copy; {{ date('Y') }} LESSA. Todos los derechos reservados.
+            </p>
         </div>
     </div>
 </body>
