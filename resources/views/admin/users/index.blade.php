@@ -56,7 +56,7 @@
         </div>
 
         <div style="padding: 1rem 1.5rem; border-top: 1px solid #e5e7eb; background-color: #f9fafb;">
-            {{ $users->links() }}
+            {{ $users->links('admin.pagination') }}
         </div>
     </div>
 
