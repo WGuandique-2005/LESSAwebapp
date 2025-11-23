@@ -67,8 +67,28 @@ Route::middleware('guest')->group(function (){
 */
 
 Route::middleware('auth')->group(function () {
+    // Admin password protection route
+    Route::get('/admin/password', [App\Http\Controllers\AdminController::class, 'showPasswordForm'])->name('admin.password');
+    Route::post('/admin/password', [App\Http\Controllers\AdminController::class, 'verifyPassword'])->name('admin.password.verify');
+
+    // Admin dashboard routes (protected by admin middleware)
+    Route::middleware('admin')->group(function () {
+        // Admin dashboard
+        Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
+        // User CRUD routes
+        Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'listUsers'])->name('admin.users');
+        Route::get('/admin/users/create', [App\Http\Controllers\AdminController::class, 'createUserForm'])->name('admin.users.create');
+        Route::post('/admin/users', [App\Http\Controllers\AdminController::class, 'storeUser'])->name('admin.users.store');
+        Route::get('/admin/users/{user}/edit', [App\Http\Controllers\AdminController::class, 'editUserForm'])->name('admin.users.edit');
+        Route::put('/admin/users/{user}', [App\Http\Controllers\AdminController::class, 'updateUser'])->name('admin.users.update');
+        Route::delete('/admin/users/{user}', [App\Http\Controllers\AdminController::class, 'deleteUser'])->name('admin.users.delete');
+        // Email sending route
+        Route::post('/admin/users/{user}/email', [App\Http\Controllers\AdminController::class, 'sendUserEmail'])->name('admin.users.email');
+    });
+
+    // Original home route
     Route::get('/home', function () {
-        $progressData = ProgressController::getHomeProgressData();
+        $progressData = \App\Http\Controllers\ProgressController::getHomeProgressData();
         return view('home', compact('progressData'));
     })->name('home');
 

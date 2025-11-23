@@ -27,9 +27,18 @@ class User extends Authenticatable
         'es_google_oauth',
     ];
 
+    protected static function booted()
+    {
+        static::deleting(function ($user) {
+            $user->lecciones()->delete();
+            $user->puntos()->delete();
+            $user->recompensas()->delete();
+        });
+    }
+
     public function lecciones()
     {
-        return $this->hasMany(ProgresoUsuario::class);
+        return $this->hasMany(ProgresoUsuario::class, 'usuario_id');
     }
 
     public function puntos()
