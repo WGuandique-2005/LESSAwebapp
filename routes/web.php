@@ -14,6 +14,7 @@ use App\Http\Controllers\CameraController;
 
 // Sección de ayuda (accesible para todos)
 Route::get('/ayuda',[TaskController::class,'ayuda'])->name('ayuda');
+Route::get('/ayuda/manual', [TaskController::class, 'manual'])->name('manual');
 
 /*
 |----------------------------------

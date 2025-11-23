@@ -38,8 +38,14 @@ class TaskController extends Controller
         return view('practica_section.practicar');
     }
 
+    // Sección de ayuda
     public function ayuda(){
         return view('ayuda');
+    }
+
+    // Manual de usuario
+    public function manual(){
+        return view('manualUsuario');
     }
 
     public function diccionario(){

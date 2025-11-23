@@ -202,7 +202,7 @@
                 <h3 class="footer-heading">Recursos</h3>
                 <ul class="footer-links">
                     <li><a href="{{ route('lecciones.diccionario') }}">Diccionario LESSA</a></li>
-                    <li><a href="#">Guía de uso</a></li>
+                    <li><a href="{{ route('manual') }}">Guía de uso</a></li>
                     <li><a href="{{ route('ayuda') }}">Preguntas frecuentes</a></li>
                 </ul>
             </div>

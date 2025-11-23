@@ -332,14 +332,9 @@
         <div class="manual-card">
             <h2 class="manual-title">Manual de Usuario</h2>
             <p class="manual-desc">Esta sección está destinada a ofrecer una guía detallada paso a paso de todas las funciones de LESSA.</p>
-            
-            <div class="manual-placeholder">
-                <i class="fas fa-tools" style="margin-bottom: 1rem; font-size: 2rem; display: block; opacity: 0.5;"></i>
-                El Manual de Usuario estará disponible pronto. Incluirá tutoriales en video y texto para aprovechar al máximo tu aprendizaje.
-            </div>
 
-            <a href="#" class="btn-manual">
-                <i class="fas fa-book-reader"></i> Ver Guía Rápida (Próximamente)
+            <a href="{{ route('manual') }}" class="btn-manual">
+                <i class="fas fa-book-reader"></i> Ver Manual de Usuario
             </a>
         </div>
 
