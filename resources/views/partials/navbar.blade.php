@@ -487,10 +487,10 @@
             </div>
         @else
             <div style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
-                <a style="text-decoration: none;" href="{{ route('profile') }}" style="font-weight:700; padding:10px 8px; border-radius:8px;">Ver
+                <a style="text-decoration: none;" href="{{ route('profile') }}" style="font-weight:700; padding:10px 8px; border-radius:8px; color:var(--primary);">Ver
                     Perfil</a>
                 <a style="text-decoration: none;" href="{{ route('profile.edit') }}"
-                    style="font-weight:700; padding:10px 8px; border-radius:8px;">Configurar Perfil</a>
+                    style="font-weight:700; padding:10px 8px; border-radius:8px; color:var(--primary);">Configurar Perfil</a>
                 <a style="text-decoration: none;" href="{{ route('logout') }}"
                     style="font-weight:700; padding:10px 8px; border-radius:8px; color:var(--primary);">Cerrar Sesión</a>
             </div>
@@ -510,8 +510,8 @@
             </div>
 
             <div style="height:8px"></div>
-            <a href="{{ route('profile') }}" style="padding:12px; border-radius:10px; font-weight:700;">Ver Perfil</a>
-            <a href="{{ route('profile.edit') }}" style="padding:12px; border-radius:10px; font-weight:700;">Configurar
+            <a href="{{ route('profile') }}" style="padding:12px; border-radius:10px; font-weight:700; color:var(--primary);">Ver Perfil</a>
+            <a href="{{ route('profile.edit') }}" style="padding:12px; border-radius:10px; font-weight:700; color:var(--primary);">Configurar
                 Perfil</a>
             <a href="{{ route('logout') }}"
                 style="padding:12px; border-radius:10px; font-weight:700; color:var(--primary);">Cerrar Sesión</a>
