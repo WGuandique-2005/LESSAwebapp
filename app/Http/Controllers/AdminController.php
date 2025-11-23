@@ -46,9 +46,20 @@ class AdminController extends Controller
     }
 
     // List Users
-    public function listUsers()
+    public function listUsers(Request $request)
     {
-        $users = User::where('id', '!=', 1)->paginate(10);
+        $query = User::where('id', '!=', 1);
+
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('username', 'like', "%{$search}%");
+            });
+        }
+
+        $users = $query->paginate(10);
         return view('admin.users.index', compact('users'));
     }
 
@@ -117,6 +128,21 @@ class AdminController extends Controller
         
         $user->delete();
         return redirect()->route('admin.users')->with('success', 'Usuario eliminado exitosamente.');
+    }
+
+    // Reset User Progress
+    public function resetProgress(User $user)
+    {
+        if ($user->id === 1) {
+            return back()->with('error', 'No puedes reiniciar el progreso del administrador principal.');
+        }
+
+        // Delete related records
+        $user->lecciones()->delete();
+        $user->puntos()->delete();
+        $user->recompensas()->delete();
+
+        return redirect()->route('admin.users')->with('success', 'Progreso del usuario reiniciado exitosamente.');
     }
 
     // Send Email

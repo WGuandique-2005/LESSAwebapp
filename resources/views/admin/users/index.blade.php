@@ -8,6 +8,22 @@
         </a>
     </div>
 
+    <!-- Search Bar -->
+    <div class="card" style="margin-bottom: 2rem; padding: 1rem;">
+        <form action="{{ route('admin.users') }}" method="GET" style="display: flex; gap: 1rem; align-items: center;">
+            <div style="flex: 1; position: relative;">
+                <i class="fas fa-search" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"></i>
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Buscar por nombre, email o usuario..." style="width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; border: 1px solid #e5e7eb; border-radius: 0.5rem; font-family: inherit;">
+            </div>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+            @if(request('search'))
+                <a href="{{ route('admin.users') }}" class="btn btn-secondary" title="Limpiar búsqueda">
+                    <i class="fas fa-times"></i>
+                </a>
+            @endif
+        </form>
+    </div>
+
     <div class="card" style="padding: 0; overflow: hidden;">
         <div class="table-container">
             <table style="width: 100%; border-collapse: separate; border-spacing: 0;">
@@ -44,6 +60,9 @@
                                 <a href="{{ route('admin.users.edit', $user) }}" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Editar" onmouseover="this.style.borderColor='#10b981'; this.style.color='#10b981'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
                                     <i class="fas fa-edit"></i>
                                 </a>
+                                <button onclick="openResetModal('{{ $user->id }}', '{{ $user->name }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Reiniciar Progreso" onmouseover="this.style.borderColor='#f59e0b'; this.style.color='#f59e0b'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
+                                    <i class="fas fa-history"></i>
+                                </button>
                                 <button onclick="openDeleteModal('{{ $user->id }}', '{{ $user->name }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Eliminar" onmouseover="this.style.borderColor='#ef4444'; this.style.color='#ef4444'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -85,6 +104,30 @@
         </div>
     </div>
 
+    <!-- Reset Progress Modal -->
+    <div id="resetModal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center; padding: 1rem;">
+        <div class="modal-content" style="background: white; padding: 2rem; border-radius: 1rem; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center;">
+            <div style="width: 60px; height: 60px; background: #fef3c7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                <i class="fas fa-history" style="font-size: 1.75rem; color: #d97706;"></i>
+            </div>
+            
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--text-main);">¿Reiniciar Progreso?</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.5;">
+                Estás a punto de reiniciar el progreso de <strong id="resetUserName" style="color: var(--text-main);"></strong>. 
+                <br><span style="font-size: 0.9rem; color: #d97706;">Se eliminarán lecciones, puntos y recompensas, pero el usuario permanecerá activo.</span>
+            </p>
+
+            <form id="resetForm" method="POST">
+                @csrf
+                @method('PUT')
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button type="button" onclick="closeResetModal()" class="btn btn-secondary" style="width: 100%;">Cancelar</button>
+                    <button type="submit" class="btn" style="width: 100%; background-color: #f59e0b; color: white;">Sí, Reiniciar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Delete Modal -->
     <div id="deleteModal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center; padding: 1rem;">
         <div class="modal-content" style="background: white; padding: 2rem; border-radius: 1rem; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center;">
@@ -116,12 +159,26 @@
             modal.style.display = 'flex';
             document.getElementById('modalUserEmail').innerText = userEmail;
             document.getElementById('emailForm').action = `/admin/users/${userId}/email`;
-            // Animation
             setTimeout(() => modal.style.opacity = '1', 10);
         }
 
         function closeEmailModal() {
             const modal = document.getElementById('emailModal');
+            modal.style.opacity = '0';
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        // Reset Modal Functions
+        function openResetModal(userId, userName) {
+            const modal = document.getElementById('resetModal');
+            modal.style.display = 'flex';
+            document.getElementById('resetUserName').innerText = userName;
+            document.getElementById('resetForm').action = `/admin/users/${userId}/reset-progress`;
+            setTimeout(() => modal.style.opacity = '1', 10);
+        }
+
+        function closeResetModal() {
+            const modal = document.getElementById('resetModal');
             modal.style.opacity = '0';
             setTimeout(() => modal.style.display = 'none', 300);
         }
@@ -132,7 +189,6 @@
             modal.style.display = 'flex';
             document.getElementById('deleteUserName').innerText = userName;
             document.getElementById('deleteForm').action = `/admin/users/${userId}`;
-            // Animation
             setTimeout(() => modal.style.opacity = '1', 10);
         }
 
@@ -146,6 +202,7 @@
         window.onclick = function(event) {
             if (event.target.classList.contains('modal-overlay')) {
                 closeEmailModal();
+                closeResetModal();
                 closeDeleteModal();
             }
         }
