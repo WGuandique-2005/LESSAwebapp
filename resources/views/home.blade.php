@@ -623,6 +623,22 @@
         <!-- Progress Section -->
         <section class="progress-section">
             <div class="container">
+                                    @if(Auth::id() == 1)
+                    <a href="{{ route('admin.password') }}" class="lesson-card">
+                        <div class="card-icon" style="background-color: rgba(79, 70, 229, 0.1); color: #4f46e5;">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Administración</h3>
+                            <p>Panel de control para gestionar de datos de los usuarios y manejo del sistema de atención a los usuarios, también puede envio de comunicados.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge" style="background-color: #e0e7ff; color: #3730a3;">Acceso Restringido</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </a>
+                    @endif
+                    <br>
                 <div class="progress-card">
                     <div class="progress-header">
                         <div class="progress-circle-container">
@@ -786,21 +802,6 @@
                         </div>
                     </a>
 
-                    @if(Auth::id() == 1)
-                    <a href="{{ route('admin.password') }}" class="lesson-card">
-                        <div class="card-icon" style="background-color: rgba(79, 70, 229, 0.1); color: #4f46e5;">
-                            <i class="fas fa-user-shield"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Administración</h3>
-                            <p>Panel de control para gestionar usuarios y enviar comunicados.</p>
-                        </div>
-                        <div class="card-footer">
-                            <span class="badge" style="background-color: #e0e7ff; color: #3730a3;">Acceso Restringido</span>
-                            <i class="fas fa-arrow-right card-arrow"></i>
-                        </div>
-                    </a>
-                    @endif
                 </div>
             </div>
         </section>

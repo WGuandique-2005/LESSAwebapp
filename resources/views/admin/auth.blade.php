@@ -61,6 +61,7 @@
             border: 1px solid #e5e7eb;
             border-radius: 0.5rem;
             font-family: inherit;
+            box-sizing: border-box;
         }
 
         .btn-primary {
@@ -73,6 +74,7 @@
             cursor: pointer;
             width: 100%;
             transition: background 0.2s;
+            box-sizing: border-box;
         }
 
         .btn-primary:hover {

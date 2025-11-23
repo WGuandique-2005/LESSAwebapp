@@ -250,7 +250,7 @@
         </div>
         
         <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-            <i class="fas fa-home"></i> Dashboard
+            <i class="fas fa-home"></i> Home
         </a>
         <a href="{{ route('admin.users') }}" class="nav-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}">
             <i class="fas fa-users"></i> Usuarios
