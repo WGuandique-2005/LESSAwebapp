@@ -385,9 +385,9 @@
                 <div class="card-body">
                     <p>¿Tienes algún problema con tu cuenta o alguna duda sobre la plataforma? Estamos aquí para ayudarte.</p>
                     <p>Puedes contactarnos directamente al siguiente correo electrónico:</p>
-                    <p style="font-weight: 600; color: var(--primary-color); font-size: 1.1rem; margin: 0.5rem 0;">
+                    <a href="mailto:wguandique2006@gmail.com" style="font-weight: 600; color: var(--primary-color); font-size: 1.1rem; margin: 0.5rem 0; text-decoration: none;">
                         <i class="fas fa-envelope"></i> wguandique2006@gmail.com
-                    </p>
+                    </a>
                     <p>Nos comprometemos a responder a todas tus inquietudes de la manera más rápida posible para garantizar tu mejor experiencia en LESSA.</p>
                 </div>
             </div>
