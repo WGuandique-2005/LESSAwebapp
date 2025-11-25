@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Nivel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AdminMessage;
 
@@ -48,7 +49,9 @@ class AdminController extends Controller
     // List Users
     public function listUsers(Request $request)
     {
-        $query = User::where('id', '!=', 1);
+        // 1. Load users with valid relationships (exclude broken 'puntos.nivel')
+        $query = User::where('id', '!=', 1)
+            ->with(['lecciones.leccion', 'puntos', 'recompensas.recompensa']);
 
         if ($request->has('search')) {
             $search = $request->get('search');
@@ -60,6 +63,27 @@ class AdminController extends Controller
         }
 
         $users = $query->paginate(10);
+
+        // 2. Load puntos with level name via join (mirroring ProgressController::miProgreso)
+        // Import the PuntosUsuario model at the top of the file if not already present.
+        $puntosWithNivel = \App\Models\PuntosUsuario::whereIn('usuario_id', $users->pluck('id'))
+            ->join('niveles', 'niveles.id', '=', 'puntos_usuarios.nivel_id')
+            ->select('puntos_usuarios.*', 'niveles.nombre as nivel_nombre')
+            ->get()
+            ->groupBy('usuario_id');
+
+        // Attach the enriched puntos collection to each user, adding a pseudo‑relation "nivel"
+        foreach ($users as $user) {
+            $puntos = $puntosWithNivel->get($user->id) ?? collect();
+            // For each punto, create a simple object representing the related nivel
+            $puntos->each(function ($p) {
+                $p->nivel = (object) ['nombre' => $p->nivel_nombre];
+                // Optionally unset the raw attribute to avoid confusion
+                unset($p->nivel_nombre);
+            });
+            $user->setRelation('puntos', $puntos);
+        }
+
         return view('admin.users.index', compact('users'));
     }
 

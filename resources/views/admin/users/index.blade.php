@@ -41,23 +41,29 @@
                 </thead>
                 <tbody style="background-color: white;">
                     @foreach($users as $user)
-                    <tr style="transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#f9fafb'" onmouseout="this.style.backgroundColor='white'">
+                    <tr style="transition: background-color 0.2s; cursor: pointer;" 
+                        onmouseover="this.style.backgroundColor='#f9fafb'" 
+                        onmouseout="this.style.backgroundColor='white'"
+                        onclick="openUserDetailsModal({{ json_encode($user) }})">
+                        
                         <td data-label="Nombre" style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6;">
                             <div style="display: flex; align-items: center;">
-                                <div style="width: 2.5rem; height: 2.5rem; background-color: #e0e7ff; color: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-right: 1rem; font-size: 0.9rem;">
+                                <div class="mobile-avatar" style="width: 2.5rem; height: 2.5rem; background-color: #e0e7ff; color: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-right: 1rem; font-size: 0.9rem; flex-shrink: 0;">
                                     {{ strtoupper(substr($user->name, 0, 2)) }}
                                 </div>
                                 <div style="font-weight: 500; color: var(--text-main);">{{ $user->name }}</div>
                             </div>
                         </td>
-                        <td data-label="Email" style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; color: var(--text-secondary);">{{ $user->email }}</td>
+                        <td data-label="Email" style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; color: var(--text-secondary);">
+                            <div style="word-break: break-all; text-align: right;">{{ $user->email }}</div>
+                        </td>
                         <td data-label="Usuario" style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6;">
-                            <span style="background: #eff6ff; color: var(--primary-color); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 500;">
+                            <span style="background: #eff6ff; color: var(--primary-color); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 500; word-break: break-all; display: inline-block; max-width: 100%;">
                                 {{ $user->username }}
                             </span>
                         </td>
-                        <td data-label="Acciones" style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; text-align: right;">
-                            <div style="display: inline-flex; gap: 0.5rem;">
+                        <td data-label="Acciones" style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; text-align: right;" onclick="event.stopPropagation()">
+                            <div style="display: inline-flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end;">
                                 <button onclick="openEmailModal('{{ $user->id }}', '{{ $user->email }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Enviar Correo" onmouseover="this.style.borderColor='var(--primary-color)'; this.style.color='var(--primary-color)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
                                     <i class="fas fa-envelope"></i>
                                 </button>
@@ -177,6 +183,110 @@
                 background-color: #f9fafb;
                 border-bottom: 1px solid #e5e7eb;
             }
+            
+            /* Ensure content doesn't overlap label (except for Actions column) */
+            .responsive-table td:not([data-label="Acciones"]) > div,
+            .responsive-table td:not([data-label="Acciones"]) > span {
+                max-width: 65%;
+                text-align: right;
+                word-break: break-word; /* Allow wrapping for long words */
+                white-space: normal; /* Ensure text wraps */
+            }
+
+            /* Specific fix for Name cell which has a nested flex container */
+            .responsive-table td[data-label="Nombre"] > div {
+                max-width: 100%; /* Allow container to fill available space */
+                justify-content: flex-end; /* Align to right on mobile */
+            }
+            
+            .responsive-table td[data-label="Nombre"] > div > div:last-child {
+                text-align: right;
+                word-break: break-word;
+            }
+
+            /* Mobile Avatar Fix */
+            .mobile-avatar {
+                margin-right: 0.75rem !important;
+                width: 2.25rem !important;
+                height: 2.25rem !important;
+                font-size: 0.85rem !important;
+                flex-shrink: 0;
+            }
+
+            /* Fix Action Buttons on Mobile */
+            .responsive-table td[data-label="Acciones"] {
+                justify-content: flex-end !important;
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
+
+            .responsive-table td[data-label="Acciones"] > div {
+                width: 100%;
+                justify-content: space-between !important; /* Spread buttons out or use flex-end */
+                display: flex !important;
+                gap: 0.5rem !important;
+            }
+
+            .responsive-table td[data-label="Acciones"] .btn {
+                width: auto !important;
+                flex: 1 !important; /* Distribute space evenly */
+                display: inline-flex !important;
+                justify-content: center !important;
+                padding: 0.6rem 0.5rem !important;
+                margin: 0 !important;
+            }
+            
+            /* If buttons are too small, maybe stack in pairs? */
+            /* Let's try just making them auto width and centered if flex:1 looks bad */
+            .responsive-table td[data-label="Acciones"] .btn {
+                flex: 0 0 auto !important;
+                width: auto !important;
+            }
+            
+            .responsive-table td[data-label="Acciones"] > div {
+                justify-content: flex-end !important;
+            }
+        }
+
+        /* Modal Responsiveness */
+        .modal-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .modal-stats-grid {
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1rem; 
+            margin-bottom: 2rem; 
+            background: #f3f4f6; 
+            padding: 1rem; 
+            border-radius: 0.75rem;
+        }
+
+        .modal-label {
+            display: block; 
+            font-size: 0.8rem; 
+            color: var(--text-secondary); 
+            margin-bottom: 0.25rem;
+        }
+
+        .modal-value {
+            font-weight: 500; 
+            color: var(--text-main);
+            word-break: break-word; /* Ensure long text wraps */
+        }
+
+        @media (max-width: 640px) {
+            .modal-info-grid {
+                grid-template-columns: 1fr; /* Force single column on mobile */
+            }
+            
+            .modal-stats-grid {
+                grid-template-columns: 1fr; /* Stack stats on very small screens if needed, or keep 3 */
+                gap: 0.5rem;
+            }
         }
     </style>
 
@@ -226,6 +336,93 @@
                     <button type="submit" class="btn" style="width: 100%; background-color: #f59e0b; color: white;">Sí, Reiniciar</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- User Details Modal -->
+    <div id="userDetailsModal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center; padding: 1rem;">
+        <div class="modal-content" style="background: white; padding: 0; border-radius: 1rem; width: 100%; max-width: 600px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); overflow: hidden; max-height: 90vh; display: flex; flex-direction: column;">
+            
+            <div style="padding: 1.5rem; background: #f9fafb; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 1.25rem; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 0.75rem;">
+                    <div id="modalAvatar" style="width: 2.5rem; height: 2.5rem; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1rem;"></div>
+                    <span id="modalUserName"></span>
+                </h3>
+                <button onclick="closeUserDetailsModal()" style="background: none; border: none; font-size: 1.5rem; color: var(--text-secondary); cursor: pointer;">&times;</button>
+            </div>
+
+            <div style="padding: 1.5rem; overflow-y: auto;">
+                <!-- General Info -->
+                <div style="margin-bottom: 2rem;">
+                    <h4 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; margin-bottom: 1rem; border-bottom: 2px solid #f3f4f6; padding-bottom: 0.5rem;">Información General</h4>
+                    <div class="modal-info-grid">
+                        <div>
+                            <label class="modal-label">Nombre Completo</label>
+                            <div id="modalName" class="modal-value"></div>
+                        </div>
+                        <div>
+                            <label class="modal-label">Usuario</label>
+                            <div id="modalUsername" class="modal-value"></div>
+                        </div>
+                        <div>
+                            <label class="modal-label">Email</label>
+                            <div id="modalEmail" class="modal-value"></div>
+                        </div>
+                        <div>
+                            <label class="modal-label">Fecha de Registro</label>
+                            <div id="modalJoined" class="modal-value"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="modal-stats-grid">
+                    <div style="text-align: center;">
+                        <div id="modalLessonsCount" style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">0</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Lecciones</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="modalPoints" style="font-size: 1.5rem; font-weight: 700; color: #f59e0b;">0</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Puntos</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="modalRewardsCount" style="font-size: 1.5rem; font-weight: 700; color: #10b981;">0</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Recompensas</div>
+                    </div>
+                </div>
+
+                <!-- Detailed Lists -->
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <!-- Lessons -->
+                    <div>
+                        <h4 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; margin-bottom: 0.5rem;">Lecciones Completadas</h4>
+                        <div id="modalLessonsList" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Minigames -->
+                    <div>
+                        <h4 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; margin-bottom: 0.5rem;">Minijuegos Completados</h4>
+                        <div id="modalMinigamesList" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                     <!-- Rewards -->
+                     <div>
+                        <h4 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; margin-bottom: 0.5rem;">Recompensas Desbloqueadas</h4>
+                        <div id="modalRewardsList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.5rem;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div style="padding: 1rem 1.5rem; background: #f9fafb; border-top: 1px solid #e5e7eb; text-align: right;">
+                <button onclick="closeUserDetailsModal()" class="btn btn-primary">Cerrar</button>
+            </div>
         </div>
     </div>
 
@@ -299,12 +496,105 @@
             setTimeout(() => modal.style.display = 'none', 300);
         }
 
+        // User Details Modal Functions
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('es-ES', options);
+        }
+
+        function openUserDetailsModal(user) {
+            const modal = document.getElementById('userDetailsModal');
+            
+            // Basic Info
+            document.getElementById('modalAvatar').innerText = user.name.substring(0, 2).toUpperCase();
+            document.getElementById('modalUserName').innerText = user.name;
+            document.getElementById('modalName').innerText = user.name;
+            document.getElementById('modalUsername').innerText = user.username;
+            document.getElementById('modalEmail').innerText = user.email;
+            
+            document.getElementById('modalJoined').innerText = formatDate(user.created_at);
+
+            // Stats
+            document.getElementById('modalLessonsCount').innerText = user.lecciones.length;
+            
+            let totalPoints = 0;
+            user.puntos.forEach(p => totalPoints += p.puntos_obtenidos);
+            document.getElementById('modalPoints').innerText = totalPoints;
+            
+            document.getElementById('modalRewardsCount').innerText = user.recompensas.length;
+
+            // Lessons List
+            const lessonsList = document.getElementById('modalLessonsList');
+            lessonsList.innerHTML = '';
+            if (user.lecciones.length > 0) {
+                user.lecciones.sort((a, b) => new Date(b.fecha_completado) - new Date(a.fecha_completado)); // Sort by completion date
+                user.lecciones.forEach(l => {
+                    const badge = document.createElement('span');
+                    badge.style.cssText = 'background: #eff6ff; color: var(--primary-color); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; border: 1px solid #dbeafe;';
+                    const lessonTitle = l.leccion ? l.leccion.titulo : 'Lección Eliminada';
+                    const completionDate = l.fecha_completada ? ` (${formatDate(l.fecha_completada)})` : '';
+                    badge.innerText = `${lessonTitle}${completionDate}`;
+                    lessonsList.appendChild(badge);
+                });
+            } else {
+                lessonsList.innerHTML = '<span style="color: var(--text-secondary); font-size: 0.9rem;">Sin lecciones completadas.</span>';
+            }
+
+            // Minigames List (using puntos)
+            const minigamesList = document.getElementById('modalMinigamesList');
+            minigamesList.innerHTML = '';
+            if (user.puntos.length > 0) {
+                user.puntos.sort((a, b) => new Date(b.fecha_completado) - new Date(a.fecha_completado));
+                user.puntos.forEach(p => {
+                    const item = document.createElement('div');
+                    item.style.cssText = 'background: #f0fdf4; color: #16a34a; padding: 0.5rem 0.75rem; border-radius: 0.5rem; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center;';
+                    const minigameTitle = p.nivel ? p.nivel.nombre : 'Nivel Desconocido';
+                    const completionDate = p.fecha_completado ? formatDate(p.fecha_completado) : 'Fecha desconocida';
+                    item.innerHTML = `<span>${minigameTitle}</span><span style="font-size: 0.8rem; color: #4b5563;">${completionDate}</span>`;
+                    minigamesList.appendChild(item);
+                });
+            } else {
+                minigamesList.innerHTML = '<span style="color: var(--text-secondary); font-size: 0.9rem;">Sin minijuegos completados.</span>';
+            }
+
+
+            // Rewards List
+            const rewardsList = document.getElementById('modalRewardsList');
+            rewardsList.innerHTML = '';
+            if (user.recompensas.length > 0) {
+                user.recompensas.forEach(r => {
+                    if (r.recompensa) {
+                        const card = document.createElement('div');
+                        card.style.cssText = 'background: white; border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 0.5rem; text-align: center;';
+                        
+                        card.innerHTML = `
+                            <div style="font-size: 2rem; margin-bottom: 0.25rem;">🏆</div>
+                            <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${r.recompensa.nombre}</div>
+                        `;
+                        rewardsList.appendChild(card);
+                    }
+                });
+            } else {
+                rewardsList.innerHTML = '<span style="color: var(--text-secondary); font-size: 0.9rem; grid-column: 1/-1;">Sin recompensas desbloqueadas.</span>';
+            }
+
+            modal.style.display = 'flex';
+            setTimeout(() => modal.style.opacity = '1', 10);
+        }
+
+        function closeUserDetailsModal() {
+            const modal = document.getElementById('userDetailsModal');
+            modal.style.opacity = '0';
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
         // Close modals on outside click
         window.onclick = function(event) {
             if (event.target.classList.contains('modal-overlay')) {
                 closeEmailModal();
                 closeResetModal();
                 closeDeleteModal();
+                closeUserDetailsModal();
             }
         }
     </script>
