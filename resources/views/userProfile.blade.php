@@ -65,7 +65,8 @@
         }
 
         .profile-container {
-            max-width: 1200px;
+            max-width: 1200px; /* Increased width for better visibility on large screens */
+            width: 85%; /* Occupy more screen space on all devices */
             margin: var(--spacing-xl) auto;
             padding: 0 var(--spacing-md);
             flex-grow: 1; /* Allows container to grow and push footer down */
