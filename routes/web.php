@@ -138,7 +138,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/practicar/numeros/conecta', [NivelesController::class, 'numeros_conecta'])->name('nivel.numeros.conecta');
     Route::post('/practicar/numeros/conecta/complete', [PuntosUsuarioController::class, 'completeNumerosConecta'])->name('lecciones.numeros.conecta.complete');
 
-    Route::get('/practicar/numeros/extra', [NivelesController::class, 'numeros_extra'])->name('nivel.numeros.extra');
+    Route::get('/practicar/numeros/extra', [CameraController::class, 'numeros'])->name('nivel.numeros.extra');
     Route::post('/practicar/numeros/extra/complete', [PuntosUsuarioController::class, 'completeNumerosExtra'])->name('lecciones.numeros.extra.complete');
 
     // Saludos

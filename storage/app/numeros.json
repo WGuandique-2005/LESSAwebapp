@@ -65,7 +65,7 @@
         "descripcion": "Extendemos ambas manos con  la palma de la mano, hacia enfrente, con todos los dedos extendidos.",
         "ruta": "/img/numeros/10.png"
     },
-        {
+    {
         "id": "11",
         "nombre": "Número 11",
         "descripcion": "Se realiza primero la seña del número 10 y, de forma seguida y en el mismo espacio, la seña del número 1 (índice extendido).",
@@ -122,49 +122,49 @@
     {
         "id": "20",
         "nombre": "Número 20",
-        "descripcion": "Se extienden juntos el índice y el medio, se mantiene la palma al frente y se hace un movimiento de giro de la muñeca hacia afuera.",
+        "descripcion": "Se extienden juntos el índice y el medio, seguida de la seña del número 0 (se realiza la seña igual a cuando se realiza la letra O).",
         "ruta": "/img/numeros/20.png"
     },
     {
         "id": "30",
         "nombre": "Número 30",
-        "descripcion": "Se realiza la seña del número 3 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "descripcion": "Se realiza la seña del número 3 seguida de la seña del número 0 (se realiza la seña igual a cuando se realiza la letra O).",
         "ruta": "/img/numeros/30.png"
     },
     {
         "id": "40",
         "nombre": "Número 40",
-        "descripcion": "Se realiza la seña del número 4 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "descripcion": "Se realiza la seña del número 4 seguida de la seña del número 0 (se realiza la seña igual a cuando se realiza la letra O).",
         "ruta": "/img/numeros/40.png"
     },
     {
         "id": "50",
         "nombre": "Número 50",
-        "descripcion": "Se realiza la seña del número 5 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "descripcion": "Se realiza la seña del número 5 seguida de la seña del número 0 (se realiza la seña igual a cuando se realiza la letra O).",
         "ruta": "/img/numeros/50.png"
     },
     {
         "id": "60",
         "nombre": "Número 60",
-        "descripcion": "Se realiza la seña del número 6 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "descripcion": "Se realiza la seña del número 6 seguida de la seña del número 0 (se realiza la seña igual a cuando se realiza la letra O).",
         "ruta": "/img/numeros/60.png"
     },
     {
         "id": "70",
         "nombre": "Número 70",
-        "descripcion": "Se realiza la seña del número 7 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "descripcion": "Se realiza la seña del número 7 seguida de la seña del número 0 (se realiza la seña igual a cuando se realiza la letra O).",
         "ruta": "/img/numeros/70.png"
     },
     {
         "id": "80",
         "nombre": "Número 80",
-        "descripcion": "Se realiza la seña del número 8 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "descripcion": "Se realiza la seña del número 8 seguida de la seña del número 0 (se realiza la seña igual a cuando se realiza la letra O).",
         "ruta": "/img/numeros/80.png"
     },
     {
         "id": "90",
         "nombre": "Número 90",
-        "descripcion": "Se realiza la seña del número 9 seguida de la seña del número 0 (puño cerrado con movimiento circular hacia adelante).",
+        "descripcion": "Se realiza la seña del número 9 seguida de la seña del número 0 (se realiza la seña igual a cuando se realiza la letra O).",
         "ruta": "/img/numeros/90.png"
     },
     {
@@ -174,10 +174,9 @@
         "ruta": "/img/numeros/100.png"
     },
     {
-    "id": "1000",
-    "nombre": "Número 1000",
-    "descripcion": "Se realiza la seña del número 1 (índice extendido con palma al frente) y luego, con la mano en forma de puño, se apoya suavemente la punta de los dedos sobre la palma de la mano no dominante extendida, indicando el valor de mil.",
-    "ruta": "/img/numeros/1000.png"
+        "id": "1000",
+        "nombre": "Número 1000",
+        "descripcion": "Se realiza la seña del número 1 (índice extendido con palma al frente) y luego, con la mano en forma de puño, se apoya suavemente la punta de los dedos sobre la palma de la mano no dominante extendida, indicando el valor de mil.",
+        "ruta": "/img/numeros/1000.png"
     }
 ]
-

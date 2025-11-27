@@ -12,6 +12,11 @@ class CameraController extends Controller
         return view('practica_section.abecedario.camara');
     }
 
+    public function numeros()
+    {
+        return view('practica_section.numeros.camara');
+    }
+
     // Endpoint: recibe landmarks o imagen en base64 y devuelve algo (placeholder)
     public function detect(Request $request)
     {
