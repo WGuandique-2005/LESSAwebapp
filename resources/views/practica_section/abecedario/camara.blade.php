@@ -634,56 +634,235 @@
 
         // Detector de letras (evaluarLetra) - Solo vocales
         function evaluarLetra(landmarks) {
-            const pts = landmarks.map(p => [p.x, p.y, p.z]);
 
-            const dist = (a, b) =>
+            // Convertimos landmarks a arreglo: [x, y, z]
+            const puntos = landmarks.map(p => [p.x, p.y, p.z]);
+
+            // -----------------------------
+            // Distancia entre 2 puntos
+            // -----------------------------
+            const distancia = (a, b) =>
                 Math.hypot(
-                    pts[a][0] - pts[b][0],
-                    pts[a][1] - pts[b][1],
-                    pts[a][2] - pts[b][2]
+                puntos[a][0] - puntos[b][0],
+                puntos[a][1] - puntos[b][1],
+                puntos[a][2] - puntos[b][2]
                 );
+            // Distancias clave
+            const dPulgarIndice = distancia(4, 8);
+            const dPulgarAnular = distancia(4, 14);
+            const dPulgarMenique = distancia(4, 18);
+            const dIndiceMedio = distancia(8, 12);
+            const dMedioAnular = distancia(12, 16);
+            const dAnularMenique = distancia(16, 20);
 
-            const isExtended = (tip, pip) => dist(0, tip) > dist(0, pip);
-            const isFolded = (tip, pip) => dist(0, tip) < dist(0, pip);
+            // -----------------------------
+            // Evauación de estado de dedos
+            // -----------------------------
+            const Extendido = (punta, mitad, base) =>
+                distancia(0, punta) > distancia(0, mitad) &&
+                distancia(0, mitad) > distancia(0, base);
 
-            const pulgarIndiceDist = dist(4, 8);
-            const indiceExtendido = isExtended(8, 6);
-            const medioExtendido = isExtended(12, 10);
-            const anularExtendido = isExtended(16, 14);
-            const meniqueExtendido = isExtended(20, 18);
-            const indiceDoblado = isFolded(8, 6);
-            const medioDoblado = isFolded(12, 10);
-            const anularDoblado = isFolded(16, 14);
-            const meniqueDoblado = isFolded(20, 18);
+            const SemiExtendido = (punta, mitad, base) =>
+                distancia(0, punta) < distancia(0, mitad) &&
+                distancia(0, mitad) > distancia(0, base);
 
+            const Doblado = (punta, mitad, base) =>
+                distancia(0, punta) < distancia(0, mitad) &&
+                distancia(0, mitad) < distancia(0, base);
+                
+            const Horizontal = (punta, base) =>
+                (puntos[punta][0] - puntos[base][0]);
+
+            const Vertical = (base1, base2) =>
+                (puntos[base1][1] < puntos[base2][1]);
+
+            const Profundo = (base1, base2) =>
+                (puntos[base1][2] > puntos[base2][2]);
+            
+            // Estado de cada dedo
+            const pulgarExtendido  = Extendido(4, 3, 2);
+            const indiceExtendido  = Extendido(8, 7, 6);
+            const medioExtendido   = Extendido(12, 11, 10);
+            const anularExtendido  = Extendido(16, 15, 14);
+            const meniqueExtendido = Extendido(20, 19, 18);
+
+            const indiceSemi  = SemiExtendido(8, 6, 5);
+            const medioSemi   = SemiExtendido(12, 10, 9);
+            const anularSemi  = SemiExtendido(16, 14, 13);
+            const meniqueSemi = SemiExtendido(20, 18, 17);
+
+            const indiceDoblado  = Doblado(8, 7, 6);
+            const medioDoblado   = Doblado(12, 11, 10);
+            const anularDoblado  = Doblado(16, 15, 14);
+            const meniqueDoblado = Doblado(20, 19, 18);
+
+            const pulgarHorizontal = Horizontal(4, 2);
+            const indiceHorizontal = Horizontal(8, 6);
+            const medioHorizontal = Horizontal(12, 10);
+            const anularHorizontal = Horizontal(16, 14);
+            const meniqueHorizontal = Horizontal(20, 18);
+
+            const vPulgarMenique = Vertical(2, 17);
+            const vIndiceMedio = Vertical(5, 9);
+            const vMedioAnular = Vertical(9, 13);
+            const vAnularMenique = Vertical(13, 17);
+
+            const hIndiceMedio = Profundo(5, 9);
+            const hMedioAnular = Profundo(9, 13);
+            const hAnularMenique = Profundo(13, 17);
+
+            // ============================================================
             // LETRA A
-            if (pulgarIndiceDist >= 0.09 && indiceDoblado && medioDoblado && anularDoblado && meniqueDoblado) {
-                return "A";
-            }
+            // ============================================================
+            if (
+                indiceDoblado && medioDoblado &&
+                anularDoblado && meniqueDoblado &&
+                dPulgarIndice > 0.08
+            ) return "A";
 
+            // ============================================================
+            // LETRA B
+            // ============================================================
+            if (
+                indiceExtendido && medioExtendido &&
+                anularExtendido && meniqueExtendido &&
+                dIndiceMedio < 0.08 && dMedioAnular < 0.08
+                && dAnularMenique < 0.08 && dPulgarIndice >= 0.2
+            ) return "B";
+
+            // ============================================================
+            // LETRA C
+            // ============================================================
+            if (
+                pulgarHorizontal && medioHorizontal &&
+                dPulgarIndice < 0.2 && dPulgarIndice > 0.15 && hIndiceMedio && hMedioAnular &&
+                hAnularMenique && !medioExtendido && !vIndiceMedio
+            ) return "C";
+
+            // ============================================================
+            // LETRA D
+            // ============================================================
+            if (
+                indiceExtendido && medioDoblado &&
+                anularDoblado && meniqueDoblado &&
+                dPulgarIndice >= 0.15 && dPulgarIndice < 0.3
+            ) return "D";
+
+            // ============================================================
             // LETRA E
-            const d812 = dist(8, 12);
-            if (indiceDoblado && medioDoblado && anularDoblado && meniqueDoblado && pulgarIndiceDist > 0.045 && d812 < 0.06) {
-                return "E";
-            }
+            // ============================================================
+            if (
+                indiceSemi && medioSemi && anularSemi &&
+                meniqueSemi && dPulgarIndice > 0.08
+            ) return "E";
 
+            // ============================================================
+            // LETRA F
+            // ============================================================
+            if (
+                medioExtendido && anularExtendido &&
+                meniqueExtendido && dPulgarIndice < 0.08
+            ) return "F";
+
+            // ============================================================
+            // LETRA G
+            // ============================================================
+            if (
+                vIndiceMedio && vMedioAnular && vAnularMenique
+                && dPulgarIndice > 0.06 && dPulgarIndice < 0.15
+                && indiceHorizontal && medioDoblado && vPulgarMenique
+            ) return "G";
+
+            // ============================================================
+            // LETRA H
+            // ============================================================
+            if (
+                vIndiceMedio && vMedioAnular && vAnularMenique
+                && dPulgarIndice > 0.06 && dPulgarIndice < 0.15
+                && indiceHorizontal && medioHorizontal && vPulgarMenique
+            ) return "H";
+
+            // ============================================================
             // LETRA I
-            if (!indiceExtendido && !medioExtendido && !anularExtendido && meniqueExtendido) {
-                return "I";
-            }
+            // ============================================================
+            if (
+                meniqueExtendido && indiceDoblado && medioDoblado &&
+                anularDoblado
+            ) return "I";
 
+            // ============================================================
+            // LETRA K
+            // ============================================================
+            if (
+                indiceExtendido && medioExtendido &&
+                anularDoblado && meniqueDoblado &&
+                dIndiceMedio > 0.06 && dPulgarIndice < 0.15
+            ) return "K";
+
+            // ============================================================
+            // LETRA L
+            // ============================================================
+            if (
+                indiceExtendido && medioDoblado &&
+                anularDoblado && meniqueDoblado &&
+                dPulgarIndice >= 0.3 && pulgarHorizontal
+            ) return "L";
+
+            // ============================================================
+            // LETRA M
+            // ============================================================
+            if (
+                indiceDoblado && medioDoblado &&
+                anularDoblado && meniqueDoblado &&
+                dPulgarMenique < 0.08
+            ) return "M";
+
+            // ============================================================
+            // LETRA N
+            // ============================================================
+            if (
+                indiceDoblado && medioDoblado &&
+                anularDoblado && meniqueDoblado &&
+                dPulgarAnular < 0.08
+            ) return "N";
+
+            // ============================================================
             // LETRA O
-            const d48 = dist(4, 8);
-            if (d48 < 0.14 && d812 < 0.08 && indiceDoblado && medioDoblado) {
-                return "O";
-            }
+            // ============================================================
+            if (
+                !indiceExtendido && !medioExtendido &&
+                !anularExtendido && !meniqueExtendido &&
+                dPulgarIndice < 0.06 &&
+                dIndiceMedio < 0.06 &&
+                dMedioAnular < 0.06 &&
+                dAnularMenique < 0.06
+            ) return "O";
 
+            // ============================================================
             // LETRA U
-            if (indiceExtendido && medioExtendido && !anularExtendido && !meniqueExtendido && d812 < 0.06) {
-                return "U";
-            }
+            // ============================================================
+            if (
+                indiceExtendido && medioExtendido &&
+                anularDoblado && meniqueDoblado &&
+                dIndiceMedio <= 0.06 && !vIndiceMedio
+            ) return "U";
 
-            return null;
+            // ============================================================
+            // LETRA V
+            // ============================================================
+            if (
+                indiceExtendido && medioExtendido &&
+                anularDoblado && meniqueDoblado &&
+                dIndiceMedio > 0.06 && !vIndiceMedio
+            ) return "V";
+
+            // ============================================================
+            // LETRA W
+            // ============================================================
+            if (
+                indiceExtendido && medioExtendido &&
+                anularExtendido && meniqueDoblado
+            ) return "W";
         }
 
         function submitAndRedirect(url) {
