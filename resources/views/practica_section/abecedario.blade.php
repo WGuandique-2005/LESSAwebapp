@@ -644,7 +644,7 @@
                         </div>
                         <div class="card-content">
                             <h3>Trazado de Señas</h3>
-                            <p>Sigue el movimiento guiado de la seña en pantalla. Enfocado en la producción correcta.</p>
+                            <p>Realiza la seña que se menciona en pantalla. Enfocado en la producción correcta de cada seña.</p>
                         </div>
                         <div class="card-footer">
                             <span>Jugar Ahora</span>

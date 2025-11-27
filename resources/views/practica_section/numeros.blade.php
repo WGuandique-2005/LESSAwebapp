@@ -649,7 +649,7 @@
                         </div>
                         <div class="card-content">
                             <h3>Sigue la Secuencia</h3>
-                            <p>Se te dará un número de inicio y deberás hacer la seña de los siguientes tres números.</p>
+                            <p>Se te dará un número de inicio y deberás hacer la seña de los siguientes números.</p>
                         </div>
                         <div class="card-footer">
                             <span>Jugar Ahora</span>
