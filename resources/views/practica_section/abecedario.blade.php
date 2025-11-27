@@ -651,6 +651,21 @@
                             <i class="fas fa-play card-arrow"></i>
                         </div>
                     </div>
+
+                    <!-- Practice Zone -->
+                    <div class="lesson-card" onclick="window.location.href='/practicar/abecedario/practice'">
+                        <div class="card-icon icon-game3">
+                            <i class="fas fa-hand-paper"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Zona de Práctica</h3>
+                            <p>Practica el abecedario libremente sin límite de tiempo. ¡Perfecciona tu técnica!</p>
+                        </div>
+                        <div class="card-footer">
+                            <span>Practicar Ahora</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

@@ -720,33 +720,7 @@
                 dPulgarIndice > 0.08
             ) return "A";
 
-            // ============================================================
-            // LETRA B
-            // ============================================================
-            if (
-                indiceExtendido && medioExtendido &&
-                anularExtendido && meniqueExtendido &&
-                dIndiceMedio < 0.08 && dMedioAnular < 0.08
-                && dAnularMenique < 0.08 && dPulgarIndice >= 0.2
-            ) return "B";
 
-            // ============================================================
-            // LETRA C
-            // ============================================================
-            if (
-                pulgarHorizontal && medioHorizontal &&
-                dPulgarIndice < 0.2 && dPulgarIndice > 0.15 && hIndiceMedio && hMedioAnular &&
-                hAnularMenique && !medioExtendido && !vIndiceMedio
-            ) return "C";
-
-            // ============================================================
-            // LETRA D
-            // ============================================================
-            if (
-                indiceExtendido && medioDoblado &&
-                anularDoblado && meniqueDoblado &&
-                dPulgarIndice >= 0.15 && dPulgarIndice < 0.3
-            ) return "D";
 
             // ============================================================
             // LETRA E
@@ -756,31 +730,7 @@
                 meniqueSemi && dPulgarIndice > 0.08
             ) return "E";
 
-            // ============================================================
-            // LETRA F
-            // ============================================================
-            if (
-                medioExtendido && anularExtendido &&
-                meniqueExtendido && dPulgarIndice < 0.08
-            ) return "F";
 
-            // ============================================================
-            // LETRA G
-            // ============================================================
-            if (
-                vIndiceMedio && vMedioAnular && vAnularMenique
-                && dPulgarIndice > 0.06 && dPulgarIndice < 0.15
-                && indiceHorizontal && medioDoblado && vPulgarMenique
-            ) return "G";
-
-            // ============================================================
-            // LETRA H
-            // ============================================================
-            if (
-                vIndiceMedio && vMedioAnular && vAnularMenique
-                && dPulgarIndice > 0.06 && dPulgarIndice < 0.15
-                && indiceHorizontal && medioHorizontal && vPulgarMenique
-            ) return "H";
 
             // ============================================================
             // LETRA I
@@ -790,41 +740,7 @@
                 anularDoblado
             ) return "I";
 
-            // ============================================================
-            // LETRA K
-            // ============================================================
-            if (
-                indiceExtendido && medioExtendido &&
-                anularDoblado && meniqueDoblado &&
-                dIndiceMedio > 0.06 && dPulgarIndice < 0.15
-            ) return "K";
 
-            // ============================================================
-            // LETRA L
-            // ============================================================
-            if (
-                indiceExtendido && medioDoblado &&
-                anularDoblado && meniqueDoblado &&
-                dPulgarIndice >= 0.3 && pulgarHorizontal
-            ) return "L";
-
-            // ============================================================
-            // LETRA M
-            // ============================================================
-            if (
-                indiceDoblado && medioDoblado &&
-                anularDoblado && meniqueDoblado &&
-                dPulgarMenique < 0.08
-            ) return "M";
-
-            // ============================================================
-            // LETRA N
-            // ============================================================
-            if (
-                indiceDoblado && medioDoblado &&
-                anularDoblado && meniqueDoblado &&
-                dPulgarAnular < 0.08
-            ) return "N";
 
             // ============================================================
             // LETRA O
@@ -846,23 +762,6 @@
                 anularDoblado && meniqueDoblado &&
                 dIndiceMedio <= 0.06 && !vIndiceMedio
             ) return "U";
-
-            // ============================================================
-            // LETRA V
-            // ============================================================
-            if (
-                indiceExtendido && medioExtendido &&
-                anularDoblado && meniqueDoblado &&
-                dIndiceMedio > 0.06 && !vIndiceMedio
-            ) return "V";
-
-            // ============================================================
-            // LETRA W
-            // ============================================================
-            if (
-                indiceExtendido && medioExtendido &&
-                anularExtendido && meniqueDoblado
-            ) return "W";
         }
 
         function submitAndRedirect(url) {

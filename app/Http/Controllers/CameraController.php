@@ -12,6 +12,11 @@ class CameraController extends Controller
         return view('practica_section.abecedario.camara');
     }
 
+    public function practice()
+    {
+        return view('practica_section.abecedario.practice');
+    }
+
     public function numeros()
     {
         return view('practica_section.numeros.camara');

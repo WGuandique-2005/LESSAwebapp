@@ -127,6 +127,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/practicar/abecedario/extra', [CameraController::class, 'index'])->name('nivel.abecedario.extra');
     Route::post('/practicar/abecedario/extra/complete', [PuntosUsuarioController::class, 'completeAbecedarioExtra'])->name('lecciones.abecedario.extra.complete');
 
+    Route::get('/practicar/abecedario/practice', [CameraController::class, 'practice'])->name('nivel.abecedario.practice');
+
     // Números
     Route::get('/practicar/numeros', [NivelesController::class, 'numeros'])->name('nivel.numeros');
     Route::get('/practicar/numeros/adivina', [NivelesController::class, 'numeros_adivina'])->name('nivel.numeros.adivina');
