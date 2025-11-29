@@ -90,7 +90,6 @@ Sigue estos pasos para tener LESSA funcionando en tu entorno local:
         ```bash
         cp .env.example .env
         ```
-    * **Importante:** Dado que usas **SQLite**, Laravel lo configurará por defecto. Si necesitas cambiar algo, abre el archivo `.env` y ajusta la sección `DB_CONNECTION` si no es `sqlite`.
 
 4.  **Genera la Clave de Aplicación:**
     Esta clave es fundamental para la seguridad de tu aplicación Laravel.
