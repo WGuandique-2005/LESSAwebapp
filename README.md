@@ -18,7 +18,7 @@ LESSA es una **plataforma educativa interactiva** diseñada para hacer que el ap
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 * **Frontend**: HTML, CSS, JavaScript
 * **Backend**: Laravel / PHP
@@ -29,11 +29,11 @@ LESSA es una **plataforma educativa interactiva** diseñada para hacer que el ap
 
 ---
 
-## 🚀 Organización del Proyecto
+## Organización del Proyecto
 
 El desarrollo de LESSA sigue **metodologías ágiles**, con el trabajo organizado en **sprints**, épicas e historias de usuario. Esto nos permite un enfoque iterativo y colaborativo, garantizando una entrega de valor constante.
 
-### 🔗 Enlaces Importantes del Proyecto
+### Enlaces Importantes del Proyecto
 
 * **[Enlace a la web](https://lessa.website)**
 * **[Prototipo en Figma](https://www.figma.com/proto/5V4YvHq5NbadccEFSM99o6/LESSA---Sprint-Demo?node-id=548-552&p=f&t=uM673BkONCdW3Iuj-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1)**
