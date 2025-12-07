@@ -1,15 +1,15 @@
-# LESSA – Lenguaje de Señas Salvadoreño👋
+# LESSA – Lenguaje de Señas Salvadoreño
 # GPO01-LESSA-2025
 LESSA es una **plataforma educativa interactiva** diseñada para hacer que el aprendizaje del Lenguaje de Señas Salvadoreño (LESSA) sea **fácil, divertido y accesible**. Nos enfocamos en la inclusión comunicacional, ofreciendo una experiencia gamificada con:
 
-* ✨ Animaciones detalladas de señas
-* 🎮 Minijuegos y desafíos interactivos
-* 📈 Progresión por niveles para un aprendizaje estructurado
-* 🔍 Sistema de retroalimentación visual para mejorar la precisión
+* Animaciones detalladas de señas
+* Minijuegos y desafíos interactivos
+* Progresión por niveles para un aprendizaje estructurado
+* Sistema de retroalimentación visual para mejorar la precisión
 
 ---
 
-## 🎯 Objetivos del Proyecto
+## Objetivos del Proyecto
 
 * **Fomentar** el aprendizaje de LESSA de manera accesible e inclusiva.
 * **Ofrecer** una experiencia atractiva basada en mecánicas de juego (gamificación).
@@ -35,12 +35,12 @@ El desarrollo de LESSA sigue **metodologías ágiles**, con el trabajo organizad
 
 ### 🔗 Enlaces Importantes del Proyecto
 
-* 🎨 **[Enlace a la web](https://lessa.website)**
-* 🎨 **[Prototipo en Figma](https://www.figma.com/proto/5V4YvHq5NbadccEFSM99o6/LESSA---Sprint-Demo?node-id=548-552&p=f&t=uM673BkONCdW3Iuj-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1)**
+* **[Enlace a la web](https://lessa.website)**
+* **[Prototipo en Figma](https://www.figma.com/proto/5V4YvHq5NbadccEFSM99o6/LESSA---Sprint-Demo?node-id=548-552&p=f&t=uM673BkONCdW3Iuj-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1)**
 
 ---
 
-## 💻 Requisitos Previos
+## Requisitos Previos
 
 Para que LESSA funcione correctamente en tu máquina, necesitarás:
 
@@ -52,7 +52,7 @@ Para que LESSA funcione correctamente en tu máquina, necesitarás:
 
 ---
 
-## ⬇️ Instalación de Composer (Si no lo tienes)
+## Instalación de Composer (Si no lo tienes)
 
 Composer es crucial para los proyectos Laravel. Sigue estos pasos para instalarlo en Windows:
 
@@ -68,7 +68,7 @@ Composer es crucial para los proyectos Laravel. Sigue estos pasos para instalarl
 
 ---
 
-## ⚙️ Pasos para la Configuración del Proyecto
+## Pasos para la Configuración del Proyecto
 
 Sigue estos pasos para tener LESSA funcionando en tu entorno local:
 
@@ -112,7 +112,7 @@ Sigue estos pasos para tener LESSA funcionando en tu entorno local:
     Esto iniciará un servidor en `http://127.0.0.1:8000` (o un puerto similar). Abre esta URL en tu navegador y ¡explora LESSA!
 
 
-##  🔑 Credenciales de Prueba (Administrador)
+##  Credenciales de Prueba (Administrador)
 Para un acceso rápido a la plataforma después de completar la instalación y las migraciones, hemos incluido un usuario administrador por defecto que puedes utilizar para explorar las funcionalidades:
         ```
         user:admin@example.com	passwd: admin
