@@ -1,15 +1,15 @@
-# LESSA – Lenguaje de Señas Salvadoreño👋
+# LESSA – Lenguaje de Señas Salvadoreño
 # GPO01-LESSA-2025
 LESSA es una **plataforma educativa interactiva** diseñada para hacer que el aprendizaje del Lenguaje de Señas Salvadoreño (LESSA) sea **fácil, divertido y accesible**. Nos enfocamos en la inclusión comunicacional, ofreciendo una experiencia gamificada con:
 
-* ✨ Animaciones detalladas de señas
-* 🎮 Minijuegos y desafíos interactivos
-* 📈 Progresión por niveles para un aprendizaje estructurado
-* 🔍 Sistema de retroalimentación visual para mejorar la precisión
+* Animaciones detalladas de señas
+* Minijuegos y desafíos interactivos
+* Progresión por niveles para un aprendizaje estructurado
+* Sistema de retroalimentación visual para mejorar la precisión
 
 ---
 
-## 🎯 Objetivos del Proyecto
+## Objetivos del Proyecto
 
 * **Fomentar** el aprendizaje de LESSA de manera accesible e inclusiva.
 * **Ofrecer** una experiencia atractiva basada en mecánicas de juego (gamificación).
@@ -18,7 +18,7 @@ LESSA es una **plataforma educativa interactiva** diseñada para hacer que el ap
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 * **Frontend**: HTML, CSS, JavaScript
 * **Backend**: Laravel / PHP
@@ -29,20 +29,18 @@ LESSA es una **plataforma educativa interactiva** diseñada para hacer que el ap
 
 ---
 
-## 🚀 Organización del Proyecto
+## Organización del Proyecto
 
 El desarrollo de LESSA sigue **metodologías ágiles**, con el trabajo organizado en **sprints**, épicas e historias de usuario. Esto nos permite un enfoque iterativo y colaborativo, garantizando una entrega de valor constante.
 
-### 🔗 Enlaces Importantes del Proyecto
+### Enlaces Importantes del Proyecto
 
-* 📄 **[Product Backlog](https://ugbedu-my.sharepoint.com/:x:/g/personal/smss076423_ugb_edu_sv/Eapi1oKlRTZEspPF9jjTorsBCA43wBJgucl2i_ann2TYmQ)**
-* 📄 **[Sprint Backlog](https://ugbedu-my.sharepoint.com/:x:/g/personal/smss076423_ugb_edu_sv/EaBSOhwlRclNqigcsJRra_wB3L288eneTHb3FPSXRcNcvQ?e=kRMlO7)**
-* 📋 **[Tablero Kanban](https://trello.com/invite/b/682888b233ee0e129eac41a1/ATTI2c99d8bc2b6ce8f7c69897eb00639d6693DB55BD/sprint-review-i)**
-* 🎨 **[Prototipo en Figma](https://www.figma.com/proto/5V4YvHq5NbadccEFSM99o6?node-id=0-1&t=NeQOI4qeubAnkxOT-6)**
+* **[Enlace a la web](https://lessa.website)**
+* **[Prototipo en Figma](https://www.figma.com/proto/5V4YvHq5NbadccEFSM99o6/LESSA---Sprint-Demo?node-id=548-552&p=f&t=uM673BkONCdW3Iuj-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1)**
 
 ---
 
-## 💻 Requisitos Previos
+## Requisitos Previos
 
 Para que LESSA funcione correctamente en tu máquina, necesitarás:
 
@@ -54,7 +52,7 @@ Para que LESSA funcione correctamente en tu máquina, necesitarás:
 
 ---
 
-## ⬇️ Instalación de Composer (Si no lo tienes)
+## Instalación de Composer (Si no lo tienes)
 
 Composer es crucial para los proyectos Laravel. Sigue estos pasos para instalarlo en Windows:
 
@@ -70,7 +68,7 @@ Composer es crucial para los proyectos Laravel. Sigue estos pasos para instalarl
 
 ---
 
-## ⚙️ Pasos para la Configuración del Proyecto
+## Pasos para la Configuración del Proyecto
 
 Sigue estos pasos para tener LESSA funcionando en tu entorno local:
 
@@ -92,7 +90,6 @@ Sigue estos pasos para tener LESSA funcionando en tu entorno local:
         ```bash
         cp .env.example .env
         ```
-    * **Importante:** Dado que usas **SQLite**, Laravel lo configurará por defecto. Si necesitas cambiar algo, abre el archivo `.env` y ajusta la sección `DB_CONNECTION` si no es `sqlite`.
 
 4.  **Genera la Clave de Aplicación:**
     Esta clave es fundamental para la seguridad de tu aplicación Laravel.
@@ -115,7 +112,7 @@ Sigue estos pasos para tener LESSA funcionando en tu entorno local:
     Esto iniciará un servidor en `http://127.0.0.1:8000` (o un puerto similar). Abre esta URL en tu navegador y ¡explora LESSA!
 
 
-##  🔑 Credenciales de Prueba (Administrador)
+##  Credenciales de Prueba (Administrador)
 Para un acceso rápido a la plataforma después de completar la instalación y las migraciones, hemos incluido un usuario administrador por defecto que puedes utilizar para explorar las funcionalidades:
         ```
         user:admin@example.com	passwd: admin
