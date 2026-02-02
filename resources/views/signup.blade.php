@@ -1,289 +1,77 @@
 <!DOCTYPE html>
-<html lang="es">
+<html class="light" lang="es">
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Registro - LESSA</title>
-
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <style>
-        :root {
-            --primary: #0A2463;
-            --secondary: #3E92CC;
-            --accent: #FFD166;
-            --light: #F2F4F7;
-            --dark: #1E1E24;
-            --success: #4CB944;
-            --radius: 16px;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            --transition: all 0.3s ease;
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Lexend', sans-serif;
+        }.custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
 
-            /* Strength colors */
+        /* Adapted Styles from original signup.blade.php */
+        :root {
             --strength-weak: #ff6b6b;
             --strength-moderate: #ffcc00;
             --strength-strong: #4CAF50;
             --strength-very-strong: #007bff;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--light) url({{ asset('img/signup.png') }}) center/cover no-repeat;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--dark);
-            padding: 24px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 520px;
-            background: rgba(10, 36, 99, 0.88);
-            color: white;
-            padding: 36px 28px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(10px);
-            text-align: center;
-            position: relative;
-            animation: fadeIn .6s ease;
-            margin: 20px 0;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px)
-            }
-
-            to {
-                opacity: 1;
-                transform: none
-            }
-        }
-
-        .logo {
-            width: 84px;
-            height: 84px;
-            margin: 0 auto 16px;
-            background: url({{ asset('img/logo2.png') }}) center/contain no-repeat;
-        }
-
-        h1 {
-            font-size: 26px;
-            margin-bottom: 8px;
-            color: var(--light);
-        }
-
-        p.lead {
-            margin-bottom: 20px;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-        }
-
-        /* Alerts region */
-        .alerts {
-            width: 100%;
-            margin-bottom: 14px;
-            display: grid;
-            gap: 10px;
-        }
-
-        .alert {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 10px 12px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .alert .left {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex: 1;
-        }
-
-        .alert .msg {
-            text-align: left;
-            color: #fff;
-        }
-
-        .alert .actions {
-            margin-left: 12px;
-        }
-
-        .alert button.close {
-            background: transparent;
-            border: 0;
-            color: inherit;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 6px;
-            border-radius: 8px;
-        }
-
-        .alert-success {
-            background: linear-gradient(90deg, var(--success), #3fb86a);
-        }
-
-        .alert-error {
-            background: linear-gradient(90deg, #d9534f, #c63b3b);
-        }
-
-        /* validation list */
-        .validation-list {
-            text-align: left;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 600;
-        }
-
-        .validation-list ul {
-            margin-top: 8px;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 500;
-            padding-left: 18px;
-        }
-
-        .input-group {
-            margin-bottom: 14px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 6px;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px 14px;
-            border-radius: 12px;
-            border: 1px solid transparent;
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            font-size: 15px;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        input:focus {
-            border-color: rgba(255, 209, 102, 0.6);
-            background: rgba(255, 255, 255, 0.10);
-            box-shadow: 0 8px 26px rgba(62, 146, 204, 0.06);
-        }
-
-        .is-invalid {
-            border-color: rgba(255, 120, 120, 0.9);
-            box-shadow: none;
-        }
-
-        .signup-btn {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            background: var(--primary);
-            border: none;
-            color: #fff;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 10px 28px rgba(10, 36, 99, 0.18);
-            transition: var(--transition);
-            margin-top: 10px;
-        }
-
-        .signup-btn:hover:not(:disabled) {
-            transform: translateY(-3px);
-            background: var(--secondary);
-        }
-
-        .signup-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            background: #555;
-            box-shadow: none;
-        }
-
-        .google-btn {
-            width: 100%;
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 12px;
-            background: #fff;
-            color: var(--dark);
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .google-btn img {
-            width: 20px;
-            height: 20px;
-        }
-
-        .links {
-            margin-top: 20px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        .links a {
-            color: var(--accent);
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .links a:hover {
-            text-decoration: underline;
-        }
-
-        .back-button {
-            position: absolute;
-            left: 18px;
-            top: 18px;
-            background: var(--accent);
-            color: var(--dark);
-            padding: 8px 12px;
-            border-radius: 12px;
-            font-weight: 700;
-            text-decoration: none;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
         /* Password Strength Indicator Styles */
         .password-strength-indicator {
             width: 100%;
             height: 6px;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: #e2e8f0;
             border-radius: 4px;
             margin-top: 8px;
             overflow: hidden;
             position: relative;
+        }
+        .dark .password-strength-indicator {
+            background-color: #334155; 
         }
 
         .strength-bar {
@@ -297,7 +85,6 @@
             font-size: 12px;
             text-align: right;
             margin-top: 5px;
-            color: rgba(255, 255, 255, 0.9);
             font-weight: 600;
             transition: color 0.3s ease-in-out;
         }
@@ -312,124 +99,249 @@
         .strength-bar.strong { background-color: var(--strength-strong); }
         .strength-bar.very-strong { background-color: var(--strength-very-strong); }
 
-        /* small helper for hide animation */
+        /* Alerts */
+        .alert {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        .alert .left {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex: 1;
+        }
+        .alert button.close {
+            background: transparent;
+            border: 0;
+            color: inherit;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .alert-success {
+            background: linear-gradient(90deg, #4CB944, #3fb86a);
+        }
+        .alert-error {
+            background: linear-gradient(90deg, #d9534f, #c63b3b);
+        }
         .fade-out {
             opacity: 0;
             transform: translateY(-8px);
             transition: opacity .35s, transform .35s;
         }
-
-        @media (max-width:520px) {
-            .container {
-                padding: 22px;
-                border-radius: 12px;
-                margin-top: 60px; /* Space for back button */
-            }
-
-            .logo {
-                width: 68px;
-                height: 68px
-            }
+        .is-invalid {
+            border-color: #d9534f !important;
         }
     </style>
 </head>
 
-<body>
-
-    <a class="back-button" href="{{ route('/') }}">← Volver</a>
-
-    <form action="{{ route('signup.submit') }}" method="POST" class="container" aria-labelledby="signup-title" novalidate>
-        @csrf
-        <div class="logo" role="img" aria-label="LESSA logo"></div>
-        <h1 id="signup-title">Crear Cuenta</h1>
-        <p class="lead">Únete a LESSA y comienza tu aprendizaje hoy mismo.</p>
-
-        <!-- Alerts region -->
-        <div class="alerts" id="alerts" aria-live="polite" aria-atomic="true">
-            @if(session('status'))
-                <div class="alert alert-success" role="status" data-auto-hide>
-                    <div class="left">
-                        <i class="fa-solid fa-check-circle"></i>
-                        <div class="msg">{{ session('status') }}</div>
+<body class="bg-white dark:bg-background-dark min-h-screen flex font-display overflow-hidden">
+    <div class="flex w-full min-h-screen">
+        <div class="hidden lg:flex lg:w-1/2 bg-primary relative flex-col justify-between p-12 text-white">
+            <div class="absolute inset-0 z-0">
+                <img alt="People communicating" class="w-full h-full object-cover opacity-20"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgGRDFDJ3zkfo4bmHAek8pcwwD1LZrQQ-BNCILGgRI0jjF99Z9sc4c5eAoRryJ6degXqXCz5EcRE4Rw4rdFMJgwfUg9RzJ5Em83-kicncTE2jUcdIf63TW5RWqkB33n2VWXnxvp5U_l9Z0sitHka700kIK-2692oGw7Qwv3vGP2pqvdu6-271zqzG8I5iTr2oW__qQrOipNeOEHN8svWVU2vfEcQgkKkjr37YCkExUYGm5L64TzYj1autT9zlBNV-PzBDvvHoh5nm1" />
+                <div class="absolute inset-0 bg-primary/60 mix-blend-multiply"></div>
+            </div>
+            <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-12">
+                    <div class="w-20 h-20 bg-white p-2 rounded-lg shadow-lg flex items-center justify-center">
+                        <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="w-full h-full object-contain">
                     </div>
-                    <div class="actions"><button type="button" class="close" aria-label="Cerrar alerta">&times;</button></div>
+                    <span class="text-2xl font-bold tracking-tight">LESSA</span>
                 </div>
-            @endif
+            </div>
+            <div class="relative z-10 max-w-lg">
+                <h2 class="text-4xl font-bold leading-tight mb-6">Aprender señas es construir puentes de inclusión.</h2>
+                <p class="text-xl text-blue-100 font-light leading-relaxed">
+                    "La comunicación no solo es hablar, es entender el mundo desde otra perspectiva."
+                </p>
+            </div>
+            <div class="relative z-10 flex items-center gap-4 text-sm text-blue-100">
+                <span class="material-symbols-outlined">diversity_3</span>
+                <span>Únete a más de 5,000 estudiantes en El Salvador</span>
+            </div>
+        </div>
+        <div
+            class="w-full lg:w-1/2 flex flex-col items-center justify-start h-screen overflow-y-auto custom-scrollbar p-8 sm:p-12 lg:p-16 bg-white dark:bg-slate-900">
+            
+             <div class="w-full max-w-[440px] mb-4">
+                <a href="{{ route('/') }}" class="text-slate-500 hover:text-primary flex items-center gap-2 transition-colors font-medium">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    Volver
+                </a>
+             </div>
 
-            @if(session('error'))
-                <div class="alert alert-error" role="alert" data-auto-hide>
-                    <div class="left">
-                        <i class="fa-solid fa-circle-exclamation"></i>
-                        <div class="msg">{{ session('error') }}</div>
+            <div class="w-full max-w-[440px] my-auto">
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-[#0d131b] dark:text-white mb-3">Crea tu cuenta</h1>
+                    <p class="text-slate-500 dark:text-slate-400">Empieza tu viaje aprendiendo la Lengua de Señas
+                        Salvadoreña.</p>
+                </div>
+
+                <!-- Alerts -->
+                <div id="alerts" class="mb-6">
+                    @if(session('status'))
+                        <div class="alert alert-success" role="status" data-auto-hide>
+                            <div class="left">
+                                <i class="fa-solid fa-check-circle"></i>
+                                <div class="msg">{{ session('status') }}</div>
+                            </div>
+                            <div class="actions"><button type="button" class="close">&times;</button></div>
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-error" role="alert" data-auto-hide>
+                            <div class="left">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <div class="msg">{{ session('error') }}</div>
+                            </div>
+                            <div class="actions"><button type="button" class="close">&times;</button></div>
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="alert alert-error" role="alert" data-auto-hide="false">
+                            <div class="left">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <div class="msg">
+                                    <div>Corrige los siguientes errores:</div>
+                                    <ul class="list-disc pl-4 mt-1">
+                                        @foreach ($errors->all() as $err)
+                                            <li>{{ $err }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="actions"><button type="button" class="close">&times;</button></div>
+                        </div>
+                    @endif
+                </div>
+
+                <form class="space-y-5" action="{{ route('signup.submit') }}" method="POST" novalidate>
+                    @csrf
+                    <a href="{{ route('auth.google') }}"
+                        class="w-full flex items-center justify-center gap-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0d131b] dark:text-white font-medium py-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24">
+                            <path
+                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                fill="#4285F4"></path>
+                            <path
+                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                fill="#34A853"></path>
+                            <path
+                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.26.81-.58z"
+                                fill="#FBBC05"></path>
+                            <path
+                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                fill="#EA4335"></path>
+                        </svg>
+                        Registrarse con Google
+                    </a>
+                    <div class="relative flex items-center py-2">
+                        <div class="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
+                        <span class="flex-shrink mx-4 text-slate-400 text-xs font-medium uppercase tracking-wider">o
+                            regístrate con correo</span>
+                        <div class="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
                     </div>
-                    <div class="actions"><button type="button" class="close" aria-label="Cerrar alerta">&times;</button></div>
-                </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="alert alert-error" role="alert" data-auto-hide="false">
-                    <div class="left">
-                        <i class="fa-solid fa-circle-exclamation"></i>
-                        <div class="msg validation-list">
-                            <div>Corrige los siguientes errores:</div>
-                            <ul>
-                                @foreach ($errors->all() as $err)
-                                    <li>{{ $err }}</li>
-                                @endforeach
-                            </ul>
+                    
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[#0d131b] dark:text-slate-200 text-sm font-semibold">Nombre real</label>
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">person</span>
+                            <input name="name" value="{{ old('name') }}"
+                                class="form-input w-full pl-12 pr-4 py-3 rounded-xl border border-[#cfd9e7] dark:border-slate-700 bg-white dark:bg-slate-800 text-[#0d131b] dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary placeholder:text-slate-400 {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                placeholder="Ej. Juan Pérez" type="text" required />
                         </div>
                     </div>
-                    <div class="actions"><button type="button" class="close" aria-label="Cerrar errores">&times;</button></div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[#0d131b] dark:text-slate-200 text-sm font-semibold">Nombre de
+                            usuario</label>
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">alternate_email</span>
+                            <input name="username" value="{{ old('username') }}"
+                                class="form-input w-full pl-12 pr-4 py-3 rounded-xl border border-[#cfd9e7] dark:border-slate-700 bg-white dark:bg-slate-800 text-[#0d131b] dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary placeholder:text-slate-400 {{ $errors->has('username') ? 'is-invalid' : '' }}"
+                                placeholder="juan_lessa23" type="text" required />
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[#0d131b] dark:text-slate-200 text-sm font-semibold">Correo
+                            electrónico</label>
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">mail</span>
+                            <input name="email" value="{{ old('email') }}"
+                                class="form-input w-full pl-12 pr-4 py-3 rounded-xl border border-[#cfd9e7] dark:border-slate-700 bg-white dark:bg-slate-800 text-[#0d131b] dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary placeholder:text-slate-400 {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                                placeholder="tu@correo.com" type="email" required />
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[#0d131b] dark:text-slate-200 text-sm font-semibold">Contraseña</label>
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">lock</span>
+                            <input id="password" name="password"
+                                class="form-input w-full pl-12 pr-12 py-3 rounded-xl border border-[#cfd9e7] dark:border-slate-700 bg-white dark:bg-slate-800 text-[#0d131b] dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary placeholder:text-slate-400 {{ $errors->has('password') ? 'is-invalid' : '' }}"
+                                placeholder="Crea una contraseña segura" type="password" required />
+                            <button
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors focus:outline-none"
+                                type="button" onclick="togglePasswordVisibility('password')">
+                                <span class="material-symbols-outlined text-xl">visibility</span>
+                            </button>
+                        </div>
+                        <!-- Strength Indicator -->
+                        <div class="password-strength-indicator">
+                            <div id="strength-bar" class="strength-bar"></div>
+                        </div>
+                        <div id="strength-text" class="strength-text"></div>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[#0d131b] dark:text-slate-200 text-sm font-semibold">Repetir
+                            contraseña</label>
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">lock</span>
+                            <input id="password_confirmation" name="password_confirmation"
+                                class="form-input w-full pl-12 pr-12 py-3 rounded-xl border border-[#cfd9e7] dark:border-slate-700 bg-white dark:bg-slate-800 text-[#0d131b] dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary placeholder:text-slate-400"
+                                placeholder="Repite la contraseña" type="password" required />
+                            <button
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors focus:outline-none"
+                                type="button" onclick="togglePasswordVisibility('password_confirmation')">
+                                <span class="material-symbols-outlined text-xl">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button
+                        class="signup-btn w-full bg-primary text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-primary/25 active:scale-[0.98] mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                        type="submit" disabled>
+                        Crear cuenta
+                    </button>
+                </form>
+                <div class="mt-10 text-center pb-8">
+                    <p class="text-slate-500 dark:text-slate-400">
+                        ¿Ya tienes una cuenta?
+                        <a class="text-primary font-bold hover:underline ml-1" href="{{ route('login') }}">Inicia sesión</a>
+                    </p>
                 </div>
-            @endif
-        </div>
-
-        <!-- Form fields -->
-        <div class="input-group">
-            <label for="name">Nombre Completo</label>
-            <input id="name" name="name" type="text" placeholder="Tu nombre" value="{{ old('name') }}"
-                required class="{{ $errors->has('name') ? 'is-invalid' : '' }}" autocomplete="name" autofocus>
-        </div>
-
-        <div class="input-group">
-            <label for="username">Nombre de Usuario</label>
-            <input id="username" name="username" type="text" placeholder="Tu nombre de usuario" value="{{ old('username') }}"
-                required class="{{ $errors->has('username') ? 'is-invalid' : '' }}" autocomplete="username">
-        </div>
-
-        <div class="input-group">
-            <label for="email">Correo Electrónico</label>
-            <input id="email" name="email" type="email" placeholder="ejemplo@correo.com" value="{{ old('email') }}"
-                required class="{{ $errors->has('email') ? 'is-invalid' : '' }}" autocomplete="email">
-        </div>
-
-        <div class="input-group">
-            <label for="password">Contraseña</label>
-            <input id="password" name="password" type="password" placeholder="********" required
-                class="{{ $errors->has('password') ? 'is-invalid' : '' }}" autocomplete="new-password">
-            
-            <div class="password-strength-indicator">
-                <div id="strength-bar" class="strength-bar"></div>
             </div>
-            <div id="strength-text" class="strength-text"></div>
         </div>
-
-        <div class="input-group">
-            <label for="password_confirmation">Confirmar Contraseña</label>
-            <input id="password_confirmation" name="password_confirmation" type="password" placeholder="Repite tu contraseña" required
-                autocomplete="new-password">
-        </div>
-
-        <button type="submit" class="signup-btn" aria-label="Registrarse" disabled>Registrarse</button>
-
-        <a href="{{ route('auth.google') }}" class="google-btn" role="button" aria-label="Registrarse con Google">
-            <img src="https://img.icons8.com/?size=512&id=17949&format=png" alt="Google logo">Continuar con Google
-        </a>
-
-        <div class="links">
-            ¿Ya tienes una cuenta? <a href="{{ route('login') }}">Inicia sesión aquí</a>
-        </div>
-    </form>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -517,8 +429,6 @@
                     // Enable/Disable Submit Button
                     // Requirement: Block until password meets characteristics.
                     // Assuming "Moderate" (score >= 3) is the threshold where it starts being acceptable.
-                    // Score 3 usually means length >= 8 and at least 2 types of characters, or just length >= 12.
-                    // Let's stick to score >= 3 as a reasonable baseline for "cumple con las características".
                     
                     if (score >= 3) {
                         submitBtn.disabled = false;
@@ -530,6 +440,16 @@
                 }
             }
         });
+
+        // Toggle visibility helper
+        function togglePasswordVisibility(id) {
+            const input = document.getElementById(id);
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+        }
     </script>
 </body>
 

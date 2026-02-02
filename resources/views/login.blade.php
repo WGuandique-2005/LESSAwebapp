@@ -3,373 +3,266 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Login - LESSA</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LESSA - Iniciar Sesión</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1d4ed8", // Deep blue from the hero section
+                        secondary: "#f59e0b", // Orange accent color
+                        "background-light": "#f3f4f6", // Light gray background from screenshots
+                        "surface-light": "#ffffff",
+                        "text-light": "#1f2937",
+                        "muted-light": "#6b7280",
+                        "success": "#4CB944",
+                        "error": "#d9534f",
+                    },
+                    fontFamily: {
+                        display: ["Poppins", "sans-serif"],
+                        body: ["Poppins", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                    },
+                },
+            },
+        };
+    </script>
     <style>
-        :root {
-            --primary: #0A2463;
-            --secondary: #3E92CC;
-            --accent: #FFD166;
-            --light: #F2F4F7;
-            --dark: #1E1E24;
-            --success: #4CB944;
-            --radius: 16px;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--light) url({{ asset('img/login.png') }}) center/cover no-repeat;
-            min-height: 100vh;
+        }
+
+        .bg-hero-pattern {
+            background-image: linear-gradient(to bottom right, #1d4ed8, #3b82f6);
+        }
+
+        /* Alerts region styles adapted from original */
+        .alert {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--dark);
-            padding: 24px;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            font-weight: 500;
+            font-size: 14px;
+            animation: slideIn 0.3s ease;
+            margin-bottom: 1rem;
         }
 
-        .container {
-            width: 100%;
-            max-width: 480px;
-            background: rgba(10, 36, 99, 0.88);
-            color: white;
-            padding: 36px 28px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(10px);
-            text-align: center;
-            position: relative;
-            animation: fadeIn .6s ease;
-        }
-
-        @keyframes fadeIn {
+        @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(10px)
+                transform: translateY(-10px);
             }
 
             to {
                 opacity: 1;
-                transform: none
+                transform: translateY(0);
             }
         }
 
-        .logo {
-            width: 84px;
-            height: 84px;
-            margin: 0 auto 16px;
-            background: url({{ asset('img/logo2.png') }}) center/contain no-repeat;
-        }
-
-        h1 {
-            font-size: 26px;
-            margin-bottom: 8px;
-            color: var(--light);
-        }
-
-        p.lead {
-            margin-bottom: 14px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        /* Alerts region */
-        .alerts {
-            width: 100%;
-            margin-bottom: 14px;
-            display: grid;
-            gap: 10px;
-        }
-
-        .alert {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 10px 12px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .alert .left {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex: 1;
-        }
-
-        .alert .msg {
-            text-align: left;
-            color: #fff;
-        }
-
-        .alert .actions {
-            margin-left: 12px;
-        }
-
-        .alert button.close {
-            background: transparent;
-            border: 0;
-            color: inherit;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 6px;
-            border-radius: 8px;
-        }
-
         .alert-success {
-            background: linear-gradient(90deg, var(--success), #3fb86a);
+            background-color: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #10b981;
         }
 
         .alert-error {
-            background: linear-gradient(90deg, #d9534f, #c63b3b);
+            background-color: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
         }
 
-        /* validation list */
-        .validation-list {
-            text-align: left;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 600;
-        }
-
-        .validation-list ul {
-            margin-top: 8px;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 500;
-            padding-left: 18px;
-        }
-
-        .input-group {
-            margin-bottom: 14px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 6px;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 600;
-        }
-
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px 14px;
-            border-radius: 12px;
-            border: 1px solid transparent;
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            font-size: 15px;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        input:focus {
-            border-color: rgba(255, 209, 102, 0.6);
-            background: rgba(255, 255, 255, 0.10);
-            box-shadow: 0 8px 26px rgba(62, 146, 204, 0.06);
-        }
-
-        .is-invalid {
-            border-color: rgba(255, 120, 120, 0.9);
-            box-shadow: none;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            background: var(--primary);
-            border: none;
-            color: #fff;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 10px 28px rgba(10, 36, 99, 0.18);
-            transition: var(--transition);
-        }
-
-        .login-btn:hover {
-            transform: translateY(-3px);
-            background: var(--secondary);
-        }
-
-        .google-btn {
-            width: 100%;
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 12px;
-            background: #fff;
-            color: var(--dark);
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .google-btn img {
-            width: 20px;
-            height: 20px;
-        }
-
-        .links {
-            margin-top: 14px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        .links a {
-            color: var(--accent);
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .links a:hover {
-            text-decoration: underline;
-        }
-
-        .back-button {
-            position: absolute;
-            left: 18px;
-            top: 18px;
-            background: var(--accent);
-            color: var(--dark);
-            padding: 8px 12px;
-            border-radius: 12px;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        /* small helper for hide animation */
         .fade-out {
             opacity: 0;
             transform: translateY(-8px);
             transition: opacity .35s, transform .35s;
         }
 
-        @media (max-width:520px) {
-            .container {
-                padding: 22px;
-                border-radius: 12px
-            }
-
-            .logo {
-                width: 68px;
-                height: 68px
-            }
+        .validation-list ul {
+            margin-top: 4px;
+            padding-left: 20px;
+            list-style-type: disc;
         }
     </style>
 </head>
 
-<body>
+<body class="bg-background-light text-text-light min-h-screen flex flex-col font-body transition-colors duration-300">
+    <header> @include('partials.navbar') </header>
 
-    <a class="back-button" href="{{ route('/') }}">← Volver</a>
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
+        <div
+            class="absolute top-0 left-0 w-full h-96 bg-hero-pattern opacity-10 skew-y-3 transform origin-top-left -z-10">
+        </div>
+        <div
+            class="absolute bottom-0 right-0 w-96 h-96 bg-primary rounded-full filter blur-3xl opacity-5 -z-10 translate-y-1/2 translate-x-1/2">
+        </div>
 
-    <form action="{{ route('login.submit') }}" method="POST" class="container" aria-labelledby="login-title" novalidate>
-        @csrf
-        <div class="logo" role="img" aria-label="LESSA logo"></div>
-        <h1 id="login-title">Iniciar sesión</h1>
-        <p class="lead">Accede a tu cuenta para continuar aprendiendo con LESSA.</p>
-
-        <!-- Alerts region (status, error, validation) -->
-        <div class="alerts" id="alerts" aria-live="polite" aria-atomic="true">
-            {{-- success message --}}
-            @if(session('status'))
-                <div class="alert alert-success" role="status" data-auto-hide>
-                    <div class="left">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        <div class="msg">{{ session('status') }}</div>
-                    </div>
-                    <div class="actions"><button type="button" class="close" aria-label="Cerrar alerta">&times;</button>
+        <div
+            class="bg-surface-light w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[600px] border border-gray-100">
+            <!-- Left Side: Visual -->
+            <div
+                class="hidden md:flex md:w-1/2 bg-hero-pattern p-12 flex-col justify-between text-white relative overflow-hidden">
+                <div
+                    class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+                </div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-bold mb-4">¡Bienvenido de nuevo!</h2>
+                    <p class="text-blue-100 text-lg">Tu camino para dominar el lenguaje de señas salvadoreño continúa
+                        aquí.</p>
+                </div>
+                <div class="relative z-10 flex justify-center">
+                    <div class="relative w-64 h-64">
+                        <div class="absolute inset-0 bg-white opacity-20 rounded-full blur-2xl animate-pulse"></div>
+                        <img alt="Students learning together"
+                            class="relative rounded-2xl shadow-lg border-4 border-white/20 object-cover w-full h-full transform rotate-3 hover:rotate-0 transition-transform duration-500"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ65z2R4s6mqueWi21qMgIRUAczfAZNGQvgULCm6gvEAf2Z7oyeFFLGLjoraIHVbkiEAxbLAc9GOnaZ9-uIJQyuZ_d2Ik2YmXN3OK5o7Or7vrKYWwhqb83IGUZ0oioXZylq8-jD_-2MOKUb9aCc0XbM8VBc9Kg6IdRcs6XnjCk3sZrwHTCtLKAFbTsCIZodstyiazGNnbKe7szlQ3hxZKDXPr3Ahb_yXsrlptMkXpS31PS0ZjpjJJ7DLKQauLvDgx8AqkTseR1SWIY" />
                     </div>
                 </div>
-            @endif
-
-            {{-- generic error message --}}
-            @if(session('error'))
-                <div class="alert alert-error" role="alert" data-auto-hide>
-                    <div class="left">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        <div class="msg">{{ session('error') }}</div>
-                    </div>
-                    <div class="actions"><button type="button" class="close" aria-label="Cerrar alerta">&times;</button>
-                    </div>
+                <div class="relative z-10">
+                    <blockquote class="italic text-blue-100 text-sm border-l-4 border-secondary pl-4">
+                        "La inclusión comienza con la comunicación. Gracias por ser parte del cambio."
+                    </blockquote>
                 </div>
-            @endif
+            </div>
 
-            {{-- validation errors (Illuminate\Support\MessageBag) --}}
-            @if ($errors->any())
-                <div class="alert alert-error" role="alert" data-auto-hide="false">
-                    <div class="left">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        <div class="msg validation-list">
-                            <div>Se encontraron los siguientes errores:</div>
-                            <ul>
-                                @foreach ($errors->all() as $err)
+            <!-- Right Side: Form -->
+            <div class="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center">
+                <div class="text-center mb-8">
+                    <h1 class="text-2xl font-bold text-gray-900 mb-2">Iniciar Sesión</h1>
+                    <p class="text-muted-light text-sm">¿Aún no tienes una cuenta? <a
+                            class="text-primary font-medium hover:underline transition-colors"
+                            href="{{ route('signup') }}">Regístrate gratis</a></p>
+                </div>
+
+                <!-- Alerts region (status, error, validation) -->
+                <div class="alerts mb-6" id="alerts" aria-live="polite" aria-atomic="true">
+                    {{-- success message --}}
+                    @if(session('status'))
+                    <div class="alert alert-success" role="status" data-auto-hide>
+                        <div class="flex gap-3">
+                            <span class="material-icons-outlined text-lg">check_circle</span>
+                            <div class="msg">{{ session('status') }}</div>
+                        </div>
+                        <button type="button" class="close opacity-50 hover:opacity-100 transition-opacity"
+                            aria-label="Cerrar alerta">
+                            <span class="material-icons-outlined text-lg">close</span>
+                        </button>
+                    </div>
+                    @endif
+
+                    {{-- generic error message --}}
+                    @if(session('error'))
+                    <div class="alert alert-error" role="alert" data-auto-hide>
+                        <div class="flex gap-3">
+                            <span class="material-icons-outlined text-lg">error_outline</span>
+                            <div class="msg">{{ session('error') }}</div>
+                        </div>
+                        <button type="button" class="close opacity-50 hover:opacity-100 transition-opacity"
+                            aria-label="Cerrar alerta">
+                            <span class="material-icons-outlined text-lg">close</span>
+                        </button>
+                    </div>
+                    @endif
+
+                    {{-- validation errors --}}
+                    @if ($errors->any())
+                    <div class="alert alert-error" role="alert" data-auto-hide="false">
+                        <div class="flex gap-3">
+                            <span class="material-icons-outlined text-lg">report_problem</span>
+                            <div class="msg validation-list">
+                                <div class="font-bold">Se encontraron los siguientes errores:</div>
+                                <ul class="text-xs mt-1">
+                                    @foreach ($errors->all() as $err)
                                     <li>{{ $err }}</li>
-                                @endforeach
-                            </ul>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <button type="button" class="close opacity-50 hover:opacity-100 transition-opacity"
+                            aria-label="Cerrar errores">
+                            <span class="material-icons-outlined text-lg">close</span>
+                        </button>
+                    </div>
+                    @endif
+                </div>
+
+                <a href="{{ route('auth.google') }}"
+                    class="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 rounded-xl py-3 px-4 text-gray-700 font-medium hover:bg-gray-50 transition-all shadow-sm mb-6 group">
+                    <img alt="Google Logo" class="w-5 h-5" src="https://img.icons8.com/?size=512&id=17949&format=png" />
+                    <span class="group-hover:text-gray-900">Continuar con Google</span>
+                </a>
+
+                <div class="relative mb-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-200"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-surface-light text-muted-light">o ingresa con tu correo</span>
+                    </div>
+                </div>
+
+                <form action="{{ route('login.submit') }}" class="space-y-5" method="POST" novalidate>
+                    @csrf
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1" for="email">Correo
+                            electrónico</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="material-icons-outlined text-gray-400 text-xl">email</span>
+                            </div>
+                            <input
+                                class="block w-full pl-10 pr-3 py-3 border {{ $errors->has('email') ? 'border-red-500 ring-2 ring-red-100' : 'border-gray-300' }} rounded-xl leading-5 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all"
+                                id="email" name="email" placeholder="ejemplo@correo.com" value="{{ old('email') }}"
+                                required type="email" />
                         </div>
                     </div>
-                    <div class="actions"><button type="button" class="close" aria-label="Cerrar errores">&times;</button>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="block text-sm font-medium text-gray-700" for="password">Contraseña</label>
+                            <a class="text-sm font-medium text-primary hover:text-blue-700 transition-colors"
+                                href="{{ route('recuperar') }}">¿Olvidaste tu contraseña?</a>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="material-icons-outlined text-gray-400 text-xl">lock</span>
+                            </div>
+                            <input
+                                class="block w-full pl-10 pr-10 py-3 border {{ $errors->has('password') ? 'border-red-500 ring-2 ring-red-100' : 'border-gray-300' }} rounded-xl leading-5 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all"
+                                id="password" name="password" placeholder="••••••••" required type="password" />
+                            <div id="togglePassword"
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-gray-400 hover:text-gray-600 transition-colors">
+                                <span class="material-icons-outlined text-xl" id="passwordIcon">visibility_off</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            @endif
+                    <button
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-sm font-semibold text-white bg-primary hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all transform active:scale-[0.98]"
+                        type="submit">
+                        Ingresar ahora
+                    </button>
+                </form>
+            </div>
         </div>
-        <!-- /Alerts region -->
-
-        <!-- Form fields -->
-        <div class="input-group">
-            <label for="email">Correo</label>
-            <input id="email" name="email" type="email" placeholder="ejemplo@correo.com" value="{{ old('email') }}"
-                required class="{{ $errors->has('email') ? 'is-invalid' : '' }}">
-        </div>
-
-        <div class="input-group">
-            <label for="password">Contraseña</label>
-            <input id="password" name="password" type="password" placeholder="********" required
-                class="{{ $errors->has('password') ? 'is-invalid' : '' }}">
-        </div>
-
-        <button type="submit" class="login-btn" aria-label="Iniciar sesión">Entrar</button>
-
-        <a href="{{ route('auth.google') }}" class="google-btn" role="button" aria-label="Iniciar sesión con Google">
-            <img src="https://img.icons8.com/?size=512&id=17949&format=png" alt="Google logo">Continuar con Google
-        </a>
-
-        <div class="links">
-            <a href="{{ route('recuperar') }}">¿Olvidaste tu contraseña?</a><br>
-            ¿No tienes cuenta? <a href="{{ route('signup') }}">Regístrate aquí</a>
-        </div>
-    </form>
+        <p class="absolute bottom-4 text-xs text-muted-light text-center w-full">
+            © 2026 LESSA — Todos los derechos reservados
+        </p>
+    </main>
 
     <script>
         (function () {
-            // Close button behavior: remove alert on click
+            // Alert manual close
             document.querySelectorAll('.alert .close').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const alert = btn.closest('.alert');
@@ -379,24 +272,34 @@
                 });
             });
 
-            // Auto-hide alerts that have [data-auto-hide] (defaults to 7000ms)
+            // Auto-hide success/error status alerts
             document.querySelectorAll('.alert[data-auto-hide]').forEach(alert => {
-                const timeout = 7000;
                 setTimeout(() => {
                     if (!document.body.contains(alert)) return;
                     alert.classList.add('fade-out');
                     setTimeout(() => alert.remove(), 350);
-                }, timeout);
+                }, 7000);
             });
 
-            // Improve UX: focus first invalid field if validation failed
-            @if($errors->any())
-                (function () {
-                    const firstInvalid = document.querySelector('.is-invalid');
-                    if (firstInvalid) firstInvalid.focus();
-                })();
+            // Password visibility toggle
+            const togglePassword = document.querySelector('#togglePassword');
+            const password = document.querySelector('#password');
+            const passwordIcon = document.querySelector('#passwordIcon');
+
+            if (togglePassword && password) {
+                togglePassword.addEventListener('click', function () {
+                    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                    password.setAttribute('type', type);
+                    passwordIcon.textContent = type === 'password' ? 'visibility_off' : 'visibility';
+                });
+            }
+
+            // Focus first invalid field
+            @if ($errors -> any())
+                const firstInvalid = document.querySelector('.border-red-500');
+            if (firstInvalid) firstInvalid.focus();
             @endif
-    })();
+        })();
     </script>
 </body>
 

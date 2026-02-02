@@ -86,6 +86,9 @@ Route::middleware('auth')->group(function () {
         Route::put('/admin/users/{user}/reset-progress', [App\Http\Controllers\AdminController::class, 'resetProgress'])->name('admin.users.reset-progress');
         // Email sending route
         Route::post('/admin/users/{user}/email', [App\Http\Controllers\AdminController::class, 'sendUserEmail'])->name('admin.users.email');
+        
+        // Global Announcement
+        Route::post('/admin/announcement', [App\Http\Controllers\AdminController::class, 'sendAnnouncement'])->name('admin.announcement.send');
     });
 
     Route::get('/test-403', function () {

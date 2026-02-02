@@ -221,10 +221,12 @@
             @enderror
 
             <button type="submit">Guardar cambios</button>
-            <p>¿Quieres cambiar tu contraseña?</p>
-            <a href="{{ route('password.change.form') }}" class="btn-link">
-                Cambiar contraseña
-            </a>
+            @if(Auth::user()->es_google_oauth == 0)
+                <p>¿Quieres cambiar tu contraseña?</p>
+                <a href="{{ route('password.change.form') }}" class="btn-link">
+                    Cambiar contraseña
+                </a>
+            @endif
         </form>
     </div>
 

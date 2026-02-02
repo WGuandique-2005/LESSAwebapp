@@ -2,409 +2,310 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Establecer Nueva Contraseña - LESSA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Nueva Contraseña - LESSA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1e3a8a", // Deep Blue
+                        secondary: "#f59e0b", // Amber/Yellow for accents
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                        "strength-weak": "#ef4444",
+                        "strength-moderate": "#eab308",
+                        "strength-strong": "#22c55e",
+                        "strength-very-strong": "#1e3a8a",
+                    },
+                    fontFamily: {
+                        display: ["Poppins", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                    },
+                },
+            },
+        };
+    </script>
     <style>
-        :root {
-            --primary: #0A2463;
-            --secondary: #3E92CC;
-            --accent: #FFD166;
-            --glass: rgba(10, 36, 99, 0.86);
-            --muted-white: rgba(255, 255, 255, 0.95);
-            --danger: #d9534f;
-            --success: #4CB944;
-            --radius: 18px;
-            --shadow-lg: 0 18px 50px rgba(8, 29, 68, 0.36);
-            --shadow-sm: 0 8px 24px rgba(8, 29, 68, 0.18);
-            --transition: all .28s ease;
-        }
-
-        * {
-            box-sizing: border-box
-        }
-
-        html,
         body {
-            height: 100%
+            font-family: 'Poppins', sans-serif;
         }
 
-        body {
-            margin: 0;
-            font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-            background: url("{{ asset('img/login.png') }}") center/cover no-repeat;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            color: var(--muted-white);
+        .bg-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Alert animations */
+        .fade-out {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .card {
-            width: 100%;
-            max-width: 520px;
-            background: linear-gradient(180deg, rgba(10, 36, 99, 0.96), rgba(10, 36, 99, 0.9));
-            border-radius: calc(var(--radius) + 2px);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            min-height: clamp(420px, 58vh, 720px);
-            padding: clamp(10px, 3.6vw, 40px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 12px;
-            position: relative;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 6px;
-        }
-
-        .brand .logo {
-            width: 56px;
-            height: 56px;
-            background: url("{{ asset('img/logo2.png') }}") center/contain no-repeat;
-        }
-
-        .brand h3 {
-            margin: 0;
-            color: var(--muted-white);
-            font-size: 18px;
-            letter-spacing: 0.3px;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 26px;
-            color: var(--muted-white);
-        }
-
-        .subtitle {
-            margin: 0;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .alerts {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 8px;
-        }
-
-        .alert {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            padding: 10px 12px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 14px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .alert .left {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex: 1;
-        }
-
-        .alert .msg {
-            color: #fff;
-            text-align: left;
-        }
-
-        .alert-success {
-            background: linear-gradient(90deg, var(--success), #45b75a);
-        }
-
-        .alert-error {
-            background: linear-gradient(90deg, var(--danger), #c83a3a);
-        }
-
-        .alert button.close {
-            background: transparent;
-            border: 0;
-            color: inherit;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 6px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 6px;
-        }
-
-        .field {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        label {
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        input[type="email"],
-        input[type="password"],
-        input[type="text"] {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            color: #fff;
-            padding: 12px 14px;
-            border-radius: 12px;
-            font-size: 15px;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        input:focus {
-            box-shadow: 0 12px 30px rgba(62, 146, 204, 0.06);
-            border-color: rgba(255, 209, 102, 0.45);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .is-invalid {
-            border-color: rgba(255, 120, 120, 0.9) !important;
-        }
-
-        .field-error {
-            color: #ffdede;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-        }
-
-        .actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 6px;
-            align-items: center;
-        }
-
-        .btn {
-            padding: 12px 14px;
-            border-radius: 12px;
-            border: 0;
-            cursor: pointer;
-            font-weight: 800;
-            font-size: 15px;
-            transition: var(--transition);
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: #fff;
-            box-shadow: var(--shadow-sm);
-            width: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            background: var(--secondary);
-        }
-
-        .links {
-            margin-top: 10px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.92);
-            text-align: center;
-        }
-
-        .links a {
-            color: var(--accent);
-            font-weight: 800;
-            text-decoration: none;
-        }
-
+        /* Password Strength */
         .password-strength-indicator {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
             margin-top: 8px;
             overflow: hidden;
         }
-
+        .dark .password-strength-indicator {
+            background: #334155;
+        }
         .strength-bar {
             height: 100%;
             width: 0%;
-            border-radius: 4px;
-            transition: width 0.3s ease, background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
-
+        .strength-bar.weak { background-color: #ef4444; }
+        .strength-bar.moderate { background-color: #eab308; }
+        .strength-bar.strong { background-color: #22c55e; }
+        .strength-bar.very-strong { background-color: #1e3a8a; }
+        
         .strength-text {
-            font-size: 12px;
+            font-size: 0.75rem;
             text-align: right;
-            margin-top: 5px;
-            font-weight: bold;
+            margin-top: 4px;
+            font-weight: 600;
         }
-
-        .strength-text.weak {
-            color: #d9534f;
-        }
-
-        .strength-text.moderate {
-            color: #FFD166;
-        }
-
-        .strength-text.strong {
-            color: #4CB944;
-        }
-
-        .strength-text.very-strong {
-            color: #0A2463;
-        }
-
-        .strength-bar.weak {
-            background: #d9534f;
-        }
-
-        .strength-bar.moderate {
-            background: #FFD166;
-        }
-
-        .strength-bar.strong {
-            background: #4CB944;
-        }
-
-        .strength-bar.very-strong {
-            background: #0A2463;
-        }
-
-        @media (max-width:980px) {
-            .card {
-                max-width: 680px;
-            }
-        }
-
-        @media (max-width:420px) {
-            .card {
-                padding: 18px;
-            }
-
-            h1 {
-                font-size: 20px;
-            }
-        }
+        .strength-text.weak { color: #ef4444; }
+        .strength-text.moderate { color: #eab308; }
+        .strength-text.strong { color: #22c55e; }
+        .strength-text.very-strong { color: #1e3a8a; }
     </style>
 </head>
 
-<body>
-    <main class="card" role="main" aria-labelledby="newPassTitle">
-        <div class="brand">
-            <div class="logo" aria-hidden="true"></div>
-            <h3>LESSA</h3>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex overflow-x-hidden">
+    <div class="hidden lg:flex lg:w-1/2 relative bg-primary items-center justify-center p-12 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-20">
+            <img alt="Background pattern of people learning" class="w-full h-full object-cover grayscale"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPX5lQ80hCK8Y4JURfc2MzC34ijspiXzDsqZ2Js_8W5n4nQgR2_aPzA7QThhX8mBE-4m91KoH2RsalzHmAfQNdLV84JfX_LG8Qj0DxLn8J28j_OXnzRFS7VfnNX3LXOmXYRWWCOaEFVV-47LH6AhfCmcf6f0TgP8ZTXOdKZaFjfqt5hJlEUIZXhV6DxWEOuTwDab8lHng-3hlkuqtxwLl5IutdGZ7FltD3bSKrbjq-MzBy1X0ipvRO_emN9zEI4R9tJZq3hHsQHOSJ" />
         </div>
-        <h1 id="newPassTitle">Nueva Contraseña</h1>
-        <p class="subtitle">Ingresa el código de recuperación recibido y tu nueva contraseña.</p>
-        <div class="alerts" id="alerts" aria-live="polite" aria-atomic="true">
-            @if(session('status'))
-            <div class="alert alert-success" data-auto-hide>
-                <div class="left">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                    <div class="msg">{{ session('status') }}</div>
+        <div class="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-transparent"></div>
+        <div class="relative z-10 text-white max-w-lg">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-20 h-20 bg-white p-2 rounded-lg shadow-lg flex items-center justify-center">
+                    <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="w-full h-full object-contain">
                 </div>
-                <button class="close" aria-label="Cerrar">×</button>
+                <h1 class="text-4xl font-bold tracking-tight">LESSA</h1>
             </div>
-            @endif
-
-            @if(session('error'))
-            <div class="alert alert-error" data-auto-hide>
-                <div class="left">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                    <div class="msg">{{ session('error') }}</div>
+            <h2 class="text-5xl font-extrabold leading-tight mb-6">
+                Tu portal para aprender <span class="text-secondary">Lengua de Señas</span>.
+            </h2>
+            <p class="text-blue-100 text-lg mb-8 leading-relaxed">
+                Únete a nuestra comunidad educativa y transforma la comunicación a través del aprendizaje interactivo y
+                gamificado.
+            </p>
+            <div class="flex gap-4">
+                <div class="flex -space-x-3 overflow-hidden">
+                    <img alt="User 1" class="inline-block h-10 w-10 rounded-full ring-2 ring-primary"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvp5fkNbgaToPwcnjS8-HlB6a4ONRWnlar8Ps5c81W5WwGMBDl00v_0lm0jkiEDzh0jVhEIyk4j0IIOwMqpUaAYkl4uUcylmJSC3kh28DTD7b8Txl7iGTq2HSScoHuC-ELy4czja6e_JTcTprs3qCMz2kf_zbreJqb7zrsnI7dowL1OduwfkFx4mTc1BMwnVcFHY5ARWrgJS3Zkzc7H5Si9_u-6L-qmDSd6-xtWSTQpbmfQ26_a1gqe5evb1pPj4g07IysYXwxPcmw" />
+                    <img alt="User 2" class="inline-block h-10 w-10 rounded-full ring-2 ring-primary"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP8GNUYTLO3bMcawh354rFbZPqYa7sPWguHKK7D1VUhgf0z3lYSpP9aJGwvtEHzT1li_-UMr34MAtYKUY1eHn3a0PaPBL5DcZZSplggAPs2Urc7wBVGwJh4UAJM2Ja5rqjpMDxGV-IWuxl3IzBwXGrA7ZEC_4Br37dj3mU3_QBcb4hNQn1qbhazsfwCtJGLfTCJsjQWXJF2TApK7Cm3REITp94yyCAhyNRO58lL67cq_rjYToFhGE7mAhBje5WGt241WvGygd2yBQ7" />
+                    <img alt="User 3" class="inline-block h-10 w-10 rounded-full ring-2 ring-primary"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv38rM-pLc98EUHtfTJ_A_fK0TwW2hHcRKfPBA1Xh5doKaK2O3V1iP9pRCKsA2QcGEqT5K1gOMdWRgqOp3wrFit6Qe7vApiFxHjLwpcgiUcChXoS6_sTKBgznueXKkgPave9UZ0vDbn3cRQzidwiZ_uPt3JcjG1Bf8OsFOFfh14hLySLp4rkWTgRts-4-dkWyFRGPLz7bMNcVQXEnBlGRXBQHVbq7x1HHnnjQOH3jvwcDtPFp79KPUQDVJCRqzsluj6LWav9GxF0ot" />
                 </div>
-                <button class="close" aria-label="Cerrar">×</button>
+                <div class="text-sm">
+                    <span class="block font-semibold">Más de 5,000 estudiantes</span>
+                    <span class="text-blue-200">aprendiendo hoy mismo</span>
+                </div>
             </div>
-            @endif
+        </div>
+    </div>
+    <div
+        class="w-full lg:w-1/2 flex flex-col justify-center items-center p-6 sm:p-12 md:p-20 bg-background-light dark:bg-background-dark min-h-screen overflow-y-auto">
+        <div class="w-full max-w-md space-y-8 py-8">
+            <div class="lg:hidden flex items-center gap-2 mb-10 justify-center">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg">
+                    <span class="material-icons text-white">handshake</span>
+                </div>
+                <span class="text-2xl font-bold text-gray-900 dark:text-white">LESSA</span>
+            </div>
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">Nueva Contraseña</h2>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Ingresa el código de 6 dígitos enviado a tu correo y tu nueva contraseña.
+                </p>
+            </div>
 
-            @if($errors->any())
-            <div class="alert alert-error" data-auto-hide="false">
-                <div class="left">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M12 9v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                    <div class="msg">
-                        <div style="font-weight:900; margin-bottom:6px;">Corrige los siguientes errores:</div>
-                        <ul style="padding-left:18px; margin:0;">
-                            @foreach($errors->all() as $err)
-                            <li style="font-weight:800;">{{ $err }}</li>
-                            @endforeach
-                        </ul>
+            <!-- Alerts Logic -->
+            <div id="alerts" class="space-y-4">
+                @if(session('status'))
+                    <div class="flex items-center justify-between p-4 bg-green-500 text-white rounded-xl shadow-lg shadow-green-500/20" data-auto-hide>
+                        <div class="flex items-center gap-3">
+                            <span class="material-icons">check_circle</span>
+                            <span class="font-medium text-sm">{{ session('status') }}</span>
+                        </div>
+                        <button class="close hover:bg-white/20 p-1 rounded-full text-white transition-colors">
+                            <span class="material-icons text-lg">close</span>
+                        </button>
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="flex items-center justify-between p-4 bg-red-500 text-white rounded-xl shadow-lg shadow-red-500/20" data-auto-hide>
+                        <div class="flex items-center gap-3">
+                            <span class="material-icons">error</span>
+                            <span class="font-medium text-sm">{{ session('error') }}</span>
+                        </div>
+                        <button class="close hover:bg-white/20 p-1 rounded-full text-white transition-colors">
+                            <span class="material-icons text-lg">close</span>
+                        </button>
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="p-4 bg-red-500 text-white rounded-xl shadow-lg shadow-red-500/20" data-auto-hide="false">
+                        <div class="flex items-start justify-between">
+                            <div class="flex gap-3">
+                                <span class="material-icons mt-0.5">error</span>
+                                <div class="text-sm">
+                                    <p class="font-bold mb-1">Corrige los siguientes errores:</p>
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        @foreach($errors->all() as $err)
+                                            <li>{{ $err }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <button class="close hover:bg-white/20 p-1 rounded-full text-white transition-colors">
+                                <span class="material-icons text-lg">close</span>
+                            </button>
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+            <form action="{{ route('newPass') }}" class="space-y-6" method="POST" novalidate>
+                @csrf
+                <!-- Token Field -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="token">
+                        Código de recuperación
+                    </label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span
+                                class="material-icons text-gray-400 group-focus-within:text-primary transition-colors">vpn_key</span>
+                        </div>
+                        <input
+                            class="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none placeholder-gray-400 {{ $errors->has('token') ? 'border-red-500 ring-red-500' : '' }}"
+                            id="token" name="token" value="{{ old('token') }}" placeholder="Código de 6 dígitos"
+                            required type="text" />
+                    </div>
+                    @error('token')
+                        <p class="text-red-500 text-xs mt-1 flex items-center gap-1 font-semibold">
+                            <span class="material-icons text-sm">error</span> {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+
+                <!-- Password Field -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="password">
+                        Nueva contraseña
+                    </label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span
+                                class="material-icons text-gray-400 group-focus-within:text-primary transition-colors">lock_open</span>
+                        </div>
+                        <input
+                            class="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none placeholder-gray-400 {{ $errors->has('password') ? 'border-red-500 ring-red-500' : '' }}"
+                            id="password" name="password" placeholder="Mínimo 8 caracteres"
+                            required type="password" />
+                    </div>
+                    <div class="password-strength-indicator">
+                        <div id="strength-bar" class="strength-bar"></div>
+                    </div>
+                    <div id="strength-text" class="strength-text"></div>
+                    @error('password')
+                        <p class="text-red-500 text-xs mt-1 flex items-center gap-1 font-semibold">
+                            <span class="material-icons text-sm">error</span> {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                        for="password_confirmation">
+                        Confirmar contraseña
+                    </label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span
+                                class="material-icons text-gray-400 group-focus-within:text-primary transition-colors">lock</span>
+                        </div>
+                        <input
+                            class="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none placeholder-gray-400"
+                            id="password_confirmation" name="password_confirmation" placeholder="Confirma tu nueva contraseña"
+                            required type="password" />
                     </div>
                 </div>
-                <button class="close" aria-label="Cerrar">×</button>
-            </div>
-            @endif
+
+                <button
+                    class="w-full bg-primary hover:bg-blue-800 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-primary/25 transform active:scale-[0.98] transition-all flex items-center justify-center gap-2 group"
+                    type="submit">
+                    <span>Actualizar Contraseña</span>
+                    <span
+                        class="material-icons text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </button>
+            </form>
         </div>
-        <form action="{{ route('newPass') }}" method="POST" novalidate>
-            @csrf
-            <div class="field">
-                <label for="token">Código de Recuperación</label>
-                <input id="token" name="token" type="text" placeholder="Código de 6 dígitos" value="{{ old('token') }}"
-                    required class="@error('token') is-invalid @enderror" />
-                @error('token') <div class="field-error"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
-                </div> @enderror
-            </div>
-            <div class="field">
-                <label for="password">Nueva Contraseña</label>
-                <input id="password-input" name="password" type="password"
-                    placeholder="Nueva contraseña (mínimo 8 caracteres)" required class="@error('password') is-invalid @enderror" />
-                <div class="password-strength-indicator">
-                    <div id="strength-bar" class="strength-bar"></div>
-                </div>
-                <div id="strength-text" class="strength-text"></div>
-                @error('password') <div class="field-error"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
-                </div> @enderror
-            </div>
-            <div class="field">
-                <label for="password_confirmation">Confirmar Contraseña</label>
-                <input id="password_confirmation" name="password_confirmation" type="password"
-                    placeholder="Confirma tu nueva contraseña" required />
-            </div>
-            <div class="actions">
-                <button type="submit" class="btn btn-primary">Actualizar Contraseña</button>
-            </div>
-        </form>
-        <div class="links" style="margin-top:14px;">
-            <a href="{{ route('login') }}" style="color:var(--accent); font-weight:800;">¿Recordaste tu contraseña?
-                Inicia sesión</a>
-        </div>
-    </main>
+        <footer class="mt-auto pt-10 text-xs text-gray-400 dark:text-gray-600 text-center">
+            {{ date('Y') }} LESSA. Todos los derechos reservados.
+        </footer>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const passwordInput = document.getElementById('password-input');
+            // Alert logic
+            document.querySelectorAll('.close').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const alert = this.closest('div[class*="bg-"]');
+                    if (alert) {
+                        alert.classList.add('fade-out');
+                        setTimeout(() => alert.remove(), 300);
+                    }
+                });
+            });
+
+            document.querySelectorAll('div[data-auto-hide]').forEach(alert => {
+                const isPermanent = alert.getAttribute('data-auto-hide') === 'false';
+                if (!isPermanent) {
+                    setTimeout(() => {
+                        if (document.body.contains(alert)) {
+                            alert.classList.add('fade-out');
+                            setTimeout(() => alert.remove(), 300);
+                        }
+                    }, 7000);
+                }
+            });
+
+            // Password strength logic
+            const passwordInput = document.getElementById('password');
             const strengthBar = document.getElementById('strength-bar');
             const strengthText = document.getElementById('strength-text');
-            passwordInput.addEventListener('input', e => updateStrength(e.target.value));
+
+            if (passwordInput) {
+                passwordInput.addEventListener('input', function(e) {
+                    updateStrength(e.target.value);
+                });
+            }
+
             function updateStrength(password) {
                 let score = 0;
                 if (password.length >= 8) score++;
@@ -414,22 +315,25 @@
                 if (/[A-Z]/.test(password)) score++;
                 if (/[0-9]/.test(password)) score++;
                 if (/[^a-zA-Z0-9]/.test(password)) score++;
-                let level = 'weak', feedback = 'Débil';
+
+                let level = 'weak';
+                let feedback = 'Débil';
+
                 if (score < 3) { level = 'weak'; feedback = 'Débil'; }
                 else if (score < 5) { level = 'moderate'; feedback = 'Moderada'; }
                 else if (score < 7) { level = 'strong'; feedback = 'Fuerte'; }
                 else { level = 'very-strong'; feedback = 'Muy Fuerte'; }
-                strengthBar.style.width = (score / 7) * 100 + '%';
-                strengthBar.className = 'strength-bar ' + level;
-                strengthText.textContent = feedback;
-                strengthText.className = 'strength-text ' + level;
+
+                if (password.length === 0) {
+                    strengthBar.style.width = '0%';
+                    strengthText.textContent = '';
+                } else {
+                    strengthBar.style.width = Math.min((score / 7) * 100, 100) + '%';
+                    strengthBar.className = 'strength-bar ' + level;
+                    strengthText.textContent = feedback;
+                    strengthText.className = 'strength-text ' + level;
+                }
             }
-            document.querySelectorAll('.alert button.close').forEach(btn => {
-                btn.addEventListener('click', function () { const a = this.closest('.alert'); if (!a) return; a.style.opacity = '0'; a.style.transform = 'translateY(-8px)'; setTimeout(() => a.remove(), 280); });
-            });
-            document.querySelectorAll('.alert[data-auto-hide]').forEach(a => {
-                setTimeout(() => { if (!document.body.contains(a)) return; a.style.opacity = '0'; a.style.transform = 'translateY(-8px)'; setTimeout(() => { if (a) a.remove(); }, 300); }, 7000);
-            });
         });
     </script>
 </body>

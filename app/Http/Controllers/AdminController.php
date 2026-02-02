@@ -181,4 +181,30 @@ class AdminController extends Controller
 
         return back()->with('success', 'Correo enviado exitosamente.');
     }
+
+    // Send Announcement to ALL users
+    public function sendAnnouncement(Request $request)
+    {
+        $request->validate([
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        // Get all users (optionally you might want to exclude the admin/sender, or specific users)
+        // For now, "todos los correos registrados" implies everyone.
+        $users = User::all();
+        $count = 0;
+
+        foreach ($users as $user) {
+            // Avoid sending to users without email or invalid email if necessary, 
+            // but User::create validates email so it should be fine.
+            if ($user->email) {
+                // Using Queue is recommended for bulk email, but for now we send directly as per request context
+                Mail::to($user->email)->send(new AdminMessage($request->subject, $request->message));
+                $count++;
+            }
+        }
+
+        return back()->with('success', "Anuncio enviado exitosamente a {$count} usuarios.");
+    }
 }
