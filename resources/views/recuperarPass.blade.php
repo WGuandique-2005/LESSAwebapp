@@ -82,14 +82,8 @@
         <section
             class="flex-1 flex flex-col items-center justify-center p-6 lg:p-12 bg-background-light dark:bg-background-dark">
             <div class="lg:hidden w-full max-w-md mb-12 flex items-center justify-center gap-2">
-                <div class="bg-primary p-2 rounded-lg">
-                    <svg fill="none" height="30" viewBox="0 0 40 40" width="30" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10 20C10 14.4772 14.4772 10 20 10C25.5228 10 30 14.4772 30 20C30 25.5228 25.5228 30 20 30"
-                            stroke="#f39200" stroke-linecap="round" stroke-width="4"></path>
-                        <path d="M15 20C15 17.2386 17.2386 15 20 15C22.7614 15 25 17.2386 25 20" stroke="white"
-                            stroke-linecap="round" stroke-width="4"></path>
-                    </svg>
+                <div class="w-20 h-20 bg-white p-2 rounded-lg shadow-lg flex items-center justify-center">
+                    <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="w-full h-full object-contain">
                 </div>
                 <span class="text-2xl font-bold tracking-wider text-primary dark:text-white">LESSA</span>
             </div>

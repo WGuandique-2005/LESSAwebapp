@@ -127,8 +127,8 @@
         class="w-full lg:w-1/2 flex flex-col justify-center items-center p-6 sm:p-12 md:p-20 bg-background-light dark:bg-background-dark min-h-screen overflow-y-auto">
         <div class="w-full max-w-md space-y-8 py-8">
             <div class="lg:hidden flex items-center gap-2 mb-10 justify-center">
-                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg">
-                    <span class="material-icons text-white">handshake</span>
+                <div class="w-20 h-20 bg-white p-2 rounded-lg shadow-lg flex items-center justify-center">
+                    <img src="{{ asset('img/logo2.png') }}" alt="LESSA Logo" class="w-full h-full object-contain">
                 </div>
                 <span class="text-2xl font-bold text-gray-900 dark:text-white">LESSA</span>
             </div>
