@@ -63,6 +63,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
         .pagination-btn {
             display: inline-flex;
@@ -139,18 +140,12 @@
             }
             .pagination-content {
                 width: 100%;
-                justify-content: space-between;
-            }
-            .pagination-numbers {
-                display: none; /* Hide page numbers on mobile for cleaner look */
+                justify-content: center;
+                flex-wrap: wrap;
             }
             .pagination-info {
                 text-align: center;
                 font-size: 0.8rem;
-            }
-            .pagination-btn {
-                flex: 1; /* Make buttons bigger/full width on mobile */
-                max-width: 120px;
             }
         }
     </style>

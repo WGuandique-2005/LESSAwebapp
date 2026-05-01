@@ -24,6 +24,10 @@
                 @endif
             </div>
         </form>
+
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+            {{ $users->links('admin.pagination') }}
+        </div>
     </div>
 
 
@@ -84,9 +88,7 @@
             </table>
         </div>
 
-        <div style="padding: 1rem 1.5rem; border-top: 1px solid #e5e7eb; background-color: #f9fafb;">
-            {{ $users->links('admin.pagination') }}
-        </div>
+        <!-- Pagination moved above the table -->
     </div>
 
     <style>
