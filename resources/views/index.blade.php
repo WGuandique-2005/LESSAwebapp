@@ -15,517 +15,591 @@
             --primary: #0A2463;
             --secondary: #3E92CC;
             --accent: #FFD166;
-            --light: #F2F4F7;
-            --dark: #1E1E24;
-            --success: #4CB944;
+            --accent-soft: #FFF3D1;
+            --ink: #172033;
+            --muted: #647086;
+            --line: #E6EAF1;
+            --surface: #FFFFFF;
+            --soft-blue: #EAF4FF;
+            --soft-green: #EAF8F1;
+            --soft-coral: #FFF0EE;
+            --page: #F6F8FB;
             --radius: 16px;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
+            --shadow-sm: 0 10px 24px rgba(10, 36, 99, 0.08);
+            --shadow-md: 0 18px 45px rgba(10, 36, 99, 0.12);
+            --transition: 220ms ease;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
+            background: var(--page);
+            color: var(--ink);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        h1,
-        h2,
-        h3,
-        h4 {
-            color: var(--primary);
-            margin-top: 0;
-            font-weight: 700;
-            line-height: 1.3;
+        img {
+            max-width: 100%;
+            display: block;
         }
 
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1.5rem;
+        a {
+            color: inherit;
         }
 
-        h2 {
-            font-size: 2.2rem;
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
+        .home {
+            overflow: hidden;
         }
 
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        p {
-            margin-bottom: 1.5rem;
-            font-size: 1.05rem;
-        }
-
-        .container {
-            max-width: 1200px;
+        .home-container {
+            width: min(1120px, calc(100% - 32px));
             margin: 0 auto;
-            padding: 0 1.5rem;
         }
 
-        /* Buttons */
+        .home-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            width: fit-content;
+            min-height: 34px;
+            padding: 0.38rem 0.8rem 0.38rem 0.48rem;
+            border: 1px solid rgba(62, 146, 204, 0.22);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.82);
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            box-shadow: 0 8px 18px rgba(10, 36, 99, 0.06);
+        }
+
+        .eyebrow-logo {
+            width: 24px;
+            height: 24px;
+            flex: 0 0 24px;
+            border-radius: 50%;
+            background: #fff;
+            object-fit: contain;
+            padding: 2px;
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.9rem 2rem;
-            border-radius: var(--radius);
-            font-size: 1rem;
-            font-weight: 600;
+            gap: 0.6rem;
+            min-height: 48px;
+            padding: 0.85rem 1.25rem;
+            border: 0;
+            border-radius: 12px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.95rem;
             cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-            gap: 8px;
-            border: none;
-            outline: none;
+            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
         }
 
         .btn-primary {
-            background-color: var(--primary);
-            color: white;
-            box-shadow: var(--shadow);
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 14px 26px rgba(10, 36, 99, 0.22);
         }
 
         .btn-primary:hover {
-            background-color: var(--secondary);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(62, 146, 204, 0.2);
+            background: #12347F;
         }
 
         .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary);
+            background: #fff;
             color: var(--primary);
+            border: 1px solid rgba(10, 36, 99, 0.16);
+            box-shadow: 0 10px 20px rgba(10, 36, 99, 0.06);
         }
 
         .btn-outline:hover {
-            background-color: var(--accent);
-            border-color: var(--accent);
-            color: var(--dark);
-            transform: translateY(-3px);
+            box-shadow: 0 14px 28px rgba(10, 36, 99, 0.1);
         }
 
         .btn-accent {
-            background-color: var(--accent);
-            color: var(--dark);
-            box-shadow: var(--shadow);
+            background: var(--accent);
+            color: var(--primary);
+            box-shadow: 0 14px 26px rgba(255, 145, 55, 0.18);
         }
 
-        .btn-accent:hover {
-            background-color: #FFC233;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(255, 209, 102, 0.25);
-        }
-
-        /* HERO */
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            padding: 4rem 0;
-            gap: 2rem;
-            min-height: 85vh;
-        }
-
-        .hero-text {
-            flex: 1 1 500px;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-text p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            max-width: 90%;
-        }
-
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .hero-img {
-            flex: 1 1 450px;
-            text-align: center;
-            animation: fadeInRight 1s ease;
+        .home-hero {
             position: relative;
+            padding: 5rem 0 4.6rem;
+            background:
+                linear-gradient(115deg, rgba(246, 248, 251, 0.97) 0%, rgba(246, 248, 251, 0.9) 45%, rgba(234, 244, 255, 0.84) 100%),
+                url("{{ asset('img/centroHistorico.png') }}") center / cover;
         }
 
-        .hero-img:before {
-            content: '';
+        .home-hero::after {
+            content: "";
             position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--secondary), var(--primary));
-            opacity: 0.1;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            filter: blur(20px);
+            inset: auto 0 0;
+            height: 120px;
+            background: linear-gradient(to bottom, rgba(246, 248, 251, 0), var(--page));
+            pointer-events: none;
         }
 
-        .hero-img img {
-            max-width: 100%;
-            height: auto;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            transition: transform 0.5s ease;
-        }
-
-        .hero-img img:hover {
-            transform: scale(1.02);
-        }
-
-        /* Features */
-        .features {
-            padding: 6rem 1rem;
-            background-color: white;
-            border-radius: var(--radius);
+        .hero-grid {
             position: relative;
-            overflow: hidden;
-        }
-
-        .features:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            margin-bottom: 1rem;
-        }
-
-        .section-header h2:after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .section-header p {
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
-
-        /* CARDS */
-        .cards {
+            z-index: 1;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: minmax(0, 1fr) minmax(340px, 0.84fr);
+            gap: clamp(2rem, 5vw, 4.2rem);
+            align-items: center;
         }
 
-        .card {
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            position: relative;
-            overflow: hidden;
+        .hero-copy {
+            display: grid;
+            gap: 1.35rem;
+        }
+
+        .hero-brand-lockup {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            width: fit-content;
+            padding: 0.62rem 0.9rem 0.62rem 0.65rem;
+            border: 1px solid rgba(10, 36, 99, 0.08);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.78);
+            box-shadow: 0 14px 28px rgba(10, 36, 99, 0.08);
+            backdrop-filter: blur(12px);
+        }
+
+        .hero-brand-lockup img {
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
+            object-fit: contain;
+        }
+
+        .hero-brand-lockup span {
+            color: var(--primary);
+            font-size: 0.92rem;
+            font-weight: 800;
+            letter-spacing: 0;
+        }
+
+        .hero-copy h1 {
+            max-width: 760px;
+            color: var(--primary);
+            font-size: clamp(2.35rem, 5vw, 4.65rem);
+            line-height: 1.02;
+            letter-spacing: 0;
+        }
+
+        .hero-copy p {
+            max-width: 650px;
+            color: #42506A;
+            font-size: clamp(1rem, 1.7vw, 1.18rem);
+        }
+
+        .hero-actions {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+            margin-top: 0.25rem;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-image-container {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
+        .hero-panel {
             position: relative;
-            background-color: #f0f0f0;
+            min-height: 430px;
         }
 
-        .card-image-container img {
+        .hero-image-card {
+            position: relative;
+            height: 410px;
+            overflow: hidden;
+            border-radius: 24px;
+            background: #fff;
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-image-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            object-position: center;
         }
 
-        .card:hover .card-image-container img {
-            transform: scale(1.1);
+        .hero-image-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 36, 99, 0.58), rgba(10, 36, 99, 0.04) 58%);
         }
 
-        .card-body {
-            padding: 2rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+        .hero-note {
+            position: absolute;
+            right: -14px;
+            bottom: 22px;
+            width: min(290px, calc(100% - 22px));
+            padding: 1.05rem;
+            border: 1px solid rgba(10, 36, 99, 0.1);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(12px);
         }
 
-        .card-icon {
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(10, 36, 99, 0.05);
-            border-radius: 50%;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
+        .hero-note::before {
+            content: "";
+            display: block;
+            width: 34px;
+            height: 4px;
+            margin-bottom: 0.78rem;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--primary), #FF8A3D);
+        }
+
+        .hero-note strong {
+            display: block;
             color: var(--primary);
-            transition: var(--transition);
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
         }
 
-        .card:hover .card-icon {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.1);
+        .hero-note span {
+            color: var(--muted);
+            font-size: 0.88rem;
         }
 
-        .card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
+        .section {
+            padding: 4.8rem 0;
         }
 
-        .card p {
-            color: #666;
-            margin-bottom: 0;
+        .section-heading {
+            display: grid;
+            gap: 0.8rem;
+            max-width: 740px;
+            margin-bottom: 2.2rem;
         }
 
-        /* Testimonials */
+        .section-heading.center {
+            margin-inline: auto;
+            text-align: center;
+            justify-items: center;
+        }
+
+        .section-heading h2 {
+            color: var(--primary);
+            font-size: clamp(1.8rem, 3vw, 2.55rem);
+            line-height: 1.14;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.1rem;
+        }
+
+        .benefit-card,
+        .path-card,
+        .testimonial-card {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: 0 8px 20px rgba(10, 36, 99, 0.05);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+        }
+
+        .benefit-card:hover,
+        .path-card:hover,
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(62, 146, 204, 0.34);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .benefit-card {
+            min-height: 250px;
+            padding: 1.55rem;
+            display: grid;
+            align-content: start;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::after {
+            content: "";
+            position: absolute;
+            right: -28px;
+            bottom: -28px;
+            width: 92px;
+            height: 92px;
+            background: url("{{ asset('img/logo2.png') }}") center / contain no-repeat;
+            opacity: 0.045;
+            pointer-events: none;
+        }
+
+        .icon-box {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        .icon-box.blue {
+            background: var(--soft-blue);
+            color: #2468E8;
+        }
+
+        .icon-box.gold {
+            background: var(--accent-soft);
+            color: #B86A00;
+        }
+
+        .icon-box.green {
+            background: var(--soft-green);
+            color: #12855E;
+        }
+
+        .icon-box.coral {
+            background: var(--soft-coral);
+            color: #E24D44;
+        }
+
+        .benefit-card h3,
+        .path-card h3,
+        .story-copy h3 {
+            color: var(--ink);
+            font-size: 1.18rem;
+            line-height: 1.25;
+        }
+
+        .benefit-card p,
+        .path-card p,
+        .story-copy p,
+        .testimonial-card p {
+            color: var(--muted);
+            font-size: 0.94rem;
+        }
+
+        .story-band {
+            padding: 1rem;
+            border-radius: 28px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(10, 36, 99, 0.06);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .story-media {
+            min-height: 440px;
+            overflow: hidden;
+            border-radius: 22px;
+            background: var(--soft-blue);
+        }
+
+        .story-media img {
+            width: 100%;
+            height: 100%;
+            min-height: 440px;
+            object-fit: cover;
+        }
+
+        .story-copy {
+            padding: 2rem 1.25rem 2rem 0;
+        }
+
+        .story-copy h2 {
+            color: var(--primary);
+            font-size: clamp(1.75rem, 3vw, 2.45rem);
+            line-height: 1.15;
+            margin: 0.85rem 0 1rem;
+        }
+
+        .story-points {
+            display: grid;
+            gap: 0.85rem;
+            margin-top: 1.5rem;
+        }
+
+        .story-point {
+            display: grid;
+            grid-template-columns: 44px 1fr;
+            gap: 0.85rem;
+            align-items: start;
+            padding: 1rem;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #FAFBFD;
+        }
+
+        .path-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .path-card {
+            overflow: hidden;
+        }
+
+        .path-card img {
+            width: 100%;
+            height: 168px;
+            object-fit: cover;
+        }
+
+        .path-card-content {
+            display: grid;
+            gap: 0.75rem;
+            padding: 1.25rem;
+        }
+
+        .path-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            width: fit-content;
+            padding: 0.32rem 0.65rem;
+            border-radius: 999px;
+            background: #F1F5FA;
+            color: var(--primary);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
         .testimonials {
-            padding: 6rem 0;
-            background: linear-gradient(to bottom, #f9fafb, #f2f4f7);
+            background: linear-gradient(180deg, rgba(234, 244, 255, 0.8), rgba(246, 248, 251, 0));
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
         }
 
         .testimonial-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 2.5rem;
-            box-shadow: var(--shadow);
-            margin: 1rem;
-            position: relative;
+            padding: 1.5rem;
         }
 
-        .testimonial-card:before {
-            content: '\201C';
-            font-size: 5rem;
-            color: var(--accent);
-            opacity: 0.2;
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            font-family: Georgia, serif;
-        }
-
-        .testimonial-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1.5rem;
+        .quote-mark {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 1rem;
+            border-radius: 50%;
+            background: var(--accent-soft);
+            color: #B86A00;
+            font-size: 1.25rem;
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.85rem;
+            margin-top: 1.2rem;
         }
 
         .author-img {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             object-fit: cover;
         }
 
         .author-info h4 {
-            margin-bottom: 0.2rem;
-            font-size: 1.1rem;
+            color: var(--primary);
+            font-size: 0.96rem;
         }
 
-        .author-info p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #666;
+        .author-info span {
+            color: var(--muted);
+            font-size: 0.84rem;
         }
 
-        /* CTA Section */
         .cta-section {
-            padding: 5rem 0;
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            border-radius: var(--radius);
-            margin: 4rem 0;
+            margin: 0 0 5rem;
         }
 
-        .cta-section h2 {
-            color: white;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-section h2:after {
-            display: none;
-        }
-
-        .cta-section p {
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 4rem 0 2rem;
-        }
-
-        .footer-content {
+        .cta-card {
+            position: relative;
+            overflow: hidden;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-logo {
-            display: flex;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
             align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 1.5rem;
+            padding: clamp(1.5rem, 4vw, 3rem);
+            border-radius: 28px;
+            background:
+                linear-gradient(135deg, rgba(10, 36, 99, 0.97), rgba(62, 146, 204, 0.92)),
+                url("{{ asset('img/hands.png') }}") center / cover;
+            color: #fff;
+            box-shadow: var(--shadow-md);
         }
 
-        .footer-description {
-            opacity: 0.8;
-            margin-bottom: 1.5rem;
+        .cta-card::after {
+            content: "";
+            position: absolute;
+            right: clamp(1rem, 4vw, 3rem);
+            top: 50%;
+            width: 160px;
+            height: 160px;
+            transform: translateY(-50%);
+            background: url("{{ asset('img/logo2.png') }}") center / contain no-repeat;
+            opacity: 0.07;
+            pointer-events: none;
         }
 
-        .social-links {
+        .cta-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-card h2 {
+            color: #fff;
+            font-size: clamp(1.7rem, 3vw, 2.4rem);
+            line-height: 1.15;
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-card p {
+            max-width: 680px;
+            color: rgba(255, 255, 255, 0.86);
+        }
+
+        .cta-actions {
             display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background: var(--accent);
-            color: var(--dark);
-            transform: translateY(-3px);
-        }
-
-        .footer-heading {
-            color: white;
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            justify-content: flex-end;
         }
 
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(26px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
         .is-visible {
@@ -533,81 +607,88 @@
             transform: translateY(0);
         }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            h1 {
-                font-size: 2.4rem;
+        @media (max-width: 980px) {
+            .hero-grid,
+            .story-grid,
+            .cta-card {
+                grid-template-columns: 1fr;
             }
 
-            h2 {
-                font-size: 2rem;
+            .hero-panel {
+                min-height: auto;
             }
 
-            .hero {
-                padding: 3rem 0;
-                text-align: center;
+            .hero-image-card {
+                height: 360px;
             }
 
-            .hero-text p {
-                max-width: 100%;
+            .hero-note {
+                right: 18px;
             }
 
-            .hero-buttons {
-                justify-content: center;
+            .benefits-grid,
+            .path-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            .btn-accent, .btn-outline {
-                max-width: 85%;
+            .story-copy {
+                padding: 0.5rem;
+            }
+
+            .cta-actions {
+                justify-content: flex-start;
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 680px) {
+            .home-container {
+                width: min(100% - 24px, 1120px);
+            }
+
+            .home-hero {
+                padding: 3.4rem 0 3rem;
+            }
+
+            .hero-actions,
+            .cta-actions {
+                flex-direction: column;
+            }
 
             .btn {
                 width: 100%;
             }
 
-            h1 {
-                font-size: 2rem;
+            .hero-image-card {
+                height: 300px;
+                border-radius: 22px;
             }
 
-            h2 {
-                font-size: 1.8rem;
+            .hero-note {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                width: 100%;
+                margin-top: 0.9rem;
             }
 
-            .card-body {
-                padding: 1.5rem;
+            .section {
+                padding: 3.4rem 0;
             }
 
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 1rem;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1.6rem;
-            }
-
-            .hero-img {
-                flex: 1 1 100%;
-            }
-
-            .cards {
+            .benefits-grid,
+            .path-grid,
+            .testimonial-grid {
                 grid-template-columns: 1fr;
             }
 
-            .footer-content {
-                grid-template-columns: 1fr;
+            .story-band,
+            .cta-card {
+                border-radius: 22px;
+            }
+
+            .story-media,
+            .story-media img {
+                min-height: 300px;
             }
         }
     </style>
@@ -615,18 +696,21 @@
 
 <body>
     <header>@include('partials.navbar')</header>
-    <main>
-        <div class="container">
-            <!-- Hero principal -->
-            <section class="hero">
-                <div class="hero-text">
-                    <h1>Aprende Lengua de Señas Salvadoreña con LESSA</h1>
+
+    <main class="home">
+        <section class="home-hero">
+            <div class="home-container hero-grid">
+                <div class="hero-copy animate-on-scroll">
+                    <div class="hero-brand-lockup">
+                        <img src="{{ asset('img/logo2.png') }}" alt="Logo LESSA">
+                        <span>Lengua de Señas Salvadoreña</span>
+                    </div>
+                    <h1>Aprende LESSA de forma clara, práctica e inclusiva</h1>
                     <p>
-                        Una plataforma interactiva diseñada para que aprendas a tu ritmo, con un método de
-                        <strong>autoaprendizaje divertido</strong>,
-                        enfocado en la <strong>inclusión</strong> y rompiendo barreras de comunicación.
+                        Una plataforma pensada para practicar a tu ritmo, fortalecer la comunicación y acercarte a la
+                        comunidad sorda salvadoreña con lecciones simples, visuales y accesibles.
                     </p>
-                    <div class="hero-buttons">
+                    <div class="hero-actions">
                         <button class="btn btn-primary" onclick="window.location.href='/signup'">
                             <i class="fas fa-rocket"></i> Empieza ahora
                         </button>
@@ -635,177 +719,216 @@
                         </button>
                     </div>
                 </div>
-                <div class="hero-img">
-                    <img src="{{ asset('img/logo2.png') }}" alt="Aprendiendo lengua de señas">
-                </div>
-            </section>
 
-            <!-- Features Section -->
-            <section class="features">
-                <div class="section-header animate-on-scroll">
-                    <h2>¿Por qué aprender con LESSA?</h2>
-                    <p>Nuestra plataforma está diseñada para hacer el aprendizaje de la lengua de señas salvadoreña
-                        accesible, efectivo y divertido.</p>
-                </div>
-
-                <div class="cards">
-                    <div class="card animate-on-scroll">
-                        <div class="card-body">
-                            <div class="card-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <h3>Aprendizaje a tu ritmo</h3>
-                            <p>Avanza según tu disponibilidad de tiempo y refuerza los conceptos las veces que necesites.
-                            </p>
-                        </div>
+                <div class="hero-panel animate-on-scroll">
+                    <div class="hero-image-card">
+                        <img src="{{ asset('img/hands.png') }}" alt="Manos practicando lengua de señas">
                     </div>
-
-                    <div class="card animate-on-scroll">
-                        <div class="card-body">
-                            <div class="card-icon">
-                                <i class="fas fa-gamepad"></i>
-                            </div>
-                            <h3>Lecciones interactivas</h3>
-                            <p>Aprende mediante juegos, ejercicios prácticos y retroalimentación inmediata.</p>
-                        </div>
-                    </div>
-
-                    <div class="card animate-on-scroll">
-                        <div class="card-body">
-                            <div class="card-icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <h3>Acceso desde cualquier dispositivo</h3>
-                            <p>Continúa tu aprendizaje en computadora, tableta o smartphone sin interrupciones.</p>
-                        </div>
+                    <div class="hero-note">
+                        <strong>Aprendizaje visual y cercano</strong>
+                        <span>Lecciones cortas para reconocer, repetir y practicar señas desde cualquier lugar.</span>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Misión y Visión -->
-            <section class="features">
-                <div class="section-header animate-on-scroll">
-                    <h2>Nuestra Misión y Visión</h2>
-                    <p>Promovemos el aprendizaje del lenguaje de señas salvadoreño con lecciones cortas, juegos
-                        interactivos y prácticas accesibles desde cualquier lugar.</p>
+        <section class="section">
+            <div class="home-container">
+                <div class="section-heading center animate-on-scroll">
+                    <span class="home-eyebrow">
+                        <img src="{{ asset('img/logo2.png') }}" alt="" class="eyebrow-logo">
+                        ¿Por qué LESSA?
+                    </span>
+                    <h2>Una experiencia de aprendizaje limpia y fácil de seguir</h2>
+                    <p>
+                        El contenido está organizado para que avances paso a paso, sin saturarte, con actividades que
+                        convierten cada seña aprendida en una habilidad útil.
+                    </p>
                 </div>
 
-                <div class="cards">
-                    <div class="card animate-on-scroll">
-                        <div class="card-image-container">
-                            <img src="{{ asset('img/salvadorMundo.png') }}" alt="Misión">
-                        </div>
-                        <div class="card-body">
-                            <h3>Misión</h3>
-                            <p>Enseñar LESSA de manera accesible y práctica, fortaleciendo la comunicación inclusiva entre
-                                personas sordas y oyentes.</p>
-                        </div>
-                    </div>
+                <div class="benefits-grid">
+                    <article class="benefit-card animate-on-scroll">
+                        <div class="icon-box blue"><i class="fas fa-clock"></i></div>
+                        <h3>Aprendizaje a tu ritmo</h3>
+                        <p>Repasa las lecciones cuando lo necesites y construye una base sólida sin presión.</p>
+                    </article>
 
-                    <div class="card animate-on-scroll">
-                        <div class="card-image-container">
-                            <img src="{{ asset('img/farolitos.png') }}" alt="Visión">
-                        </div>
-                        <div class="card-body">
-                            <h3>Visión</h3>
-                            <p>Ser la plataforma líder en El Salvador para aprender lengua de señas, fomentando integración
-                                social, cultural y laboral.</p>
-                        </div>
-                    </div>
+                    <article class="benefit-card animate-on-scroll">
+                        <div class="icon-box gold"><i class="fas fa-gamepad"></i></div>
+                        <h3>Práctica interactiva</h3>
+                        <p>Ejercicios, juegos y retroalimentación para aprender haciendo, no solo leyendo.</p>
+                    </article>
+
+                    <article class="benefit-card animate-on-scroll">
+                        <div class="icon-box green"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>Acceso flexible</h3>
+                        <p>Continúa desde computadora, tableta o celular con una interfaz sencilla y responsive.</p>
+                    </article>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Inclusión -->
-            <section class="features">
-                <div class="section-header animate-on-scroll">
-                    <h2>Rompiendo barreras</h2>
-                    <p>Cada seña aprendida es un paso hacia un mundo más inclusivo, donde todos podamos comunicarnos sin
-                        barreras.</p>
-                </div>
-
-                <div class="cards">
-                    <div class="card animate-on-scroll">
-                        <div class="card-image-container">
-                            <img src="{{ asset('img/who.png')}}" alt="Quiénes somos">
-                        </div>
-                        <div class="card-body">
-                            <h3>¿Quiénes somos?</h3>
-                            <p>Un equipo de jóvenes desarrolladores comprometidos con la accesibilidad y la educación
-                                inclusiva.</p>
-                        </div>
+        <section class="section">
+            <div class="home-container story-band animate-on-scroll">
+                <div class="story-grid">
+                    <div class="story-media">
+                        <img src="{{ asset('img/salvadorMundo.png') }}" alt="Monumento al Salvador del Mundo">
                     </div>
+                    <div class="story-copy">
+                        <span class="home-eyebrow">
+                            <img src="{{ asset('img/logo2.png') }}" alt="" class="eyebrow-logo">
+                            Inclusión con identidad
+                        </span>
+                        <h2>LESSA nace para acercar a más personas a la comunicación sin barreras</h2>
+                        <p>
+                            Promovemos el aprendizaje de la lengua de señas salvadoreña con recursos claros, práctica
+                            constante y una visión centrada en la accesibilidad.
+                        </p>
 
-                    <div class="card animate-on-scroll">
-                        <div class="card-image-container">
-                            <img src="{{ asset('img/hands.png')}}" alt="Manos">
-                        </div>
-                        <div class="card-body">
-                            <h3>Educación para todos</h3>
-                            <p>Ofrecemos una app intuitiva que se adapta a tu ritmo de aprendizaje, incluso en comunidades
-                                con recursos limitados.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Testimonials Section -->
-            <section class="testimonials">
-                <div class="container">
-                    <div class="section-header animate-on-scroll">
-                        <h2>Lo que dicen nuestros usuarios</h2>
-                        <p>La experiencia de aprendizaje de nuestros usuarios es nuestra mayor motivación.</p>
-                    </div>
-
-                    <div class="cards">
-                        <div class="testimonial-card animate-on-scroll">
-                            <div class="testimonial-content">
-                                <p class="testimonial-text">LESSA ha transformado la forma en que me comunico con mis
-                                    estudiantes con discapacidad auditiva. ¡Una herramienta invaluable!</p>
-                                <div class="testimonial-author">
-                                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="María González"
-                                        class="author-img">
-                                    <div class="author-info">
-                                        <h4>María González</h4>
-                                        <p>Estudiantes</p>
-                                    </div>
+                        <div class="story-points">
+                            <div class="story-point">
+                                <div class="icon-box blue"><i class="fas fa-bullseye"></i></div>
+                                <div>
+                                    <h3>Misión</h3>
+                                    <p>Enseñar LESSA de manera accesible y práctica para fortalecer la comunicación
+                                        inclusiva.</p>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="testimonial-card animate-on-scroll">
-                            <div class="testimonial-content">
-                                <p class="testimonial-text">Como persona con discapacidad auditiva, valoro enormemente
-                                    iniciativas como LESSA que promueven la inclusión.</p>
-                                <div class="testimonial-author">
-                                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Carlos Rodríguez"
-                                        class="author-img">
-                                    <div class="author-info">
-                                        <h4>Carlos Rodríguez</h4>
-                                        <p>Estudiante</p>
-                                    </div>
+                            <div class="story-point">
+                                <div class="icon-box gold"><i class="fas fa-lightbulb"></i></div>
+                                <div>
+                                    <h3>Visión</h3>
+                                    <p>Ser una plataforma referente en El Salvador para aprender señas y fomentar
+                                        integración social, cultural y laboral.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- CTA Section -->
-            <section class="cta-section animate-on-scroll">
-                <h2>¡Comienza tu aprendizaje hoy!</h2>
-                <p>Únete a nuestra comunidad y forma parte del cambio hacia una sociedad más inclusiva y comunicativa.
-                </p>
-                <div class="cta-buttons">
-                    <button class="btn btn-accent" onclick="window.location.href='/signup'">
-                        <i class="fas fa-user-plus"></i> Crear cuenta gratuita
-                    </button>
-                    <button class="btn btn-outline" onclick="window.location.href='/ayuda/manual'"
-                        style="background: rgba(255,255,255,0.1); color: white; border-color: white;">
-                        <i class="fas fa-info-circle"></i> Más información
-                    </button>
+        <section class="section">
+            <div class="home-container">
+                <div class="section-heading animate-on-scroll">
+                    <span class="home-eyebrow">
+                        <img src="{{ asset('img/logo2.png') }}" alt="" class="eyebrow-logo">
+                        Tu ruta de aprendizaje
+                    </span>
+                    <h2>Empieza con bases útiles y avanza hacia conversaciones reales</h2>
+                    <p>
+                        Cada módulo está diseñado para ayudarte a reconocer señas, memorizar vocabulario y practicar en
+                        situaciones cotidianas.
+                    </p>
                 </div>
-            </section>
-        </div>
+
+                <div class="path-grid">
+                    <article class="path-card animate-on-scroll">
+                        <img src="{{ asset('img/abcd.png') }}" alt="Abecedario en lengua de señas">
+                        <div class="path-card-content">
+                            <span class="path-meta"><i class="fas fa-fingerprint"></i> Base</span>
+                            <h3>Abecedario</h3>
+                            <p>Practica la dactilología completa de LESSA paso a paso.</p>
+                        </div>
+                    </article>
+
+                    <article class="path-card animate-on-scroll">
+                        <img src="{{ asset('img/numbers.png') }}" alt="Números en lengua de señas">
+                        <div class="path-card-content">
+                            <span class="path-meta"><i class="fas fa-calculator"></i> Práctica</span>
+                            <h3>Números</h3>
+                            <p>Aprende a contar y reconocer números con ejercicios visuales.</p>
+                        </div>
+                    </article>
+
+                    <article class="path-card animate-on-scroll">
+                        <img src="{{ asset('img/saludos.png') }}" alt="Saludos en lengua de señas">
+                        <div class="path-card-content">
+                            <span class="path-meta"><i class="fas fa-comments"></i> Conversación</span>
+                            <h3>Saludos</h3>
+                            <p>Inicia interacciones básicas, formales y cotidianas.</p>
+                        </div>
+                    </article>
+
+                    <article class="path-card animate-on-scroll">
+                        <img src="{{ asset('img/health.png') }}" alt="Vocabulario de salud">
+                        <div class="path-card-content">
+                            <span class="path-meta"><i class="fas fa-heartbeat"></i> Vocabulario</span>
+                            <h3>Salud</h3>
+                            <p>Reconoce señas esenciales sobre cuerpo, síntomas y bienestar.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section testimonials">
+            <div class="home-container">
+                <div class="section-heading center animate-on-scroll">
+                    <span class="home-eyebrow">
+                        <img src="{{ asset('img/logo2.png') }}" alt="" class="eyebrow-logo">
+                        Comunidad
+                    </span>
+                    <h2>Una herramienta para aprender y conectar mejor</h2>
+                    <p>
+                        LESSA busca apoyar a estudiantes, docentes, familias y personas interesadas en una comunicación
+                        más inclusiva.
+                    </p>
+                </div>
+
+                <div class="testimonial-grid">
+                    <article class="testimonial-card animate-on-scroll">
+                        <div class="quote-mark"><i class="fas fa-quote-left"></i></div>
+                        <p>LESSA ha transformado la forma en que practico vocabulario con mis estudiantes. Es clara,
+                            visual y fácil de seguir.</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="María González"
+                                class="author-img">
+                            <div class="author-info">
+                                <h4>María González</h4>
+                                <span>Docente</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="testimonial-card animate-on-scroll">
+                        <div class="quote-mark"><i class="fas fa-quote-left"></i></div>
+                        <p>Valoro mucho una plataforma que promueva la inclusión y motive a más personas a aprender
+                            lengua de señas salvadoreña.</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Carlos Rodríguez"
+                                class="author-img">
+                            <div class="author-info">
+                                <h4>Carlos Rodríguez</h4>
+                                <span>Estudiante</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="home-container">
+                <div class="cta-card animate-on-scroll">
+                    <div>
+                        <h2>Comienza hoy y aprende una seña nueva cada día</h2>
+                        <p>
+                            Únete a LESSA y forma parte de una comunidad que aprende para comunicarse mejor y construir
+                            espacios más inclusivos.
+                        </p>
+                    </div>
+                    <div class="cta-actions">
+                        <button class="btn btn-accent" onclick="window.location.href='/signup'">
+                            <i class="fas fa-user-plus"></i> Crear cuenta gratuita
+                        </button>
+                        <button class="btn btn-outline" onclick="window.location.href='/ayuda/manual'">
+                            <i class="fas fa-info-circle"></i> Más información
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -813,7 +936,6 @@
     </footer>
 
     <script>
-        // Animation on scroll
         document.addEventListener('DOMContentLoaded', function () {
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
 
