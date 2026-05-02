@@ -339,12 +339,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
     // Shared data from PHP
-    const leccionLabels = @json(['Abecedario','Números','Saludos','Salud']);
+    const leccionLabels = @json($leccionNames);
     const completados   = @json($completadosPorLeccion);
     const avgPuntos     = @json($avgPuntosPorLeccion);
     const semLabels     = @json($semanaLabels);
     const semData       = @json($actividadSemanal);
-    const totalUsers    = {{ $totalUsers }};
+    const totalUsers    = {{ (int) $totalUsers }};
 
     Chart.defaults.font.family = "'Poppins', sans-serif";
     Chart.defaults.color = '#6b7280';

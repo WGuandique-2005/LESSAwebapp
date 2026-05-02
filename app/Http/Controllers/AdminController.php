@@ -48,7 +48,7 @@ class AdminController extends Controller
 
         // --- Lecciones: usuarios que completaron cada lección ---
         $lecciones = Leccion::all();
-        $leccionNames = ['Lección 1: Abecedario', 'Lección 2: Números', 'Lección 3: Saludos', 'Lección 4: Salud'];
+        $leccionNames = ['Abecedario', 'Numeros', 'Saludos', 'Salud'];
 
         $completadosPorLeccion = [];
         for ($i = 1; $i <= 4; $i++) {
