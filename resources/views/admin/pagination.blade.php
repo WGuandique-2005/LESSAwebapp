@@ -63,7 +63,14 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            flex-wrap: wrap;
+            max-width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .pagination-content::-webkit-scrollbar {
+            display: none;
         }
         .pagination-btn {
             display: inline-flex;
@@ -140,8 +147,7 @@
             }
             .pagination-content {
                 width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
+                justify-content: flex-start;
             }
             .pagination-info {
                 text-align: center;
