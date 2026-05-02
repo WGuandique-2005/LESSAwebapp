@@ -55,7 +55,12 @@
                                 <div class="mobile-avatar" style="width: 2.5rem; height: 2.5rem; background-color: #e0e7ff; color: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-right: 1rem; font-size: 0.9rem; flex-shrink: 0;">
                                     {{ strtoupper(substr($user->name, 0, 2)) }}
                                 </div>
-                                <div style="font-weight: 500; color: var(--text-main);">{{ $user->name }}</div>
+                                <div style="font-weight: 500; color: var(--text-main);">
+                                    {{ $user->name }}
+                                    @if($user->is_admin)
+                                        <span style="margin-left: 0.5rem; background: #fee2e2; color: #dc2626; font-size: 0.65rem; padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 700; text-transform: uppercase;">Admin</span>
+                                    @endif
+                                </div>
                             </div>
                         </td>
                         <td data-label="Email" style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; color: var(--text-secondary);">
@@ -71,6 +76,11 @@
                                 <button onclick="openEmailModal('{{ $user->id }}', '{{ $user->email }}')" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Enviar Correo" onmouseover="this.style.borderColor='var(--primary-color)'; this.style.color='var(--primary-color)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
                                     <i class="fas fa-envelope"></i>
                                 </button>
+                                @if($user->id !== 1)
+                                <button onclick="openAdminModal('{{ $user->id }}', '{{ addslashes($user->name) }}', {{ $user->is_admin ? 'true' : 'false' }})" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="{{ $user->is_admin ? 'Quitar Administrador' : 'Hacer Administrador' }}" onmouseover="this.style.borderColor='var(--primary-color)'; this.style.color='var(--primary-color)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
+                                    <i class="fas {{ $user->is_admin ? 'fa-user-times' : 'fa-user-shield' }}"></i>
+                                </button>
+                                @endif
                                 <a href="{{ route('admin.users.edit', $user) }}" class="btn" style="background-color: white; border: 1px solid #e5e7eb; color: var(--text-secondary); padding: 0.4rem 0.6rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);" title="Editar" onmouseover="this.style.borderColor='#10b981'; this.style.color='#10b981'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='var(--text-secondary)'">
                                     <i class="fas fa-edit"></i>
                                 </a>
@@ -452,6 +462,26 @@
         </div>
     </div>
 
+    <!-- Admin Modal -->
+    <div id="adminModal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center; padding: 1rem;">
+        <div class="modal-content" style="background: white; padding: 2rem; border-radius: 1rem; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center;">
+            <div id="adminModalIconWrapper" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                <i id="adminModalIcon" class="fas" style="font-size: 1.75rem;"></i>
+            </div>
+            
+            <h3 id="adminModalTitle" style="margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--text-main);"></h3>
+            <p id="adminModalDesc" style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.5;"></p>
+
+            <form id="adminForm" method="POST">
+                @csrf
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button type="button" onclick="closeAdminModal()" class="btn btn-secondary" style="width: 100%;">Cancelar</button>
+                    <button type="submit" id="adminModalBtn" class="btn" style="width: 100%; border:none;"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         // Email Modal Functions
         function openEmailModal(userId, userEmail) {
@@ -494,6 +524,46 @@
 
         function closeDeleteModal() {
             const modal = document.getElementById('deleteModal');
+            modal.style.opacity = '0';
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        // Admin Modal Functions
+        function openAdminModal(userId, userName, isAdmin) {
+            const modal = document.getElementById('adminModal');
+            const wrapper = document.getElementById('adminModalIconWrapper');
+            const icon = document.getElementById('adminModalIcon');
+            const title = document.getElementById('adminModalTitle');
+            const desc = document.getElementById('adminModalDesc');
+            const btn = document.getElementById('adminModalBtn');
+            const form = document.getElementById('adminForm');
+
+            if (isAdmin) {
+                wrapper.style.background = '#fee2e2';
+                icon.className = 'fas fa-user-times';
+                icon.style.color = '#dc2626';
+                title.innerText = '¿Quitar Administrador?';
+                desc.innerHTML = `Estás a punto de revocar los permisos de administrador a <strong style="color: var(--text-main);">${userName}</strong>.<br><span style="font-size: 0.9rem; color: #dc2626;">Perderá acceso al panel de control.</span>`;
+                btn.style.backgroundColor = '#dc2626';
+                btn.innerText = 'Sí, Quitar';
+                form.action = `/admin/users/${userId}/remove-admin`;
+            } else {
+                wrapper.style.background = '#dbeafe';
+                icon.className = 'fas fa-user-shield';
+                icon.style.color = '#2563eb';
+                title.innerText = '¿Hacer Administrador?';
+                desc.innerHTML = `Estás a punto de otorgar permisos de administrador a <strong style="color: var(--text-main);">${userName}</strong>.<br><span style="font-size: 0.9rem; color: #2563eb;">Tendrá acceso completo a este panel.</span>`;
+                btn.style.backgroundColor = '#2563eb';
+                btn.innerText = 'Sí, Promover';
+                form.action = `/admin/users/${userId}/make-admin`;
+            }
+
+            modal.style.display = 'flex';
+            setTimeout(() => modal.style.opacity = '1', 10);
+        }
+
+        function closeAdminModal() {
+            const modal = document.getElementById('adminModal');
             modal.style.opacity = '0';
             setTimeout(() => modal.style.display = 'none', 300);
         }
@@ -596,6 +666,7 @@
                 closeEmailModal();
                 closeResetModal();
                 closeDeleteModal();
+                closeAdminModal();
                 closeUserDetailsModal();
             }
         }

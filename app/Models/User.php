@@ -25,6 +25,7 @@ class User extends Authenticatable
         'oauth_id',
         'is_active',
         'es_google_oauth',
+        'is_admin',
     ];
 
     protected static function booted()
@@ -72,6 +73,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'is_active' => 'boolean',
             'es_google_oauth' => 'boolean',
+            'is_admin' => 'boolean',
         ];
     }
 }

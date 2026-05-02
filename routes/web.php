@@ -84,6 +84,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/admin/users/{user}', [App\Http\Controllers\AdminController::class, 'updateUser'])->name('admin.users.update');
         Route::delete('/admin/users/{user}', [App\Http\Controllers\AdminController::class, 'deleteUser'])->name('admin.users.delete');
         Route::put('/admin/users/{user}/reset-progress', [App\Http\Controllers\AdminController::class, 'resetProgress'])->name('admin.users.reset-progress');
+        Route::post('/admin/users/{user}/make-admin', [App\Http\Controllers\AdminController::class, 'makeAdmin'])->name('admin.users.make-admin');
+        Route::post('/admin/users/{user}/remove-admin', [App\Http\Controllers\AdminController::class, 'removeAdmin'])->name('admin.users.remove-admin');
         // Email sending route
         Route::post('/admin/users/{user}/email', [App\Http\Controllers\AdminController::class, 'sendUserEmail'])->name('admin.users.email');
         

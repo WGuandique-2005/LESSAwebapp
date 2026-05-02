@@ -49,6 +49,7 @@ return new class extends Migration
             'username' => 'admin',
             'email' => 'admin@example.com',
             'password' => bcrypt('admin'),
+            'is_admin' => true,
             'es_google_oauth' => false,
             'oauth_id' => null,
             'is_active' => true,

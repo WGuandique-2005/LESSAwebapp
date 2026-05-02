@@ -109,8 +109,7 @@ class AdminController extends Controller
     public function listUsers(Request $request)
     {
         // 1. Load users with valid relationships (exclude broken 'puntos.nivel')
-        $query = User::where('id', '!=', 1)
-            ->with(['lecciones.leccion', 'puntos', 'recompensas.recompensa']);
+        $query = User::with(['lecciones.leccion', 'puntos', 'recompensas.recompensa']);
 
         if ($request->has('search')) {
             $search = $request->get('search');
@@ -211,6 +210,25 @@ class AdminController extends Controller
         
         $user->delete();
         return redirect()->route('admin.users')->with('success', 'Usuario eliminado exitosamente.');
+    }
+
+    // Toggle Admin status
+    public function makeAdmin(User $user)
+    {
+        $user->is_admin = true;
+        $user->save();
+        return redirect()->route('admin.users')->with('success', 'El usuario ahora es administrador.');
+    }
+
+    public function removeAdmin(User $user)
+    {
+        if ($user->id === 1) {
+            return back()->with('error', 'No puedes quitarle los permisos al administrador principal.');
+        }
+
+        $user->is_admin = false;
+        $user->save();
+        return redirect()->route('admin.users')->with('success', 'Se han revocado los permisos de administrador.');
     }
 
     // Reset User Progress
