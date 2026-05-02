@@ -58,21 +58,18 @@ class AdminController extends Controller
                 ->count('usuario_id');
         }
 
-        // --- Puntos: promedio de puntos por lección (agrupando niveles 1-4 → ls1, 5-8 → ls2, etc.) ---
-        // Agrupar niveles por leccion: cada lección tiene 4 niveles secuenciales
-        $avgPuntosPorLeccion = [];
-        $nivelesOrdenados = Nivel::orderBy('id')->pluck('id')->toArray();
-        $chunkSize = max(1, intdiv(count($nivelesOrdenados), 4));
-        $nivelesChunked = array_chunk($nivelesOrdenados, $chunkSize);
+        // --- Puntos: promedio de puntos por lección ---
+        $leccionNivelIds = [
+            ['ABC1', 'ABC2', 'ABC3', 'ABC4'],       // Lección 1: Abecedario
+            ['NUM1', 'NUM2', 'NUM3', 'NUM4'],       // Lección 2: Números
+            ['SL1', 'SL2', 'SL3', 'SL4'],           // Lección 3: Saludos
+            ['SALUD1', 'SALUD2', 'SALUD3', 'SALUD4'] // Lección 4: Salud
+        ];
 
-        for ($i = 0; $i < 4; $i++) {
-            $ids = $nivelesChunked[$i] ?? [];
-            if (count($ids) > 0) {
-                $avg = PuntosUsuario::whereIn('nivel_id', $ids)->avg('puntos_obtenidos');
-                $avgPuntosPorLeccion[] = round($avg ?? 0, 1);
-            } else {
-                $avgPuntosPorLeccion[] = 0;
-            }
+        $avgPuntosPorLeccion = [];
+        foreach ($leccionNivelIds as $ids) {
+            $avg = PuntosUsuario::whereIn('nivel_id', $ids)->avg('puntos_obtenidos');
+            $avgPuntosPorLeccion[] = round($avg ?? 0, 1);
         }
 
         // --- Actividad reciente: registros de las últimas 4 semanas ---

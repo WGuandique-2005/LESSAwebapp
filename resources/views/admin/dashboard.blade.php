@@ -292,7 +292,7 @@
             <div class="leader-avatar">{{ strtoupper(substr($u->name, 0, 2)) }}</div>
             <div class="leader-info">
                 <div class="leader-name">{{ $u->name }}</div>
-                <div class="leader-username">@{{ $u->username }}</div>
+                <div class="leader-username">{{ '@' . $u->username }}</div>
             </div>
             <div class="leader-bar-wrap">
                 <div class="leader-bar" data-width="{{ round($u->total_puntos / $maxPts * 100) }}%"></div>
