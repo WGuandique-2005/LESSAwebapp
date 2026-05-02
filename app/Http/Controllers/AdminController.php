@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Nivel;
+use App\Models\Leccion;
+use App\Models\ProgresoUsuario;
+use App\Models\PuntosUsuario;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 use App\Mail\AdminMessage;
 
 class AdminController extends Controller
@@ -40,10 +44,68 @@ class AdminController extends Controller
     // Admin Dashboard
     public function dashboard()
     {
-        // For now, the dashboard can just be the user list or a landing page.
-        // Let's show some stats and a link to users.
-        $totalUsers = User::count();
-        return view('admin.dashboard', compact('totalUsers'));
+        $totalUsers = User::where('id', '!=', 1)->count();
+
+        // --- Lecciones: usuarios que completaron cada lección ---
+        $lecciones = Leccion::all();
+        $leccionNames = ['Lección 1: Abecedario', 'Lección 2: Números', 'Lección 3: Saludos', 'Lección 4: Salud'];
+
+        $completadosPorLeccion = [];
+        for ($i = 1; $i <= 4; $i++) {
+            $completadosPorLeccion[] = ProgresoUsuario::where('leccion_id', $i)
+                ->where('completado', true)
+                ->distinct('usuario_id')
+                ->count('usuario_id');
+        }
+
+        // --- Puntos: promedio de puntos por lección (agrupando niveles 1-4 → ls1, 5-8 → ls2, etc.) ---
+        // Agrupar niveles por leccion: cada lección tiene 4 niveles secuenciales
+        $avgPuntosPorLeccion = [];
+        $nivelesOrdenados = Nivel::orderBy('id')->pluck('id')->toArray();
+        $chunkSize = max(1, intdiv(count($nivelesOrdenados), 4));
+        $nivelesChunked = array_chunk($nivelesOrdenados, $chunkSize);
+
+        for ($i = 0; $i < 4; $i++) {
+            $ids = $nivelesChunked[$i] ?? [];
+            if (count($ids) > 0) {
+                $avg = PuntosUsuario::whereIn('nivel_id', $ids)->avg('puntos_obtenidos');
+                $avgPuntosPorLeccion[] = round($avg ?? 0, 1);
+            } else {
+                $avgPuntosPorLeccion[] = 0;
+            }
+        }
+
+        // --- Actividad reciente: registros de las últimas 4 semanas ---
+        $actividadSemanal = [];
+        $semanaLabels = [];
+        for ($week = 3; $week >= 0; $week--) {
+            $start = now()->startOfWeek()->subWeeks($week);
+            $end   = $start->copy()->endOfWeek();
+            $semanaLabels[] = 'Sem ' . $start->format('d/M');
+            $actividadSemanal[] = ProgresoUsuario::whereBetween('fecha_completada', [$start, $end])
+                ->where('completado', true)
+                ->count();
+        }
+
+        // --- Top usuarios por puntos ---
+        $topUsuarios = DB::table('puntos_usuarios')
+            ->join('users', 'users.id', '=', 'puntos_usuarios.usuario_id')
+            ->where('users.id', '!=', 1)
+            ->select('users.name', 'users.username', DB::raw('SUM(puntos_usuarios.puntos_obtenidos) as total_puntos'))
+            ->groupBy('users.id', 'users.name', 'users.username')
+            ->orderByDesc('total_puntos')
+            ->limit(5)
+            ->get();
+
+        return view('admin.dashboard', compact(
+            'totalUsers',
+            'leccionNames',
+            'completadosPorLeccion',
+            'avgPuntosPorLeccion',
+            'semanaLabels',
+            'actividadSemanal',
+            'topUsuarios'
+        ));
     }
 
     // List Users
