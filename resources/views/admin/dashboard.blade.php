@@ -339,7 +339,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
     // Shared data from PHP
-    const leccionLabels = @json(['Lec 1\nAbecedario','Lec 2\nNúmeros','Lec 3\nSaludos','Lec 4\nSalud']);
+    const leccionLabels = @json(['Abecedario','Números','Saludos','Salud']);
     const completados   = @json($completadosPorLeccion);
     const avgPuntos     = @json($avgPuntosPorLeccion);
     const semLabels     = @json($semanaLabels);
