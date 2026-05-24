@@ -265,6 +265,171 @@
             font-size: 1.1rem;
         }
 
+        /* --- CERTIFICATE SECTION --- */
+        .certificate-card {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2a5298 50%, #1e3a5f 100%);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 3rem;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(184, 134, 11, 0.1) 0%, transparent 60%);
+            animation: certificateGlow 6s ease-in-out infinite;
+        }
+
+        @keyframes certificateGlow {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(5%, 5%); }
+        }
+
+        .certificate-card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .certificate-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #b8860b;
+            text-shadow: 0 0 20px rgba(184, 134, 11, 0.4);
+        }
+
+        .certificate-title-main {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .certificate-description {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .certificate-progress-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .certificate-progress-info i {
+            color: #b8860b;
+        }
+
+        .btn-certificate {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 2.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-certificate.active {
+            background: linear-gradient(135deg, #b8860b, #daa520, #b8860b);
+            color: #1e3a5f;
+            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.4);
+        }
+
+        .btn-certificate.active:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(184, 134, 11, 0.5);
+        }
+
+        .btn-certificate.active::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .btn-certificate.disabled {
+            background: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-certificate.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .certificate-check-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .check-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .check-item.done {
+            color: #34d399;
+            border-color: rgba(52, 211, 153, 0.3);
+            background: rgba(52, 211, 153, 0.1);
+        }
+
+        .check-item.pending {
+            color: rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
         /* --- MODALS --- */
         .modal-backdrop {
             position: fixed;
@@ -526,6 +691,72 @@
             @endif
         </div>
 
+        <!-- Certificate Section -->
+        @php
+            $leccionesIds = [1, 2, 3, 4];
+            $leccionesNombres = [
+                1 => 'Abecedario',
+                2 => 'Números',
+                3 => 'Saludos',
+                4 => 'Salud',
+            ];
+            $completadasIds = $leccionesCompletadas->pluck('leccion_id')->toArray();
+            $todasCompletadas = count(array_intersect($leccionesIds, $completadasIds)) === 4;
+        @endphp
+
+        <h3 class="section-title"><i class="fas fa-certificate"></i> Tu Certificado</h3>
+        <div class="certificate-card">
+            <div class="certificate-card-content">
+                <div class="certificate-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3 class="certificate-title-main">
+                    @if($todasCompletadas)
+                        ¡Felicidades! Tu certificado está listo
+                    @else
+                        Certificado de Aprobación LESSA
+                    @endif
+                </h3>
+                <p class="certificate-description">
+                    @if($todasCompletadas)
+                        Has completado todas las lecciones del curso. Descarga tu diploma oficial avalado por la Universidad Gerardo Barrios y el MINED.
+                    @else
+                        Completa todas las lecciones del curso para obtener tu certificado oficial de aprobación en Lengua de Señas Salvadoreña.
+                    @endif
+                </p>
+
+                <!-- Checklist de lecciones -->
+                <div class="certificate-check-list">
+                    @foreach($leccionesIds as $lid)
+                        @php
+                            $completada = in_array($lid, $completadasIds);
+                        @endphp
+                        <span class="check-item {{ $completada ? 'done' : 'pending' }}">
+                            <i class="fas {{ $completada ? 'fa-check-circle' : 'fa-circle' }}"></i>
+                            {{ $leccionesNombres[$lid] }}
+                        </span>
+                    @endforeach
+                </div>
+
+                <div class="certificate-progress-info">
+                    <i class="fas fa-tasks"></i>
+                    <span>{{ count(array_intersect($leccionesIds, $completadasIds)) }} de 4 lecciones completadas</span>
+                </div>
+
+                @if($todasCompletadas)
+                    <a href="{{ route('certificado.descargar') }}" class="btn-certificate active">
+                        <i class="fas fa-download"></i>
+                        Descargar Certificado PDF
+                    </a>
+                @else
+                    <button class="btn-certificate disabled" onclick="mostrarMensajeCertificado()" type="button">
+                        <i class="fas fa-lock"></i>
+                        Certificado Bloqueado
+                    </button>
+                @endif
+            </div>
+        </div>
+
     </main>
 
     <!-- Reward Modal -->
@@ -573,6 +804,18 @@
         const resultModalMessage = document.getElementById('result-modal-message');
         const resultModalBtn = document.getElementById('result-modal-btn');
         let currentActionRoute = null;
+
+        // Certificate locked message
+        function mostrarMensajeCertificado() {
+            currentActionRoute = 'lecciones';
+            resultModalTitle.textContent = '¡Certificado no disponible!';
+            resultModalTitle.style.color = 'var(--text-secondary)';
+            resultModalMessage.innerHTML = 'Debes completar las <strong>4 lecciones</strong> del curso (Abecedario, Números, Saludos y Salud) para poder descargar tu certificado de aprobación.';
+            resultModalBtn.className = 'btn-modal primary';
+            resultModalBtn.textContent = 'Ir a las Lecciones';
+            resultModalBtn.onclick = handleResultAction;
+            openModal(resultModal);
+        }
 
         function openRewardModal(element) {
             const id = element.getAttribute('data-id');

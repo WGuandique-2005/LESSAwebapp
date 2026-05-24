@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -25,6 +26,7 @@ return new class extends Migration
 
             $table->rememberToken();
             $table->boolean('is_active')->default(false);
+            $table->boolean('is_admin')->default(false);
             $table->timestamps();
         });
 

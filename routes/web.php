@@ -11,6 +11,7 @@ use App\Http\Controllers\PuntosUsuarioController;
 use App\Http\Controllers\RecompensasUsuarioController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\CameraController;
+use App\Http\Controllers\CertificadoController;
 
 // Sección de ayuda (accesible para todos)
 Route::get('/ayuda',[TaskController::class,'ayuda'])->name('ayuda');
@@ -219,6 +220,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
     // Ver progreso
     Route::get('/miProgreso',[ProgressController::class, 'miProgreso'])->name('miProgreso');
+
+    // Certificado PDF
+    Route::get('/certificado/descargar', [CertificadoController::class, 'descargar'])->name('certificado.descargar');
+    Route::get('/certificado/estado', [CertificadoController::class, 'verificarEstado'])->name('certificado.estado');
 
     // Mostrar formulario para editar perfil
     Route::get('/profile/edit', [UserController::class, 'showEditProfileForm'])
