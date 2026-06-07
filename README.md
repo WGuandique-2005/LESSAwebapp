@@ -9,7 +9,7 @@
 [![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat&logo=sqlite&logoColor=white)](https://sqlite.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-[🌐 Ver Plataforma](https://lessa.website) · [🎨 Prototipo en Figma](https://www.figma.com/proto/5V4YvHq5NbadccEFSM99o6/LESSA---Sprint-Demo?node-id=548-552&p=f&t=uM673BkONCdW3Iuj-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1) · [📋 Product Backlog](https://docs.google.com/spreadsheets/d/1hzbgJDMGRnsYUfSIKFP_jNKFW4frKsqovEBlbz5If6U/edit?usp=sharing)
+[🌐 Ver Plataforma](https://lessa.website) · [🎨 Prototipo en Figma](https://www.figma.com/design/pmOjOdl9WxbxQ5sxwtezAW/Prototipado-LESSA--web-?node-id=0-1&t=32ViiiTOoBeS4Whs-1) · [📋 Product Backlog](https://docs.google.com/spreadsheets/d/1hzbgJDMGRnsYUfSIKFP_jNKFW4frKsqovEBlbz5If6U/edit?usp=sharing)
 
 </div>
 
@@ -180,25 +180,16 @@ LESSAwebapp/
 
 ## 👥 Equipo de Desarrollo
 
-| Nombre | Rol |
+| Nombre |
 |--------|-----|
-| William Josué Guandique Rivera | Scrum Master / Full Stack |
-| Briseily Yamileth Solórzano Hernández | Product Owner / Frontend |
-| Tania del Carmen Quintanilla Lozano | Scrum Team / Frontend & QA |
-| Noe Isaí Hernández Rivas | Scrum Team / Backend |
+| William Josué Guandique Rivera |
+| Briseily Yamileth Solórzano Hernández |
 
-Proyecto desarrollado en la **Universidad Gerardo Barrios** — Facultad de Ciencia y Tecnología, como parte de la materia *Gestión de Proyectos Informáticos* (Ciclo 01-2026).
-
----
-
-## 📄 Licencia
-
-Este proyecto es de uso académico. El código fuente, diseños y documentación son propiedad compartida entre la Universidad Gerardo Barrios y el Ministerio de Educación de El Salvador.
-
+Proyecto desarrollado en la **Universidad Gerardo Barrios** — Facultad de Ciencia y Tecnología.
 ---
 
 <div align="center">
 
-Hecho con ❤️ para la comunidad sorda de El Salvador
+Hecho con ❤️ para la comunidad sordo muda de El Salvador
 
 </div>
